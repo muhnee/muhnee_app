@@ -13,7 +13,7 @@ void main() {
     theme: ThemeData(
       canvasColor: Colors.white,
       primaryColor: Colors.white,
-      fontFamily: 'Quicksand',
+      fontFamily: 'Montserrat',
       appBarTheme: AppBarTheme(
         color: Colors.white,
       ),

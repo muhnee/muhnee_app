@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../routing + transitions/FadeRoute.dart';
 import '../routing + transitions/FadeUpTransition.dart';
+import './HomePage.dart';
 import 'dart:async';
 
 class IntroPage extends StatelessWidget {
@@ -45,14 +46,12 @@ class IntroPage extends StatelessWidget {
                     ShowUp(
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 32.0),
-                        child:
-                            Text("Welcome to Muhn-ee.",
-                                style: TextStyle(
-                                  height: 1.5,
-                                  fontSize: 28.0,
-                                  //fontFamily: "Montserrat",
-                                  color: Colors.black,
-                                )),
+                        child: Text("Welcome to Muhn-ee.",
+                            style: TextStyle(
+                              fontSize: 28.0,
+                              // fontFamily: "Montserrat",
+                              color: Colors.black,
+                            )),
                       ),
                       delay: delayAmount * 3,
                     ),
@@ -62,9 +61,8 @@ class IntroPage extends StatelessWidget {
                         child: Text(
                             "The simplest way to track you're daily spending.",
                             style: TextStyle(
-                              height: 1.5,
                               fontSize: 28.0,
-                              //fontFamily: "Montserrat",
+                              // fontFamily: "Montserrat",
                               color: Colors.black,
                             )),
                       ),
@@ -110,7 +108,6 @@ class IntroPage extends StatelessWidget {
                       child: Text(
                         "Let's start with a few details",
                         style: TextStyle(
-                          height: 1.5,
                           fontSize: 30.0,
                           color: Colors.black,
                         ),
@@ -238,7 +235,9 @@ class IntroPage extends StatelessWidget {
                 );
               } else {
                 Navigator.pushReplacement(
-                    context, FadeRouteBuilder(page: HomePage(userName: nameController.text)));
+                    context,
+                    FadeRouteBuilder(
+                        page: HomePage(userName: nameController.text)));
               }
             },
             child: ShowUp(
