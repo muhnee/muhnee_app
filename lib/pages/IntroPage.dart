@@ -171,7 +171,7 @@ class IntroPage extends StatelessWidget {
                     return AlertDialog(
                       shape: RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(15.0))),
+                              BorderRadius.all(Radius.circular(11.0))),
                       title: new Text("Missing Name"),
                       content: new Text("Please add name before continuing"),
                       actions: <Widget>[
@@ -194,7 +194,7 @@ class IntroPage extends StatelessWidget {
                     return AlertDialog(
                       shape: RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(15.0))),
+                              BorderRadius.all(Radius.circular(11.0))),
                       title: new Text("Missing Email"),
                       content: new Text("Please add email before continuing"),
                       actions: <Widget>[
@@ -217,7 +217,7 @@ class IntroPage extends StatelessWidget {
                     return AlertDialog(
                       shape: RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(15.0))),
+                              BorderRadius.all(Radius.circular(11.0))),
                       title: new Text("Missing Password "),
                       content:
                           new Text("Please add password before continuing"),
