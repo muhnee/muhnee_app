@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee_app/pages/MainApp/LeftPage.dart';
 import '../MainApp/HomePage.dart';
 import '../../routing/FadeRoute.dart';
 import '../../utilities/ShowUp.dart';
-import '../../widgets/GoogleSignInBtn.dart';
+import '../../utilities/SignIn.dart';
 
-class IntroPage extends StatelessWidget {
 
-  int delayAmount = 500;
+
+class IntroPage extends StatefulWidget {
+
+  @override
+  _IntroPageState createState() => _IntroPageState();
+}
+
+class _IntroPageState extends State<IntroPage> {
+
+    int delayAmount = 500;
 
   PageController controller = PageController();
 
   TextEditingController nameController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +32,9 @@ class IntroPage extends StatelessWidget {
       children: <Widget>[
 
         //! this should be in 2 seperate pages 
-
         //Pages
         // IP1(controller: _controller, delayAmount: delayAmount),
-        // IP2(
-        //     controller: _controller,
-        //     nameController: nameController,
-        //     emailController: emailController,
-        //     passwordController: passwordController,
-        //     delayAmount: delayAmount),
+       
 
         Scaffold(
           backgroundColor: Colors.white,
@@ -84,7 +88,7 @@ class IntroPage extends StatelessWidget {
                     ShowUp(
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 32.0),
-                        child: GoogleSignInBtn(),
+                        child: _signInButton(),
                       ),
                       delay: delayAmount * 9,
                     ),
@@ -95,27 +99,70 @@ class IntroPage extends StatelessWidget {
               ),
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              controller.nextPage(
-                  duration: Duration(seconds: 1), curve: Curves.ease);
-            },
-            child: ShowUp(
-              child: Icon(Icons.keyboard_arrow_down),
-              delay: delayAmount * 11,
-            ),
-            elevation: 0,
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16.0)),
-            ),
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: () {
+          //     controller.nextPage(
+          //         duration: Duration(seconds: 1), curve: Curves.ease);
+          //   },
+          //   child: ShowUp(
+          //     child: Icon(Icons.keyboard_arrow_down),
+          //     delay: delayAmount * 11,
+          //   ),
+          //   elevation: 0,
+          //   foregroundColor: Colors.black,
+          //   backgroundColor: Colors.white,
+          //   shape: RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          //   ),
+          // ),
         ),
 
       ],
     );
   }
-}
 
+
+  Widget _signInButton() {
+    return OutlineButton(
+      splashColor: Colors.grey,
+      onPressed: () {
+        signInWithGoogle().whenComplete(() {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return HomePage();
+              },
+            ),
+          );
+        });
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      highlightElevation: 0,
+      borderSide: BorderSide(color: Colors.grey),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.grey,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  
+}
 
