@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../utilities/SignIn.dart';
+import 'IntroPage.dart';
 
 class CenterPage extends StatelessWidget {
   var userName;
@@ -33,9 +35,7 @@ class CenterPage extends StatelessWidget {
 
           // put in components of the rest of the page here
 
-          TopText(
-            userName: userName,
-          ),
+          TopText(),
 
           
 
@@ -48,8 +48,6 @@ class CenterPage extends StatelessWidget {
 }
 
 class TopText extends StatelessWidget {
-  var userName;
-  TopText({this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +64,7 @@ class TopText extends StatelessWidget {
                     fontSize: 31.0,
                     color: Colors.black,
                   )),
-              Text(userName + ',',
+              Text(name + ',',
                   style: TextStyle(
                       fontSize: 32.0,
                       color: Colors.black,
