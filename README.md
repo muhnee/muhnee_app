@@ -1,17 +1,18 @@
 # muhnee_app
 
-A new Flutter project.
+The Native Version of Muhnee -- currently built for iOS
 
-## Getting Started
+## Development Setup
 
-This project is a starting point for a Flutter application.
+### How to run 
 
-A few resources to get you started if this is your first Flutter project:
+Initialise an instance of an iOS Simulator or connect physical iOS device, navigate to the cloned repo and run from root:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```sh
+# from terminal 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# muhn-ee_app
+open -a simulator 
+
+cd desktop/muhnee-app
+flutter run -d iPhone
+```
