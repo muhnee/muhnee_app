@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './routing + transitions/FadeRoute.dart';
-import './pages/IntroPage.dart';
+import './pages/Intro/IntroPage.dart';
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);
@@ -45,7 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return new Scaffold(
         body: new Container(
       decoration: BoxDecoration(
@@ -59,18 +58,18 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
       ),
-    //   child: new Stack(
-    //     children: <Widget>[
-    //       Container(
-    //   alignment: Alignment.bottomLeft,
-    //   padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
-    //   child: new Image.asset(
-    //     'lib/assets/images/logoFull.png',
-    //     height: 150,
-    //   ),
-    // ),
-    //     ],
-    //   ),
+      //   child: new Stack(
+      //     children: <Widget>[
+      //       Container(
+      //   alignment: Alignment.bottomLeft,
+      //   padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
+      //   child: new Image.asset(
+      //     'lib/assets/images/logoFull.png',
+      //     height: 150,
+      //   ),
+      // ),
+      //     ],
+      //   ),
     ));
   }
 }
