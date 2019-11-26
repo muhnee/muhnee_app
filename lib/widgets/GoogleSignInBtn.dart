@@ -11,7 +11,8 @@ class GoogleSignInBtn extends StatelessWidget {
       onPressed: () {
         signInWithGoogle().whenComplete(() {
 
-          Navigator.pushReplacement(
+          // ! pushReplacement?
+          Navigator.push(
                     context, FadeRouteBuilder(page: HomePage()));
 
         });
