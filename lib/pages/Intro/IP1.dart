@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utilities/FadeUpTransition.dart';
+import '../../utilities/ShowUp.dart';
 
 class IP1 extends StatelessWidget {
   var controller;

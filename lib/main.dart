@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './routing + transitions/FadeRoute.dart';
+import './routing/FadeRoute.dart';
 import './pages/Intro/IntroPage.dart';
 
 void main() {

@@ -4,20 +4,22 @@ import './LeftPage.dart';
 import './RightPage.dart';
 
 class HomePage extends StatelessWidget {
-  var userName;
-  HomePage({@required this.userName});
-
   @override
   Widget build(BuildContext context) {
-    PageController _homePageController = PageController();
+    PageController _homePageController = PageController(
+      initialPage: 1,
+      keepPage: false,
+    );
 
     return PageView(
       controller: _homePageController,
       scrollDirection: Axis.horizontal,
+      pageSnapping: true,
+      physics: BouncingScrollPhysics(),
       children: <Widget>[
         LeftPage(),
         CenterPage(
-          userName: userName,
+          userName: "Test",
         ),
         RightPage(),
       ],
