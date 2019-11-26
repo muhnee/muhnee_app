@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './routing/FadeRoute.dart';
-import './pages/Intro/IntroPage.dart';
+import './pages/IntroPage.dart';
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);

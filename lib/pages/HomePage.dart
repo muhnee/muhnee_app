@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import './CenterPage.dart';
 import './LeftPage.dart';
 import './RightPage.dart';
+import 'IntroPage.dart';
+import '../utilities/SignIn.dart';
 
 class HomePage extends StatelessWidget {
   @override

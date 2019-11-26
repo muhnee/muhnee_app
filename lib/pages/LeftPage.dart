@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/pages/Intro/IntroPage.dart';
-import '../../utilities/SignIn.dart';
+import 'package:muhnee_app/routing/FadeRoute.dart';
+import 'IntroPage.dart';
+import '../utilities/SignIn.dart';
 
 class LeftPage extends StatelessWidget {
   @override
@@ -33,7 +34,7 @@ class LeftPage extends StatelessWidget {
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54),
-                     ),
+              ),
               Text(
                 name,
                 style: TextStyle(
@@ -60,7 +61,8 @@ class LeftPage extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   signOutGoogle();
-                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return IntroPage();}), ModalRoute.withName('/'));
+                   Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
+                  //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return IntroPage();}), ModalRoute.withName('/'));
                 },
                 color: Colors.deepPurple,
                 child: Padding(

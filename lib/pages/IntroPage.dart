@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/pages/MainApp/LeftPage.dart';
-import '../MainApp/HomePage.dart';
-import '../../routing/FadeRoute.dart';
-import '../../utilities/ShowUp.dart';
-import '../../utilities/SignIn.dart';
-
-
+import 'package:muhnee_app/routing/FadeRoute.dart';
+import 'HomePage.dart';
+import '../utilities/ShowUp.dart';
+import '../utilities/SignIn.dart';
 
 class IntroPage extends StatefulWidget {
 
@@ -127,13 +124,7 @@ class _IntroPageState extends State<IntroPage> {
       splashColor: Colors.grey,
       onPressed: () {
         signInWithGoogle().whenComplete(() {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return HomePage();
-              },
-            ),
-          );
+          Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage()));
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
@@ -145,7 +136,7 @@ class _IntroPageState extends State<IntroPage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
+            //Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
