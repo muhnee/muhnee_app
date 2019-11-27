@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee_app/pages/ProfilePage.dart';
 import './CenterPage.dart';
 import './LeftPage.dart';
 import './RightPage.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       children: <Widget>[
         LeftPage(),
+        ProfilePage(),
         CenterPage(
           userName: "Test",
         ),
