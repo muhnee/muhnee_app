@@ -32,11 +32,23 @@ class ProfilePage extends StatelessWidget {
               TopText(),
               ],
             ),
-          )
+          ),
 
           //have the rest of the profile page here 
 
+          Padding(
+            padding: EdgeInsets.all(32.0),
+            child: SettingsCell(),
+          ), 
 
+          Padding(
+            padding: EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 32.0),
+            child: SignoutCell(),
+          )
+
+          
+
+        
         ],
       ),
     );
@@ -78,6 +90,42 @@ class TopText extends StatelessWidget {
                 color: Colors.black,
               )),
         ],
+      ),
+    );
+  }
+}
+
+class SettingsCell extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 400,
+      decoration: BoxDecoration(
+        borderRadius: new BorderRadius.circular(16.0),
+        color: Colors.grey[100],
+        boxShadow: [BoxShadow(
+            color: Colors.grey,
+            blurRadius: 10.0,
+          ),]
+      ),
+    );
+  }
+}
+
+class SignoutCell extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        borderRadius: new BorderRadius.circular(16.0),
+        color: Colors.red,
+        boxShadow: [BoxShadow(
+            color: Colors.red[100],
+            blurRadius: 10.0,
+          ),]
       ),
     );
   }
