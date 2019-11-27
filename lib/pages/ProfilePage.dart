@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee_app/routing/FadeRoute.dart';
 import 'package:muhnee_app/utilities/SizeConfig.dart';
 import 'IntroPage.dart';
 import '../utilities/SignIn.dart';
@@ -117,8 +118,13 @@ class SignoutCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InkWell(
+
+      
+
+      child: Container(
       height: 60,
+      width: 600, //! this is dodgy af
       decoration: BoxDecoration(
         borderRadius: new BorderRadius.circular(16.0),
         color: Colors.red,
@@ -127,6 +133,27 @@ class SignoutCell extends StatelessWidget {
             blurRadius: 10.0,
           ),]
       ),
+      child: 
+      Center(
+        child: Text(
+          "Signout", 
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+      ),
+
+    ),
+
+    onTap: (){
+      signOutGoogle();
+      Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
+    },
+
     );
+    
+
   }
 }
