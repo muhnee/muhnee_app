@@ -14,7 +14,7 @@ void main() {
     theme: ThemeData(
       canvasColor: Colors.white,
       primaryColor: Colors.white,
-      fontFamily: 'Quicksand',
+      fontFamily: 'Montserrat',
       appBarTheme: AppBarTheme(
         color: Colors.white,
       ),
@@ -24,7 +24,6 @@ void main() {
 }
 
 class SplashScreen extends StatefulWidget {
-  
   @override
   _SplashScreenState createState() => new _SplashScreenState();
 }
@@ -39,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.pushReplacement(context, FadeRouteBuilder(page: _page));
+    Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
   }
 
   @override
@@ -49,10 +48,6 @@ class _SplashScreenState extends State<SplashScreen> {
     // checks if the current user is already logged in
     // signedInAlready() != null ? _page = HomePage() : _page = IntroPage();
 
-    var res = signedInAlready();
-    print(res);
-
-    
     startTime();
   }
 
@@ -60,29 +55,38 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment(1.0, 1.0),
-          end: Alignment(-1.0, -1.0),
-          stops: [0.1, 0.9],
-          colors: [
-            Color(0xffecf2d0),
-            Color(0xfff6f8ec),
-          ],
-        ),
-      ),
-      //   child: new Stack(
-      //     children: <Widget>[
-      //       Container(
-      //   alignment: Alignment.bottomLeft,
-      //   padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
-      //   child: new Image.asset(
-      //     'lib/assets/images/logoFull.png',
-      //     height: 150,
-      //   ),
-      // ),
-      //     ],
-      //   ),
-    ));
+            color: Color(0xff8e91f3),
+            // decoration: BoxDecoration(
+            //   gradient: LinearGradient(
+            //     begin: Alignment(1.0, 1.0),
+            //     end: Alignment(-1.0, -1.0),
+            //     stops: [0.1, 0.9],
+            //     colors: [
+            //       Color(0xffecf2d0),
+            //       Color(0xfff6f8ec),
+            //     ],
+            //   ),
+            // ),
+            child: Center(
+              child: Text("muhnee",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  )),
+            )
+            //   new Stack(
+            //     children: <Widget>[
+            //       Container(
+            //   alignment: Alignment.bottomLeft,
+            //   padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
+            //   child: new Image.asset(
+            //     'lib/assets/images/logoFull.png',
+            //     height: 150,
+            //   ),
+            // ),
+            //     ],
+            //   ),
+            ));
   }
 }
