@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:muhnee_app/pages/HomePage.dart';
 import './routing/FadeRoute.dart';
 import './pages/IntroPage.dart';
+import './utilities/SignIn.dart';
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);
@@ -22,11 +24,14 @@ void main() {
 }
 
 class SplashScreen extends StatefulWidget {
+  
   @override
   _SplashScreenState createState() => new _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  var _page;
+
   startTime() async {
     var _duration = new Duration(seconds: 2);
 
@@ -34,12 +39,20 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
+    Navigator.pushReplacement(context, FadeRouteBuilder(page: _page));
   }
 
   @override
   void initState() {
     super.initState();
+
+    // checks if the current user is already logged in
+    // signedInAlready() != null ? _page = HomePage() : _page = IntroPage();
+
+    var res = signedInAlready();
+    print(res);
+
+    
     startTime();
   }
 

@@ -49,3 +49,20 @@ void signOutGoogle() async {
 
   print("User Sign Out");
 }
+
+Future<bool> signedInAlready() async{
+  final FirebaseUser x = await _auth.currentUser();
+
+  bool signedIn;
+
+  if (x != null) {
+    print("user already signed in"); 
+    signedIn = true; 
+  }
+  else{
+    print("user NOT signed in"); 
+    signedIn = false;
+  }
+
+  return signedIn;
+}
