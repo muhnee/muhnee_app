@@ -26,7 +26,7 @@ class _IntroPageState extends State<IntroPage> {
           _showUpText(),
           ShowUp(
             child: Padding(
-                padding: EdgeInsets.only(bottom: 138.0),
+                padding: EdgeInsets.only(bottom: 142.0),
                 child: Center(
                   child: _signInButton(),
                 )),
@@ -55,13 +55,13 @@ class _IntroPageState extends State<IntroPage> {
 
   Widget _showUpText() {
     return Padding(
-      padding: EdgeInsets.only(top: 64.0, left: 22.0, right: 22.0),
+      padding: EdgeInsets.only(top: 54.0, left: 22.0, right: 22.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 35.0),
+              padding: EdgeInsets.only(bottom: 33.0),
               child: Text("Hi,",
                   style: TextStyle(
                     fontSize: 30.0,
@@ -72,7 +72,7 @@ class _IntroPageState extends State<IntroPage> {
           ),
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 35.0),
+              padding: EdgeInsets.only(bottom: 33.0),
               child: Text("Welcome to Muhnee",
                   style: TextStyle(
                     fontSize: 30.0,
@@ -84,7 +84,7 @@ class _IntroPageState extends State<IntroPage> {
           ),
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 32.0),
+              padding: EdgeInsets.only(bottom: 33.0),
               child: Text("A simple way to track daily spending.",
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -7,7 +7,7 @@ import './pages/IntroPage.dart';
 import './utilities/SignIn.dart';
 
 void main() {
-  SystemChrome.setEnabledSystemUIOverlays([]);
+  //SystemChrome.setEnabledSystemUIOverlays([]);
 
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
