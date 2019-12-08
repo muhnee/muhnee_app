@@ -3,7 +3,6 @@ import 'package:muhnee_app/routing/FadeRoute.dart';
 import '../utilities/ShowUp.dart';
 import '../utilities/SignIn.dart';
 
-
 class IntroPageExpense extends StatefulWidget {
   @override
   _IntroPageExpenseState createState() => _IntroPageExpenseState();
@@ -25,16 +24,14 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         children: <Widget>[
           _showUpText(),
 
-          Expanded(
-          
-            child: SizedBox(
-              width: 350,
-              
-              child: _expensesCells(),
-            ),
-            
-        
-        ),
+          // Expanded(
+          //   child: SizedBox(
+          //     width: 350,
+          //     child: _expensesCells(),
+          //   ),
+          // ),
+
+          _expCells(),
 
           ShowUp(
             child: Padding(
@@ -57,21 +54,21 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         children: <Widget>[
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
+              padding: EdgeInsets.only(bottom: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text("Firstly, ",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  )),
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      )),
                   Text("let's add some",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.black,
-                  )),
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        color: Colors.black,
+                      )),
                 ],
               ),
             ),
@@ -79,7 +76,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
           ),
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
+              padding: EdgeInsets.only(bottom: 15.0),
               child: Text("categories to group",
                   style: TextStyle(
                     fontSize: 30.0,
@@ -103,7 +100,6 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
             ),
             delay: delayAmount * 4,
           ),
-       
         ],
       ),
     );
@@ -114,10 +110,8 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
       width: 150,
       child: GestureDetector(
         onTap: () {
-        
-            // Navigator.pushReplacement(
-            //     context, FadeRouteBuilder(page: IntroPageIncome()));
-     
+          // Navigator.pushReplacement(
+          //     context, FadeRouteBuilder(page: IntroPageIncome()));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -147,59 +141,196 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
   }
 }
 
+//! Keep this code - great to use for grid view builder in future
+// class _expensesCells extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     var functions = [
+//       "Food",
+//       "Clothing",
+//       "Rent",
+//       "Fuel",
+//       "Tech",
+//       "Drinks",
+//       "Coffee",
+//       "Activities",
+//       "Alcohol",
+//     ];
 
+//     return GridView.count(
+//       crossAxisCount: 3,
+//       //padding: EdgeInsets.symmetric(horizontal: 50.0),
 
+//       childAspectRatio: 1 / 1,
+//       mainAxisSpacing: 0.0,
+//       //crossAxisSpacing: 0.0,
+//       children: <Widget>[
+//         //for(String i in functions) Cards(title:i, page: SingleFunction(), curve: 15.0,),
 
-class _expensesCells extends StatelessWidget {
+//         for (String i in functions)
+//           _eachCell(
+//             expenseType: i,
+//           )
+//       ],
+//     );
+//   }
+// }
+
+// class _eachCell extends StatelessWidget {
+//   var expenseType;
+//   _eachCell({this.expenseType});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: SizedBox(
+//         width: 91,
+//         height: 35,
+//         child: Container(
+//           child: Center(
+//             child: Text(
+//               expenseType,
+//               style: TextStyle(fontSize: 15.0),
+//               textAlign: TextAlign.center,
+//             ),
+//           ),
+//           decoration: BoxDecoration(
+//             color: Color(0xffDEDEDE),
+//             borderRadius: BorderRadius.circular(50.0),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+//! keep this code ^^^
+
+class _expCells extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var functions = ["Food", "Clothing", "Rent", "Fuel", "Tech", "Drinks", "Coffee", "Activities", "Alcohol",];
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 52.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          //Row 1
+          Padding(
+            padding: EdgeInsets.only(bottom: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SingleExpCell(
+                  expenseType: "Food",
+                ),
+                SingleExpCell(
+                  expenseType: "Clothing",
+                ),
+                SingleExpCell(
+                  expenseType: "Rent",
+                ),
+              ],
+            ),
+          ),
 
-    return GridView.count(
-                crossAxisCount: 3,
-                //padding: EdgeInsets.symmetric(horizontal: 50.0),
-                
-                 childAspectRatio: 1 / 1,
-                 mainAxisSpacing: 0.0,
-                 //crossAxisSpacing: 0.0,
-                children: <Widget>[
-                  //for(String i in functions) Cards(title:i, page: SingleFunction(), curve: 15.0,),
+          //Row 2
+          Padding(
+            padding: EdgeInsets.only(bottom: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SingleExpCell(
+                  expenseType: "Fuel",
+                ),
+                SingleExpCell(
+                  expenseType: "Tech",
+                ),
+                SingleExpCell(
+                  expenseType: "Drinks",
+                ),
+              ],
+            ),
+          ),
 
-                  for (String i in functions) _eachCell(expenseType: i,)
+          //Row 3
+          Padding(
+            padding: EdgeInsets.only(bottom: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SingleExpCell(
+                  expenseType: "Coffee",
+                ),
+                SingleExpCell(
+                  expenseType: "Activities",
+                ),
+                SingleExpCell(
+                  expenseType: "Alcohol",
+                ),
+              ],
+            ),
+          ),
 
-            ],
-          );
+          //Row 4
+          Padding(
+            padding: EdgeInsets.only(bottom: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 250,
+                  height: 40,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      style: new TextStyle(fontSize: 15.0, color: Colors.black),
+                      decoration: InputDecoration(
+                          border: InputBorder.none, hintText: 'Custom...'),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffDEDEDE),
+                    borderRadius: BorderRadius.circular(13.0),
+                  ),
+                ),
+              ],
+
+              
+
+
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
-class _eachCell extends StatelessWidget {
-  var expenseType; 
-  _eachCell({this.expenseType});
+class SingleExpCell extends StatelessWidget {
+  var expenseType;
+
+  SingleExpCell({this.expenseType});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-       child: SizedBox(
-         width: 91,
-         height: 35,
-        child: Container(
-          
-          child: Center(
-            child: Text(expenseType, 
-            style: TextStyle(
-              fontSize: 15.0
-            ),
-          textAlign: TextAlign.center,),
-          ), 
-
-          decoration: BoxDecoration(
-            color: Color(0xffDEDEDE),
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-          
-          
+    return Container(
+      width: 91,
+      height: 37,
+      child: Center(
+        child: Text(
+          expenseType,
+          style: TextStyle(
+              fontSize: 15.0, color: Colors.black, fontWeight: FontWeight.w400),
+          textAlign: TextAlign.center,
         ),
-        
+      ),
+      decoration: BoxDecoration(
+        color: Color(0xffDEDEDE),
+        borderRadius: BorderRadius.circular(50.0),
       ),
     );
   }
