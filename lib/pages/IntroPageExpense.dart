@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/routing/FadeRoute.dart';
 import '../utilities/ShowUp.dart';
-import '../utilities/SignIn.dart';
-import 'IntroPageExpense.dart';
 
-class IntroPage extends StatefulWidget {
+class IntroPageExpense extends StatefulWidget {
   @override
-  _IntroPageState createState() => _IntroPageState();
+  _IntroPageExpenseState createState() => _IntroPageExpenseState();
 }
 
-class _IntroPageState extends State<IntroPage> {
+class _IntroPageExpenseState extends State<IntroPageExpense> {
   int delayAmount = 500;
 
   @override
@@ -24,13 +21,14 @@ class _IntroPageState extends State<IntroPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           _showUpText(),
+          _choiceCells(),
           ShowUp(
             child: Padding(
-                padding: EdgeInsets.only(bottom: 142.0),
+                padding: EdgeInsets.only(bottom: 30.0),
                 child: Center(
-                  child: _signInButton(),
+                  child: _nextButton(),
                 )),
-            delay: delayAmount * 8,
+            delay: delayAmount * 9,
           ),
         ],
       ),
@@ -46,30 +44,40 @@ class _IntroPageState extends State<IntroPage> {
           ShowUp(
             child: Padding(
               padding: EdgeInsets.only(bottom: 33.0),
-              child: Text("Hi,",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.black,
-                  )),
+              child: Row(
+                children: <Widget>[
+                  Text("Firstly, ",
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      )),
+                  Text("let's add some",
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        color: Colors.black,
+                      )),
+                ],
+              ),
             ),
             delay: delayAmount,
           ),
           ShowUp(
             child: Padding(
               padding: EdgeInsets.only(bottom: 33.0),
-              child: Text("Welcome to Muhnee",
+              child: Text("categories to group",
                   style: TextStyle(
                     fontSize: 30.0,
                     // fontFamily: "Montserrat",
                     color: Colors.black,
                   )),
             ),
-            delay: delayAmount * 2,
+            delay: delayAmount * 3,
           ),
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 15.0),
-              child: Text("A simple way to track.",
+              padding: EdgeInsets.only(bottom: 33.0),
+              child: Text("your expenses.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30.0,
@@ -78,17 +86,6 @@ class _IntroPageState extends State<IntroPage> {
                     color: Colors.black,
                   )),
             ),
-            delay: delayAmount * 4,
-          ),
-          ShowUp(
-            child: Text("daily spending.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30.0,
-                  // height: 2.0,
-                  // fontFamily: "Montserrat",
-                  color: Colors.black,
-                )),
             delay: delayAmount * 6,
           ),
         ],
@@ -96,15 +93,13 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  Widget _signInButton() {
+  Widget _nextButton() {
     return SizedBox(
       width: 300,
       child: GestureDetector(
         onTap: () {
-          signInWithGoogle().whenComplete(() {
-            Navigator.pushReplacement(
-                context, FadeRouteBuilder(page: IntroPageExpense()));
-          });
+          // go to the next page
+          //Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPageIncome()));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -121,14 +116,8 @@ class _IntroPageState extends State<IntroPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(right: 17.0),
-                  child: Image(
-                      image: AssetImage("lib/assets/images/google_icon.png"),
-                      height: 30.0),
-                ),
                 Text(
-                  "Sign in with Google",
+                  "Next",
                   style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
               ],
@@ -137,5 +126,18 @@ class _IntroPageState extends State<IntroPage> {
         ),
       ),
     );
+  }
+}
+
+class _choiceCells extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+        crossAxisCount: 2,
+        children: <Widget>[
+          Text("hello"), 
+          Text("hello"), 
+        ],
+        );
   }
 }

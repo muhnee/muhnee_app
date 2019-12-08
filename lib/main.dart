@@ -7,7 +7,6 @@ import './pages/IntroPage.dart';
 import './utilities/SignIn.dart';
 
 void main() {
-  //SystemChrome.setEnabledSystemUIOverlays([]);
 
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -21,6 +20,8 @@ void main() {
     ),
     home: new SplashScreen(),
   ));
+
+  SystemChrome.setEnabledSystemUIOverlays([]);
 }
 
 class SplashScreen extends StatefulWidget {
