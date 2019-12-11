@@ -285,9 +285,10 @@ class _expCells extends StatelessWidget {
                   width: 250,
                   height: 40,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 20.0),
+                    padding:
+                        EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
                     child: TextField(
-                      style: new TextStyle(fontSize: 15.0, color: Colors.black),
+                      style: TextStyle(fontSize: 15.0, color: Colors.black),
                       decoration: InputDecoration(
                           border: InputBorder.none, hintText: 'Custom...'),
                     ),
@@ -297,11 +298,28 @@ class _expCells extends StatelessWidget {
                     borderRadius: BorderRadius.circular(13.0),
                   ),
                 ),
+                Container(
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Image(
+                      image: AssetImage("lib/assets/images/tick.png"),),
+
+                  ), 
+
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 40.0,
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(13.0),
+                  ),
+                ),
               ],
-
-              
-
-
             ),
           ),
         ],
@@ -319,7 +337,7 @@ class SingleExpCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 91,
-      height: 37,
+      height: 34,
       child: Center(
         child: Text(
           expenseType,
