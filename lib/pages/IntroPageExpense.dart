@@ -374,7 +374,7 @@ void itemSelected(expenseType, cellColor) async {
     //set colour to grey and remove the item
     selectedItems.remove(expenseType);
 
-    setState(() { });
+   // setState(() { });
 
     cellColor = Color(0xffDEDEDE);
     

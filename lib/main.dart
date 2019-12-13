@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:muhnee_app/pages/HomePage.dart';
 import './routing/FadeRoute.dart';
 import './pages/IntroPage.dart';
-import './utilities/SignIn.dart';
 
 void main() {
-
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -20,7 +17,6 @@ void main() {
     ),
     home: new SplashScreen(),
   ));
-
   SystemChrome.setEnabledSystemUIOverlays([]);
 }
 
@@ -30,11 +26,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var _page;
-
   startTime() async {
     var _duration = new Duration(seconds: 2);
-
     return new Timer(_duration, navigationPage);
   }
 
