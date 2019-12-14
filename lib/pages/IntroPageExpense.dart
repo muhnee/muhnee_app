@@ -167,52 +167,57 @@ class ExpCellsComponent extends StatelessWidget {
   }
 }
 
-class SingleExpCell extends StatelessWidget {
+class SingleExpCell extends StatefulWidget {
   var expenseType;
-  var cellColor = Color(0xffDEDEDE);
+  SingleExpCell({@required this.expenseType});
 
-  SingleExpCell({this.expenseType});
+  @override
+  _SingleExpCellState createState() => _SingleExpCellState();
+}
+
+class _SingleExpCellState extends State<SingleExpCell> {
+  //! should this be in the build or not???
+  var cellColor = Color(0xffDEDEDE);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        width: 91,
-        height: 34,
-        child: Center(
-          child: Text(
-            expenseType,
-            style: TextStyle(
-                fontSize: 15.0,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-            textAlign: TextAlign.center,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 400),
+          width: 91,
+          height: 34,
+          child: Center(
+            child: Text(
+              widget.expenseType,
+              style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          decoration: BoxDecoration(
+            color: cellColor,
+            borderRadius: BorderRadius.circular(50.0),
           ),
         ),
-        decoration: BoxDecoration(
-          color: cellColor,
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-      ),
-      onTap: () {
-        itemSelected(expenseType, cellColor);
-      },
-    );
-  }
-}
-
-void itemSelected(expenseType, cellColor) async {
-  var selectedItems = [];
-
-  if (selectedItems.contains(expenseType)) {
-    //set colour to grey and remove the item
-    selectedItems.remove(expenseType);
-
-    // setState(() { });
-
-    cellColor = Color(0xffDEDEDE);
-  } else {
-    selectedItems.add(expenseType);
+        onTap: () {
+          //set the state of itself
+          //if cell colour is grey set it to purple and update the array
+          if (cellColor == Color(0xffDEDEDE)) {
+            setState(() {
+              cellColor = Color(0xff8e91f3);
+              //add to array
+            });
+          }
+          //else if its purple, set colour back to grey and remove from array
+          else {
+            setState(() {
+              cellColor = Color(0xffDEDEDE);
+              //remove from array
+            });
+          }
+        });
   }
 }
 
