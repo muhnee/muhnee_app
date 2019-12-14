@@ -23,7 +23,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ShowUpText(),
-          ExpCells(),
+          ExpCellsComponent(),
           NextButton(),
         ],
       ),
@@ -81,7 +81,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
   }
 }
 
-class ExpCells extends StatelessWidget {
+class ExpCellsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -89,67 +89,11 @@ class ExpCells extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          //Row 1
-          Padding(
-            padding: EdgeInsets.only(bottom: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SingleExpCell(
-                  expenseType: "Food",
-                ),
-                SingleExpCell(
-                  expenseType: "Clothing",
-                ),
-                SingleExpCell(
-                  expenseType: "Rent",
-                ),
-              ],
-            ),
-          ),
+          ExpCellOrdRow("Food", "Clothing", "Rent"),
+          ExpCellOrdRow("Fuel", "Tech", "Drinks"),
+          ExpCellOrdRow("Coffee", "Activites", "Alcohol"),
 
-          //Row 2
-          Padding(
-            padding: EdgeInsets.only(bottom: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SingleExpCell(
-                  expenseType: "Fuel",
-                ),
-                SingleExpCell(
-                  expenseType: "Tech",
-                ),
-                SingleExpCell(
-                  expenseType: "Drinks",
-                ),
-              ],
-            ),
-          ),
-
-          //Row 3
-          Padding(
-            padding: EdgeInsets.only(bottom: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SingleExpCell(
-                  expenseType: "Coffee",
-                ),
-                SingleExpCell(
-                  expenseType: "Activities",
-                ),
-                SingleExpCell(
-                  expenseType: "Alcohol",
-                ),
-              ],
-            ),
-          ),
-
-          //Row 4
+          //Row 4 = Custom input row
           Padding(
             padding: EdgeInsets.only(bottom: 25),
             child: Row(
@@ -195,6 +139,27 @@ class ExpCells extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget ExpCellOrdRow(type1, type2, type3) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SingleExpCell(
+            expenseType: type1,
+          ),
+          SingleExpCell(
+            expenseType: type2,
+          ),
+          SingleExpCell(
+            expenseType: type3,
           ),
         ],
       ),
