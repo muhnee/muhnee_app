@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.861823949799-vc35cprkp249096uujjn0vvnmcvjppkn</string>
+				<string>com.googleusercontent.apps.311803461659-urrlki19kh162ghogcugcfcmfg9hfl27</string>
 			</array>
 		</dict>
 	</array>
@@ -52,17 +52,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<!-- Copied from GoogleServices-Info.plist key REVERSED_CLIENT_ID -->
-				<string>com.googleusercontent.apps.311803461659-urrlki19kh162ghogcugcfcmfg9hfl27</string>
-			</array>
-		</dict>
-	</array>
 </dict>
 </plist>
