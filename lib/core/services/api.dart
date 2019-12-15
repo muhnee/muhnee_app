@@ -10,6 +10,7 @@ class Api{
   }
 
   Future<QuerySnapshot> getDataCollection() {
+    print(_db);
     return ref.getDocuments() ;
   }
   Stream<QuerySnapshot> streamDataCollection() {

@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:muhnee_app/routing/FadeRoute.dart';
+import 'package:provider/provider.dart';
 import '../utilities/ShowUp.dart';
 import '../utilities/SignIn.dart';
+import '../core/viewModels/ProductModel.dart';
 import 'IntroPageExpense.dart';
 
 class IntroPage extends StatefulWidget {
+  final BuildContext context;
+  const IntroPage({this.context}): super();
   @override
   _IntroPageState createState() => _IntroPageState();
 }
 
 class _IntroPageState extends State<IntroPage> {
   int delayAmount = 500;
+  
+ 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
+    // final productProvider = Provider.of<ProductModel>(widget.context);
+    // productProvider.fetchProducts().then((x) {
+    //   print(x.map((f){
+    //     return f.testfield;
+    //   }));
+    // });
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

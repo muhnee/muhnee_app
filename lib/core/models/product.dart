@@ -1,22 +1,16 @@
 class Product {
-  String id;
-  String price;
-  String name;
-  String img;
+  String testfield;
 
-  Product({this.id, this.price, this.name,this.img});
+  Product({this.testfield});
 
   Product.fromMap(Map snapshot,String id) :
-        id = id ?? '',
-        price = snapshot['price'] ?? '',
-        name = snapshot['name'] ?? '',
-        img = snapshot['img'] ?? '';
+        testfield = snapshot['testfield'] ?? '';
 
-  toJson() {
-    return {
-      "price": price,
-      "name": name,
-      "img": img,
-    };
-  }
+  // toJson() {
+  //   return {
+  //     "price": price,
+  //     "name": name,
+  //     "img": img,
+  //   };
+  // }
 }

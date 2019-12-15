@@ -1,23 +1,46 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:muhnee_app/core/models/product.dart';
 import './routing/FadeRoute.dart';
 import './pages/IntroPage.dart';
+import 'package:provider/provider.dart';
+import './locator.dart';
+import 'package:get_it/get_it.dart';
+import './core/services/api.dart';
+import './core/viewmodels/ProductModel.dart';
+
+GetIt locator = GetIt.instance;
 
 void main() {
-  runApp(new MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      canvasColor: Colors.white,
-      primaryColor: Colors.white,
-      fontFamily: 'Montserrat',
-      appBarTheme: AppBarTheme(
-        color: Colors.white,
-      ),
-    ),
-    home: new SplashScreen(),
-  ));
+  locator.registerLazySingleton<Api>(() => Api('test'));
+  locator.registerLazySingleton<ProductModel>(() => ProductModel());
+
+  runApp(App());
   SystemChrome.setEnabledSystemUIOverlays([]);
+}
+
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => locator<ProductModel>()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          canvasColor: Colors.white,
+          primaryColor: Colors.white,
+          fontFamily: 'Montserrat',
+          appBarTheme: AppBarTheme(
+            color: Colors.white,
+          ),
+        ),
+        home: SplashScreen(),
+      ),
+    );
+  }
 }
 
 class SplashScreen extends StatefulWidget {
@@ -47,6 +70,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductModel>(context);
+    productProvider.fetchProducts().then((x) {
+      print(x.map((f){
+        return f.testfield;
+      }));
+    });
+
     return new Scaffold(
         body: new Container(
             color: Color(0xff8e91f3),
