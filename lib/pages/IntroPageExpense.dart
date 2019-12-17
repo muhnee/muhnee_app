@@ -195,6 +195,7 @@ class SingleExpCell extends StatefulWidget {
 class _SingleExpCellState extends State<SingleExpCell> {
   //! should this be in the build or not???
   var cellColor = Color(0xffDEDEDE);
+  var textColor = Colors.black; 
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +209,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
               widget.expenseType,
               style: TextStyle(
                   fontSize: 15.0,
-                  color: Colors.black,
+                  color: textColor,
                   fontWeight: FontWeight.w400),
               textAlign: TextAlign.center,
             ),
@@ -224,6 +225,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
           if (cellColor == Color(0xffDEDEDE)) {
             setState(() {
               cellColor = Color(0xff8e91f3);
+              textColor = Colors.white; 
 
               //add to array
               widget.testArray.add(widget.expenseType);
@@ -234,6 +236,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
           else {
             setState(() {
               cellColor = Color(0xffDEDEDE);
+              textColor = Colors.black; 
 
               //remove from array
               widget.testArray.remove(widget.expenseType);
