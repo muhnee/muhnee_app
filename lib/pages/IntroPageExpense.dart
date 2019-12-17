@@ -23,7 +23,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ShowUpText(),
-          ExpCellsComponent(),
+          ExpCellsComponent(delayAmount: delayAmount),
           NextButton(),
         ],
       ),
@@ -82,6 +82,9 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
 }
 
 class ExpCellsComponent extends StatelessWidget {
+  var delayAmount;
+  ExpCellsComponent({this.delayAmount});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -89,57 +92,70 @@ class ExpCellsComponent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ExpCellOrdRow("Food", "Clothing", "Rent"),
-          ExpCellOrdRow("Fuel", "Tech", "Drinks"),
-          ExpCellOrdRow("Coffee", "Activites", "Alcohol"),
+          ShowUp(
+            child: ExpCellOrdRow("Food", "Clothing", "Rent"),
+            delay: delayAmount * 6,
+          ),
+          ShowUp(
+            child: ExpCellOrdRow("Fuel", "Tech", "Drinks"),
+            delay: delayAmount * 7,
+          ),
+          ShowUp(
+            child: ExpCellOrdRow("Coffee", "Activites", "Alcohol"),
+            delay: delayAmount * 8,
+          ),
 
           //Row 4 = Custom input row
-          Padding(
-            padding: EdgeInsets.only(bottom: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: 250,
-                  height: 40,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
-                    child: TextField(
-                      style: TextStyle(fontSize: 15.0, color: Colors.black),
-                      decoration: InputDecoration(
-                          border: InputBorder.none, hintText: 'Custom...'),
+
+          ShowUp(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: 250,
+                    height: 40,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
+                      child: TextField(
+                        style: TextStyle(fontSize: 15.0, color: Colors.black),
+                        decoration: InputDecoration(
+                            border: InputBorder.none, hintText: 'Custom...'),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xffDEDEDE),
+                      borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Color(0xffDEDEDE),
-                    borderRadius: BorderRadius.circular(13.0),
-                  ),
-                ),
-                Container(
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Image(
-                      image: AssetImage("lib/assets/images/tick.png"),
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Image(
+                        image: AssetImage("lib/assets/images/tick.png"),
+                      ),
+                    ),
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 40.0,
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 40.0,
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(13.0),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+            delay: delayAmount * 10,
+          )
         ],
       ),
     );
@@ -212,7 +228,6 @@ class _SingleExpCellState extends State<SingleExpCell> {
               //add to array
               widget.testArray.add(widget.expenseType);
               print(widget.testArray);
-  
             });
           }
           //else if its purple, set colour back to grey and remove from array
@@ -277,7 +292,7 @@ class _NextButtonState extends State<NextButton> {
               ),
             ),
           )),
-      delay: delayAmount * 6,
+      delay: delayAmount * 10,
     );
   }
 }

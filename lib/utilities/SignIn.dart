@@ -49,18 +49,23 @@ Future<String> signInWithGoogle() async {
   // }
 }
 
-// void signInGoogleFinal() async{
-
-//   await signInWithGoogle().catchError(onError)
-
-//   googleSignIn.signInSilently();
-
-// }
 
 void signOutGoogle() async {
+  //! MUST SIGNOUT USING BOTH GOOGLE AND FIREBASE 
+  //? CONTROL FLOW => google signIn then firbase user takes over 
   await googleSignIn.signOut();
+  await _auth.signOut();
 
   print("User Sign Out");
+}
+
+Future<bool> isSignedIn() async {
+  try{
+    googleSignIn.signInSilently();
+  } catch (e){
+    print("ISSIGNEDIN" + e);
+    return false;
+  }
 }
 
 Future<bool> signedInAlready() async {

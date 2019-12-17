@@ -7,6 +7,10 @@ import 'IntroPage.dart';
 import '../utilities/SignIn.dart';
 
 class HomePage extends StatelessWidget {
+  var userName;
+  HomePage({this.userName});
+
+
   @override
   Widget build(BuildContext context) {
     PageController _homePageController = PageController(
@@ -20,12 +24,12 @@ class HomePage extends StatelessWidget {
       pageSnapping: true,
       physics: BouncingScrollPhysics(),
       children: <Widget>[
-        LeftPage(),
-        ProfilePage(),
+        //LeftPage(),
+        //ProfilePage(),
         CenterPage(
-          userName: "Test",
+          userName: userName,
         ),
-        RightPage(),
+        //RightPage(),
       ],
     );
   }

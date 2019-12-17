@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:muhnee_app/pages/HomePage.dart';
 import './routing/FadeRoute.dart';
 import './pages/IntroPage.dart';
+import './utilities/SignIn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'pages/IntroPageIncome.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -26,21 +31,44 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  var uid;
+  var name;
+
   startTime() async {
-    var _duration = new Duration(seconds: 2);
-    return new Timer(_duration, navigationPage);
+
+    var _duration = Duration(seconds: 2);
+
+    try{
+      uid = await FirebaseAuth.instance.currentUser();
+      name = uid.displayName;
+
+    } catch(e){
+      print(e);
+    }
+
+    if (uid != null){
+      return Timer(_duration, mainSignedIn);
+    } else {
+      return Timer(_duration, mainNotSignIn);
+    }
+
+    
   }
 
-  void navigationPage() {
-    Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
+  void mainSignedIn() {
+   Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage(userName: name,)));
   }
+
+  void mainNotSignIn() {
+   Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
+  }
+
+
 
   @override
   void initState() {
     super.initState();
-
-    // checks if the current user is already logged in
-    // signedInAlready() != null ? _page = HomePage() : _page = IntroPage();
 
     startTime();
   }
