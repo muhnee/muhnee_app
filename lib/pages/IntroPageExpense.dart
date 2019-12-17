@@ -194,7 +194,7 @@ class SingleExpCell extends StatefulWidget {
 
 class _SingleExpCellState extends State<SingleExpCell> {
   //! should this be in the build or not???
-  var cellColor = Color(0xffDEDEDE);
+  var cellColor = Color(0xffDEDEDE).withOpacity(0.75);
   var textColor = Colors.black; 
 
   @override
@@ -224,7 +224,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
           //if cell colour is grey set it to purple and update the array
           if (cellColor == Color(0xffDEDEDE)) {
             setState(() {
-              cellColor = Color(0xff8e91f3);
+              cellColor = Color(0xff8e91f3).withOpacity(0.75);
               textColor = Colors.white; 
 
               //add to array

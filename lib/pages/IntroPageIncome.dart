@@ -43,13 +43,13 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Firstly, ",
+                  Text("Now, ",
                       style: TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
-                  Text("let's add some",
+                  Text("let's your",
                       style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.black,
@@ -59,8 +59,7 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
             ),
             delay: delayAmount,
           ),
-          ShowUpLineText("categories to group", delayAmount * 2),
-          ShowUpLineText("your Incomes", delayAmount * 4),
+          ShowUpLineText("sources of income", delayAmount * 2),
         ],
       ),
     );
@@ -89,28 +88,27 @@ class ExpCellsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 52.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 52.0,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ShowUp(
-            child: ExpCellOrdRow("Food", "Clothing", "Rent"),
-            delay: delayAmount * 6,
+          SingleExpCell(
+            incomeType: "Work",
           ),
-          ShowUp(
-            child: ExpCellOrdRow("Fuel", "Tech", "Drinks"),
-            delay: delayAmount * 7,
+          SingleExpCell(
+            incomeType: "Hobbies",
           ),
-          ShowUp(
-            child: ExpCellOrdRow("Coffee", "Activites", "Alcohol"),
-            delay: delayAmount * 8,
+          SingleExpCell(
+            incomeType: "Side Hustle",
           ),
 
           //Row 4 = Custom input row
 
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 25),
+              padding: EdgeInsets.only(bottom: 25, top: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,29 +153,8 @@ class ExpCellsComponent extends StatelessWidget {
                 ],
               ),
             ),
-            delay: delayAmount * 10,
+            delay: delayAmount * 9,
           )
-        ],
-      ),
-    );
-  }
-
-  Widget ExpCellOrdRow(type1, type2, type3) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SingleExpCell(
-            IncomeType: type1,
-          ),
-          SingleExpCell(
-            IncomeType: type2,
-          ),
-          SingleExpCell(
-            IncomeType: type3,
-          ),
         ],
       ),
     );
@@ -185,9 +162,12 @@ class ExpCellsComponent extends StatelessWidget {
 }
 
 class SingleExpCell extends StatefulWidget {
-  var IncomeType;
+  var incomeType;
+  //var width;
   var testArray = [];
-  SingleExpCell({@required this.IncomeType});
+  SingleExpCell({
+    @required this.incomeType,
+  });
 
   @override
   _SingleExpCellState createState() => _SingleExpCellState();
@@ -195,56 +175,61 @@ class SingleExpCell extends StatefulWidget {
 
 class _SingleExpCellState extends State<SingleExpCell> {
   //! should this be in the build or not???
-  var cellColor = Color(0xffDEDEDE);
-  var textColor = Colors.black; 
+  var cellColor = Color(0xffDEDEDE).withOpacity(0.75);
+  var textColor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 400),
-          width: 91,
-          height: 34,
-          child: Center(
-            child: Text(
-              widget.IncomeType,
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: textColor,
-                  fontWeight: FontWeight.w400),
-              textAlign: TextAlign.center,
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20.0),
+      child: GestureDetector(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 400),
+
+            //TODO: make this dynamic
+            width: 110,
+            height: 34,
+            child: Center(
+              child: Text(
+                widget.incomeType,
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: textColor,
+                    fontWeight: FontWeight.w400),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: cellColor,
+              borderRadius: BorderRadius.circular(50.0),
             ),
           ),
-          decoration: BoxDecoration(
-            color: cellColor,
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-        ),
-        onTap: () {
-          //set the state of itself
-          //if cell colour is grey set it to purple and update the array
-          if (cellColor == Color(0xffDEDEDE)) {
-            setState(() {
-              cellColor = Color(0xff8e91f3);
-              textColor = Colors.white; 
+          onTap: () {
+            //set the state of itself
+            //if cell colour is grey set it to purple and update the array
+            if (cellColor == Color(0xffDEDEDE)) {
+              setState(() {
+                cellColor = Color(0xff8e91f3).withOpacity(0.75);
+                textColor = Colors.white;
 
-              //add to array
-              widget.testArray.add(widget.IncomeType);
-              print(widget.testArray);
-            });
-          }
-          //else if its purple, set colour back to grey and remove from array
-          else {
-            setState(() {
-              cellColor = Color(0xffDEDEDE);
-              textColor = Colors.black; 
+                //add to array
+                widget.testArray.add(widget.incomeType);
+                print(widget.testArray);
+              });
+            }
+            //else if its purple, set colour back to grey and remove from array
+            else {
+              setState(() {
+                cellColor = Color(0xffDEDEDE);
+                textColor = Colors.black;
 
-              //remove from array
-              widget.testArray.remove(widget.IncomeType);
-              print(widget.testArray);
-            });
-          }
-        });
+                //remove from array
+                widget.testArray.remove(widget.incomeType);
+                print(widget.testArray);
+              });
+            }
+          }),
+    );
   }
 }
 
@@ -267,8 +252,8 @@ class _NextButtonState extends State<NextButton> {
               width: 150,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context, FadeRouteBuilder(page: HomePage(userName: "TEST")));
+                  Navigator.pushReplacement(context,
+                      FadeRouteBuilder(page: HomePage(userName: "TEST")));
                 },
                 child: Container(
                   decoration: BoxDecoration(
