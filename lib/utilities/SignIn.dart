@@ -50,11 +50,12 @@ Future<String> signInWithGoogle() async {
 }
 
 
-void signOutGoogle() async {
+void signOutGoogle()  {
   //! MUST SIGNOUT USING BOTH GOOGLE AND FIREBASE 
   //? CONTROL FLOW => google signIn then firbase user takes over 
-  await googleSignIn.signOut();
-  await _auth.signOut();
+   _auth.signOut();
+   googleSignIn.signOut();
+  
 
   print("User Sign Out");
 }
