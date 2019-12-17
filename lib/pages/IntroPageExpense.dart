@@ -169,6 +169,7 @@ class ExpCellsComponent extends StatelessWidget {
 
 class SingleExpCell extends StatefulWidget {
   var expenseType;
+  var testArray = [];
   SingleExpCell({@required this.expenseType});
 
   @override
@@ -207,14 +208,21 @@ class _SingleExpCellState extends State<SingleExpCell> {
           if (cellColor == Color(0xffDEDEDE)) {
             setState(() {
               cellColor = Color(0xff8e91f3);
+
               //add to array
+              widget.testArray.add(widget.expenseType);
+              print(widget.testArray);
+  
             });
           }
           //else if its purple, set colour back to grey and remove from array
           else {
             setState(() {
               cellColor = Color(0xffDEDEDE);
+
               //remove from array
+              widget.testArray.remove(widget.expenseType);
+              print(widget.testArray);
             });
           }
         });
