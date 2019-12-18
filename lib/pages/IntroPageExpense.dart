@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muhnee_app/routing/FadeRoute.dart';
+import 'package:muhnee_app/utilities/FirestoreFunctions.dart';
 import 'package:muhnee_app/utilities/ShowUp.dart';
 import 'IntroPageIncome.dart';
 
@@ -131,26 +132,7 @@ class ExpCellsComponent extends StatelessWidget {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-                  Container(
-                    child: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: Image(
-                        image: AssetImage("lib/assets/images/tick.png"),
-                      ),
-                    ),
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.25),
-                          blurRadius: 40.0,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(13.0),
-                    ),
-                  ),
+                  TickBtn(),
                 ],
               ),
             ),
@@ -183,6 +165,55 @@ class ExpCellsComponent extends StatelessWidget {
   }
 }
 
+class TickBtn extends StatefulWidget {
+  @override
+  _TickBtnState createState() => _TickBtnState();
+}
+
+class _TickBtnState extends State<TickBtn> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: AnimatedContainer(
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Image(
+            image: AssetImage("lib/assets/images/tick.png"),
+          ),
+        ),
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          //color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurRadius: 40.0,
+            )
+          ],
+          borderRadius: BorderRadius.circular(13.0),
+        ),
+        duration: Duration(milliseconds: 800),
+      ),
+      onTap: () {
+
+        Scaffold.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          content: Text('Added', textAlign: TextAlign.center, style: TextStyle(color: Color(0xff8e91f3)), ),
+        ));
+
+        print("TAP REG");
+        
+      },
+      
+    );
+
+   
+
+  }
+}
+
 class SingleExpCell extends StatefulWidget {
   var expenseType;
   var testArray = [];
@@ -195,7 +226,7 @@ class SingleExpCell extends StatefulWidget {
 class _SingleExpCellState extends State<SingleExpCell> {
   //! should this be in the build or not???
   var cellColor = Color(0xffDEDEDE).withOpacity(0.75);
-  var textColor = Colors.black; 
+  var textColor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +256,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
           if (cellColor == Color(0xffDEDEDE)) {
             setState(() {
               cellColor = Color(0xff8e91f3).withOpacity(0.75);
-              textColor = Colors.white; 
+              textColor = Colors.white;
 
               //add to array
               widget.testArray.add(widget.expenseType);
@@ -236,7 +267,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
           else {
             setState(() {
               cellColor = Color(0xffDEDEDE);
-              textColor = Colors.black; 
+              textColor = Colors.black;
 
               //remove from array
               widget.testArray.remove(widget.expenseType);

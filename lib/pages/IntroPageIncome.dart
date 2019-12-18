@@ -49,7 +49,7 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
-                  Text("let's your",
+                  Text("what are your",
                       style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.black,
@@ -59,7 +59,7 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
             ),
             delay: delayAmount,
           ),
-          ShowUpLineText("sources of income", delayAmount * 2),
+          ShowUpLineText("sources of income?", delayAmount * 2),
         ],
       ),
     );
