@@ -82,30 +82,22 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
       delay: delayAmountSpecific,
     );
   }
-
-
 }
 
-addToExpenses(expenseType){
-
-  expenses.add(expenseType); 
-
+addToExpenses(expenseType) {
+  expenses.add(expenseType);
 }
 
-removeFromExpenses(expenseType){
-
+removeFromExpenses(expenseType) {
   expenses.remove(expenseType);
-
 }
 
 class ExpCellsComponent extends StatefulWidget {
-
   @override
   _ExpCellsComponentState createState() => _ExpCellsComponentState();
 }
 
 class _ExpCellsComponentState extends State<ExpCellsComponent> {
-
   var delayAmount = 500;
 
   final customExpenseController = TextEditingController();
@@ -116,11 +108,10 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
     customExpenseController.dispose();
     super.dispose();
   }
-  
 
   @override
   Widget build(BuildContext context) {
-     return Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 52.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -165,7 +156,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-                  TickBtn(customExpense: customExpenseController.text),
+                  TickBtn(customExpenseController: customExpenseController),
                 ],
               ),
             ),
@@ -198,19 +189,16 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
   }
 }
 
-
-
 class TickBtn extends StatefulWidget {
-  var customExpense; 
+  var customExpenseController;
 
-  TickBtn({@required this.customExpense});
+  TickBtn({@required this.customExpenseController});
 
   @override
   _TickBtnState createState() => _TickBtnState();
 }
 
 class _TickBtnState extends State<TickBtn> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -250,15 +238,10 @@ class _TickBtnState extends State<TickBtn> {
             //   ),
             // ));
 
-            
+            addToExpenses(widget.customExpenseController.text);
+            widget.customExpenseController.clear();
 
-            
-            addToExpenses(widget.customExpense);
-            
-
-            
-            
-
+            print(expenses);
           },
         ),
       ),
@@ -308,27 +291,20 @@ class _SingleExpCellState extends State<SingleExpCell> {
             setState(() {
               cellColor = Color(0xff8e91f3).withOpacity(0.75);
               textColor = Colors.white;
-
-             
             });
 
-             //add to array
-              addToExpenses(widget.expenseType);
-
+            //add to array
+            addToExpenses(widget.expenseType);
           }
           //else if its purple, set colour back to grey and remove from array
           else {
             setState(() {
               cellColor = Color(0xffDEDEDE);
               textColor = Colors.black;
-
-             
-              
             });
 
-             //remove from array
-              removeFromExpenses(widget.expenseType);
-
+            //remove from array
+            removeFromExpenses(widget.expenseType);
           }
         });
   }
@@ -366,7 +342,7 @@ class _NextButtonState extends State<NextButton> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
-                        print(expenses);
+                        uploadExpenses(expenses);
                         // Navigator.pushReplacement(
                         //     context, FadeRouteBuilder(page: IntroPageIncome()));
                       },

@@ -13,7 +13,7 @@ String uid;
 // }
 
 
-void uploadExpenses() async {
+void uploadExpenses(expenses) async {
 
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -21,16 +21,10 @@ void uploadExpenses() async {
   await databaseReference.collection("MobileUsers")
       .document(uid)
       .setData({
-        'val1': 'test',
-        'val2': 'testInfo'
+        'expenseCategories': expenses,
+       
       });
 
   print("addToExpense executed");
 
-  // DocumentReference ref = await databaseReference.collection("books")
-  //     .add({
-  //       'title': 'Flutter in Action',
-  //       'description': 'Complete Programming Guide to learn Flutter'
-  //     });
-  // print(ref.documentID);
 }
