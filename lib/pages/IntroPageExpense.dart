@@ -197,18 +197,18 @@ class _TickBtnState extends State<TickBtn> {
             ),
           ),
           onTap: () {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              content: Text(
-                'added',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Color(0xff8e91f3),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12),
-              ),
-            ));
+            // Scaffold.of(context).showSnackBar(SnackBar(
+            //   backgroundColor: Colors.white,
+            //   elevation: 0,
+            //   content: Text(
+            //     'added',
+            //     textAlign: TextAlign.center,
+            //     style: TextStyle(
+            //         color: Color(0xff8e91f3),
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: 12),
+            //   ),
+            // ));
 
             print("Expense type added");
           },
