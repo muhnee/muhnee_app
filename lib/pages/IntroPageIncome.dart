@@ -130,32 +130,69 @@ class ExpCellsComponent extends StatelessWidget {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-                  Container(
-                    child: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: Image(
-                        image: AssetImage("lib/assets/images/tick.png"),
-                      ),
-                    ),
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.25),
-                          blurRadius: 40.0,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(13.0),
-                    ),
-                  ),
+
+                  TickBtnIncome(),
+                 
                 ],
               ),
             ),
             delay: delayAmount * 9,
           )
         ],
+      ),
+    );
+  }
+}
+
+
+class TickBtnIncome extends StatefulWidget {
+  @override
+  _TickBtnIncomeState createState() => _TickBtnIncomeState();
+}
+
+class _TickBtnIncomeState extends State<TickBtnIncome> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 40.0,
+          )
+        ],
+        borderRadius: BorderRadius.circular(13.0),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(13.0),
+          child: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Image(
+              image: AssetImage("lib/assets/images/tick.png"),
+            ),
+          ),
+          onTap: () {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              content: Text(
+                'added',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Color(0xff8e91f3),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
+              ),
+            ));
+
+            print("Income type added");
+          },
+        ),
       ),
     );
   }

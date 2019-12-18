@@ -210,7 +210,7 @@ class _TickBtnState extends State<TickBtn> {
               ),
             ));
 
-            print("TAP REG");
+            print("Expense type added");
           },
         ),
       ),
