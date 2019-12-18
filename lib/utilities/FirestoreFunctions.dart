@@ -13,7 +13,7 @@ String uid;
 // }
 
 
-void addToExpense() async {
+void uploadExpenses() async {
 
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;

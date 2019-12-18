@@ -4,6 +4,8 @@ import 'package:muhnee_app/utilities/FirestoreFunctions.dart';
 import 'package:muhnee_app/utilities/ShowUp.dart';
 import 'IntroPageIncome.dart';
 
+var expenses = [];
+
 class IntroPageExpense extends StatefulWidget {
   @override
   _IntroPageExpenseState createState() => _IntroPageExpenseState();
@@ -24,7 +26,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ShowUpText(),
-          ExpCellsComponent(delayAmount: delayAmount),
+          ExpCellsComponent(),
           NextButton(),
         ],
       ),
@@ -80,15 +82,45 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
       delay: delayAmountSpecific,
     );
   }
+
+
 }
 
-class ExpCellsComponent extends StatelessWidget {
-  var delayAmount;
-  ExpCellsComponent({this.delayAmount});
+addToExpenses(expenseType){
+
+  expenses.add(expenseType); 
+
+}
+
+removeFromExpenses(expenseType){
+
+  expenses.remove(expenseType);
+
+}
+
+class ExpCellsComponent extends StatefulWidget {
+
+  @override
+  _ExpCellsComponentState createState() => _ExpCellsComponentState();
+}
+
+class _ExpCellsComponentState extends State<ExpCellsComponent> {
+
+  var delayAmount = 500;
+
+  final customExpenseController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    customExpenseController.dispose();
+    super.dispose();
+  }
+  
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 52.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -122,6 +154,7 @@ class ExpCellsComponent extends StatelessWidget {
                       padding:
                           EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
                       child: TextField(
+
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Custom...'),
@@ -164,6 +197,8 @@ class ExpCellsComponent extends StatelessWidget {
     );
   }
 }
+
+
 
 class TickBtn extends StatefulWidget {
   @override
@@ -210,10 +245,9 @@ class _TickBtnState extends State<TickBtn> {
             //   ),
             // ));
 
-            addToExpense();
+            // addToExpenses();
             
 
-            print("Expense type added");
           },
         ),
       ),
@@ -223,7 +257,6 @@ class _TickBtnState extends State<TickBtn> {
 
 class SingleExpCell extends StatefulWidget {
   var expenseType;
-  var testArray = [];
   SingleExpCell({@required this.expenseType});
 
   @override
@@ -265,10 +298,12 @@ class _SingleExpCellState extends State<SingleExpCell> {
               cellColor = Color(0xff8e91f3).withOpacity(0.75);
               textColor = Colors.white;
 
-              //add to array
-              widget.testArray.add(widget.expenseType);
-              print(widget.testArray);
+             
             });
+
+             //add to array
+              addToExpenses(widget.expenseType);
+
           }
           //else if its purple, set colour back to grey and remove from array
           else {
@@ -276,10 +311,13 @@ class _SingleExpCellState extends State<SingleExpCell> {
               cellColor = Color(0xffDEDEDE);
               textColor = Colors.black;
 
-              //remove from array
-              widget.testArray.remove(widget.expenseType);
-              print(widget.testArray);
+             
+              
             });
+
+             //remove from array
+              removeFromExpenses(widget.expenseType);
+
           }
         });
   }
@@ -317,8 +355,9 @@ class _NextButtonState extends State<NextButton> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
-                        Navigator.pushReplacement(
-                            context, FadeRouteBuilder(page: IntroPageIncome()));
+                        print(expenses);
+                        // Navigator.pushReplacement(
+                        //     context, FadeRouteBuilder(page: IntroPageIncome()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
