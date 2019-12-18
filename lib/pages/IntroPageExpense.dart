@@ -154,7 +154,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                       padding:
                           EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
                       child: TextField(
-
+                        controller: customExpenseController,
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Custom...'),
@@ -165,7 +165,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-                  TickBtn(),
+                  TickBtn(customExpense: customExpenseController.text),
                 ],
               ),
             ),
@@ -201,11 +201,16 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
 
 
 class TickBtn extends StatefulWidget {
+  var customExpense; 
+
+  TickBtn({@required this.customExpense});
+
   @override
   _TickBtnState createState() => _TickBtnState();
 }
 
 class _TickBtnState extends State<TickBtn> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -245,7 +250,13 @@ class _TickBtnState extends State<TickBtn> {
             //   ),
             // ));
 
-            // addToExpenses();
+            
+
+            
+            addToExpenses(widget.customExpense);
+            
+
+            
             
 
           },
