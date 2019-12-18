@@ -173,45 +173,60 @@ class TickBtn extends StatefulWidget {
 class _TickBtnState extends State<TickBtn> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: AnimatedContainer(
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 40.0,
+          )
+        ],
+        borderRadius: BorderRadius.circular(13.0),
+      ),
+
+      child: Material(
+        color: Colors.transparent,
+        child:  InkWell(
+         borderRadius: BorderRadius.circular(13.0),
+
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Image(
             image: AssetImage("lib/assets/images/tick.png"),
           ),
         ),
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          //color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.25),
-              blurRadius: 40.0,
-            )
-          ],
-          borderRadius: BorderRadius.circular(13.0),
-        ),
-        duration: Duration(milliseconds: 800),
+        onTap: () {
+
+          Scaffold.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            content: Text(
+              'added',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Color(0xff8e91f3), 
+              fontWeight: FontWeight.bold,
+              fontSize: 12),
+            ),
+          ));
+
+          print("TAP REG");
+
+          
+
+
+        },
       ),
-      onTap: () {
+      ),
 
-        Scaffold.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          content: Text('Added', textAlign: TextAlign.center, style: TextStyle(color: Color(0xff8e91f3)), ),
-        ));
 
-        print("TAP REG");
-        
-      },
-      
+
     );
-
-   
-
   }
+
+
 }
 
 class SingleExpCell extends StatefulWidget {
