@@ -69,21 +69,7 @@ class _IntroPageState extends State<IntroPage> {
           child: Center(
             child: SizedBox(
               width: 300,
-              child: GestureDetector(
-                onTap: () {
-                  // signInWithGoogle().whenComplete(() {
-                  //   Navigator.pushReplacement(
-                  //       context, FadeRouteBuilder(page: IntroPageExpense()));
-                  // });
-
-                  //! the below shows the object returned after a successful auth
-                  //signInWithGoogle().then((user) => print(user)).catchError((e) => print(e));
-
-                  signInWithGoogle()
-                      .then((user) => Navigator.pushReplacement(
-                          context, FadeRouteBuilder(page: IntroPageExpense())))
-                      .catchError((e) => print(e));
-                },
+              
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(23.0),
@@ -94,7 +80,13 @@ class _IntroPageState extends State<IntroPage> {
                           blurRadius: 40.0,
                         ),
                       ]),
-                  child: Padding(
+                  child: 
+
+                  Material(
+                    borderRadius: BorderRadius.circular(23.0),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(23.0),
+                      child:  Padding(
                     padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -113,9 +105,31 @@ class _IntroPageState extends State<IntroPage> {
                       ],
                     ),
                   ),
+
+                  onTap: () {
+                  // signInWithGoogle().whenComplete(() {
+                  //   Navigator.pushReplacement(
+                  //       context, FadeRouteBuilder(page: IntroPageExpense()));
+                  // });
+
+                  //! the below shows the object returned after a successful auth
+                  //signInWithGoogle().then((user) => print(user)).catchError((e) => print(e));
+
+                  signInWithGoogle()
+                      .then((user) => Navigator.pushReplacement(
+                          context, FadeRouteBuilder(page: IntroPageExpense())))
+                      .catchError((e) => print(e));
+                },
+
+                    ),
+                  ),
+                  
+                 
+
+
                 ),
               ),
-            ),
+           
           )),
       delay: delayAmount * 8,
     );
