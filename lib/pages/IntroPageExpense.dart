@@ -210,6 +210,9 @@ class _TickBtnState extends State<TickBtn> {
             //   ),
             // ));
 
+            addToExpense();
+            
+
             print("Expense type added");
           },
         ),
