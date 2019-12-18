@@ -244,18 +244,13 @@ class _NextButtonState extends State<NextButton> {
     //! does this go within or ouside of the build method???
     var delayAmount = 500;
 
-    return ShowUp(
+     return ShowUp(
       child: Padding(
           padding: EdgeInsets.only(bottom: 142.0),
           child: Center(
             child: SizedBox(
               width: 150,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacement(context,
-                      FadeRouteBuilder(page: HomePage(userName: "TEST")));
-                },
-                child: Container(
+              child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(23.0),
                       color: Colors.white,
@@ -265,20 +260,29 @@ class _NextButtonState extends State<NextButton> {
                           blurRadius: 40.0,
                         ),
                       ]),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Next",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
+                  child: Material(
+                    borderRadius: BorderRadius.circular(23.0),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(23.0),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context, FadeRouteBuilder(page: HomePage(userName: "TEST",)));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Next",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                  )),
             ),
           )),
       delay: delayAmount * 10,

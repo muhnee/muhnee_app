@@ -186,47 +186,36 @@ class _TickBtnState extends State<TickBtn> {
         ],
         borderRadius: BorderRadius.circular(13.0),
       ),
-
       child: Material(
         color: Colors.transparent,
-        child:  InkWell(
-         borderRadius: BorderRadius.circular(13.0),
-
-        child: Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Image(
-            image: AssetImage("lib/assets/images/tick.png"),
-          ),
-        ),
-        onTap: () {
-
-          Scaffold.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            content: Text(
-              'added',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Color(0xff8e91f3), 
-              fontWeight: FontWeight.bold,
-              fontSize: 12),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(13.0),
+          child: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Image(
+              image: AssetImage("lib/assets/images/tick.png"),
             ),
-          ));
+          ),
+          onTap: () {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              content: Text(
+                'added',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Color(0xff8e91f3),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
+              ),
+            ));
 
-          print("TAP REG");
-
-          
-
-
-        },
+            print("TAP REG");
+          },
+        ),
       ),
-      ),
-
-
-
     );
   }
-
-
 }
 
 class SingleExpCell extends StatefulWidget {
@@ -310,12 +299,7 @@ class _NextButtonState extends State<NextButton> {
           child: Center(
             child: SizedBox(
               width: 150,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context, FadeRouteBuilder(page: IntroPageIncome()));
-                },
-                child: Container(
+              child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(23.0),
                       color: Colors.white,
@@ -325,20 +309,29 @@ class _NextButtonState extends State<NextButton> {
                           blurRadius: 40.0,
                         ),
                       ]),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Next",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
+                  child: Material(
+                    borderRadius: BorderRadius.circular(23.0),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(23.0),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context, FadeRouteBuilder(page: IntroPageIncome()));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Next",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                  )),
             ),
           )),
       delay: delayAmount * 10,
