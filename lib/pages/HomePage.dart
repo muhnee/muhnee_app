@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/pages/ProfilePage.dart';
+import 'package:muhnee/pages/ProfilePage.dart';
 import './CenterPage.dart';
 import './LeftPage.dart';
 import './RightPage.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/routing/FadeRoute.dart';
-import 'package:muhnee_app/utilities/SizeConfig.dart';
+import 'package:muhnee/routing/FadeRoute.dart';
+import 'package:muhnee/utilities/SizeConfig.dart';
 import 'IntroPage.dart';
 import '../utilities/SignIn.dart';
 import '../utilities/SizeConfig.dart';

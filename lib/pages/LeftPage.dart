@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/routing/FadeRoute.dart';
+import 'package:muhnee/routing/FadeRoute.dart';
 import 'IntroPage.dart';
 import '../utilities/SignIn.dart';
 

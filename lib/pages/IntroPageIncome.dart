@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/pages/HomePage.dart';
-import 'package:muhnee_app/routing/FadeRoute.dart';
-import 'package:muhnee_app/utilities/ShowUp.dart';
+import 'package:muhnee/pages/HomePage.dart';
+import 'package:muhnee/routing/FadeRoute.dart';
+import 'package:muhnee/utilities/ShowUp.dart';
 import 'HomePage.dart';
+
+var incomes = [];
 
 class IntroPageIncome extends StatefulWidget {
   @override
@@ -24,7 +26,7 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ShowUpText(),
-          ExpCellsComponent(delayAmount: delayAmount),
+          IncCellsComponent(),
           NextButton(),
         ],
       ),
@@ -81,9 +83,30 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
   }
 }
 
-class ExpCellsComponent extends StatelessWidget {
-  var delayAmount;
-  ExpCellsComponent({this.delayAmount});
+addToIncomes(incomeType) {
+  incomes.add(incomeType);
+}
+
+removeFromIncomes(incomeType) {
+  incomes.remove(incomeType);
+}
+
+class IncCellsComponent extends StatefulWidget {
+  @override
+  _IncCellsComponentState createState() => _IncCellsComponentState();
+}
+
+class _IncCellsComponentState extends State<IncCellsComponent> {
+  var delayAmount = 500;
+
+  final customIncomeController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    customIncomeController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +143,7 @@ class ExpCellsComponent extends StatelessWidget {
                       padding:
                           EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
                       child: TextField(
+                        controller: customIncomeController,
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Custom...'),
@@ -130,9 +154,7 @@ class ExpCellsComponent extends StatelessWidget {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-
-                  TickBtnIncome(),
-                 
+                  TickBtnIncome(customIncomeController: customIncomeController),
                 ],
               ),
             ),
@@ -144,8 +166,11 @@ class ExpCellsComponent extends StatelessWidget {
   }
 }
 
-
 class TickBtnIncome extends StatefulWidget {
+  var customIncomeController;
+
+  TickBtnIncome({@required this.customIncomeController});
+
   @override
   _TickBtnIncomeState createState() => _TickBtnIncomeState();
 }
@@ -190,7 +215,10 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
             //   ),
             // ));
 
-            print("Income type added");
+            addToIncomes(widget.customIncomeController.text);
+            widget.customIncomeController.clear();
+
+            print(incomes);
           },
         ),
       ),
@@ -200,8 +228,7 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
 
 class SingleExpCell extends StatefulWidget {
   var incomeType;
-  //var width;
-  var testArray = [];
+
   SingleExpCell({
     @required this.incomeType,
   });
@@ -250,8 +277,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
                 textColor = Colors.white;
 
                 //add to array
-                widget.testArray.add(widget.incomeType);
-                print(widget.testArray);
+                addToIncomes(widget.incomeType);
               });
             }
             //else if its purple, set colour back to grey and remove from array
@@ -261,8 +287,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
                 textColor = Colors.black;
 
                 //remove from array
-                widget.testArray.remove(widget.incomeType);
-                print(widget.testArray);
+                removeFromIncomes(widget.incomeType);
               });
             }
           }),
@@ -281,7 +306,7 @@ class _NextButtonState extends State<NextButton> {
     //! does this go within or ouside of the build method???
     var delayAmount = 500;
 
-     return ShowUp(
+    return ShowUp(
       child: Padding(
           padding: EdgeInsets.only(bottom: 142.0),
           child: Center(
@@ -303,7 +328,11 @@ class _NextButtonState extends State<NextButton> {
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
                         Navigator.pushReplacement(
-                            context, FadeRouteBuilder(page: HomePage(userName: "TEST",)));
+                            context,
+                            FadeRouteBuilder(
+                                page: HomePage(
+                              userName: "TEST",
+                            )));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),

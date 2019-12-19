@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee_app/routing/FadeRoute.dart';
-import 'package:muhnee_app/utilities/FirestoreFunctions.dart';
-import 'package:muhnee_app/utilities/ShowUp.dart';
+import 'package:muhnee/routing/FadeRoute.dart';
+import 'package:muhnee/utilities/FirestoreFunctions.dart';
+import 'package:muhnee/utilities/ShowUp.dart';
 import 'IntroPageIncome.dart';
 
 var expenses = [];

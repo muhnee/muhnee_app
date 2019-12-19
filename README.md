@@ -1,4 +1,4 @@
-# muhnee_app
+# muhnee
 
 The Native Version of Muhnee -- currently built for iOS
 

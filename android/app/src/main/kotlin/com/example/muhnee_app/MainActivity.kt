@@ -1,4 +1,4 @@
-package com.example.muhnee_app
+package com.example.muhnee
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

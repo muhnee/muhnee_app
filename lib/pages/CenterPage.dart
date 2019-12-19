@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:muhnee_app/routing/FadeRoute.dart';
+import 'package:muhnee/routing/FadeRoute.dart';
 import '../main.dart';
 import '../utilities/SignIn.dart';
 import 'IntroPage.dart';
