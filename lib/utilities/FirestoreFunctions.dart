@@ -11,7 +11,7 @@ void uploadExpenses(expenses) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  await databaseReference.collection("MobileUsers").document(uid).setData({
+  await databaseReference.collection("users").document(uid).collection("categories").document("expense").setData({
     'expenseCategories': expenses,
   });
 
@@ -22,9 +22,10 @@ void uploadIncomes(incomes) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  await databaseReference.collection("MobileUsers").document(uid).setData({
+  await databaseReference.collection("users").document(uid).collection("categories").document("income").setData({
     'incomeCategories': incomes,
   });
+
 
   print("uploadIncomes executed");
 }

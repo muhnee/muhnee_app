@@ -100,7 +100,7 @@ class _IntroPageState extends State<IntroPage> {
                         ),
                         Text(
                           "Sign in with Google",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
+                          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),

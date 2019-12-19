@@ -6,10 +6,17 @@ import './routing/FadeRoute.dart';
 import './pages/IntroPage.dart';
 import './utilities/SignIn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import 'pages/IntroPageIncome.dart';
 
-void main() {
+void main() async {
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(

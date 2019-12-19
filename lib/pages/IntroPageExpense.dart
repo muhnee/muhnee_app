@@ -238,10 +238,14 @@ class _TickBtnState extends State<TickBtn> {
             //   ),
             // ));
 
-            addToExpenses(widget.customExpenseController.text);
-            widget.customExpenseController.clear();
+            if (widget.customExpenseController.text != "") {
+              addToExpenses(widget.customExpenseController.text);
+              widget.customExpenseController.clear();
 
-            print(expenses);
+              print(expenses);
+            } else {
+              print("custom is empty");
+            }
           },
         ),
       ),
@@ -343,8 +347,8 @@ class _NextButtonState extends State<NextButton> {
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
                         uploadExpenses(expenses);
-                        // Navigator.pushReplacement(
-                        //     context, FadeRouteBuilder(page: IntroPageIncome()));
+                         Navigator.pushReplacement(
+                             context, FadeRouteBuilder(page: IntroPageIncome()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),

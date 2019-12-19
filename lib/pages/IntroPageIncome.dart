@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:muhnee/pages/HomePage.dart';
 import 'package:muhnee/routing/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
+import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'HomePage.dart';
 
 var incomes = [];
@@ -215,10 +216,15 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
             //   ),
             // ));
 
-            addToIncomes(widget.customIncomeController.text);
-            widget.customIncomeController.clear();
+             if (widget.customIncomeController.text != "") {
+              addToIncomes(widget.customIncomeController.text);
+              widget.customIncomeController.clear();
 
-            print(incomes);
+              print(incomes);
+            } else {
+              print("custom is empty");
+            }
+
           },
         ),
       ),
@@ -327,6 +333,9 @@ class _NextButtonState extends State<NextButton> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
+
+                        uploadIncomes(incomes);
+
                         Navigator.pushReplacement(
                             context,
                             FadeRouteBuilder(
