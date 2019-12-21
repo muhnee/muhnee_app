@@ -367,7 +367,7 @@ class _NextButtonState extends State<NextButton> {
                   )),
             ),
           )),
-      delay: delayAmount * 10,
+      delay: delayAmount * 11,
     );
   }
 }

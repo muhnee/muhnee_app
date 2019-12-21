@@ -40,12 +40,12 @@ class _IntroPageState extends State<IntroPage> {
           ShowUpTextSingle(
             bottomPadding: 33.0,
             lineText: "Hi",
-            delayAmount: delayAmount,
+            delayAmount: delayAmount * 2,
           ),
           ShowUpTextSingle(
             bottomPadding: 33.0,
             lineText: "Welcome to Muhnee",
-            delayAmount: delayAmount * 2,
+            delayAmount: delayAmount * 3,
           ),
           ShowUpTextSingle(
             bottomPadding: 15.0,
@@ -55,7 +55,7 @@ class _IntroPageState extends State<IntroPage> {
           ShowUpTextSingle(
             bottomPadding: 0.0,
             lineText: "daily spending",
-            delayAmount: delayAmount * 6,
+            delayAmount: delayAmount * 5,
           ),
         ],
       ),
@@ -100,7 +100,7 @@ class _IntroPageState extends State<IntroPage> {
                         ),
                         Text(
                           "Sign in with Google",
-                          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.black, fontSize: 20,),
                         ),
                       ],
                     ),
@@ -131,7 +131,7 @@ class _IntroPageState extends State<IntroPage> {
               ),
            
           )),
-      delay: delayAmount * 8,
+      delay: delayAmount * 7,
     );
   }
 }

@@ -62,7 +62,7 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
             ),
             delay: delayAmount,
           ),
-          ShowUpLineText("sources of income?", delayAmount * 2),
+          ShowUpLineText("sources of income?", delayAmount * 3),
         ],
       ),
     );
@@ -118,14 +118,25 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SingleExpCell(
-            incomeType: "Work",
+          ShowUp(
+            child: SingleExpCell(
+              incomeType: "Work",
+            ),
+            delay: delayAmount * 5,
           ),
-          SingleExpCell(
-            incomeType: "Hobbies",
+
+          ShowUp(
+            child: SingleExpCell(
+              incomeType: "Hobbies",
+            ),
+            delay: delayAmount * 6,
           ),
-          SingleExpCell(
-            incomeType: "Side Hustle",
+
+          ShowUp(
+            child: SingleExpCell(
+              incomeType: "Side Hustle",
+            ),
+            delay: delayAmount *7,
           ),
 
           //Row 4 = Custom input row
@@ -216,7 +227,7 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
             //   ),
             // ));
 
-             if (widget.customIncomeController.text != "") {
+            if (widget.customIncomeController.text != "") {
               addToIncomes(widget.customIncomeController.text);
               widget.customIncomeController.clear();
 
@@ -224,7 +235,6 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
             } else {
               print("custom is empty");
             }
-
           },
         ),
       ),
@@ -333,7 +343,6 @@ class _NextButtonState extends State<NextButton> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
-
                         uploadIncomes(incomes);
 
                         Navigator.pushReplacement(
