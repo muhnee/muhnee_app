@@ -1,29 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee/utilities/SizeConfig.dart';
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    return Material(
-      child: Row(
-        children: <Widget>[
-          LeftPanel(),
-          Expanded(
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+import '../../utilities/SizeConfig.dart';
 
 class LeftPanel extends StatefulWidget {
   @override
@@ -33,6 +9,7 @@ class LeftPanel extends StatefulWidget {
 class _LeftPanelState extends State<LeftPanel> {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       width: SizeConfig.blockSizeHorizontal * 20,
       color: Colors.blue,

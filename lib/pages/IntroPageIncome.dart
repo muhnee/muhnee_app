@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee/pages/HomePage.dart';
+import 'package:muhnee/pages/HomePage/HomePage.dart';
 import 'package:muhnee/routing/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
-import 'HomePage.dart';
+
 
 var incomes = [];
 
