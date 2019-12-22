@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:muhnee/pages/HomePage.dart';
+import 'package:muhnee/pages/HomePage/HomePage.dart';
 import './routing/FadeRoute.dart';
 import './pages/IntroPage.dart';
 import './utilities/SignIn.dart';

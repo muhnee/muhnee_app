@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 
 import 'LeftPanel.dart';
+import 'RightSectionMain.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,12 +16,18 @@ class _HomePageState extends State<HomePage> {
     return Material(
       child: Row(
         children: <Widget>[
+         
           LeftPanel(),
           Expanded(
             child: Container(
-              color: Colors.red,
+              
+                color: Colors.white,
+                
+              
+              // child: RightSectionMain(),
             ),
           ),
+
         ],
       ),
     );
