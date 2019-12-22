@@ -20,7 +20,6 @@ class _LeftPanelState extends State<LeftPanel> {
     return Container(
       width: SizeConfig.blockSizeHorizontal * 20,
       decoration: BoxDecoration(
-        // color: Colors.transparent,
         boxShadow: [
           BoxShadow(
             color: Colors.grey[400],
@@ -160,9 +159,7 @@ class _PanelButtonState extends State<PanelButton> {
             ),
             onTap: () {
 
-              widget.pageViewController.animateToPage(widget.pageIndex, duration: Duration(milliseconds: 500), curve: Curves.ease);
-
-              
+              widget.pageViewController.animateToPage(widget.pageIndex, duration: Duration(milliseconds: 900), curve: Curves.easeInOutExpo);              
             },
           ),
         ),

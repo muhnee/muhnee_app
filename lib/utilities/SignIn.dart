@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -55,7 +56,6 @@ void signOutGoogle()  {
   //? CONTROL FLOW => google signIn then firbase user takes over 
    _auth.signOut();
    googleSignIn.signOut();
-  
 
   print("User Sign Out");
 }

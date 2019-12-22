@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: PageView(
               controller: pageViewController,
+              scrollDirection: Axis.vertical,
               physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
                 ExpensePage(), 
