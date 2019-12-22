@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void mainSignedIn() {
-   Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage(userName: name,)));
+   Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage()));
   }
 
   void mainNotSignIn() {

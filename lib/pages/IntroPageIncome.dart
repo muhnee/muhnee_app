@@ -349,7 +349,7 @@ class _NextButtonState extends State<NextButton> {
                             context,
                             FadeRouteBuilder(
                                 page: HomePage(
-                              userName: "TEST",
+                              
                             )));
                       },
                       child: Padding(
