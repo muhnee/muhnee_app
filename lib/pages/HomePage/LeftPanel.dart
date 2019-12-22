@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import '../../utilities/SizeConfig.dart';
 import '../../utilities/SignIn.dart';
 
+
+
 class LeftPanel extends StatefulWidget {
+
+  PageController pageViewController; 
+  LeftPanel({@required this.pageViewController});
+
   @override
   _LeftPanelState createState() => _LeftPanelState();
 }
@@ -28,7 +34,7 @@ class _LeftPanelState extends State<LeftPanel> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            ProfilePic(),
+            //ProfilePic(),
 
             Expanded(
               flex: 4,
@@ -40,6 +46,8 @@ class _LeftPanelState extends State<LeftPanel> {
               fontSize: 27,
               cellHeight: 15,
               rotation: 0,
+              pageIndex: 0,
+              pageViewController: widget.pageViewController
             ),
 
             Expanded(
@@ -52,6 +60,8 @@ class _LeftPanelState extends State<LeftPanel> {
               fontSize: 27,
               cellHeight: 15,
               rotation: 0,
+              pageIndex: 1,
+              pageViewController: widget.pageViewController
             ),
 
             Expanded(
@@ -64,6 +74,8 @@ class _LeftPanelState extends State<LeftPanel> {
               fontSize: 16,
               cellHeight: 22,
               rotation: 3,
+              pageIndex: 2,
+              pageViewController: widget.pageViewController
             ),
 
             Expanded(
@@ -103,11 +115,17 @@ class PanelButton extends StatefulWidget {
   double fontSize;
   var cellHeight;
   var rotation;
+  var pageIndex; 
+  PageController pageViewController;
+
   PanelButton(
       {@required this.itemValue,
       @required this.fontSize,
       @required this.cellHeight,
-      @required this.rotation});
+      @required this.rotation, 
+      @required this.pageIndex,
+      this.pageViewController,
+      });
 
   @override
   _PanelButtonState createState() => _PanelButtonState();
@@ -141,7 +159,10 @@ class _PanelButtonState extends State<PanelButton> {
               ),
             ),
             onTap: () {
-              print("pressed");
+
+              widget.pageViewController.animateToPage(widget.pageIndex, duration: Duration(milliseconds: 500), curve: Curves.ease);
+
+              
             },
           ),
         ),
