@@ -26,26 +26,49 @@ class _LeftPanelState extends State<LeftPanel> {
       ),
       child: SafeArea(
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             ProfilePic(),
+
+            Expanded(
+              flex: 4,
+              child: Container(),
+            ),
+
             PanelButton(
               itemValue: "+",
               fontSize: 27,
               cellHeight: 15,
               rotation: 0,
             ),
+
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+
             PanelButton(
               itemValue: "-",
               fontSize: 27,
               cellHeight: 15,
               rotation: 0,
             ),
+
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+
             PanelButton(
               itemValue: "Transactions",
               fontSize: 16,
               cellHeight: 22,
               rotation: 3,
+            ),
+
+            Expanded(
+              flex: 1,
+              child: Container(),
             ),
           ],
         ),
