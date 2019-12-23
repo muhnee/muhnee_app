@@ -41,13 +41,19 @@ void uploadIncomes(incomes) async {
 }
 
 Future<bool> isOnboarded() async {
-
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  var onBoardedRef = await databaseReference.collection("users").document(uid).get();
+  var onBoardedRef =
+      await databaseReference.collection("users").document(uid).get();
   var onBoarded = onBoardedRef.data["onboarded"];
 
   return onBoarded;
- 
+}
+
+userProfilePic() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  String imageUrlFirebase = currentUser.photoUrl;
+
+  return imageUrlFirebase;
 }

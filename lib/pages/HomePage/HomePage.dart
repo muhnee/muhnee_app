@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'IncomePage.dart';
 import 'LeftPanel.dart';
 import './ExpensePage.dart';
 import 'ProfilePage.dart';
 import 'TransactionsPage.dart';
+
+var imageUrlFirebase;
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,6 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     SizeConfig().init(context);
     return Material(
       child: Row(

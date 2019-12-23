@@ -5,7 +5,7 @@ import '../../utilities/SizeConfig.dart';
 import '../IntroPage.dart';
 
 class ProfilePage extends StatefulWidget {
-
+  
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }

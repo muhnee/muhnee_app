@@ -1,12 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../utilities/SizeConfig.dart';
 import '../../utilities/SignIn.dart';
-
-
+import '../../utilities/FirestoreFunctions.dart';
+import 'HomePage.dart';
 
 class LeftPanel extends StatefulWidget {
-
-  PageController pageViewController; 
+  PageController pageViewController;
   LeftPanel({@required this.pageViewController});
 
   @override
@@ -33,54 +33,44 @@ class _LeftPanelState extends State<LeftPanel> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            //ProfilePic(),
-
+            ProfilePic(),
             Expanded(
-              flex: 4,
+              flex: 10,
               child: Container(),
             ),
-
             PanelButton(
-              itemValue: "+",
-              fontSize: 27,
-              cellHeight: 15,
-              rotation: 0,
-              pageIndex: 0,
-              pageViewController: widget.pageViewController
-            ),
-
+                itemValue: "+",
+                fontSize: 27,
+                cellHeight: 15,
+                rotation: 0,
+                pageIndex: 0,
+                pageViewController: widget.pageViewController),
             Expanded(
               flex: 1,
               child: Container(),
             ),
-
             PanelButton(
-              itemValue: "-",
-              fontSize: 27,
-              cellHeight: 15,
-              rotation: 0,
-              pageIndex: 1,
-              pageViewController: widget.pageViewController
-            ),
-
+                itemValue: "-",
+                fontSize: 27,
+                cellHeight: 15,
+                rotation: 0,
+                pageIndex: 1,
+                pageViewController: widget.pageViewController),
             Expanded(
               flex: 1,
               child: Container(),
             ),
-
             PanelButton(
-              itemValue: "Transactions",
-              fontSize: 16,
-              cellHeight: 22,
-              rotation: 3,
-              pageIndex: 2,
-              pageViewController: widget.pageViewController
-            ),
-
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
+                itemValue: "Transactions",
+                fontSize: 16,
+                cellHeight: 22,
+                rotation: 3,
+                pageIndex: 2,
+                pageViewController: widget.pageViewController),
+            // Expanded(
+            //   flex: 1,
+            //   child: Container(),
+            // ),
           ],
         ),
       ),
@@ -96,13 +86,27 @@ class ProfilePic extends StatelessWidget {
         SizedBox(
           height: SizeConfig.blockSizeVertical * 2,
         ),
-        ClipRRect(
-          borderRadius: new BorderRadius.circular(14.0),
-          child: Image.network(
-            imageUrl,
-            width: SizeConfig.blockSizeHorizontal * 13,
-            height: SizeConfig.blockSizeHorizontal * 13,
-          ),
+        Stack(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(14.0),
+              child: Image.network(
+                "https://lh3.googleusercontent.com/a-/AAuE7mDHyKXfGnaH4IJIvp11DTSxrotvC8W2P96VfsT5s8c",
+                width: SizeConfig.blockSizeHorizontal * 13,
+                height: SizeConfig.blockSizeHorizontal * 13,
+              ),
+            ),
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                    borderRadius: BorderRadius.circular(14.0),
+                    onTap: () {
+                      print("image tapped");
+                    }),
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -114,17 +118,17 @@ class PanelButton extends StatefulWidget {
   double fontSize;
   var cellHeight;
   var rotation;
-  var pageIndex; 
+  var pageIndex;
   PageController pageViewController;
 
-  PanelButton(
-      {@required this.itemValue,
-      @required this.fontSize,
-      @required this.cellHeight,
-      @required this.rotation, 
-      @required this.pageIndex,
-      this.pageViewController,
-      });
+  PanelButton({
+    @required this.itemValue,
+    @required this.fontSize,
+    @required this.cellHeight,
+    @required this.rotation,
+    @required this.pageIndex,
+    this.pageViewController,
+  });
 
   @override
   _PanelButtonState createState() => _PanelButtonState();
@@ -158,8 +162,9 @@ class _PanelButtonState extends State<PanelButton> {
               ),
             ),
             onTap: () {
-
-              widget.pageViewController.animateToPage(widget.pageIndex, duration: Duration(milliseconds: 800), curve: Curves.easeInOutExpo);              
+              widget.pageViewController.animateToPage(widget.pageIndex,
+                  duration: Duration(milliseconds: 800),
+                  curve: Curves.easeInOutExpo);
             },
           ),
         ),
