@@ -3,6 +3,7 @@ import 'package:muhnee/utilities/SizeConfig.dart';
 import 'IncomePage.dart';
 import 'LeftPanel.dart';
 import './ExpensePage.dart';
+import 'ProfilePage.dart';
 import 'TransactionsPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  PageController pageViewController = PageController();
+  PageController pageViewController = PageController(initialPage: 3);
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.vertical,
               physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
+                ProfilePage(),
                 ExpensePage(), 
                 IncomePage(), 
                 TransactionsPage(),
