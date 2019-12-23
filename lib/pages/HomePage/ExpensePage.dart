@@ -35,8 +35,11 @@ class _ExpensePageState extends State<ExpensePage> {
         padding: EdgeInsets.only(top: 30),
         child:  RaisedButton(
         child: Text("get data"),
-        onPressed: (){
-          getData();
+        onPressed: () async {
+
+          print(
+
+          await isOnboarded());
           
 
         },

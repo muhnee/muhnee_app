@@ -40,15 +40,15 @@ void uploadIncomes(incomes) async {
   print("uploadIncomes executed");
 }
 
-void isOnboarded() async {
+Future<bool> isOnboarded() async {
 
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
+  var onBoardedRef = await databaseReference.collection("users").document(uid).get();
+  var onBoarded = onBoardedRef.data["onboarded"];
 
-  var x = await databaseReference.collection("users").document(uid).get();
-
-  print(x.data["onboarded"]);
+  return onBoarded;
 
  
 }
