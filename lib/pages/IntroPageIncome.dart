@@ -227,7 +227,7 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
             //   ),
             // ));
 
-            if (widget.customIncomeController.text != "") {
+            if (widget.customIncomeController.text.isNotEmpty) {
               addToIncomes(widget.customIncomeController.text);
               widget.customIncomeController.clear();
 

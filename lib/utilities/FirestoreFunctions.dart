@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:muhnee/utilities/SignIn.dart';
 import './SignIn.dart';
 
@@ -11,7 +12,12 @@ void uploadExpenses(expenses) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  await databaseReference.collection("users").document(uid).collection("categories").document("expense").setData({
+  await databaseReference
+      .collection("users")
+      .document(uid)
+      .collection("categories")
+      .document("expense")
+      .setData({
     'expenseCategories': expenses,
   });
 
@@ -22,10 +28,27 @@ void uploadIncomes(incomes) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  await databaseReference.collection("users").document(uid).collection("categories").document("income").setData({
+  await databaseReference
+      .collection("users")
+      .document(uid)
+      .collection("categories")
+      .document("income")
+      .setData({
     'incomeCategories': incomes,
   });
 
-
   print("uploadIncomes executed");
+}
+
+void isOnboarded() async {
+
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+
+  var x = await databaseReference.collection("users").document(uid).get();
+
+  print(x.data["onboarded"]);
+
+ 
 }

@@ -21,7 +21,6 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         children: <Widget>[
           LeftPanel(pageViewController: pageViewController),
-          //  LeftPanel(),
           
           Expanded(
             child: PageView(

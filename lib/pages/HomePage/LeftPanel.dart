@@ -159,7 +159,7 @@ class _PanelButtonState extends State<PanelButton> {
             ),
             onTap: () {
 
-              widget.pageViewController.animateToPage(widget.pageIndex, duration: Duration(milliseconds: 900), curve: Curves.easeInOutExpo);              
+              widget.pageViewController.animateToPage(widget.pageIndex, duration: Duration(milliseconds: 800), curve: Curves.easeInOutExpo);              
             },
           ),
         ),

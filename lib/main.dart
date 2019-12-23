@@ -38,7 +38,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
   var uid;
-  var name;
 
   startTime() async {
 
@@ -46,7 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     try{
       uid = await FirebaseAuth.instance.currentUser();
-      name = uid.displayName;
 
     } catch(e){
       print(e);

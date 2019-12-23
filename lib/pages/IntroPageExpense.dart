@@ -238,7 +238,7 @@ class _TickBtnState extends State<TickBtn> {
             //   ),
             // ));
 
-            if (widget.customExpenseController.text != "") {
+            if (widget.customExpenseController.text.isNotEmpty) {
               addToExpenses(widget.customExpenseController.text);
               widget.customExpenseController.clear();
 

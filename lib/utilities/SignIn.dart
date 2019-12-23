@@ -60,27 +60,27 @@ void signOutGoogle()  {
   print("User Sign Out");
 }
 
-Future<bool> isSignedIn() async {
-  try{
-    googleSignIn.signInSilently();
-  } catch (e){
-    print("ISSIGNEDIN" + e);
-    return false;
-  }
-}
+// Future<bool> isSignedIn() async {
+//   try{
+//     googleSignIn.signInSilently();
+//   } catch (e){
+//     print("ISSIGNEDIN" + e);
+//     return false;
+//   }
+// }
 
-Future<bool> signedInAlready() async {
-  final FirebaseUser x = await _auth.currentUser();
+// Future<bool> signedInAlready() async {
+//   final FirebaseUser x = await _auth.currentUser();
 
-  bool signedIn;
+//   bool signedIn;
 
-  if (x != null) {
-    print("user already signed in");
-    signedIn = true;
-  } else {
-    print("user NOT signed in");
-    signedIn = false;
-  }
+//   if (x != null) {
+//     print("user already signed in");
+//     signedIn = true;
+//   } else {
+//     print("user NOT signed in");
+//     signedIn = false;
+//   }
 
-  return signedIn;
-}
+//   return signedIn;
+// }
