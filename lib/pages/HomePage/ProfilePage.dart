@@ -15,6 +15,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      backgroundColor: Colors.red,
       body: SafeArea(
         child: Column(
           children: <Widget>[

@@ -33,24 +33,14 @@ class _LeftPanelState extends State<LeftPanel> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            ProfilePic(),
+            ProfilePic(
+                pageIndex: 0, pageViewController: widget.pageViewController),
             Expanded(
               flex: 10,
               child: Container(),
             ),
             PanelButton(
                 itemValue: "+",
-                fontSize: 27,
-                cellHeight: 15,
-                rotation: 0,
-                pageIndex: 0,
-                pageViewController: widget.pageViewController),
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
-            PanelButton(
-                itemValue: "-",
                 fontSize: 27,
                 cellHeight: 15,
                 rotation: 0,
@@ -61,11 +51,22 @@ class _LeftPanelState extends State<LeftPanel> {
               child: Container(),
             ),
             PanelButton(
+                itemValue: "-",
+                fontSize: 27,
+                cellHeight: 15,
+                rotation: 0,
+                pageIndex: 2,
+                pageViewController: widget.pageViewController),
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+            PanelButton(
                 itemValue: "Transactions",
                 fontSize: 16,
                 cellHeight: 22,
                 rotation: 3,
-                pageIndex: 2,
+                pageIndex: 3,
                 pageViewController: widget.pageViewController),
             // Expanded(
             //   flex: 1,
@@ -78,7 +79,17 @@ class _LeftPanelState extends State<LeftPanel> {
   }
 }
 
-class ProfilePic extends StatelessWidget {
+class ProfilePic extends StatefulWidget {
+  var pageIndex;
+  PageController pageViewController;
+
+  ProfilePic({@required this.pageIndex, @required this.pageViewController});
+
+  @override
+  _ProfilePicState createState() => _ProfilePicState();
+}
+
+class _ProfilePicState extends State<ProfilePic> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -102,7 +113,11 @@ class ProfilePic extends StatelessWidget {
                 child: InkWell(
                     borderRadius: BorderRadius.circular(14.0),
                     onTap: () {
-                      print("image tapped");
+
+                      widget.pageViewController.animateToPage(widget.pageIndex,
+                  duration: Duration(milliseconds: 800),
+                  curve: Curves.easeInOutExpo);
+                      
                     }),
               ),
             ),
