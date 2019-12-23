@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee/pages/HomePage/HomePage.dart';
 import 'package:muhnee/routing/FadeRoute.dart';
+import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import '../utilities/ShowUp.dart';
 import '../utilities/SignIn.dart';
 import 'IntroPageExpense.dart';
@@ -69,67 +71,74 @@ class _IntroPageState extends State<IntroPage> {
           child: Center(
             child: SizedBox(
               width: 300,
-              
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(23.0),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.25),
-                          blurRadius: 40.0,
-                        ),
-                      ]),
-                  child: 
-
-                  Material(
+              child: Container(
+                decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(23.0),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(23.0),
-                      child:  Padding(
-                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(right: 17.0),
-                          child: Image(
-                              image: AssetImage(
-                                  "lib/assets/images/google_icon.png"),
-                              height: 30.0),
-                        ),
-                        Text(
-                          "Sign in with Google",
-                          style: TextStyle(color: Colors.black, fontSize: 20,),
-                        ),
-                      ],
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 40.0,
+                      ),
+                    ]),
+                child: Material(
+                  borderRadius: BorderRadius.circular(23.0),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(23.0),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(right: 17.0),
+                            child: Image(
+                                image: AssetImage(
+                                    "lib/assets/images/google_icon.png"),
+                                height: 30.0),
+                          ),
+                          Text(
+                            "Sign in with Google",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                    onTap: () async {
+                      // signInWithGoogle().whenComplete(() {
+                      //   Navigator.pushReplacement(
+                      //       context, FadeRouteBuilder(page: IntroPageExpense()));
+                      // });
+
+                      //! the below shows the object returned after a successful auth
+                      //signInWithGoogle().then((user) => print(user)).catchError((e) => print(e));
+
+                      // signInWithGoogle()
+                      //     .then((user) => Navigator.pushReplacement(context,
+                      //         FadeRouteBuilder(page: IntroPageExpense())))
+                      //     .catchError((e) => print(e));
+
+                      signInWithGoogle()
+                          .then((user) async => await isOnboarded()
+                              ? Navigator.pushReplacement(
+                                  context, FadeRouteBuilder(page: HomePage()))
+                              : Navigator.pushReplacement(context,
+                                  FadeRouteBuilder(page: IntroPageExpense())))
+                          .catchError((e) => print(e));
+
+                      // if (await isOnboarded()){
+                      //   Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage()));
+                      // } else {
+                      //   Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPageExpense()));
+                      // }
+                    },
                   ),
-
-                  onTap: () {
-                  // signInWithGoogle().whenComplete(() {
-                  //   Navigator.pushReplacement(
-                  //       context, FadeRouteBuilder(page: IntroPageExpense()));
-                  // });
-
-                  //! the below shows the object returned after a successful auth
-                  //signInWithGoogle().then((user) => print(user)).catchError((e) => print(e));
-
-                  signInWithGoogle()
-                      .then((user) => Navigator.pushReplacement(
-                          context, FadeRouteBuilder(page: IntroPageExpense())))
-                      .catchError((e) => print(e));
-                },
-
-                    ),
-                  ),
-                  
-                 
-
-
                 ),
               ),
-           
+            ),
           )),
       delay: delayAmount * 7,
     );

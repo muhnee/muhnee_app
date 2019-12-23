@@ -49,6 +49,5 @@ Future<bool> isOnboarded() async {
   var onBoarded = onBoardedRef.data["onboarded"];
 
   return onBoarded;
-
  
 }
