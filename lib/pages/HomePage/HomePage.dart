@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 ProfilePage(),
                 ExpensePage(), 
-                IncomePage(), 
+                //IncomePage(), 
                 TransactionsPage(),
               ],
             ),

@@ -36,37 +36,37 @@ class _LeftPanelState extends State<LeftPanel> {
             ProfilePic(
                 pageIndex: 0, pageViewController: widget.pageViewController),
             Expanded(
-              flex: 10,
+              flex: 13,
               child: Container(),
             ),
             PanelButton(
-                itemValue: "+",
-                fontSize: 27,
+                itemValue: "Add",
+                fontSize: 16,
                 cellHeight: 15,
-                rotation: 0,
+                rotation: 3,
                 pageIndex: 1,
                 pageViewController: widget.pageViewController),
             Expanded(
               flex: 1,
               child: Container(),
             ),
-            PanelButton(
-                itemValue: "-",
-                fontSize: 27,
-                cellHeight: 15,
-                rotation: 0,
-                pageIndex: 2,
-                pageViewController: widget.pageViewController),
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
+            // PanelButton(
+            //     itemValue: "-",
+            //     fontSize: 27,
+            //     cellHeight: 15,
+            //     rotation: 0,
+            //     pageIndex: 2,
+            //     pageViewController: widget.pageViewController),
+            // Expanded(
+            //   flex: 1,
+            //   child: Container(),
+            // ),
             PanelButton(
                 itemValue: "Transactions",
                 fontSize: 16,
-                cellHeight: 22,
+                cellHeight: 25,
                 rotation: 3,
-                pageIndex: 3,
+                pageIndex: 2, //3 to 2
                 pageViewController: widget.pageViewController),
             // Expanded(
             //   flex: 1,
