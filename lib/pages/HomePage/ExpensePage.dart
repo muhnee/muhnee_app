@@ -17,17 +17,17 @@ class _ExpensePageState extends State<ExpensePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            // Padding(
-            //   padding: EdgeInsets.only(top: 30),
-            //   child: RaisedButton(
-            //     child: Text("SignOut"),
-            //     onPressed: () {
-            //       signOutGoogle();
-            //       Navigator.pushReplacement(
-            //           context, FadeRouteBuilder(page: SplashScreen()));
-            //     },
-            //   ),
-            // ),
+            Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: RaisedButton(
+                child: Text("SignOut"),
+                onPressed: () {
+                  signOutGoogle();
+                  Navigator.pushReplacement(
+                      context, FadeRouteBuilder(page: SplashScreen()));
+                },
+              ),
+            ),
             // Padding(
             //   padding: EdgeInsets.only(top: 30),
             //   child: RaisedButton(
@@ -37,10 +37,6 @@ class _ExpensePageState extends State<ExpensePage> {
             //     },
             //   ),
             // )
-
-            
-
-
           ],
         ),
       ),

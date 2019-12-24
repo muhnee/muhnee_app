@@ -5,6 +5,7 @@ import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import '../utilities/ShowUp.dart';
 import '../utilities/SignIn.dart';
 import 'IntroPageExpense.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -121,6 +122,20 @@ class _IntroPageState extends State<IntroPage> {
                       //         FadeRouteBuilder(page: IntroPageExpense())))
                       //     .catchError((e) => print(e));
 
+                      showDialog(
+                        
+                        context: context,
+                        barrierDismissible: true,
+                      
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            
+                            elevation: 0,
+                            backgroundColor: Colors.transparent,
+                            child: SpinKitDoubleBounce(color: Colors.white),
+                          );
+                        },
+                      );
                       signInWithGoogle()
                           .then((user) async => await isOnboarded()
                               ? Navigator.pushReplacement(

@@ -22,7 +22,7 @@ class _LeftPanelState extends State<LeftPanel> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey[400],
+            color: Colors.grey[500],
             offset: const Offset(90.0, 0.0),
             spreadRadius: 0.0,
             blurRadius: 20.0,
@@ -158,6 +158,12 @@ class _PanelButtonState extends State<PanelButton> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13.0),
+          boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 10.0,
+          )
+        ],
         ),
         child: Material(
           color: Color(0xff8e91f3).withOpacity(0.9),
