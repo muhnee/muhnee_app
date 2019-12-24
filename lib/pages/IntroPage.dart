@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:muhnee/pages/HomePage/HomePage.dart';
 import 'package:muhnee/routing/FadeRoute.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
+import 'package:muhnee/utilities/SizeConfig.dart';
 import '../utilities/ShowUp.dart';
 import '../utilities/SignIn.dart';
 import 'IntroPageExpense.dart';
@@ -17,6 +18,7 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -132,7 +134,13 @@ class _IntroPageState extends State<IntroPage> {
                             
                             elevation: 0,
                             backgroundColor: Colors.transparent,
-                            child: SpinKitDoubleBounce(color: Colors.white),
+                            child: SizedBox(
+                              width: SizeConfig.blockSizeHorizontal * 10,
+                              height: SizeConfig.blockSizeVertical*15,
+                              child: SpinKitDoubleBounce(color: Colors.white, size: SizeConfig.blockSizeHorizontal *8,),
+                            ),
+                            
+                            
                           );
                         },
                       );
