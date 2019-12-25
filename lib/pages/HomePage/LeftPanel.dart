@@ -68,10 +68,10 @@ class _LeftPanelState extends State<LeftPanel> {
                 rotation: 3,
                 pageIndex: 2, //3 to 2
                 pageViewController: widget.pageViewController),
-            // Expanded(
-            //   flex: 1,
-            //   child: Container(),
-            // ),
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
           ],
         ),
       ),
