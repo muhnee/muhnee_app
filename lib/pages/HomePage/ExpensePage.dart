@@ -47,29 +47,56 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * 80,
       height: SizeConfig.blockSizeVertical * 40,
-      child: GridView.count(
-        physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 3,
-        childAspectRatio: 1.25,
-        padding: const EdgeInsets.fromLTRB(6, 6, 6, 0),
-        mainAxisSpacing: 1.0,
-        crossAxisSpacing: 1.0,
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          
-          keyboardCell("1"),
-          keyboardCell("2"),
-          keyboardCell("3"),
-          keyboardCell("4"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              keyboardCell("1"),
+              keyboardCell("2"),
+              keyboardCell("3"),
+            ],
+          ),
+
+
+           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+                keyboardCell("4"),
           keyboardCell("5"),
           keyboardCell("6"),
-          keyboardCell("7"),
+            ],
+          ),
+
+
+
+
+           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+                keyboardCell("7"),
           keyboardCell("8"),
           keyboardCell("9"),
-          IconButton(
+            ],
+          ),
+
+
+
+
+
+           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+
+                IconButton(
             icon: Icon(Icons.backspace, size: 23, color: componentColor),
             onPressed: () {},
           ),
-          keyboardCell("0"),
+
+
+           keyboardCell("0"),
           IconButton(
             icon: Icon(
               Icons.check_circle_outline,
@@ -77,8 +104,23 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
             ),
             onPressed: () {},
           ),
+
+
+
+               
+            ],
+          ),
+
+
         ],
       ),
+
+      
+
+    
+        
+
+      
     );
   }
 
