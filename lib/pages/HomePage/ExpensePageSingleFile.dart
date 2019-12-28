@@ -29,7 +29,14 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Text(amount),
+            Text(
+              amount,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
+            ),
             CustomKeyboard(),
           ],
         ),
@@ -73,7 +80,15 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Icon(Icons.first_page, color: Colors.white),
+                  GestureDetector(
+                    child: Icon(Icons.first_page, color: Colors.white),
+                    onTap: () {
+                      print("btn works");
+                      setState(() {
+                        amount = amount.substring(0, (amount.length - 1));
+                      });
+                    },
+                  ),
                   KeyboardCell("0"),
                   Icon(Icons.check_circle_outline,
                       size: 20, color: Colors.white),
@@ -100,7 +115,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
         ),
         onTap: () {
           setState(() {
-            amount = amount + cellValue;
+            amount += cellValue;
           });
         },
       ),
