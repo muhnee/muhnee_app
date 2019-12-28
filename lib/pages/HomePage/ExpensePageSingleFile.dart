@@ -35,6 +35,10 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                   fontWeight: FontWeight.w600,
                   color: componentColor,
                 )),
+
+
+
+
             CustomKeyboard(),
           ],
         ),
@@ -80,6 +84,21 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                 children: <Widget>[
                   GestureDetector(
                     child: SizedBox(
+                      child: Icon(Icons.brightness_1,
+                          size: 8, color: componentColor),
+                      width: SizeConfig.blockSizeHorizontal * 15,
+                    ),
+                    onTap: () {
+                      print("point");
+                      setState(() {
+                        amount += ".";
+                      });
+                    },
+                  ),
+                  
+                  KeyboardCell("0"),
+                  GestureDetector(
+                    child: SizedBox(
                       child: Icon(Icons.first_page, color: componentColor),
                       width: SizeConfig.blockSizeHorizontal * 15,
                     ),
@@ -90,17 +109,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                       });
                     },
                   ),
-                  KeyboardCell("0"),
-                  GestureDetector(
-                    child: SizedBox(
-                      child: Icon(Icons.check_circle_outline,
-                          size: 20, color: componentColor),
-                      width: SizeConfig.blockSizeHorizontal * 15,
-                    ),
-                    onTap: () {
-                      print("upload to firebase");
-                    },
-                  ),
+                  
                 ],
               ),
             ],
