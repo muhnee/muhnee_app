@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
+import 'ExpensePageSingleFile.dart';
 import 'IncomePage.dart';
 import 'LeftPanel.dart';
 import './ExpensePage.dart';
@@ -34,7 +35,8 @@ class _HomePageState extends State<HomePage> {
               physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
                 ProfilePage(),
-                ExpensePage(), 
+                ExpensePageSingleFile(), 
+
                 //IncomePage(), 
                 TransactionsPage(),
               ],
