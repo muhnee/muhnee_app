@@ -3,29 +3,26 @@ import 'package:muhnee_app/routing/FadeRoute.dart';
 import 'package:provider/provider.dart';
 import '../utilities/ShowUp.dart';
 import '../utilities/SignIn.dart';
-import '../core/viewModels/ProductModel.dart';
+import 'package:muhnee_app/core/viewModels/ProductModel.dart';
 import 'IntroPageExpense.dart';
 
 class IntroPage extends StatefulWidget {
-  final BuildContext context;
-  const IntroPage({this.context}): super();
   @override
   _IntroPageState createState() => _IntroPageState();
 }
 
 class _IntroPageState extends State<IntroPage> {
   int delayAmount = 500;
-  
- 
 
   @override
-  Widget build(BuildContext context) { 
-    // final productProvider = Provider.of<ProductModel>(widget.context);
-    // productProvider.fetchProducts().then((x) {
-    //   print(x.map((f){
-    //     return f.testfield;
-    //   }));
-    // });
+  Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductModel>(context);
+    productProvider.fetchProducts().then((x) {
+      print(x.map((f) {
+        return f.testfield;
+      }));
+    });
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -49,13 +46,26 @@ class _IntroPageState extends State<IntroPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-
-          ShowUpTextSingle(bottomPadding: 33.0, lineText: "Hi", delayAmount: delayAmount,),
-          ShowUpTextSingle(bottomPadding: 33.0, lineText: "Welcome to Muhnee", delayAmount: delayAmount * 2,),
-          ShowUpTextSingle(bottomPadding: 15.0, lineText: "A simple way to track", delayAmount: delayAmount * 4,),
-          ShowUpTextSingle(bottomPadding: 0.0, lineText: "daily spending", delayAmount: delayAmount * 6,),
-
-
+          ShowUpTextSingle(
+            bottomPadding: 33.0,
+            lineText: "Hi",
+            delayAmount: delayAmount,
+          ),
+          ShowUpTextSingle(
+            bottomPadding: 33.0,
+            lineText: "Welcome to Muhnee",
+            delayAmount: delayAmount * 2,
+          ),
+          ShowUpTextSingle(
+            bottomPadding: 15.0,
+            lineText: "A simple way to track",
+            delayAmount: delayAmount * 4,
+          ),
+          ShowUpTextSingle(
+            bottomPadding: 0.0,
+            lineText: "daily spending",
+            delayAmount: delayAmount * 6,
+          ),
         ],
       ),
     );
@@ -113,26 +123,28 @@ class _IntroPageState extends State<IntroPage> {
   }
 }
 
-
 class ShowUpTextSingle extends StatelessWidget {
-  var bottomPadding; 
-  var lineText; 
+  var bottomPadding;
+  var lineText;
   var delayAmount;
 
-  ShowUpTextSingle({@required this.bottomPadding, @required this.delayAmount, @required this.lineText});
+  ShowUpTextSingle(
+      {@required this.bottomPadding,
+      @required this.delayAmount,
+      @required this.lineText});
 
   @override
   Widget build(BuildContext context) {
-    return   ShowUp(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: bottomPadding),
-              child: Text(lineText,
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.black,
-                  )),
-            ),
-            delay: delayAmount,
-          );
+    return ShowUp(
+      child: Padding(
+        padding: EdgeInsets.only(bottom: bottomPadding),
+        child: Text(lineText,
+            style: TextStyle(
+              fontSize: 30.0,
+              color: Colors.black,
+            )),
+      ),
+      delay: delayAmount,
+    );
   }
 }

@@ -37,7 +37,7 @@ class App extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        home: SplashScreen(),
+        home: IntroPage(),
       ),
     );
   }
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
+    Navigator.push(context, FadeRouteBuilder(page: IntroPage()));
   }
 
   @override
