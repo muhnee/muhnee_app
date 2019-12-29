@@ -209,6 +209,10 @@ class SelectorButtonSingle extends StatefulWidget {
 }
 
 class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
+
+  Color t1 = Colors.grey; 
+  Color t2 = Colors.grey[200];
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -225,7 +229,7 @@ class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
           ],
         ),
         child: Material(
-          color: widget.baseColor,
+          color: t2,
           borderRadius: BorderRadius.circular(10.0),
           child: InkWell(
             borderRadius: BorderRadius.circular(10.0),
@@ -233,13 +237,39 @@ class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
               child: Text(
                 widget.btnValue,
                 style: TextStyle(
-                    color: widget.textColor,
+                    color: t1,
                     letterSpacing: 1,
                     fontSize: 12.5,
                     fontWeight: FontWeight.bold),
               ),
             ),
-            onTap: () {},
+            onTap: () {
+
+              if(t1 == Colors.grey){
+                setState(() {
+
+                t1 = widget.textColor; 
+                t2 = widget.baseColor;
+                
+              });
+
+
+              } else {
+
+                setState(() {
+
+                t1 = Colors.grey; 
+                t2 = Colors.grey[200];
+                
+              });
+
+
+
+              }
+
+              
+
+            },
           ),
         ),
       ),
