@@ -14,5 +14,5 @@ Initialise an instance of an iOS Simulator or connect physical iOS device, navig
 open -a simulator 
 
 cd desktop/muhnee-app
-flutter run -d iPhone
+flutter run -d "iPhone"
 ```
