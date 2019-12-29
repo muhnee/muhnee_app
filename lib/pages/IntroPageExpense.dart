@@ -19,6 +19,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
       ),
       body: Column(

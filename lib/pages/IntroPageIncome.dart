@@ -4,7 +4,6 @@ import 'package:muhnee/routing/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 
-
 var incomes = [];
 
 class IntroPageIncome extends StatefulWidget {
@@ -20,6 +19,7 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
       ),
       body: Column(
@@ -136,7 +136,7 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
             child: SingleExpCell(
               incomeType: "Side Hustle",
             ),
-            delay: delayAmount *7,
+            delay: delayAmount * 7,
           ),
 
           //Row 4 = Custom input row
@@ -344,13 +344,10 @@ class _NextButtonState extends State<NextButton> {
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
                         uploadIncomes(incomes);
+                        setOnboardedParam();
 
                         Navigator.pushReplacement(
-                            context,
-                            FadeRouteBuilder(
-                                page: HomePage(
-                              
-                            )));
+                            context, FadeRouteBuilder(page: HomePage()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),

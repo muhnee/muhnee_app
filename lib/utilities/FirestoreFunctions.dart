@@ -57,3 +57,14 @@ userProfilePic() async {
 
   return imageUrlFirebase;
 }
+
+void setOnboardedParam() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+  await databaseReference.collection("users").document(uid).setData({
+    'onboarded': true,
+  });
+
+  print("onboarded set to true");
+}

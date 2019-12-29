@@ -22,6 +22,7 @@ class _IntroPageState extends State<IntroPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
       ),
       body: Column(
