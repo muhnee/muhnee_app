@@ -260,54 +260,99 @@ class _SingleExpCellState extends State<SingleExpCell> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 20.0),
-      child: GestureDetector(
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 400),
 
-            //TODO: make this dynamic
-            width: 110,
-            height: 34,
-            child: Center(
-              child: Text(
-                widget.incomeType,
-                style: TextStyle(
-                    fontSize: 15.0,
-                    color: textColor,
-                    fontWeight: FontWeight.w400),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: cellColor,
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-          ),
-          onTap: () {
-            //set the state of itself
-            //if cell colour is grey set it to purple and update the array
-            if (cellColor == Color(0xffDEDEDE)) {
-              setState(() {
-                cellColor = Color(0xff8e91f3).withOpacity(0.75);
-                textColor = Colors.white;
 
-                //add to array
-                addToIncomes(widget.incomeType);
-              });
-            }
-            //else if its purple, set colour back to grey and remove from array
-            else {
-              setState(() {
-                cellColor = Color(0xffDEDEDE);
-                textColor = Colors.black;
 
-                //remove from array
-                removeFromIncomes(widget.incomeType);
-              });
-            }
-          }),
+     return RaisedButton(
+      elevation: 0,
+      child: Text(
+        widget.incomeType,
+        style: TextStyle(
+            fontSize: 15.0, color: textColor, fontWeight: FontWeight.w400),
+        textAlign: TextAlign.center,
+      ),
+      color: cellColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.0),
+      ),
+      onPressed: () {
+        //set the state of itself
+        //if cell colour is grey set it to purple and update the array
+        if (cellColor == Color(0xffDEDEDE).withOpacity(0.75)) {
+          setState(() {
+            cellColor = Color(0xff8e91f3).withOpacity(0.75);
+            textColor = Colors.white;
+          });
+
+          //add to array
+          addToIncomes(widget.incomeType);
+        }
+        //else if its purple, set colour back to grey and remove from array
+        else {
+          setState(() {
+            cellColor = Color(0xffDEDEDE);
+            textColor = Colors.black;
+          });
+
+          //remove from array
+          removeFromIncomes(widget.incomeType);
+        }
+      },
     );
+
+
+
+
+    // return Padding(
+    //   padding: EdgeInsets.only(bottom: 20.0),
+    //   child: GestureDetector(
+    //       child: AnimatedContainer(
+    //         duration: Duration(milliseconds: 400),
+
+    //         //TODO: make this dynamic
+    //         width: 110,
+    //         height: 34,
+    //         child: Center(
+    //           child: Text(
+    //             widget.incomeType,
+    //             style: TextStyle(
+    //                 fontSize: 15.0,
+    //                 color: textColor,
+    //                 fontWeight: FontWeight.w400),
+    //             textAlign: TextAlign.center,
+    //           ),
+    //         ),
+    //         decoration: BoxDecoration(
+    //           color: cellColor,
+    //           borderRadius: BorderRadius.circular(50.0),
+    //         ),
+    //       ),
+    //       onTap: () {
+    //         //set the state of itself
+    //         //if cell colour is grey set it to purple and update the array
+    //         if (cellColor == Color(0xffDEDEDE)) {
+    //           setState(() {
+    //             cellColor = Color(0xff8e91f3).withOpacity(0.75);
+    //             textColor = Colors.white;
+
+    //             //add to array
+    //             addToIncomes(widget.incomeType);
+    //           });
+    //         }
+    //         //else if its purple, set colour back to grey and remove from array
+    //         else {
+    //           setState(() {
+    //             cellColor = Color(0xffDEDEDE);
+    //             textColor = Colors.black;
+
+    //             //remove from array
+    //             removeFromIncomes(widget.incomeType);
+    //           });
+    //         }
+    //       }),
+    // );
+
+    
   }
 }
 
