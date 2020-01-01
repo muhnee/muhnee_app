@@ -186,7 +186,7 @@ class ShowUpTextSingle extends StatelessWidget {
         padding: EdgeInsets.only(bottom: bottomPadding),
         child: Text(lineText,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: 29.0,
               color: Colors.black,
             )),
       ),

@@ -48,13 +48,13 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
                 children: <Widget>[
                   Text("Firstly, ",
                       style: TextStyle(
-                        fontSize: 30.0,
+                        fontSize: 28.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
                   Text("let's add some",
                       style: TextStyle(
-                        fontSize: 30.0,
+                        fontSize: 28.0,
                         color: Colors.black,
                       )),
                 ],
@@ -75,7 +75,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         padding: EdgeInsets.only(bottom: 15.0),
         child: Text(lineText,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: 28.0,
               // fontFamily: "Montserrat",
               color: Colors.black,
             )),
@@ -269,49 +269,44 @@ class _SingleExpCellState extends State<SingleExpCell> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 400),
-          width: 91,
-          height: 34,
-          child: Center(
-            child: Text(
-              widget.expenseType,
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: textColor,
-                  fontWeight: FontWeight.w400),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          decoration: BoxDecoration(
-            color: cellColor,
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-        ),
-        onTap: () {
-          //set the state of itself
-          //if cell colour is grey set it to purple and update the array
-          if (cellColor == Color(0xffDEDEDE)) {
-            setState(() {
-              cellColor = Color(0xff8e91f3).withOpacity(0.75);
-              textColor = Colors.white;
-            });
+    return RaisedButton(
+      elevation: 0,
+      child: Text(
+        widget.expenseType,
+        style: TextStyle(
+            fontSize: 15.0, color: textColor, fontWeight: FontWeight.w400),
+        textAlign: TextAlign.center,
+      ),
+      color: cellColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.0),
+      ),
+      onPressed: () {
+        //set the state of itself
+        //if cell colour is grey set it to purple and update the array
+        if (cellColor == Color(0xffDEDEDE).withOpacity(0.75)) {
+          setState(() {
+            cellColor = Color(0xff8e91f3).withOpacity(0.75);
+            textColor = Colors.white;
+          });
 
-            //add to array
-            addToExpenses(widget.expenseType);
-          }
-          //else if its purple, set colour back to grey and remove from array
-          else {
-            setState(() {
-              cellColor = Color(0xffDEDEDE);
-              textColor = Colors.black;
-            });
+          //add to array
+          addToExpenses(widget.expenseType);
+        }
+        //else if its purple, set colour back to grey and remove from array
+        else {
+          setState(() {
+            cellColor = Color(0xffDEDEDE);
+            textColor = Colors.black;
+          });
 
-            //remove from array
-            removeFromExpenses(widget.expenseType);
-          }
-        });
+          //remove from array
+          removeFromExpenses(widget.expenseType);
+        }
+      },
+    );
+
+
   }
 }
 
@@ -348,8 +343,8 @@ class _NextButtonState extends State<NextButton> {
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
                         uploadExpenses(expenses);
-                         Navigator.pushReplacement(
-                             context, FadeRouteBuilder(page: IntroPageIncome()));
+                        Navigator.pushReplacement(
+                            context, FadeRouteBuilder(page: IntroPageIncome()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),

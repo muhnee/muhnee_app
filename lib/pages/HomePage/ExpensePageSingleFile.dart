@@ -146,14 +146,35 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   }
 
   Widget SelectorButtons() {
-    var btn1TextColor = Color(0xfff990bf);
-    var btn1BaseColor = Color(0xfffddaea);
+    var btn1 = {
+      "startText": "Expense",
+      "width": 19,
+      "startTextColor": Color(0xffa2d56f),
+      "startCellColor": Color(0xffa2d56f).withOpacity(0.5),
+      "endText": "Income",
+      "endTextColor": Color(0xfff990bf),
+      "endCellColor": Color(0xfffddaea),
+    };
 
-    var btn2TextColor = Color(0xffd4455b);
-    var btn2BaseColor = Color(0xfff6d9dd);
+    var btn2 = {
+      "startText": "Taxable",
+      "width": 25,
+      "startTextColor": Color(0xffa2d56f),
+      "startCellColor": Color(0xffa2d56f).withOpacity(0.5),
+      "endText": "Taxable",
+      "endTextColor": Color(0xfff990bf),
+      "endCellColor": Color(0xfffddaea),
+    };
 
-    var btn3TextColor = Color(0xff4a5999);
-    var btn3BaseColor = Color(0xffd9dcea);
+    var btn3 = {
+      "startText": "Upload",
+      "width": 19,
+      "startTextColor": Color(0xffd4455b),
+      "startCellColor": Color(0xfff6d9dd),
+      "endText": "Upload",
+      "endTextColor": Color(0xff4a5999),
+      "endCellColor": Color(0xffd9dcea),
+    };
 
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
@@ -167,22 +188,13 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   SelectorButtonSingle(
-                    btnValue: "Expense",
-                    width: 19,
-                    textColor: btn1TextColor,
-                    baseColor: btn1BaseColor,
-                  ),
-                  SelectorButtonSingle(
-                    btnValue: "Taxable",
-                    width: 25,
-                    textColor: btn2TextColor,
-                    baseColor: btn2BaseColor,
-                  ),
-                  SelectorButtonSingle(
-                    btnValue: "Upload",
-                    width: 19,
-                    textColor: btn3TextColor,
-                    baseColor: btn3BaseColor,
+                    startText: btn1["startText"],
+                    width: btn1["width"],
+                    startTextColor: btn1["startTextColor"],
+                    startCellColor: btn1["startCellColor"],
+                    endText: btn1["endText"],
+                    endTextColor: btn1["endTextColor"],
+                    endCellColor: btn1["endCellColor"],
                   ),
                 ],
               ),
@@ -193,16 +205,22 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
 }
 
 class SelectorButtonSingle extends StatefulWidget {
-  var btnValue;
+  var startText;
   var width;
-  var textColor;
-  var baseColor;
+  var startTextColor;
+  var startCellColor;
+  var endText;
+  var endTextColor;
+  var endCellColor;
 
   SelectorButtonSingle(
-      {@required this.btnValue,
+      {@required this.startText,
       @required this.width,
-      @required this.textColor,
-      @required this.baseColor});
+      @required this.startTextColor,
+      @required this.startCellColor,
+      @required this.endText,
+      @required this.endTextColor,
+      @required this.endCellColor});
 
   @override
   _SelectorButtonSingleState createState() => _SelectorButtonSingleState();
@@ -210,11 +228,14 @@ class SelectorButtonSingle extends StatefulWidget {
 
 class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
 
-  Color t1 = Colors.grey; 
-  Color t2 = Colors.grey[200];
-
   @override
   Widget build(BuildContext context) {
+
+    var stateText = widget.startText;
+    Color stateCellColor = widget.startCellColor; 
+    Color stateTextColor = widget.startCellColor; 
+
+
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * widget.width,
       height: SizeConfig.blockSizeVertical * 4,
@@ -223,21 +244,21 @@ class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
-              color: widget.baseColor.withOpacity(0.25),
+              color: stateTextColor.withOpacity(0.25),
               blurRadius: 10.0,
             )
           ],
         ),
         child: Material(
-          color: t2,
+          color: stateCellColor,
           borderRadius: BorderRadius.circular(10.0),
           child: InkWell(
             borderRadius: BorderRadius.circular(10.0),
             child: Center(
               child: Text(
-                widget.btnValue,
+                stateText,
                 style: TextStyle(
-                    color: t1,
+                    color: stateTextColor,
                     letterSpacing: 1,
                     fontSize: 12.5,
                     fontWeight: FontWeight.bold),
@@ -245,30 +266,12 @@ class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
             ),
             onTap: () {
 
-              if(t1 == Colors.grey){
-                setState(() {
-
-                t1 = widget.textColor; 
-                t2 = widget.baseColor;
+              // if (stateCellColor == widget.startCellColor ) {
                 
-              });
+              // }
 
 
-              } else {
-
-                setState(() {
-
-                t1 = Colors.grey; 
-                t2 = Colors.grey[200];
-                
-              });
-
-
-
-              }
-
-              
-
+             
             },
           ),
         ),
