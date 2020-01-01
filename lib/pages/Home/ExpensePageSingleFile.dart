@@ -3,7 +3,7 @@ import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Color componentColor = Colors.black;
-Color pageColor = Colors.grey[100];
+Color pageColor = Colors.white;
 
 var amount = "";
 
@@ -31,7 +31,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                   fontWeight: FontWeight.w600,
                   color: componentColor,
                 )),
-            SelectorButtons(),
+            InteractionPane(),
             CustomKeyboard(),
           ],
         ),
@@ -77,13 +77,16 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                 children: <Widget>[
                   RaisedButton(
                     shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(50.0),
-                      // side: BorderSide(color: pageColor)
-                    ),
-                    color: pageColor,
+                        borderRadius: new BorderRadius.circular(10.0),
+                        side: BorderSide(color: Colors.grey[200])),
+                    color: Colors.grey[100],
                     elevation: 0,
-                    child: Icon(Icons.brightness_1,
-                        size: 8, color: componentColor),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: SizeConfig.blockSizeVertical * 1),
+                      child: Icon(Icons.brightness_1,
+                          size: 8, color: componentColor),
+                    ),
                     onPressed: () {
                       setState(() {
                         amount += ".";
@@ -93,12 +96,15 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                   KeyboardCell("0"),
                   RaisedButton(
                     shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(50.0),
-                      // side: BorderSide(color: pageColor)
-                    ),
-                    color: pageColor,
+                        borderRadius: new BorderRadius.circular(10.0),
+                        side: BorderSide(color: Colors.grey[200])),
+                    color: Colors.grey[100],
                     elevation: 0,
-                    child: Icon(Icons.first_page, color: componentColor),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: SizeConfig.blockSizeVertical * 1),
+                      child: Icon(Icons.first_page, color: componentColor),
+                    ),
                     onPressed: () {
                       print("delete char");
                       setState(() {
@@ -116,19 +122,22 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget KeyboardCell(cellValue) {
     return RaisedButton(
       shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(50.0),
-        // side: BorderSide(color: pageColor)
-      ),
-      color: pageColor,
+          borderRadius: new BorderRadius.circular(10.0),
+          side: BorderSide(color: Colors.grey[200])),
+      color: Colors.grey[100],
       elevation: 0,
-      child: Text(
-        cellValue,
-        textAlign: TextAlign.center,
-        style: GoogleFonts.kulimPark(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          textStyle: TextStyle(
-            color: componentColor,
+      child: Padding(
+        padding:
+            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1),
+        child: Text(
+          cellValue,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.kulimPark(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            textStyle: TextStyle(
+              color: componentColor,
+            ),
           ),
         ),
       ),
@@ -140,45 +149,29 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
     );
   }
 
-  Widget SelectorButtons() {
+  Widget InteractionPane() {
     var btn1 = {
-      "startText": "Expense",
-      "width": 19,
-      "startTextColor": Color(0xffa2d56f),
-      "startCellColor": Color(0xffa2d56f).withOpacity(0.5),
+      "startText": "Income",
+      "width": 18,
+      "startTextColor": Colors.black,
+      "startCellColor": Color(0xffa2d56f).withOpacity(0.2),
       "endText": "Income",
-      "endTextColor": Color(0xfff990bf),
+      "endTextColor": Colors.black,
       "endCellColor": Color(0xfffddaea),
-    };
-
-    var btn2 = {
-      "startText": "Taxable",
-      "width": 25,
-      "startTextColor": Color(0xffa2d56f),
-      "startCellColor": Color(0xffa2d56f).withOpacity(0.5),
-      "endText": "Taxable",
-      "endTextColor": Color(0xfff990bf),
-      "endCellColor": Color(0xfffddaea),
-    };
-
-    var btn3 = {
-      "startText": "Upload",
-      "width": 19,
-      "startTextColor": Color(0xffd4455b),
-      "startCellColor": Color(0xfff6d9dd),
-      "endText": "Upload",
-      "endTextColor": Color(0xff4a5999),
-      "endCellColor": Color(0xffd9dcea),
     };
 
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 5,
+        height: SizeConfig.blockSizeVertical * 20,
         child: Container(
           color: Colors.transparent,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              // ROW FOR CATEGORY OPTIONS
+
+              // ROW FOR BUTTONS
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -208,14 +201,15 @@ class SelectorButtonSingle extends StatefulWidget {
   var endTextColor;
   var endCellColor;
 
-  SelectorButtonSingle(
-      {@required this.startText,
-      @required this.width,
-      @required this.startTextColor,
-      @required this.startCellColor,
-      @required this.endText,
-      @required this.endTextColor,
-      @required this.endCellColor});
+  SelectorButtonSingle({
+    @required this.startText,
+    @required this.width,
+    @required this.startTextColor,
+    @required this.startCellColor,
+    @required this.endText,
+    @required this.endTextColor,
+    @required this.endCellColor,
+  });
 
   @override
   _SelectorButtonSingleState createState() => _SelectorButtonSingleState();
@@ -224,10 +218,6 @@ class SelectorButtonSingle extends StatefulWidget {
 class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
   @override
   Widget build(BuildContext context) {
-    var stateText = widget.startText;
-    Color stateCellColor = widget.startCellColor;
-    Color stateTextColor = widget.startCellColor;
-
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * widget.width,
       height: SizeConfig.blockSizeVertical * 4,
@@ -236,30 +226,32 @@ class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
-              color: stateTextColor.withOpacity(0.25),
+              color: widget.startCellColor.withOpacity(0.25),
               blurRadius: 10.0,
             )
           ],
         ),
         child: Material(
-          color: stateCellColor,
+          color: widget.startCellColor,
           borderRadius: BorderRadius.circular(10.0),
           child: InkWell(
             borderRadius: BorderRadius.circular(10.0),
             child: Center(
               child: Text(
-                stateText,
+                widget.startText,
                 style: TextStyle(
-                    color: stateTextColor,
+                    color: widget.startTextColor,
                     letterSpacing: 1,
                     fontSize: 12.5,
                     fontWeight: FontWeight.bold),
               ),
             ),
             onTap: () {
-              // if (stateCellColor == widget.startCellColor ) {
-
-              // }
+              setState(() {
+                widget.startText = widget.endText;
+                widget.startTextColor = widget.endTextColor;
+                widget.startCellColor = widget.endCellColor;
+              });
             },
           ),
         ),
