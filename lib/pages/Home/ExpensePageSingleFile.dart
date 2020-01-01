@@ -149,42 +149,94 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
     );
   }
 
-  Widget InteractionPane() {
-    var btn1 = {
-      "startText": "Income",
-      "width": 18,
-      "startTextColor": Colors.black,
-      "startCellColor": Color(0xffa2d56f).withOpacity(0.2),
-      "endText": "Income",
-      "endTextColor": Colors.black,
-      "endCellColor": Color(0xfffddaea),
-    };
 
+}
+
+class InteractionPane extends StatefulWidget {
+  @override
+  _InteractionPaneState createState() => _InteractionPaneState();
+}
+
+class _InteractionPaneState extends State<InteractionPane> {
+  var incomeExpenseText = "Income";
+  Color incomeExpenseColor = Color(0xffa5d15b);
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 20,
+        height: SizeConfig.blockSizeVertical * 25,
         child: Container(
           color: Colors.transparent,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              // ROW FOR CATEGORY OPTIONS
-
               // ROW FOR BUTTONS
 
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  SelectorButtonSingle(
-                    startText: btn1["startText"],
-                    width: btn1["width"],
-                    startTextColor: btn1["startTextColor"],
-                    startCellColor: btn1["startCellColor"],
-                    endText: btn1["endText"],
-                    endTextColor: btn1["endTextColor"],
-                    endCellColor: btn1["endCellColor"],
+                  // Income / Expense Button
+                  RaisedButton(
+                    child: Text(
+                      incomeExpenseText,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: incomeExpenseColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: BorderSide(color: Colors.grey[200])),
+                    elevation: 0,
+                    onPressed: () {
+                      if (incomeExpenseText == "Income") {
+                        setState(() {
+                          incomeExpenseText = "Expense";
+                          incomeExpenseColor = Color(0xfffb3d4e);
+                        });
+                      } else {
+                        setState(() {
+                          incomeExpenseText = "Income";
+                          incomeExpenseColor = Color(0xffa5d15b);
+                        });
+                      }
+                    },
                   ),
+
+                  //Taxable Button 
+
+                  RaisedButton(
+                    child: Text(
+                      incomeExpenseText,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: incomeExpenseColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: BorderSide(color: Colors.grey[200])),
+                    elevation: 0,
+                    onPressed: () {
+                      if (incomeExpenseText == "Income") {
+                        setState(() {
+                          incomeExpenseText = "Expense";
+                          incomeExpenseColor = Color(0xfffb3d4e);
+                        });
+                      } else {
+                        setState(() {
+                          incomeExpenseText = "Income";
+                          incomeExpenseColor = Color(0xffa5d15b);
+                        });
+                      }
+                    },
+                  ),
+                  
+
+
                 ],
+              ),
+
+              // ROW FOR CATEGORY OPTIONS
+              Row(
+                children: <Widget>[],
               ),
             ],
           ),
@@ -192,70 +244,3 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   }
 }
 
-class SelectorButtonSingle extends StatefulWidget {
-  var startText;
-  var width;
-  var startTextColor;
-  var startCellColor;
-  var endText;
-  var endTextColor;
-  var endCellColor;
-
-  SelectorButtonSingle({
-    @required this.startText,
-    @required this.width,
-    @required this.startTextColor,
-    @required this.startCellColor,
-    @required this.endText,
-    @required this.endTextColor,
-    @required this.endCellColor,
-  });
-
-  @override
-  _SelectorButtonSingleState createState() => _SelectorButtonSingleState();
-}
-
-class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: SizeConfig.blockSizeHorizontal * widget.width,
-      height: SizeConfig.blockSizeVertical * 4,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-              color: widget.startCellColor.withOpacity(0.25),
-              blurRadius: 10.0,
-            )
-          ],
-        ),
-        child: Material(
-          color: widget.startCellColor,
-          borderRadius: BorderRadius.circular(10.0),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(10.0),
-            child: Center(
-              child: Text(
-                widget.startText,
-                style: TextStyle(
-                    color: widget.startTextColor,
-                    letterSpacing: 1,
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            onTap: () {
-              setState(() {
-                widget.startText = widget.endText;
-                widget.startTextColor = widget.endTextColor;
-                widget.startCellColor = widget.endCellColor;
-              });
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}

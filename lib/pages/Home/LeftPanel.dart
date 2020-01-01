@@ -172,6 +172,7 @@ class _PanelButtonState extends State<PanelButton> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: widget.fontSize,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
