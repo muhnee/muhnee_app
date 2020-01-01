@@ -1,9 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../utilities/SizeConfig.dart';
-import '../../utilities/SignIn.dart';
-import '../../utilities/FirestoreFunctions.dart';
-import 'HomePage.dart';
 
 class LeftPanel extends StatefulWidget {
   PageController pageViewController;
@@ -113,11 +109,9 @@ class _ProfilePicState extends State<ProfilePic> {
                 child: InkWell(
                     borderRadius: BorderRadius.circular(14.0),
                     onTap: () {
-
                       widget.pageViewController.animateToPage(widget.pageIndex,
-                  duration: Duration(milliseconds: 800),
-                  curve: Curves.easeInOutExpo);
-                      
+                          duration: Duration(milliseconds: 800),
+                          curve: Curves.easeInOutExpo);
                     }),
               ),
             ),
@@ -159,11 +153,11 @@ class _PanelButtonState extends State<PanelButton> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13.0),
           boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 10.0,
-          )
-        ],
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurRadius: 10.0,
+            )
+          ],
         ),
         child: Material(
           color: Color(0xff8e91f3).withOpacity(0.9),

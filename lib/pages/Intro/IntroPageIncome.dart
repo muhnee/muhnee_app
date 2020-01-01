@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee/routing/FadeRoute.dart';
-import 'package:muhnee/utilities/FirestoreFunctions.dart';
+import '../../utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
-import 'IntroPageIncome.dart';
+import 'package:muhnee/utilities/FirestoreFunctions.dart';
+import '../Home/HomePage.dart';
 
-var expenses = [];
+var incomes = [];
 
-class IntroPageExpense extends StatefulWidget {
+class IntroPageIncome extends StatefulWidget {
   @override
-  _IntroPageExpenseState createState() => _IntroPageExpenseState();
+  _IntroPageIncomeState createState() => _IntroPageIncomeState();
 }
 
-class _IntroPageExpenseState extends State<IntroPageExpense> {
+class _IntroPageIncomeState extends State<IntroPageIncome> {
   int delayAmount = 500;
 
   @override
@@ -27,7 +27,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ShowUpText(),
-          ExpCellsComponent(),
+          IncCellsComponent(),
           NextButton(),
         ],
       ),
@@ -46,15 +46,15 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Firstly, ",
+                  Text("Now, ",
                       style: TextStyle(
-                        fontSize: 28.0,
+                        fontSize: 30.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
-                  Text("let's add some",
+                  Text("what are your",
                       style: TextStyle(
-                        fontSize: 28.0,
+                        fontSize: 30.0,
                         color: Colors.black,
                       )),
                 ],
@@ -62,8 +62,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
             ),
             delay: delayAmount,
           ),
-          ShowUpLineText("categories to group", delayAmount * 2),
-          ShowUpLineText("your expenses", delayAmount * 4),
+          ShowUpLineText("sources of income?", delayAmount * 3),
         ],
       ),
     );
@@ -75,7 +74,7 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         padding: EdgeInsets.only(bottom: 15.0),
         child: Text(lineText,
             style: TextStyle(
-              fontSize: 28.0,
+              fontSize: 30.0,
               // fontFamily: "Montserrat",
               color: Colors.black,
             )),
@@ -85,56 +84,66 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
   }
 }
 
-addToExpenses(expenseType) {
-  expenses.add(expenseType);
+addToIncomes(incomeType) {
+  incomes.add(incomeType);
 }
 
-removeFromExpenses(expenseType) {
-  expenses.remove(expenseType);
+removeFromIncomes(incomeType) {
+  incomes.remove(incomeType);
 }
 
-class ExpCellsComponent extends StatefulWidget {
+class IncCellsComponent extends StatefulWidget {
   @override
-  _ExpCellsComponentState createState() => _ExpCellsComponentState();
+  _IncCellsComponentState createState() => _IncCellsComponentState();
 }
 
-class _ExpCellsComponentState extends State<ExpCellsComponent> {
+class _IncCellsComponentState extends State<IncCellsComponent> {
   var delayAmount = 500;
 
-  final customExpenseController = TextEditingController();
+  final customIncomeController = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    customExpenseController.dispose();
+    customIncomeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 52.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 52.0,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           ShowUp(
-            child: ExpCellOrdRow("Food", "Clothing", "Rent"),
+            child: SingleExpCell(
+              incomeType: "Work",
+            ),
+            delay: delayAmount * 5,
+          ),
+
+          ShowUp(
+            child: SingleExpCell(
+              incomeType: "Hobbies",
+            ),
             delay: delayAmount * 6,
           ),
+
           ShowUp(
-            child: ExpCellOrdRow("Fuel", "Tech", "Drinks"),
+            child: SingleExpCell(
+              incomeType: "Side Hustle",
+            ),
             delay: delayAmount * 7,
-          ),
-          ShowUp(
-            child: ExpCellOrdRow("Coffee", "Activites", "Alcohol"),
-            delay: delayAmount * 8,
           ),
 
           //Row 4 = Custom input row
 
           ShowUp(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 25),
+              padding: EdgeInsets.only(bottom: 25, top: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,7 +155,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                       padding:
                           EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
                       child: TextField(
-                        controller: customExpenseController,
+                        controller: customIncomeController,
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Custom...'),
@@ -157,49 +166,28 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
-                  TickBtn(customExpenseController: customExpenseController),
+                  TickBtnIncome(customIncomeController: customIncomeController),
                 ],
               ),
             ),
-            delay: delayAmount * 10,
+            delay: delayAmount * 9,
           )
         ],
       ),
     );
   }
-
-  Widget ExpCellOrdRow(type1, type2, type3) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SingleExpCell(
-            expenseType: type1,
-          ),
-          SingleExpCell(
-            expenseType: type2,
-          ),
-          SingleExpCell(
-            expenseType: type3,
-          ),
-        ],
-      ),
-    );
-  }
 }
 
-class TickBtn extends StatefulWidget {
-  var customExpenseController;
+class TickBtnIncome extends StatefulWidget {
+  var customIncomeController;
 
-  TickBtn({@required this.customExpenseController});
+  TickBtnIncome({@required this.customIncomeController});
 
   @override
-  _TickBtnState createState() => _TickBtnState();
+  _TickBtnIncomeState createState() => _TickBtnIncomeState();
 }
 
-class _TickBtnState extends State<TickBtn> {
+class _TickBtnIncomeState extends State<TickBtnIncome> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -239,11 +227,11 @@ class _TickBtnState extends State<TickBtn> {
             //   ),
             // ));
 
-            if (widget.customExpenseController.text.isNotEmpty) {
-              addToExpenses(widget.customExpenseController.text);
-              widget.customExpenseController.clear();
+            if (widget.customIncomeController.text.isNotEmpty) {
+              addToIncomes(widget.customIncomeController.text);
+              widget.customIncomeController.clear();
 
-              print(expenses);
+              print(incomes);
             } else {
               print("custom is empty");
             }
@@ -255,8 +243,11 @@ class _TickBtnState extends State<TickBtn> {
 }
 
 class SingleExpCell extends StatefulWidget {
-  var expenseType;
-  SingleExpCell({@required this.expenseType});
+  var incomeType;
+
+  SingleExpCell({
+    @required this.incomeType,
+  });
 
   @override
   _SingleExpCellState createState() => _SingleExpCellState();
@@ -272,7 +263,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
     return RaisedButton(
       elevation: 0,
       child: Text(
-        widget.expenseType,
+        widget.incomeType,
         style: TextStyle(
             fontSize: 15.0, color: textColor, fontWeight: FontWeight.w400),
         textAlign: TextAlign.center,
@@ -291,7 +282,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
           });
 
           //add to array
-          addToExpenses(widget.expenseType);
+          addToIncomes(widget.incomeType);
         }
         //else if its purple, set colour back to grey and remove from array
         else {
@@ -301,12 +292,10 @@ class _SingleExpCellState extends State<SingleExpCell> {
           });
 
           //remove from array
-          removeFromExpenses(widget.expenseType);
+          removeFromIncomes(widget.incomeType);
         }
       },
     );
-
-
   }
 }
 
@@ -342,9 +331,11 @@ class _NextButtonState extends State<NextButton> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
-                        uploadExpenses(expenses);
+                        uploadIncomes(incomes);
+                        setOnboardedParam();
+
                         Navigator.pushReplacement(
-                            context, FadeRouteBuilder(page: IntroPageIncome()));
+                            context, FadeRouteBuilder(page: HomePage()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
@@ -363,7 +354,7 @@ class _NextButtonState extends State<NextButton> {
                   )),
             ),
           )),
-      delay: delayAmount * 11,
+      delay: delayAmount * 10,
     );
   }
 }

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee/routing/FadeRoute.dart';
-import 'package:muhnee/utilities/FirestoreFunctions.dart';
-import 'package:muhnee/utilities/SignIn.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
-import '../../main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Color componentColor = Colors.grey[600];
@@ -48,53 +44,49 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      
-      width: SizeConfig.blockSizeHorizontal * 80,
-      height: SizeConfig.blockSizeVertical * 35,
-      child: Container(
-        color: Color(0xff424044),
-        child:  
-      Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Row(
+        width: SizeConfig.blockSizeHorizontal * 80,
+        height: SizeConfig.blockSizeVertical * 35,
+        child: Container(
+          color: Color(0xff424044),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              KeyboardCell(cellValue: "1"),
-              KeyboardCell(cellValue: "2"),
-              KeyboardCell(cellValue: "3"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  KeyboardCell(cellValue: "1"),
+                  KeyboardCell(cellValue: "2"),
+                  KeyboardCell(cellValue: "3"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  KeyboardCell(cellValue: "4"),
+                  KeyboardCell(cellValue: "5"),
+                  KeyboardCell(cellValue: "6"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  KeyboardCell(cellValue: "7"),
+                  KeyboardCell(cellValue: "8"),
+                  KeyboardCell(cellValue: "9"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Icon(Icons.first_page, color: Colors.white),
+                  KeyboardCell(cellValue: "0"),
+                  Icon(Icons.check_circle_outline,
+                      size: 20, color: Colors.white),
+                ],
+              ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              KeyboardCell(cellValue: "4"),
-              KeyboardCell(cellValue: "5"),
-              KeyboardCell(cellValue: "6"),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              KeyboardCell(cellValue: "7"),
-              KeyboardCell(cellValue: "8"),
-              KeyboardCell(cellValue: "9"),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Icon(Icons.first_page,  color: Colors.white),
-              KeyboardCell(cellValue: "0"),
-              Icon(Icons.check_circle_outline, size: 20, color: Colors.white),
-            ],
-          ),
-        ],
-      ),
-      )
-      
-     
-    );
+        ));
   }
 }
 

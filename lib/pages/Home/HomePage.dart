@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'ExpensePageSingleFile.dart';
-import 'IncomePage.dart';
 import 'LeftPanel.dart';
-import './ExpensePage.dart';
 import 'ProfilePage.dart';
 import 'TransactionsPage.dart';
 
@@ -16,18 +13,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   PageController pageViewController = PageController(initialPage: 2);
 
   @override
   Widget build(BuildContext context) {
-
     SizeConfig().init(context);
     return Material(
       child: Row(
         children: <Widget>[
           LeftPanel(pageViewController: pageViewController),
-          
           Expanded(
             child: PageView(
               controller: pageViewController,
@@ -35,9 +29,9 @@ class _HomePageState extends State<HomePage> {
               physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
                 ProfilePage(),
-                ExpensePageSingleFile(), 
+                ExpensePageSingleFile(),
 
-                //IncomePage(), 
+                //IncomePage(),
                 TransactionsPage(),
               ],
             ),

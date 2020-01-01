@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:muhnee/pages/HomePage/HomePage.dart';
-import 'package:muhnee/routing/FadeRoute.dart';
+import '../../utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
-import '../utilities/ShowUp.dart';
-import '../utilities/SignIn.dart';
+import '../../utilities/SignIn.dart';
+import '../../utilities/ShowUp.dart';
 import 'IntroPageExpense.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -126,22 +126,20 @@ class _IntroPageState extends State<IntroPage> {
                       //     .catchError((e) => print(e));
 
                       showDialog(
-                        
                         context: context,
                         barrierDismissible: true,
-                      
                         builder: (BuildContext context) {
                           return Dialog(
-                            
                             elevation: 0,
                             backgroundColor: Colors.transparent,
                             child: SizedBox(
                               width: SizeConfig.blockSizeHorizontal * 10,
-                              height: SizeConfig.blockSizeVertical*15,
-                              child: SpinKitDoubleBounce(color: Colors.white, size: SizeConfig.blockSizeHorizontal *8,),
+                              height: SizeConfig.blockSizeVertical * 15,
+                              child: SpinKitDoubleBounce(
+                                color: Colors.white,
+                                size: SizeConfig.blockSizeHorizontal * 8,
+                              ),
                             ),
-                            
-                            
                           );
                         },
                       );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class IncomePage extends StatefulWidget {
-
   @override
   _IncomePageState createState() => _IncomePageState();
 }

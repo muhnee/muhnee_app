@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class TransactionsPage extends StatefulWidget {
-
   @override
   _TransactionsPageState createState() => _TransactionsPageState();
 }

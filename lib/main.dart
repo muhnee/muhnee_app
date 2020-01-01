@@ -2,15 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:muhnee/pages/HomePage/HomePage.dart';
-import './routing/FadeRoute.dart';
-import './pages/IntroPage.dart';
-import './utilities/SignIn.dart';
+import './utilities/FadeRoute.dart';
+import './pages/Intro/IntroPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
-
 
 void main() async {
-
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -25,10 +21,8 @@ void main() async {
   ));
   SystemChrome.setEnabledSystemUIOverlays([]);
 
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 }
 
 class SplashScreen extends StatefulWidget {
@@ -37,38 +31,31 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   var uid;
 
   startTime() async {
-
     var _duration = Duration(seconds: 2);
 
-    try{
+    try {
       uid = await FirebaseAuth.instance.currentUser();
-
-    } catch(e){
+    } catch (e) {
       print(e);
     }
 
-    if (uid != null){
+    if (uid != null) {
       return Timer(_duration, mainSignedIn);
     } else {
       return Timer(_duration, mainNotSignIn);
     }
-
-    
   }
 
   void mainSignedIn() {
-   Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage()));
+    Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage()));
   }
 
   void mainNotSignIn() {
-   Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
+    Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPage()));
   }
-
-
 
   @override
   void initState() {

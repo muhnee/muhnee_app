@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee/pages/HomePage/LeftPanel.dart';
-import 'package:muhnee/routing/FadeRoute.dart';
-import 'package:muhnee/utilities/FirestoreFunctions.dart';
-import 'package:muhnee/utilities/SignIn.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
-import '../../main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Color componentColor = Colors.black;
@@ -227,14 +222,11 @@ class SelectorButtonSingle extends StatefulWidget {
 }
 
 class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
-
   @override
   Widget build(BuildContext context) {
-
     var stateText = widget.startText;
-    Color stateCellColor = widget.startCellColor; 
-    Color stateTextColor = widget.startCellColor; 
-
+    Color stateCellColor = widget.startCellColor;
+    Color stateTextColor = widget.startCellColor;
 
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * widget.width,
@@ -265,13 +257,9 @@ class _SelectorButtonSingleState extends State<SelectorButtonSingle> {
               ),
             ),
             onTap: () {
-
               // if (stateCellColor == widget.startCellColor ) {
-                
+
               // }
-
-
-             
             },
           ),
         ),
