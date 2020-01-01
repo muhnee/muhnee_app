@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muhnee/pages/HomePage/HomePage.dart';
+import '../Home/HomePage.dart';
 import '../../utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
