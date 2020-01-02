@@ -148,8 +148,6 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
       },
     );
   }
-
-
 }
 
 class InteractionPane extends StatefulWidget {
@@ -160,6 +158,8 @@ class InteractionPane extends StatefulWidget {
 class _InteractionPaneState extends State<InteractionPane> {
   var incomeExpenseText = "Income";
   Color incomeExpenseColor = Color(0xffa5d15b);
+
+  Color taxableColor = Colors.grey[300];
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +174,7 @@ class _InteractionPaneState extends State<InteractionPane> {
               // ROW FOR BUTTONS
 
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   // Income / Expense Button
                   RaisedButton(
@@ -202,45 +202,84 @@ class _InteractionPaneState extends State<InteractionPane> {
                     },
                   ),
 
-                  //Taxable Button 
-
+                  //Taxable Button
                   RaisedButton(
                     child: Text(
-                      incomeExpenseText,
+                      "Taxable",
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: incomeExpenseColor,
+                    color: taxableColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         side: BorderSide(color: Colors.grey[200])),
                     elevation: 0,
                     onPressed: () {
-                      if (incomeExpenseText == "Income") {
+                      if (taxableColor == Colors.grey[300]) {
                         setState(() {
-                          incomeExpenseText = "Expense";
-                          incomeExpenseColor = Color(0xfffb3d4e);
+                          taxableColor = Color(0xff8e91f3);
                         });
                       } else {
                         setState(() {
-                          incomeExpenseText = "Income";
-                          incomeExpenseColor = Color(0xffa5d15b);
+                          taxableColor = Colors.grey[300];
                         });
                       }
                     },
                   ),
-                  
 
-
+                  //Upload Button
+                  RaisedButton(
+                    child: Text(
+                      "Upload",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Color(0xff1ea6f9),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: BorderSide(color: Colors.grey[200])),
+                    elevation: 0,
+                    onPressed: () {
+                      //send to cloud
+                    },
+                  ),
                 ],
               ),
 
               // ROW FOR CATEGORY OPTIONS
-              Row(
-                children: <Widget>[],
+
+              Container(
+                height: SizeConfig.blockSizeVertical * 12.5,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+
+
+                    Container(
+                      width: 160.0,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.green,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.yellow,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.orange,
+                    ),
+
+                    
+                  ],
+                ),
               ),
             ],
           ),
         ));
   }
 }
-
