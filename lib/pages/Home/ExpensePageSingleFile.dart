@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,6 +7,9 @@ Color componentColor = Colors.black;
 Color pageColor = Colors.white;
 
 var amount = "";
+var expenseCategories = ["Food", "Clothing", "Tech", "Activities", "Coffee", "Alcohol"];
+var incomeCategories = ["Work"];
+var transactionType = "Income";
 
 class ExpensePageSingleFile extends StatefulWidget {
   @override
@@ -13,6 +17,7 @@ class ExpensePageSingleFile extends StatefulWidget {
 }
 
 class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -42,7 +47,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget CustomKeyboard() {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 35,
+        height: SizeConfig.blockSizeVertical * 30,
         child: Container(
           color: pageColor,
           child: Column(
@@ -185,17 +190,20 @@ class _InteractionPaneState extends State<InteractionPane> {
                     color: incomeExpenseColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Colors.grey[200])),
+                        //side: BorderSide(color: Colors.grey[200])
+                        ),
                     elevation: 0,
                     onPressed: () {
                       if (incomeExpenseText == "Income") {
                         setState(() {
                           incomeExpenseText = "Expense";
+                          transactionType = "Expense";
                           incomeExpenseColor = Color(0xfffb3d4e);
                         });
                       } else {
                         setState(() {
                           incomeExpenseText = "Income";
+                          transactionType = "Income";
                           incomeExpenseColor = Color(0xffa5d15b);
                         });
                       }
@@ -211,7 +219,8 @@ class _InteractionPaneState extends State<InteractionPane> {
                     color: taxableColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Colors.grey[200])),
+                        //side: BorderSide(color: Colors.grey[200])
+                        ),
                     elevation: 0,
                     onPressed: () {
                       if (taxableColor == Colors.grey[300]) {
@@ -235,7 +244,8 @@ class _InteractionPaneState extends State<InteractionPane> {
                     color: Color(0xff1ea6f9),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Colors.grey[200])),
+                        //side: BorderSide(color: Colors.grey[200])
+                        ),
                     elevation: 0,
                     onPressed: () {
                       //send to cloud
@@ -246,16 +256,42 @@ class _InteractionPaneState extends State<InteractionPane> {
 
               // ROW FOR CATEGORY OPTIONS
 
-              Container(
+              // if (transactionType == "Income") {
+              //   expenseCategorySection();
+              // } else {
+
+              // }
+
+              transactionType == "Income" ? incomeCategorySection() : expenseCategorySection(),
+
+
+
+             
+            ],
+          ),
+        ));
+  }
+}
+
+
+class expenseCategorySection extends StatefulWidget {
+  expenseCategorySection({Key key}) : super(key: key);
+
+  @override
+  _expenseCategorySectionState createState() => _expenseCategorySectionState();
+}
+
+class _expenseCategorySectionState extends State<expenseCategorySection> {
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
                 height: SizeConfig.blockSizeVertical * 12.5,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-
-
                     Container(
                       width: 160.0,
-                      color: Colors.red,
+                      color: Colors.yellow,
                     ),
                     Container(
                       width: 160.0,
@@ -267,19 +303,58 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     Container(
                       width: 160.0,
-                      color: Colors.yellow,
+                      color: Colors.orange,
                     ),
                     Container(
                       width: 160.0,
-                      color: Colors.orange,
+                      color: Colors.red,
                     ),
 
-                    
                   ],
                 ),
-              ),
-            ],
-          ),
-        ));
+              );
+  }
+}
+
+
+class incomeCategorySection extends StatefulWidget {
+  incomeCategorySection({Key key}) : super(key: key);
+
+  @override
+  _incomeCategorySectionState createState() => _incomeCategorySectionState();
+}
+
+class _incomeCategorySectionState extends State<incomeCategorySection> {
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+                height: SizeConfig.blockSizeVertical * 12.5,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      width: 160.0,
+                      color: Colors.grey,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.blueGrey,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.pink,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.brown,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.cyan,
+                    ),
+
+                  ],
+                ),
+              );
   }
 }
