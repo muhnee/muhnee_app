@@ -7,7 +7,14 @@ Color componentColor = Colors.black;
 Color pageColor = Colors.white;
 
 var amount = "";
-var expenseCategories = ["Food", "Clothing", "Tech", "Activities", "Coffee", "Alcohol"];
+var expenseCategories = [
+  "Food",
+  "Clothing",
+  "Tech",
+  "Activities",
+  "Coffee",
+  "Alcohol"
+];
 var incomeCategories = ["Work"];
 var transactionType = "Income";
 
@@ -17,7 +24,6 @@ class ExpensePageSingleFile extends StatefulWidget {
 }
 
 class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -189,9 +195,9 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     color: incomeExpenseColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        //side: BorderSide(color: Colors.grey[200])
-                        ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      //side: BorderSide(color: Colors.grey[200])
+                    ),
                     elevation: 0,
                     onPressed: () {
                       if (incomeExpenseText == "Income") {
@@ -218,9 +224,9 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     color: taxableColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        //side: BorderSide(color: Colors.grey[200])
-                        ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      //side: BorderSide(color: Colors.grey[200])
+                    ),
                     elevation: 0,
                     onPressed: () {
                       if (taxableColor == Colors.grey[300]) {
@@ -243,9 +249,9 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     color: Color(0xff1ea6f9),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        //side: BorderSide(color: Colors.grey[200])
-                        ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      //side: BorderSide(color: Colors.grey[200])
+                    ),
                     elevation: 0,
                     onPressed: () {
                       //send to cloud
@@ -262,17 +268,14 @@ class _InteractionPaneState extends State<InteractionPane> {
 
               // }
 
-              transactionType == "Income" ? incomeCategorySection() : expenseCategorySection(),
-
-
-
-             
+              transactionType == "Income"
+                  ? incomeCategorySection()
+                  : expenseCategorySection(),
             ],
           ),
         ));
   }
 }
-
 
 class expenseCategorySection extends StatefulWidget {
   expenseCategorySection({Key key}) : super(key: key);
@@ -284,38 +287,21 @@ class expenseCategorySection extends StatefulWidget {
 class _expenseCategorySectionState extends State<expenseCategorySection> {
   @override
   Widget build(BuildContext context) {
-    return  Container(
-                height: SizeConfig.blockSizeVertical * 12.5,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Container(
-                      width: 160.0,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.green,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.orange,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.red,
-                    ),
+    return Container(
+      height: SizeConfig.blockSizeVertical * 12.5,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
 
-                  ],
-                ),
-              );
+          for (var item in expenseCategories) 
+            Text(item)
+          
+         
+        ],
+      ),
+    );
   }
 }
-
 
 class incomeCategorySection extends StatefulWidget {
   incomeCategorySection({Key key}) : super(key: key);
@@ -327,34 +313,17 @@ class incomeCategorySection extends StatefulWidget {
 class _incomeCategorySectionState extends State<incomeCategorySection> {
   @override
   Widget build(BuildContext context) {
-    return  Container(
-                height: SizeConfig.blockSizeVertical * 12.5,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Container(
-                      width: 160.0,
-                      color: Colors.grey,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.blueGrey,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.pink,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.brown,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.cyan,
-                    ),
+    return Container(
+      height: SizeConfig.blockSizeVertical * 12.5,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
 
-                  ],
-                ),
-              );
+          for (var item in incomeCategories) 
+            Text(item)
+          
+        ],
+      ),
+    );
   }
 }
