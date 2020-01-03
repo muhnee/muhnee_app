@@ -18,6 +18,8 @@ var expenseCategories = [
 var incomeCategories = ["Work"];
 var transactionType = "Income";
 
+var selectedCategories = [];
+
 class ExpensePageSingleFile extends StatefulWidget {
   @override
   _ExpensePageSingleFileState createState() => _ExpensePageSingleFileState();
@@ -292,11 +294,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-
-          for (var item in expenseCategories) 
-            Text(item)
-          
-         
+          for (var item in expenseCategories) CategorySelectorBtn(catItem: item,)
         ],
       ),
     );
@@ -318,12 +316,51 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-
-          for (var item in incomeCategories) 
-            Text(item)
-          
+          for (var item in incomeCategories) CategorySelectorBtn(catItem: item,)
         ],
       ),
+    );
+  }
+}
+
+class CategorySelectorBtn extends StatefulWidget {
+
+  var catItem; 
+  CategorySelectorBtn({@required this.catItem});
+
+  @override
+  _CategorySelectorBtnState createState() => _CategorySelectorBtnState();
+}
+
+class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
+
+  Color unselectedBtnColor = Colors.grey[300];
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Text(
+        widget.catItem,
+        style: TextStyle(color: Colors.white),
+      ),
+      color: unselectedBtnColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      elevation: 0,
+      onPressed: () {
+        if (unselectedBtnColor == Colors.grey[300]) {
+          setState(() {
+            unselectedBtnColor = Color(0xff8e91f3);
+            selectedCategories.add(widget.catItem); 
+          });
+        } else {
+          setState(() {
+            unselectedBtnColor = Colors.grey[300];
+            selectedCategories.remove(widget.catItem);
+          });
+        }
+      },
     );
   }
 }
