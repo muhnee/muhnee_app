@@ -178,7 +178,7 @@ class _InteractionPaneState extends State<InteractionPane> {
   Widget build(BuildContext context) {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 25,
+        height: SizeConfig.blockSizeVertical * 14,
         child: Container(
           color: Colors.transparent,
           child: Column(
@@ -264,15 +264,13 @@ class _InteractionPaneState extends State<InteractionPane> {
 
               // ROW FOR CATEGORY OPTIONS
 
-              // if (transactionType == "Income") {
-              //   expenseCategorySection();
-              // } else {
-
-              // }
-
               transactionType == "Income"
                   ? incomeCategorySection()
                   : expenseCategorySection(),
+
+              
+
+
             ],
           ),
         ));
@@ -290,7 +288,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.blockSizeVertical * 12.5,
+      height: SizeConfig.blockSizeVertical * 4.2,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
@@ -312,7 +310,7 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.blockSizeVertical * 12.5,
+      height: SizeConfig.blockSizeVertical * 4.2,  //! this is dumb
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
@@ -338,7 +336,9 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 6.0),
+      child:  RaisedButton(
       child: Text(
         widget.catItem,
         style: TextStyle(color: Colors.white),
@@ -353,14 +353,22 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
           setState(() {
             unselectedBtnColor = Color(0xff8e91f3);
             selectedCategories.add(widget.catItem); 
+            print(selectedCategories);
           });
         } else {
           setState(() {
             unselectedBtnColor = Colors.grey[300];
             selectedCategories.remove(widget.catItem);
+            print(selectedCategories);
           });
         }
       },
-    );
+    ), 
+
+    ); 
+
+
+   
+
   }
 }
