@@ -340,6 +340,7 @@ class _NextButtonState extends State<NextButton> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
+                        expenses.add("Other");
                         uploadExpenses(expenses);
                         Navigator.pushReplacement(
                             context, FadeRouteBuilder(page: IntroPageIncome()));
