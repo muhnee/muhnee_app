@@ -207,12 +207,14 @@ class _InteractionPaneState extends State<InteractionPane> {
                           incomeExpenseText = "Expense";
                           transactionType = "Expense";
                           incomeExpenseColor = Color(0xfffb3d4e);
+                          selectedCategories.clear(); 
                         });
                       } else {
                         setState(() {
                           incomeExpenseText = "Income";
                           transactionType = "Income";
                           incomeExpenseColor = Color(0xffa5d15b);
+                          selectedCategories.clear(); 
                         });
                       }
                     },
