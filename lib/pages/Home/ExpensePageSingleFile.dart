@@ -281,36 +281,27 @@ class _InteractionPaneState extends State<InteractionPane> {
                       //should check if there is a failure or sucess
 
                       if (amount != "0") {
-                         AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.SUCCES,
-                              animType: AnimType.BOTTOMSLIDE,
-                              tittle: transactionType + " uploaded",
-                              desc: '\$' + amount,
-                              btnOkOnPress: () {})
-                          .show();
-                      } 
-                      else {
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.SUCCES,
+                                animType: AnimType.BOTTOMSLIDE,
+                                tittle: transactionType + " uploaded",
+                                desc: '\$' + amount,
+                                btnOkOnPress: () {})
+                            .show();
 
-                         AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.ERROR,
-                              animType: AnimType.BOTTOMSLIDE,
-                              tittle: "Value empty",
-                              desc: 'Add a transaction value',
-                              btnCancelText: "Ok" ,
-                              btnCancelOnPress: () {},)
-                              
-                          .show();
-
-
+                        resetValues();
+                      } else {
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.ERROR,
+                          animType: AnimType.BOTTOMSLIDE,
+                          tittle: "Value empty",
+                          desc: 'Add a transaction value',
+                          btnCancelText: "Ok",
+                          btnCancelOnPress: () {},
+                        ).show();
                       }
-
-
-                     
-
-
-
                     },
                   ),
                 ],
@@ -324,6 +315,22 @@ class _InteractionPaneState extends State<InteractionPane> {
             ],
           ),
         ));
+  }
+
+  //TODO : setState on amount wont rebuild the view if in this widget
+
+  resetValues() {
+    setState(() {
+      amount = "0";
+      transactionType = "Income";
+      selectedCategories = [];
+      isTaxable = false;
+    });
+
+    print(amount);
+    print(transactionType);
+    print(selectedCategories);
+    print(isTaxable);
   }
 }
 
@@ -445,5 +452,3 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
     );
   }
 }
-
-// Modal
