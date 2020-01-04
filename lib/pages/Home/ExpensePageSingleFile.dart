@@ -40,13 +40,29 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Text(amount,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: componentColor,
-                )),
+            Container(
+              child: Expanded(
+                child: Center(
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "\$ ",
+                        style: GoogleFonts.francoisOne(
+                          textStyle: TextStyle(letterSpacing: .5, fontSize: 30),
+                        ),
+                      ),
+                      Text(
+                        amount,
+                        style: GoogleFonts.francoisOne(
+                          textStyle: TextStyle(letterSpacing: .5, fontSize: 80),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             InteractionPane(),
             CustomKeyboard(),
           ],
@@ -318,7 +334,6 @@ class _InteractionPaneState extends State<InteractionPane> {
   }
 
   //TODO : setState on amount wont rebuild the view if in this widget
-
   resetValues() {
     setState(() {
       amount = "0";
