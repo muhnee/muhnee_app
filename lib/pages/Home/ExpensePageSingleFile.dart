@@ -267,10 +267,6 @@ class _InteractionPaneState extends State<InteractionPane> {
               transactionType == "Income"
                   ? incomeCategorySection()
                   : expenseCategorySection(),
-
-              
-
-
             ],
           ),
         ));
@@ -289,12 +285,27 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
   Widget build(BuildContext context) {
     return Container(
       height: SizeConfig.blockSizeVertical * 4.2,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          for (var item in expenseCategories) CategorySelectorBtn(catItem: item,)
-        ],
+      child: Center(
+        child: ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            children: [
+              for (var item in expenseCategories)
+                CategorySelectorBtn(
+                  catItem: item,
+                )
+            ]),
       ),
+
+      // ListView(
+      //   scrollDirection: Axis.horizontal,
+      //   children: <Widget>[
+      //     for (var item in expenseCategories)
+      //       CategorySelectorBtn(
+      //         catItem: item,
+      //       )
+      //   ],
+      // ),
     );
   }
 }
@@ -310,20 +321,34 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.blockSizeVertical * 4.2,  //! this is dumb
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          for (var item in incomeCategories) CategorySelectorBtn(catItem: item,)
-        ],
+      height: SizeConfig.blockSizeVertical * 4.2, //! this is dumb
+      child: Center(
+        child: ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            children: [
+              for (var item in incomeCategories)
+                CategorySelectorBtn(
+                  catItem: item,
+                )
+            ]),
       ),
+
+      //  ListView(
+      //   scrollDirection: Axis.horizontal,
+      //   children: <Widget>[
+      //     for (var item in incomeCategories)
+      //       CategorySelectorBtn(
+      //         catItem: item,
+      //       )
+      //   ],
+      // ),
     );
   }
 }
 
 class CategorySelectorBtn extends StatefulWidget {
-
-  var catItem; 
+  var catItem;
   CategorySelectorBtn({@required this.catItem});
 
   @override
@@ -331,44 +356,38 @@ class CategorySelectorBtn extends StatefulWidget {
 }
 
 class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
-
   Color unselectedBtnColor = Colors.grey[300];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 6.0),
-      child:  RaisedButton(
-      child: Text(
-        widget.catItem,
-        style: TextStyle(color: Colors.white),
+      child: RaisedButton(
+        child: Text(
+          widget.catItem,
+          style: TextStyle(color: Colors.white),
+        ),
+        color: unselectedBtnColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        elevation: 0,
+        onPressed: () {
+          if (unselectedBtnColor == Colors.grey[300]) {
+            setState(() {
+              unselectedBtnColor = Color(0xff8e91f3);
+              selectedCategories.add(widget.catItem);
+              print(selectedCategories);
+            });
+          } else {
+            setState(() {
+              unselectedBtnColor = Colors.grey[300];
+              selectedCategories.remove(widget.catItem);
+              print(selectedCategories);
+            });
+          }
+        },
       ),
-      color: unselectedBtnColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 0,
-      onPressed: () {
-        if (unselectedBtnColor == Colors.grey[300]) {
-          setState(() {
-            unselectedBtnColor = Color(0xff8e91f3);
-            selectedCategories.add(widget.catItem); 
-            print(selectedCategories);
-          });
-        } else {
-          setState(() {
-            unselectedBtnColor = Colors.grey[300];
-            selectedCategories.remove(widget.catItem);
-            print(selectedCategories);
-          });
-        }
-      },
-    ), 
-
-    ); 
-
-
-   
-
+    );
   }
 }
