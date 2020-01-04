@@ -19,6 +19,7 @@ var incomeCategories = ["Work"];
 var transactionType = "Income";
 
 var selectedCategories = [];
+var isTaxable = false; 
 
 class ExpensePageSingleFile extends StatefulWidget {
   @override
@@ -236,10 +237,14 @@ class _InteractionPaneState extends State<InteractionPane> {
                       if (taxableColor == Colors.grey[300]) {
                         setState(() {
                           taxableColor = Color(0xff8e91f3);
+                          isTaxable = true; 
+                          print (isTaxable);
                         });
                       } else {
                         setState(() {
                           taxableColor = Colors.grey[300];
+                          isTaxable = false; 
+                          print (isTaxable);
                         });
                       }
                     },
