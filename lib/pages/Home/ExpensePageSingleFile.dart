@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 Color componentColor = Colors.black;
 Color pageColor = Colors.white;
@@ -17,7 +18,7 @@ var expenseCategories = [
 var incomeCategories = ["Work"];
 
 //to send
-var amount = "";
+var amount = "0";
 var transactionType = "Income";
 var selectedCategories = [];
 var isTaxable = false;
@@ -122,9 +123,16 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                     ),
                     onPressed: () {
                       print("delete char");
-                      setState(() {
-                        amount = amount.substring(0, (amount.length - 1));
-                      });
+
+                      if (amount.length == 1) {
+                        setState(() {
+                          amount = "0";
+                        });
+                      } else {
+                        setState(() {
+                          amount = amount.substring(0, (amount.length - 1));
+                        });
+                      }
                     },
                   ),
                 ],
@@ -157,9 +165,13 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
         ),
       ),
       onPressed: () {
-        setState(() {
-          amount += cellValue;
-        });
+        amount == "0"
+            ? setState(() {
+                amount = cellValue;
+              })
+            : setState(() {
+                amount += cellValue;
+              });
       },
     );
   }
@@ -264,14 +276,17 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     elevation: 0,
                     onPressed: () {
-
-                      showDialog(
-                context: context,
-                builder: (_) => TimedModal(),
-              );
-
-                      
                       //send to cloud
+
+                      //should check if there is a failure or sucess
+                      AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.SUCCES,
+                              animType: AnimType.BOTTOMSLIDE,
+                              tittle: transactionType + " uploaded",
+                              desc: '\$' + amount,
+                              btnOkOnPress: () {})
+                          .show();
                     },
                   ),
                 ],
@@ -407,54 +422,4 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
   }
 }
 
-
-// Modal 
-
-class TimedModal extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => TimedModalState();
-}
-
-class TimedModalState extends State<TimedModal>
-    with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
-    scaleAnimation =
-        CurvedAnimation(parent: controller, curve: Curves.elasticInOut);
-
-    controller.addListener(() {
-      setState(() {});
-    });
-
-    controller.forward();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Material(
-        color: Colors.transparent,
-        child: ScaleTransition(
-          scale: scaleAnimation,
-          child: Container(
-            decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0))),
-            child: Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: Text("Well hello there!"),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// Modal
