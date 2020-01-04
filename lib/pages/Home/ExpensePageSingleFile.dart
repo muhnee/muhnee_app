@@ -279,7 +279,9 @@ class _InteractionPaneState extends State<InteractionPane> {
                       //send to cloud
 
                       //should check if there is a failure or sucess
-                      AwesomeDialog(
+
+                      if (amount != "0") {
+                         AwesomeDialog(
                               context: context,
                               dialogType: DialogType.SUCCES,
                               animType: AnimType.BOTTOMSLIDE,
@@ -287,6 +289,28 @@ class _InteractionPaneState extends State<InteractionPane> {
                               desc: '\$' + amount,
                               btnOkOnPress: () {})
                           .show();
+                      } 
+                      else {
+
+                         AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.ERROR,
+                              animType: AnimType.BOTTOMSLIDE,
+                              tittle: "Value empty",
+                              desc: 'Add a transaction value',
+                              btnCancelText: "Ok" ,
+                              btnCancelOnPress: () {},)
+                              
+                          .show();
+
+
+                      }
+
+
+                     
+
+
+
                     },
                   ),
                 ],
