@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 Color componentColor = Colors.black;
 Color pageColor = Colors.white;
 
-var amount = "";
 var expenseCategories = [
   "Food",
   "Clothing",
@@ -16,10 +15,12 @@ var expenseCategories = [
   "Alcohol"
 ];
 var incomeCategories = ["Work"];
-var transactionType = "Income";
 
+//to send
+var amount = "";
+var transactionType = "Income";
 var selectedCategories = [];
-var isTaxable = false; 
+var isTaxable = false;
 
 class ExpensePageSingleFile extends StatefulWidget {
   @override
@@ -208,14 +209,14 @@ class _InteractionPaneState extends State<InteractionPane> {
                           incomeExpenseText = "Expense";
                           transactionType = "Expense";
                           incomeExpenseColor = Color(0xfffb3d4e);
-                          selectedCategories.clear(); 
+                          selectedCategories.clear();
                         });
                       } else {
                         setState(() {
                           incomeExpenseText = "Income";
                           transactionType = "Income";
                           incomeExpenseColor = Color(0xffa5d15b);
-                          selectedCategories.clear(); 
+                          selectedCategories.clear();
                         });
                       }
                     },
@@ -237,14 +238,14 @@ class _InteractionPaneState extends State<InteractionPane> {
                       if (taxableColor == Colors.grey[300]) {
                         setState(() {
                           taxableColor = Color(0xff8e91f3);
-                          isTaxable = true; 
-                          print (isTaxable);
+                          isTaxable = true;
+                          print(isTaxable);
                         });
                       } else {
                         setState(() {
                           taxableColor = Colors.grey[300];
-                          isTaxable = false; 
-                          print (isTaxable);
+                          isTaxable = false;
+                          print(isTaxable);
                         });
                       }
                     },
@@ -263,6 +264,13 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     elevation: 0,
                     onPressed: () {
+
+                      showDialog(
+                context: context,
+                builder: (_) => TimedModal(),
+              );
+
+                      
                       //send to cloud
                     },
                   ),
@@ -394,6 +402,58 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
             });
           }
         },
+      ),
+    );
+  }
+}
+
+
+// Modal 
+
+class TimedModal extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => TimedModalState();
+}
+
+class TimedModalState extends State<TimedModal>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    scaleAnimation =
+        CurvedAnimation(parent: controller, curve: Curves.elasticInOut);
+
+    controller.addListener(() {
+      setState(() {});
+    });
+
+    controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Material(
+        color: Colors.transparent,
+        child: ScaleTransition(
+          scale: scaleAnimation,
+          child: Container(
+            decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0))),
+            child: Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Text("Well hello there!"),
+            ),
+          ),
+        ),
       ),
     );
   }
