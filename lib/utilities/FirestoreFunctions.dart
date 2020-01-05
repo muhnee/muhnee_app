@@ -66,17 +66,45 @@ void setOnboardedParam() async {
   print("onboarded set to true");
 }
 
-Future<bool> getExpenseCategories() async {
+// Future<bool> getExpenseCategories() async {
+//   final FirebaseUser currentUser = await _auth.currentUser();
+//   uid = currentUser.uid;
+
+//   var onBoardedRef = await databaseReference
+//       .collection("users")
+//       .document(uid)
+//       .collection("categories")
+//       .document("expense")
+//       .get();
+//   var expenseCategories = onBoardedRef.data["expenseCategories"];
+
+//   return expenseCategories;
+// }
+
+void uploadTransaction(transactionObject) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  var onBoardedRef = await databaseReference
+  var curDateTime = DateTime.now().toUtc().millisecondsSinceEpoch.toString();
+
+  // await databaseReference
+  //     .collection("users")
+  //     .document(uid)
+  //     .collection("transactions")
+  //     .document(curDateTime)
+  //     .setData(transactionObject);
+
+  var test = {"test": "testValue"};
+
+  await databaseReference
       .collection("users")
       .document(uid)
-      .collection("categories")
-      .document("expense")
-      .get();
-  var expenseCategories = onBoardedRef.data["expenseCategories"];
+      .collection("transactions")
+      .document("income")
+      .setData(test);
 
-  return expenseCategories;
+
+
+  print("transaction uploaded");
+
 }

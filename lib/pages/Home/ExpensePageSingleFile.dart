@@ -40,6 +40,11 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+            // SizedBox(
+            //   width: SizeConfig.blockSizeHorizontal * 80,
+            //   height: SizeConfig.blockSizeVertical * 14,
+            // ),
+
             Container(
               child: Expanded(
                 child: Center(
@@ -63,6 +68,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                 ),
               ),
             ),
+
             InteractionPane(),
             CustomKeyboard(),
           ],
@@ -208,13 +214,15 @@ class _InteractionPaneState extends State<InteractionPane> {
   Widget build(BuildContext context) {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 14,
+        height: SizeConfig.blockSizeVertical * 17,
         child: Container(
           color: Colors.transparent,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               // ROW FOR BUTTONS
+
+              ExpenseDescription(),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -297,6 +305,15 @@ class _InteractionPaneState extends State<InteractionPane> {
                       //should check if there is a failure or sucess
 
                       if (amount != "0") {
+                        var transactionObject = {
+                          "amount": amount,
+                          "type": transactionType,
+                          "category": selectedCategories,
+                          "taxDeductible": isTaxable,
+                        };
+
+                        uploadTransaction(transactionObject);
+
                         AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.SUCCES,
@@ -463,6 +480,39 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
             });
           }
         },
+      ),
+    );
+  }
+}
+
+class ExpenseDescription extends StatefulWidget {
+  ExpenseDescription({Key key}) : super(key: key);
+
+  @override
+  _ExpenseDescriptionState createState() => _ExpenseDescriptionState();
+}
+
+class _ExpenseDescriptionState extends State<ExpenseDescription> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: SizeConfig.blockSizeHorizontal * 80,
+      height: SizeConfig.blockSizeVertical * 5,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.blockSizeHorizontal * 5),
+        child: TextField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Add a description (optional) . . .',
+            labelStyle: TextStyle(
+              fontSize: 13,
+            ),
+          ),
+          style: TextStyle(fontSize: 13),
+          cursorColor: Colors.grey,
+          //textAlign: TextAlign.center,
+        ),
       ),
     );
   }
