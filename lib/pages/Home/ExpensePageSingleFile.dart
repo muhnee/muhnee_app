@@ -222,7 +222,11 @@ class _InteractionPaneState extends State<InteractionPane> {
             children: <Widget>[
               // ROW FOR BUTTONS
 
-              ExpenseDescription(),
+              // ExpenseDescription(),
+
+              transactionType == "Income"
+                  ? ExpenseDescriptionEmptySpace()
+                  : ExpenseDescription(),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -504,7 +508,7 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
         child: TextField(
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            labelText: 'Add a description (optional) . . .',
+            labelText: 'Add a description (optional)',
             labelStyle: TextStyle(
               fontSize: 13,
             ),
@@ -514,6 +518,18 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
           //textAlign: TextAlign.center,
         ),
       ),
+    );
+  }
+}
+
+class ExpenseDescriptionEmptySpace extends StatelessWidget {
+  const ExpenseDescriptionEmptySpace({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: SizeConfig.blockSizeHorizontal * 80,
+      height: SizeConfig.blockSizeVertical * 5,
     );
   }
 }
