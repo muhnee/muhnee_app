@@ -59,7 +59,7 @@ void setOnboardedParam() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  await databaseReference.collection("users").document(uid).setData({
+  await databaseReference.collection("users").document(uid).updateData({
     'onboarded': true,
   });
 
@@ -103,8 +103,5 @@ void uploadTransaction(transactionObject) async {
       .document("income")
       .setData(test);
 
-
-
   print("transaction uploaded");
-
 }
