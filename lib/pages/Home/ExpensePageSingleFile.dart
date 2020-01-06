@@ -5,15 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 // Pull from Firebase
-var expenseCategories = [
-  "Food",
-  "Clothing",
-  "Tech",
-  "Activities",
-  "Coffee",
-  "Alcohol"
-];
-var incomeCategories = ["Work"];
+
+var tExp;
+var tInc;
 
 // Send as transaction
 var amount = "0";
@@ -373,29 +367,50 @@ class expenseCategorySection extends StatefulWidget {
 class _expenseCategorySectionState extends State<expenseCategorySection> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: SizeConfig.blockSizeVertical * 4.2,
-      child: Center(
-        child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: [
-              for (var item in expenseCategories)
-                CategorySelectorBtn(
-                  catItem: item,
-                )
-            ]),
-      ),
+    return FutureBuilder<List>(
+      future:
+          getExpenseCategories(), // a previously-obtained Future<String> or null
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        List<Widget> children;
 
-      // ListView(
-      //   scrollDirection: Axis.horizontal,
-      //   children: <Widget>[
-      //     for (var item in expenseCategories)
-      //       CategorySelectorBtn(
-      //         catItem: item,
-      //       )
-      //   ],
-      // ),
+        if (snapshot.hasData) {
+          children = <Widget>[
+            Container(
+              height: SizeConfig.blockSizeVertical * 4.2,
+              child: Center(
+                child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      for (var item in snapshot.data)
+                        CategorySelectorBtn(
+                          catItem: item,
+                        )
+                    ]),
+              ),
+            )
+          ];
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            CategorySelectorBtn(
+              catItem: "Network Error",
+            )
+          ];
+        } else {
+          children = <Widget>[
+            CategorySelectorBtn(
+              catItem: "loading ...",
+            )
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
+          ),
+        );
+      },
     );
   }
 }
@@ -410,29 +425,50 @@ class incomeCategorySection extends StatefulWidget {
 class _incomeCategorySectionState extends State<incomeCategorySection> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: SizeConfig.blockSizeVertical * 4.2, //! this is dumb
-      child: Center(
-        child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: [
-              for (var item in incomeCategories)
-                CategorySelectorBtn(
-                  catItem: item,
-                )
-            ]),
-      ),
+    return FutureBuilder<List>(
+      future:
+          getIncomeCategories(), // a previously-obtained Future<String> or null
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        List<Widget> children;
 
-      //  ListView(
-      //   scrollDirection: Axis.horizontal,
-      //   children: <Widget>[
-      //     for (var item in incomeCategories)
-      //       CategorySelectorBtn(
-      //         catItem: item,
-      //       )
-      //   ],
-      // ),
+        if (snapshot.hasData) {
+          children = <Widget>[
+            Container(
+              height: SizeConfig.blockSizeVertical * 4.2,
+              child: Center(
+                child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      for (var item in snapshot.data)
+                        CategorySelectorBtn(
+                          catItem: item,
+                        )
+                    ]),
+              ),
+            )
+          ];
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            CategorySelectorBtn(
+              catItem: "Network Error",
+            )
+          ];
+        } else {
+          children = <Widget>[
+            CategorySelectorBtn(
+              catItem: "loading ...",
+            )
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
+          ),
+        );
+      },
     );
   }
 }
