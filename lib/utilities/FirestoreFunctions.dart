@@ -66,20 +66,35 @@ void setOnboardedParam() async {
   print("onboarded set to true");
 }
 
-// Future<bool> getExpenseCategories() async {
-//   final FirebaseUser currentUser = await _auth.currentUser();
-//   uid = currentUser.uid;
+Future<List> getExpenseCategories() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
 
-//   var onBoardedRef = await databaseReference
-//       .collection("users")
-//       .document(uid)
-//       .collection("categories")
-//       .document("expense")
-//       .get();
-//   var expenseCategories = onBoardedRef.data["expenseCategories"];
+  var onBoardedRef = await databaseReference
+      .collection("users")
+      .document(uid)
+      .collection("categories")
+      .document("expense")
+      .get();
+  var expenseCategories = onBoardedRef.data["expenseCategories"];
 
-//   return expenseCategories;
-// }
+  return expenseCategories;
+}
+
+Future<List> getIncomeCategories() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+  var onBoardedRef = await databaseReference
+      .collection("users")
+      .document(uid)
+      .collection("categories")
+      .document("income")
+      .get();
+  var incomeCategories = onBoardedRef.data["incomeCategories"];
+
+  return incomeCategories;
+}
 
 void uploadTransaction(transactionObject) async {
   final FirebaseUser currentUser = await _auth.currentUser();
