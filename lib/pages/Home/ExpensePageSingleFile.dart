@@ -85,7 +85,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                 children: <Widget>[
                   RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(10.0),
                         side: BorderSide(color: Colors.grey[200])),
                     color: Colors.grey[100],
                     elevation: 0,
@@ -104,7 +104,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                   KeyboardCell("0"),
                   RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(10.0),
                         side: BorderSide(color: Colors.grey[200])),
                     color: Colors.grey[100],
                     elevation: 0,
@@ -168,35 +168,31 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
     );
   }
 
-  Widget AmountText(){
-
-  return Container(
-              child: Expanded(
-                child: Center(
-                  child: Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "\$ ",
-                        style: GoogleFonts.francoisOne(
-                          textStyle: TextStyle(letterSpacing: .5, fontSize: 30),
-                        ),
-                      ),
-                      Text(
-                        amount,
-                        style: GoogleFonts.francoisOne(
-                          textStyle: TextStyle(letterSpacing: .5, fontSize: 80),
-                        ),
-                      ),
-                    ],
-                  ),
+  Widget AmountText() {
+    return Container(
+      child: Expanded(
+        child: Center(
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              Text(
+                "\$ ",
+                style: GoogleFonts.francoisOne(
+                  textStyle: TextStyle(letterSpacing: .5, fontSize: 30),
                 ),
               ),
-            );
-
+              Text(
+                amount,
+                style: GoogleFonts.francoisOne(
+                  textStyle: TextStyle(letterSpacing: .5, fontSize: 80),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
-
-
 }
 
 class InteractionPane extends StatefulWidget {
@@ -205,7 +201,6 @@ class InteractionPane extends StatefulWidget {
 }
 
 class _InteractionPaneState extends State<InteractionPane> {
-  var incomeExpenseText = "Income";
   Color incomeExpenseColor = Color(0xffa5d15b);
 
   Color taxableColor = Colors.grey[300];
@@ -234,7 +229,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                   // Income / Expense Button
                   RaisedButton(
                     child: Text(
-                      incomeExpenseText,
+                      transactionType,
                       style: TextStyle(color: Colors.white),
                     ),
                     color: incomeExpenseColor,
@@ -244,16 +239,14 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     elevation: 0,
                     onPressed: () {
-                      if (incomeExpenseText == "Income") {
+                      if (transactionType == "Income") {
                         setState(() {
-                          incomeExpenseText = "Expense";
                           transactionType = "Expense";
                           incomeExpenseColor = Color(0xfffb3d4e);
                           selectedCategories.clear();
                         });
                       } else {
                         setState(() {
-                          incomeExpenseText = "Income";
                           transactionType = "Income";
                           incomeExpenseColor = Color(0xffa5d15b);
                           selectedCategories.clear();
@@ -507,7 +500,8 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
             horizontal: SizeConfig.blockSizeHorizontal * 5),
         child: TextField(
           decoration: InputDecoration(
-            border: OutlineInputBorder(),
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
             labelText: 'Add a description (optional)',
             labelStyle: TextStyle(
               fontSize: 13,
