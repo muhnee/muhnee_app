@@ -4,9 +4,7 @@ import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
-Color componentColor = Colors.black;
-Color pageColor = Colors.white;
-
+// Pull from Firebase
 var expenseCategories = [
   "Food",
   "Clothing",
@@ -17,7 +15,7 @@ var expenseCategories = [
 ];
 var incomeCategories = ["Work"];
 
-//to send
+// Send as transaction
 var amount = "0";
 var transactionType = "Income";
 var selectedCategories = [];
@@ -33,42 +31,14 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: pageColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            // SizedBox(
-            //   width: SizeConfig.blockSizeHorizontal * 80,
-            //   height: SizeConfig.blockSizeVertical * 14,
-            // ),
-
-            Container(
-              child: Expanded(
-                child: Center(
-                  child: Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "\$ ",
-                        style: GoogleFonts.francoisOne(
-                          textStyle: TextStyle(letterSpacing: .5, fontSize: 30),
-                        ),
-                      ),
-                      Text(
-                        amount,
-                        style: GoogleFonts.francoisOne(
-                          textStyle: TextStyle(letterSpacing: .5, fontSize: 80),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
+            AmountText(),
             InteractionPane(),
             CustomKeyboard(),
           ],
@@ -82,7 +52,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
         width: SizeConfig.blockSizeHorizontal * 80,
         height: SizeConfig.blockSizeVertical * 30,
         child: Container(
-          color: pageColor,
+          color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -123,7 +93,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                       padding: EdgeInsets.symmetric(
                           vertical: SizeConfig.blockSizeVertical * 1),
                       child: Icon(Icons.brightness_1,
-                          size: 8, color: componentColor),
+                          size: 8, color: Colors.black),
                     ),
                     onPressed: () {
                       setState(() {
@@ -141,7 +111,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: SizeConfig.blockSizeVertical * 1),
-                      child: Icon(Icons.first_page, color: componentColor),
+                      child: Icon(Icons.first_page, color: Colors.black),
                     ),
                     onPressed: () {
                       print("delete char");
@@ -167,7 +137,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget KeyboardCell(cellValue) {
     return RaisedButton(
       shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(10.0),
           side: BorderSide(color: Colors.grey[200])),
       color: Colors.grey[100],
       elevation: 0,
@@ -181,7 +151,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
             fontSize: 20,
             fontWeight: FontWeight.w600,
             textStyle: TextStyle(
-              color: componentColor,
+              color: Colors.black,
             ),
           ),
         ),
@@ -197,6 +167,36 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
       },
     );
   }
+
+  Widget AmountText(){
+
+  return Container(
+              child: Expanded(
+                child: Center(
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "\$ ",
+                        style: GoogleFonts.francoisOne(
+                          textStyle: TextStyle(letterSpacing: .5, fontSize: 30),
+                        ),
+                      ),
+                      Text(
+                        amount,
+                        style: GoogleFonts.francoisOne(
+                          textStyle: TextStyle(letterSpacing: .5, fontSize: 80),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+
+  }
+
+
 }
 
 class InteractionPane extends StatefulWidget {
