@@ -368,6 +368,7 @@ class _InteractionPaneState extends State<InteractionPane> {
       transactionType = "Income";
       selectedCategories = [];
       isTaxable = false;
+      descriptionController.clear();
     });
 
     print(amount);

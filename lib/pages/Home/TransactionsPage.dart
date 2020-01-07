@@ -44,6 +44,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         TransactionViewCell(
                           amountText: item["amount"],
                           type: item["type"],
+                          //category: item["category"],
                         )
                     ]),
               ))
@@ -96,13 +97,17 @@ class TransactionViewCell extends StatefulWidget {
 
 class _TransactionViewCellState extends State<TransactionViewCell> {
   Color cellColor;
-  var category;
+  var cat;
+  var tax; 
+  var desc; 
 
   @override
   Widget build(BuildContext context) {
     widget.type == "Income"
         ? cellColor = Color(0xffa5d15b)
         : cellColor = Color(0xfffb3d4e);
+
+    // widget.category == "" ? cat 
 
     return Padding(
         padding:
@@ -137,10 +142,10 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                     ),
                   ],
                 ),
-                Text(
-                  widget.category,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-                ),
+                // Text(
+                //   widget.category,
+                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                // ),
               ],
             ),
           ),
