@@ -308,9 +308,11 @@ class _InteractionPaneState extends State<InteractionPane> {
                         var description;
 
                         transactionType == "Income"
-                            ? description = "NA"
-                            : description =
-                                descriptionController.text.toString();
+                            ? description = ""
+                            : descriptionController.text.isNotEmpty
+                                ? description =
+                                    descriptionController.text.toString()
+                                : description = "";
 
                         uploadTransaction(amount, transactionType,
                             selectedCategories, isTaxable, description);

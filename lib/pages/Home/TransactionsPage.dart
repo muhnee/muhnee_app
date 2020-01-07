@@ -45,6 +45,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                           amountText: item["amount"],
                           type: item["type"],
                           //category: item["category"],
+                          description: item["description"],
                         )
                     ]),
               ))
@@ -89,7 +90,7 @@ class TransactionViewCell extends StatefulWidget {
       @required this.type,
       this.category,
       this.taxable,
-      this.description});
+      @required this.description});
 
   @override
   _TransactionViewCellState createState() => _TransactionViewCellState();
@@ -99,15 +100,16 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   Color cellColor1;
   Color cellColor2;
 
-  var cat;
+  var cat;  //! ISSUE IS THAT CAT IS AN ARRAY AND NOT A SINGLE ITEM
   var tax;
-  var desc;
+
 
   @override
   Widget build(BuildContext context) {
     if (widget.type == "Income") {
       cellColor1 = Color(0xffa5d15b);
       cellColor2 = Colors.green;
+
     } else {
       cellColor1 = Color(0xfffb3d4e);
       cellColor2 = Colors.red;
@@ -117,7 +119,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
         padding:
             EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1),
         child: SizedBox(
-          height: SizeConfig.blockSizeVertical * 8,
+          height: SizeConfig.blockSizeVertical * 7,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -166,10 +168,11 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                   ],
                 ),
 
-                // Text(
-                //   widget.category,
-                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                // ),
+                Text(
+                  widget.description,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                ),
+
               ],
             ),
           ),
