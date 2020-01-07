@@ -96,18 +96,22 @@ class TransactionViewCell extends StatefulWidget {
 }
 
 class _TransactionViewCellState extends State<TransactionViewCell> {
-  Color cellColor;
+  Color cellColor1;
+  Color cellColor2;
+
   var cat;
-  var tax; 
-  var desc; 
+  var tax;
+  var desc;
 
   @override
   Widget build(BuildContext context) {
-    widget.type == "Income"
-        ? cellColor = Color(0xffa5d15b)
-        : cellColor = Color(0xfffb3d4e);
-
-    // widget.category == "" ? cat 
+    if (widget.type == "Income") {
+      cellColor1 = Color(0xffa5d15b);
+      cellColor2 = Colors.green;
+    } else {
+      cellColor1 = Color(0xfffb3d4e);
+      cellColor2 = Colors.red;
+    }
 
     return Padding(
         padding:
@@ -116,32 +120,52 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
           height: SizeConfig.blockSizeVertical * 8,
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0), color: cellColor),
+              borderRadius: BorderRadius.circular(10.0),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [cellColor1, cellColor2],
+              ),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Row(
                   children: <Widget>[
+                    // Text(
+                    //   "\$ ",
+                    //   style: GoogleFonts.francoisOne(
+                    //     textStyle: TextStyle(
+                    //         letterSpacing: .5,
+                    //         fontSize: 20,
+                    //         color: Colors.white),
+                    //   ),
+                    // ),
+                    // Text(
+                    //   widget.amountText,
+                    //   style: GoogleFonts.francoisOne(
+                    //     textStyle: TextStyle(
+                    //         letterSpacing: .5,
+                    //         fontSize: 30,
+                    //         color: Colors.white),
+                    //   ),
+                    // ),
+
                     Text(
                       "\$ ",
-                      style: GoogleFonts.francoisOne(
-                        textStyle: TextStyle(
-                            letterSpacing: .5,
-                            fontSize: 20,
-                            color: Colors.white),
-                      ),
+                      style: TextStyle(color: Colors.grey[100], fontSize: 20),
                     ),
                     Text(
                       widget.amountText,
-                      style: GoogleFonts.francoisOne(
-                        textStyle: TextStyle(
-                            letterSpacing: .5,
-                            fontSize: 30,
-                            color: Colors.white),
-                      ),
+                      style: TextStyle(
+                          letterSpacing: .5,
+                          color: Colors.grey[100],
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
+
                 // Text(
                 //   widget.category,
                 //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
