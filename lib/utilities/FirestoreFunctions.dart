@@ -97,8 +97,8 @@ Future<List> getIncomeCategories() async {
   return incomeCategories;
 }
 
-void uploadTransaction(
-    uAmount, uTransactionType, uSelectedCategories, uIsTaxable) async {
+void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
+    uIsTaxable, description) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
@@ -114,7 +114,27 @@ void uploadTransaction(
     "type": uTransactionType,
     "category": uSelectedCategories,
     "taxDeductible": uIsTaxable,
+    "description": description
   });
 
   print("transaction uploaded");
+}
+
+Future<List> getTransactions() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+  var tRef = await databaseReference
+      .collection("users")
+      .document(uid)
+      .collection("transactions")
+      .getDocuments();
+
+  var tempList = tRef.documents;
+
+  var transactionList = tempList.map((DocumentSnapshot docSnapshot) {
+    return docSnapshot.data;
+  }).toList();
+
+  print(transactionList);
 }

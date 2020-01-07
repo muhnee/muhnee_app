@@ -15,6 +15,8 @@ var transactionType = "Income";
 var selectedCategories = [];
 var isTaxable = false;
 
+final descriptionController = TextEditingController();
+
 class ExpensePageSingleFile extends StatefulWidget {
   @override
   _ExpensePageSingleFileState createState() => _ExpensePageSingleFileState();
@@ -303,8 +305,15 @@ class _InteractionPaneState extends State<InteractionPane> {
                       //should check if there is a failure or sucess
 
                       if (amount != "0") {
+                        var description;
+
+                        transactionType == "Income"
+                            ? description = "NA"
+                            : description =
+                                descriptionController.text.toString();
+
                         uploadTransaction(amount, transactionType,
-                            selectedCategories, isTaxable);
+                            selectedCategories, isTaxable, description);
 
                         AwesomeDialog(
                                 context: context,
@@ -392,14 +401,16 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
           ];
         } else if (snapshot.hasError) {
           children = <Widget>[
-            CategorySelectorBtn(
-              catItem: "Network Error",
+            NotificationCell(
+              message: "Network Error",
+              messageColor: Colors.red,
             )
           ];
         } else {
           children = <Widget>[
-            CategorySelectorBtn(
-              catItem: "loading ...",
+            NotificationCell(
+              message: "Loading...",
+              messageColor: Colors.orange,
             )
           ];
         }
@@ -536,6 +547,7 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
         padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.blockSizeHorizontal * 5),
         child: TextField(
+          controller: descriptionController,
           decoration: InputDecoration(
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -574,10 +586,11 @@ class NotificationCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 6.0),
-      child: Text(
-        message,
-        style: TextStyle(color: messageColor),
-      ),
+      child: Text(message,
+          style: TextStyle(
+            color: messageColor,
+            fontWeight: FontWeight.w600,
+          )),
     );
   }
 }
