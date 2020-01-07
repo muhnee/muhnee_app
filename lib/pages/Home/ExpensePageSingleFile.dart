@@ -22,6 +22,13 @@ class ExpensePageSingleFile extends StatefulWidget {
 
 class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   @override
+  void initState() {
+    super.initState();
+    tExp = getExpenseCategories();
+    tInc = getIncomeCategories();
+  }
+
+  @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
@@ -296,14 +303,8 @@ class _InteractionPaneState extends State<InteractionPane> {
                       //should check if there is a failure or sucess
 
                       if (amount != "0") {
-                        var transactionObject = {
-                          "amount": amount,
-                          "type": transactionType,
-                          "category": selectedCategories,
-                          "taxDeductible": isTaxable,
-                        };
-
-                        uploadTransaction(transactionObject);
+                        uploadTransaction(amount, transactionType,
+                            selectedCategories, isTaxable);
 
                         AwesomeDialog(
                                 context: context,
@@ -368,8 +369,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future:
-          getExpenseCategories(), // a previously-obtained Future<String> or null
+      future: tExp, // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         List<Widget> children;
 
@@ -426,8 +426,7 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future:
-          getIncomeCategories(), // a previously-obtained Future<String> or null
+      future: tInc, // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         List<Widget> children;
 
@@ -450,14 +449,16 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
           ];
         } else if (snapshot.hasError) {
           children = <Widget>[
-            CategorySelectorBtn(
-              catItem: "Network Error",
+            NotificationCell(
+              message: "Network Error",
+              messageColor: Colors.red,
             )
           ];
         } else {
           children = <Widget>[
-            CategorySelectorBtn(
-              catItem: "loading ...",
+            NotificationCell(
+              message: "Loading...",
+              messageColor: Colors.orange,
             )
           ];
         }
@@ -560,6 +561,23 @@ class ExpenseDescriptionEmptySpace extends StatelessWidget {
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * 80,
       height: SizeConfig.blockSizeVertical * 5,
+    );
+  }
+}
+
+class NotificationCell extends StatelessWidget {
+  var message;
+  Color messageColor;
+  NotificationCell({@required this.message, @required this.messageColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 6.0),
+      child: Text(
+        message,
+        style: TextStyle(color: messageColor),
+      ),
     );
   }
 }

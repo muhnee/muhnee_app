@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
@@ -96,27 +97,24 @@ Future<List> getIncomeCategories() async {
   return incomeCategories;
 }
 
-void uploadTransaction(transactionObject) async {
+void uploadTransaction(
+    uAmount, uTransactionType, uSelectedCategories, uIsTaxable) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
   var curDateTime = DateTime.now().toUtc().millisecondsSinceEpoch.toString();
 
-  // await databaseReference
-  //     .collection("users")
-  //     .document(uid)
-  //     .collection("transactions")
-  //     .document(curDateTime)
-  //     .setData(transactionObject);
-
-  var test = {"test": "testValue"};
-
   await databaseReference
       .collection("users")
       .document(uid)
       .collection("transactions")
-      .document("income")
-      .setData(test);
+      .document(curDateTime)
+      .setData({
+    "amount": uAmount,
+    "type": uTransactionType,
+    "category": uSelectedCategories,
+    "taxDeductible": uIsTaxable,
+  });
 
   print("transaction uploaded");
 }
