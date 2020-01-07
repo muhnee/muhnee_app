@@ -304,7 +304,7 @@ class _InteractionPaneState extends State<InteractionPane> {
 
                       //should check if there is a failure or sucess
 
-                      if (amount != "0") {
+                      if (amount != "0" && selectedCategories.isNotEmpty) {
                         var description;
 
                         transactionType == "Income"
@@ -325,15 +325,25 @@ class _InteractionPaneState extends State<InteractionPane> {
                             .show();
 
                         resetValues();
+                      } else if (selectedCategories.isEmpty) {
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.WARNING,
+                          animType: AnimType.BOTTOMSLIDE,
+                          tittle: "Transaction category missing",
+                          desc: 'Select a category for your transaction',
+                          btnOkColor: Color(0xfffdb800),
+                          btnOkOnPress: () {},
+                        ).show();
                       } else {
                         AwesomeDialog(
                           context: context,
-                          dialogType: DialogType.ERROR,
+                          dialogType: DialogType.WARNING,
                           animType: AnimType.BOTTOMSLIDE,
-                          tittle: "Value empty",
-                          desc: 'Add a transaction value',
-                          btnCancelText: "Ok",
-                          btnCancelOnPress: () {},
+                          tittle: "Transaction amount missing",
+                          desc: 'Add a value for your transaction',
+                          btnOkColor: Color(0xfffdb800),
+                          btnOkOnPress: () {},
                         ).show();
                       }
                     },

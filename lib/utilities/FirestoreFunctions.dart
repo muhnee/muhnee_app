@@ -136,5 +136,5 @@ Future<List> getTransactions() async {
     return docSnapshot.data;
   }).toList();
 
-  print(transactionList);
+  return transactionList;
 }
