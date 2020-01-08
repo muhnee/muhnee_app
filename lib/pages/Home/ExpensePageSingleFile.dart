@@ -3,7 +3,6 @@ import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter_tags/selectable_tags.dart';
 
 // Pull from Firebase
 
@@ -13,10 +12,8 @@ var tInc;
 // Send as transaction
 var amount = "0";
 var transactionType = "Income";
-var selectedCategories = [];
+var selectedCategory;
 var isTaxable = false;
-
-List<Tag> _expenseTags = [];
 
 final descriptionController = TextEditingController();
 
@@ -257,13 +254,13 @@ class _InteractionPaneState extends State<InteractionPane> {
                         setState(() {
                           transactionType = "Expense";
                           incomeExpenseColor = Color(0xffE43524);
-                          selectedCategories.clear();
+                          selectedCategory = "";
                         });
                       } else {
                         setState(() {
                           transactionType = "Income";
                           incomeExpenseColor = Color(0xffa5d15b);
-                          selectedCategories.clear();
+                          selectedCategory = "";
                         });
                       }
                     },
@@ -315,7 +312,7 @@ class _InteractionPaneState extends State<InteractionPane> {
 
                       //should check if there is a failure or sucess
 
-                      if (amount != "0" && selectedCategories.isNotEmpty) {
+                      if (amount != "0" && selectedCategory != "") {
                         var description;
 
                         transactionType == "Income"
@@ -326,7 +323,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                                 : description = "";
 
                         uploadTransaction(amount, transactionType,
-                            selectedCategories, isTaxable, description);
+                            selectedCategory, isTaxable, description);
 
                         AwesomeDialog(
                                 context: context,
@@ -338,7 +335,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                             .show();
 
                         resetValues();
-                      } else if (selectedCategories.isEmpty) {
+                      } else if (selectedCategory == "") {
                         AwesomeDialog(
                           context: context,
                           dialogType: DialogType.WARNING,
@@ -379,14 +376,14 @@ class _InteractionPaneState extends State<InteractionPane> {
     setState(() {
       amount = "0";
       transactionType = "Income";
-      selectedCategories = [];
+      selectedCategory = "";
       isTaxable = false;
       descriptionController.clear();
     });
 
     print(amount);
     print(transactionType);
-    print(selectedCategories);
+    print(selectedCategory);
     print(isTaxable);
   }
 }
@@ -407,12 +404,12 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
         List<Widget> children;
 
         if (snapshot.hasData) {
-          for (var tag in snapshot.data)
-            _expenseTags.add(Tag(
-              id: tag.id,
-              title: tag.title,
-              active: bool.fromEnvironment(tag.active) == "true",
-            ));
+          var length = snapshot.data.length;
+          var items = [];
+
+          for (var item in snapshot.data) {
+            items.add(item);
+          }
 
           children = <Widget>[
             Container(
@@ -422,19 +419,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
-                      SelectableTags(
-                        tags: _expenseTags,
-                        columns: 3, // default 4
-                        symmetry: true, // default false
-                        onPressed: (tag) {
-                          print(tag);
-                        },
-                      )
-
-                      // for (var item in snapshot.data)
-                      //   CategorySelectorBtn(
-                      //     catItem: item,
-                      //   )
+                      CategorySelectorBtn(items: items, length: length)
                     ]),
               ),
             )
@@ -482,6 +467,15 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
         List<Widget> children;
 
         if (snapshot.hasData) {
+
+           
+          var length = snapshot.data.length;
+          var items = [];
+
+          for (var item in snapshot.data) {
+            items.add(item);
+          }
+
           children = <Widget>[
             Container(
               height: SizeConfig.blockSizeVertical * 4.2,
@@ -490,10 +484,9 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
-                      for (var item in snapshot.data)
-                        CategorySelectorBtn(
-                          catItem: item,
-                        )
+
+                       CategorySelectorBtn(items: items, length: length)
+                     
                     ]),
               ),
             )
@@ -526,8 +519,10 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
 }
 
 class CategorySelectorBtn extends StatefulWidget {
-  var catItem;
-  CategorySelectorBtn({@required this.catItem});
+  var items;
+  var length;
+
+  CategorySelectorBtn({@required this.items, @required this.length});
 
   @override
   _CategorySelectorBtnState createState() => _CategorySelectorBtnState();
@@ -536,38 +531,75 @@ class CategorySelectorBtn extends StatefulWidget {
 class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
   Color unselectedBtnColor = Colors.grey[300];
 
+  int _value = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6.0),
-      child: RaisedButton(
-        child: Text(
-          widget.catItem,
-          style: TextStyle(color: Colors.white),
-        ),
-        color: unselectedBtnColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        elevation: 0,
-        onPressed: () {
-          if (unselectedBtnColor == Colors.grey[300]) {
-            setState(() {
-              unselectedBtnColor = Color(0xff8e91f3);
-              selectedCategories.add(widget.catItem);
-              print(selectedCategories);
-            });
-          } else {
-            setState(() {
-              unselectedBtnColor = Colors.grey[300];
-              selectedCategories.remove(widget.catItem);
-              print(selectedCategories);
-            });
-          }
+  
+    return Wrap(
+      children: List<Widget>.generate(
+        widget.length,
+        (int index) {
+          return Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.blockSizeHorizontal * 1.2),
+              child: ChoiceChip(
+                label: Text(
+                  widget.items[index],
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.grey[300],
+                selectedColor: Color(0xff8e91f3),
+                padding: EdgeInsets.symmetric(horizontal: 4.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                selected: _value == index,
+                onSelected: (bool selected) {
+                  setState(() {
+                    _value = selected ? index : null;
+                    selectedCategory = widget.items[index];
+                  });
+                },
+              ));
         },
-      ),
+      ).toList(),
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Padding(
+  //     padding: EdgeInsets.symmetric(horizontal: 6.0),
+  //     child: RaisedButton(
+  //       child: Text(
+  //         widget.catItem,
+  //         style: TextStyle(color: Colors.white),
+  //       ),
+  //       color: unselectedBtnColor,
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(10.0),
+  //       ),
+  //       elevation: 0,
+  //       onPressed: () {
+  //         if (unselectedBtnColor == Colors.grey[300]) {
+  //           setState(() {
+  //             unselectedBtnColor = Color(0xff8e91f3);
+  //             selectedCategories.add(widget.catItem);
+  //             print(selectedCategories);
+  //           });
+  //         } else {
+  //           setState(() {
+  //             unselectedBtnColor = Colors.grey[300];
+  //             selectedCategories.remove(widget.catItem);
+  //             print(selectedCategories);
+  //           });
+  //         }
+  //       },
+  //     ),
+  //   );
+
+  //}
 }
 
 class ExpenseDescription extends StatefulWidget {
