@@ -33,9 +33,17 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return Container(
+      // backgroundColor: Colors.white,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.grey[100], Colors.white],
+              ),
+        
+      ),
+      child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
@@ -55,7 +63,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
         width: SizeConfig.blockSizeHorizontal * 80,
         height: SizeConfig.blockSizeVertical * 30,
         child: Container(
-          color: Colors.white,
+          //color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -180,14 +188,14 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
             children: <Widget>[
               Text(
                 "\$ ",
-                style: GoogleFonts.varela(
-                  textStyle: TextStyle(letterSpacing: .5, fontSize: 30),
+                style: GoogleFonts.varelaRound(
+                  textStyle: TextStyle(fontSize: 35),
                 ),
               ),
               Text(
                 amount,
-                style: GoogleFonts.varela(
-                  textStyle: TextStyle(letterSpacing: .5, fontSize: 80),
+                style: GoogleFonts.varelaRound(
+                  textStyle: TextStyle(fontSize: 80),
                 ),
               ),
             ],

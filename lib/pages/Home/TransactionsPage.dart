@@ -137,7 +137,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                   children: <Widget>[
                     Text(
                       "\$ ",
-                      style: GoogleFonts.varela(
+                      style: GoogleFonts.varelaRound(
                         textStyle: TextStyle(
                             letterSpacing: .5,
                             fontSize: 20,
@@ -146,7 +146,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                     ),
                     Text(
                       widget.amountText,
-                      style: GoogleFonts.varela(
+                      style: GoogleFonts.varelaRound(
                         textStyle: TextStyle(
                             letterSpacing: .5,
                             fontSize: 30,
