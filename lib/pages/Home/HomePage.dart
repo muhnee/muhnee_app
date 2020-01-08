@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PageController pageViewController = PageController(initialPage: 2);
+  PageController pageViewController = PageController(initialPage: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
             child: PageView(
               controller: pageViewController,
               scrollDirection: Axis.vertical,
-              //physics: NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
                 ProfilePage(),
                 ExpensePageSingleFile(),

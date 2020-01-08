@@ -57,14 +57,15 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 messageColor: Colors.red,
               )
             ];
-          } else if (!snapshot.hasData) {
-            children = <Widget>[
-              NotificationCell(
-                message: "Hmmm...Looks like you haven't recorded any transactions yet",
-                messageColor: Colors.blue,
-              )
-            ];
-          }
+           } 
+          //else if (snapshot.data.length < 1) {
+          //   children = <Widget>[
+          //     NotificationCell(
+          //       message: "Hmmm...Looks like you haven't recorded any transactions yet",
+          //       messageColor: Colors.blue,
+          //     )
+          //   ];
+          // }
           else {
             children = <Widget>[
               NotificationCell(
