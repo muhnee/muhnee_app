@@ -34,15 +34,15 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-      // backgroundColor: Colors.white,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.grey[100], Colors.white],
-              ),
+       color: Colors.white,
+      // decoration: BoxDecoration(
+      //     gradient: LinearGradient(
+      //           begin: Alignment.topCenter,
+      //           end: Alignment.bottomCenter,
+      //           colors: [Colors.grey[100], Colors.white],
+      //         ),
         
-      ),
+      // ),
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,7 +61,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget CustomKeyboard() {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 30,
+        height: SizeConfig.blockSizeVertical * 35,
         child: Container(
           //color: Colors.white,
           child: Column(
@@ -253,7 +253,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                       if (transactionType == "Income") {
                         setState(() {
                           transactionType = "Expense";
-                          incomeExpenseColor = Color(0xfffb3d4e);
+                          incomeExpenseColor = Color(0xffE43524);
                           selectedCategories.clear();
                         });
                       } else {

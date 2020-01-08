@@ -57,7 +57,15 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 messageColor: Colors.red,
               )
             ];
-          } else {
+          } else if (!snapshot.hasData) {
+            children = <Widget>[
+              NotificationCell(
+                message: "Hmmm...Looks like you haven't recorded any transactions yet",
+                messageColor: Colors.blue,
+              )
+            ];
+          }
+          else {
             children = <Widget>[
               NotificationCell(
                 message: "Loading...",
@@ -115,7 +123,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
 
     return Padding(
         padding:
-            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1),
+            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 2),
         child: SizedBox(
           height: SizeConfig.blockSizeVertical * 7,
           child: Container(
