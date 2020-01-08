@@ -3,6 +3,7 @@ import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter_tags/selectable_tags.dart';
 
 // Pull from Firebase
 
@@ -14,6 +15,8 @@ var amount = "0";
 var transactionType = "Income";
 var selectedCategories = [];
 var isTaxable = false;
+
+List<Tag> _expenseTags = [];
 
 final descriptionController = TextEditingController();
 
@@ -34,14 +37,14 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-       color: Colors.white,
+      color: Colors.white,
       // decoration: BoxDecoration(
       //     gradient: LinearGradient(
       //           begin: Alignment.topCenter,
       //           end: Alignment.bottomCenter,
       //           colors: [Colors.grey[100], Colors.white],
       //         ),
-        
+
       // ),
       child: SafeArea(
         child: Column(
@@ -404,6 +407,13 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
         List<Widget> children;
 
         if (snapshot.hasData) {
+          for (var tag in snapshot.data)
+            _expenseTags.add(Tag(
+              id: tag.id,
+              title: tag.title,
+              active: bool.fromEnvironment(tag.active) == "true",
+            ));
+
           children = <Widget>[
             Container(
               height: SizeConfig.blockSizeVertical * 4.2,
@@ -412,10 +422,19 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
-                      for (var item in snapshot.data)
-                        CategorySelectorBtn(
-                          catItem: item,
-                        )
+                      SelectableTags(
+                        tags: _expenseTags,
+                        columns: 3, // default 4
+                        symmetry: true, // default false
+                        onPressed: (tag) {
+                          print(tag);
+                        },
+                      )
+
+                      // for (var item in snapshot.data)
+                      //   CategorySelectorBtn(
+                      //     catItem: item,
+                      //   )
                     ]),
               ),
             )

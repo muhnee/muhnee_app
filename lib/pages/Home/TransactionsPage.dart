@@ -124,7 +124,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
 
     return Padding(
         padding:
-            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 2),
+            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1),
         child: SizedBox(
           height: SizeConfig.blockSizeVertical * 7,
           child: Container(
