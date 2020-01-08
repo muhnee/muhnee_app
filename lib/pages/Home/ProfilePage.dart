@@ -14,11 +14,19 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Colors.red,
+      // backgroundColor: Colors.red,
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Padding(
+       
+
+        child: Container(
+              
+             
+                child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    children: [
+
+                          Padding(
               padding: EdgeInsets.only(top: 30),
               child: RaisedButton(
                 child: Text("SignOut"),
@@ -28,11 +36,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       context, FadeRouteBuilder(page: SplashScreen()));
                 },
               ),
+            ), 
+                    
+
+                      
+                    ]
+              ),
             ),
 
-            //put the page children in here...
-          ],
-        ),
+
       ),
     );
   }
