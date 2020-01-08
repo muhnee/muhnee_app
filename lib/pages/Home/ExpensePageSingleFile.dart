@@ -180,13 +180,13 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
             children: <Widget>[
               Text(
                 "\$ ",
-                style: GoogleFonts.francoisOne(
+                style: GoogleFonts.varela(
                   textStyle: TextStyle(letterSpacing: .5, fontSize: 30),
                 ),
               ),
               Text(
                 amount,
-                style: GoogleFonts.francoisOne(
+                style: GoogleFonts.varela(
                   textStyle: TextStyle(letterSpacing: .5, fontSize: 80),
                 ),
               ),
@@ -423,7 +423,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
           children = <Widget>[
             NotificationCell(
               message: "Loading...",
-              messageColor: Colors.orange,
+              messageColor: Colors.white,
             )
           ];
         }
@@ -482,7 +482,7 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
           children = <Widget>[
             NotificationCell(
               message: "Loading...",
-              messageColor: Colors.orange,
+              messageColor: Colors.white,
             )
           ];
         }

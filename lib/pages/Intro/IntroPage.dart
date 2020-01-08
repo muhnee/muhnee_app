@@ -125,24 +125,24 @@ class _IntroPageState extends State<IntroPage> {
                       //         FadeRouteBuilder(page: IntroPageExpense())))
                       //     .catchError((e) => print(e));
 
-                      showDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            elevation: 0,
-                            backgroundColor: Colors.transparent,
-                            child: SizedBox(
-                              width: SizeConfig.blockSizeHorizontal * 10,
-                              height: SizeConfig.blockSizeVertical * 15,
-                              child: SpinKitDoubleBounce(
-                                color: Colors.white,
-                                size: SizeConfig.blockSizeHorizontal * 8,
+                        showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              elevation: 0,
+                              backgroundColor: Colors.transparent,
+                              child: SizedBox(
+                                width: SizeConfig.blockSizeHorizontal * 10,
+                                height: SizeConfig.blockSizeVertical * 15,
+                                child: SpinKitDoubleBounce(
+                                  color: Colors.white,
+                                  size: SizeConfig.blockSizeHorizontal * 8,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
+                            );
+                          },
+                        );
                       signInWithGoogle()
                           .then((user) async => await isOnboarded()
                               ? Navigator.pushReplacement(
@@ -151,11 +151,23 @@ class _IntroPageState extends State<IntroPage> {
                                   FadeRouteBuilder(page: IntroPageExpense())))
                           .catchError((e) => print(e));
 
-                      // if (await isOnboarded()){
-                      //   Navigator.pushReplacement(context, FadeRouteBuilder(page: HomePage()));
-                      // } else {
-                      //   Navigator.pushReplacement(context, FadeRouteBuilder(page: IntroPageExpense()));
-                      // }
+                      //   signInWithGoogle().catchError((e) => print(e));
+
+                      // isOnboarded()
+                      //     .then((boolean) => boolean == true
+                      //         ? Navigator.pushReplacement(
+                      //             context, FadeRouteBuilder(page: HomePage()))
+                      //         : Navigator.pushReplacement(context,
+                      //             FadeRouteBuilder(page: IntroPageExpense())))
+                      //     .catchError((e) => print(e));
+
+                      //   var booleanOnboarded = isOnboarded();
+
+                      //   await booleanOnboarded == true
+                      //           ? Navigator.pushReplacement(
+                      //               context, FadeRouteBuilder(page: HomePage()))
+                      //           : Navigator.pushReplacement(context,
+                      //               FadeRouteBuilder(page: IntroPageExpense()));
                     },
                   ),
                 ),

@@ -100,19 +100,17 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   Color cellColor1;
   Color cellColor2;
 
-  var cat;  //! ISSUE IS THAT CAT IS AN ARRAY AND NOT A SINGLE ITEM
+  var cat; //! ISSUE IS THAT CAT IS AN ARRAY AND NOT A SINGLE ITEM
   var tax;
-
 
   @override
   Widget build(BuildContext context) {
     if (widget.type == "Income") {
-      cellColor1 = Color(0xffa5d15b);
-      cellColor2 = Colors.green;
-
+      cellColor1 = Color(0xff90cb46);
+      cellColor2 = Color(0xff9ed45b);
     } else {
-      cellColor1 = Color(0xfffb3d4e);
-      cellColor2 = Colors.red;
+      cellColor1 = Color(0xffd01908);
+      cellColor2 = Color(0xffe43524);
     }
 
     return Padding(
@@ -130,49 +128,53 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
               ),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // Text(
-                    //   "\$ ",
-                    //   style: GoogleFonts.francoisOne(
-                    //     textStyle: TextStyle(
-                    //         letterSpacing: .5,
-                    //         fontSize: 20,
-                    //         color: Colors.white),
-                    //   ),
-                    // ),
-                    // Text(
-                    //   widget.amountText,
-                    //   style: GoogleFonts.francoisOne(
-                    //     textStyle: TextStyle(
-                    //         letterSpacing: .5,
-                    //         fontSize: 30,
-                    //         color: Colors.white),
-                    //   ),
-                    // ),
 
+                Padding(
+                  padding: EdgeInsets.only(left: SizeConfig.blockSizeVertical * 1),
+                  child:  Row(
+                  children: <Widget>[
                     Text(
                       "\$ ",
-                      style: TextStyle(color: Colors.grey[100], fontSize: 20),
+                      style: GoogleFonts.varela(
+                        textStyle: TextStyle(
+                            letterSpacing: .5,
+                            fontSize: 20,
+                            color: Colors.white),
+                      ),
                     ),
                     Text(
                       widget.amountText,
-                      style: TextStyle(
-                          letterSpacing: .5,
-                          color: Colors.grey[100],
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
+                      style: GoogleFonts.varela(
+                        textStyle: TextStyle(
+                            letterSpacing: .5,
+                            fontSize: 30,
+                            color: Colors.white),
+                      ),
                     ),
+
+                    // Text(
+                    //   "\$ ",
+                    //   style: TextStyle(color: Colors.grey[100], fontSize: 20),
+                    // ),
+                    // Text(
+                    //   widget.amountText,
+                    //   style: TextStyle(
+                    //       letterSpacing: .5,
+                    //       color: Colors.grey[100],
+                    //       fontSize: 30,
+                    //       fontWeight: FontWeight.bold),
+                    // ),
                   ],
                 ),
+                ),
 
+               
                 Text(
                   widget.description,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
-
               ],
             ),
           ),
