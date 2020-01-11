@@ -114,7 +114,8 @@ void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
     "type": uTransactionType,
     "category": uSelectedCategories,
     "taxDeductible": uIsTaxable,
-    "description": description
+    "description": description, 
+    "timestamp" : curDateTime
   });
 
   print("transaction uploaded");
@@ -127,8 +128,7 @@ Future<List> getTransactions() async {
   var tRef = await databaseReference
       .collection("users")
       .document(uid)
-      .collection("transactions")
-      .getDocuments();
+      .collection("transactions").orderBy("timestamp", descending: true).getDocuments();
 
   var tempList = tRef.documents;
 

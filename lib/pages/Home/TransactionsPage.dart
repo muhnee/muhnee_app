@@ -4,6 +4,7 @@ import 'package:muhnee/utilities/SizeConfig.dart';
 
 import 'ExpensePageSingleFile.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 var tGetTransactions;
 
@@ -24,7 +25,16 @@ class _TransactionsPageState extends State<TransactionsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: FutureBuilder<List>(
+          child: Column(
+            children: <Widget>[
+
+              Container(
+                child: Text("TESTTESTTESTTEST"),
+                color: Colors.red,
+              ),
+
+              Expanded(
+                child: FutureBuilder<List>(
         future:
             tGetTransactions, // a previously-obtained Future<String> or null
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -82,7 +92,79 @@ class _TransactionsPageState extends State<TransactionsPage> {
             ),
           );
         },
-      )),
+      )
+              ),
+
+
+      //         FutureBuilder<List>(
+      //   future:
+      //       tGetTransactions, // a previously-obtained Future<String> or null
+      //   builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+      //     List<Widget> children;
+
+      //     if (snapshot.hasData) {
+      //       children = <Widget>[
+      //         Container(
+      //             child: Expanded(
+      //           child: ListView(
+      //               scrollDirection: Axis.vertical,
+      //               padding: EdgeInsets.symmetric(
+      //                 horizontal: SizeConfig.blockSizeHorizontal * 5,
+      //               ),
+      //               children: [
+      //                 for (var item in snapshot.data)
+      //                   TransactionViewCell(
+      //                     amountText: item["amount"],
+      //                     type: item["type"],
+      //                     //category: item["category"],
+      //                     description: item["description"],
+      //                   )
+      //               ]),
+      //         ))
+      //       ];
+      //     } else if (snapshot.hasError) {
+      //       children = <Widget>[
+      //         NotificationCell(
+      //           message: "Network Error",
+      //           messageColor: Colors.red,
+      //         )
+      //       ];
+      //      } 
+      //     //else if (snapshot.data.length < 1) {
+      //     //   children = <Widget>[
+      //     //     NotificationCell(
+      //     //       message: "Hmmm...Looks like you haven't recorded any transactions yet",
+      //     //       messageColor: Colors.blue,
+      //     //     )
+      //     //   ];
+      //     // }
+      //     else {
+      //       children = <Widget>[
+      //         NotificationCell(
+      //           message: "Loading...",
+      //           messageColor: Colors.orange,
+      //         )
+      //       ];
+      //     }
+      //     return Center(
+      //       child: Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //         children: children,
+      //       ),
+      //     );
+      //   },
+      // )
+
+
+
+
+
+            ],
+
+          )
+          
+      ),
     );
   }
 }

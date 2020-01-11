@@ -12,8 +12,10 @@ var tInc;
 // Send as transaction
 var amount = "0";
 var transactionType = "Income";
-var selectedCategory;
+var selectedCategory = "";
 var isTaxable = false;
+
+var catClickIn = false;
 
 final descriptionController = TextEditingController();
 
@@ -61,7 +63,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget CustomKeyboard() {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 35,
+        height: SizeConfig.blockSizeVertical * 30,
         child: Container(
           //color: Colors.white,
           child: Column(
@@ -222,9 +224,9 @@ class _InteractionPaneState extends State<InteractionPane> {
         width: SizeConfig.blockSizeHorizontal * 80,
         height: SizeConfig.blockSizeVertical * 17,
         child: Container(
-          color: Colors.transparent,
+          //color: Colors.red,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               // ROW FOR BUTTONS
 
@@ -413,7 +415,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
 
           children = <Widget>[
             Container(
-              height: SizeConfig.blockSizeVertical * 4.2,
+              height: SizeConfig.blockSizeVertical * 5,
               child: Center(
                 child: ListView(
                     shrinkWrap: true,
@@ -467,8 +469,6 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
         List<Widget> children;
 
         if (snapshot.hasData) {
-
-           
           var length = snapshot.data.length;
           var items = [];
 
@@ -478,15 +478,13 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
 
           children = <Widget>[
             Container(
-              height: SizeConfig.blockSizeVertical * 4.2,
+              height: SizeConfig.blockSizeVertical * 5,
               child: Center(
                 child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
-
-                       CategorySelectorBtn(items: items, length: length)
-                     
+                      CategorySelectorBtn(items: items, length: length)
                     ]),
               ),
             )
@@ -535,22 +533,27 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
 
   @override
   Widget build(BuildContext context) {
-  
     return Wrap(
       children: List<Widget>.generate(
         widget.length,
         (int index) {
+          //! this padding is dodgy
           return Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.blockSizeHorizontal * 1.2),
+                horizontal: SizeConfig.blockSizeHorizontal * 1.2,
+              ),
               child: ChoiceChip(
-                label: Text(
-                  widget.items[index],
-                  style: TextStyle(color: Colors.white),
+                label: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 7, horizontal: 3),
+                  child: Text(
+                    widget.items[index],
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, color: Colors.white),
+                  ),
                 ),
                 backgroundColor: Colors.grey[300],
                 selectedColor: Color(0xff8e91f3),
-                padding: EdgeInsets.symmetric(horizontal: 4.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -558,7 +561,16 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
                 onSelected: (bool selected) {
                   setState(() {
                     _value = selected ? index : null;
-                    selectedCategory = widget.items[index];
+
+                    //! fix this logic 
+
+                    if (selectedCategory == "") {
+                      selectedCategory = widget.items[index];
+                    } else if (selectedCategory == widget.items[index]) {
+                      selectedCategory = "";
+                    } else {
+                      selectedCategory = widget.items[index];
+                    }
                   });
                 },
               ));
