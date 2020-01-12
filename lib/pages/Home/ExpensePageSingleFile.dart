@@ -11,11 +11,9 @@ var tInc;
 
 // Send as transaction
 var amount = "0";
-var transactionType = "Income";
+var transactionType = "income";
 var selectedCategory = "";
 var isTaxable = false;
-
-var catClickIn = false;
 
 final descriptionController = TextEditingController();
 
@@ -232,7 +230,7 @@ class _InteractionPaneState extends State<InteractionPane> {
 
               // ExpenseDescription(),
 
-              transactionType == "Income"
+              transactionType == "income"
                   ? ExpenseDescriptionEmptySpace()
                   : ExpenseDescription(),
 
@@ -242,7 +240,8 @@ class _InteractionPaneState extends State<InteractionPane> {
                   // Income / Expense Button
                   RaisedButton(
                     child: Text(
-                      transactionType,
+                      transactionType[0].toUpperCase().toString() +  transactionType.substring(1).toString()
+                     ,
                       style: TextStyle(color: Colors.white),
                     ),
                     color: incomeExpenseColor,
@@ -252,15 +251,15 @@ class _InteractionPaneState extends State<InteractionPane> {
                     ),
                     elevation: 0,
                     onPressed: () {
-                      if (transactionType == "Income") {
+                      if (transactionType == "income") {
                         setState(() {
-                          transactionType = "Expense";
+                          transactionType = "expense";
                           incomeExpenseColor = Color(0xffE43524);
                           selectedCategory = "";
                         });
                       } else {
                         setState(() {
-                          transactionType = "Income";
+                          transactionType = "income";
                           incomeExpenseColor = Color(0xffa5d15b);
                           selectedCategory = "";
                         });
@@ -317,7 +316,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                       if (amount != "0" && selectedCategory != "") {
                         var description;
 
-                        transactionType == "Income"
+                        transactionType == "income"
                             ? description = ""
                             : descriptionController.text.isNotEmpty
                                 ? description =
@@ -365,7 +364,7 @@ class _InteractionPaneState extends State<InteractionPane> {
 
               // ROW FOR CATEGORY OPTIONS
 
-              transactionType == "Income"
+              transactionType == "income"
                   ? incomeCategorySection()
                   : expenseCategorySection(),
             ],
@@ -377,7 +376,7 @@ class _InteractionPaneState extends State<InteractionPane> {
   resetValues() {
     setState(() {
       amount = "0";
-      transactionType = "Income";
+      transactionType = "income";
       selectedCategory = "";
       isTaxable = false;
       descriptionController.clear();

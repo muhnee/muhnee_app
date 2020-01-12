@@ -4,7 +4,7 @@ import 'package:muhnee/utilities/SizeConfig.dart';
 
 import 'ExpensePageSingleFile.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:fl_chart/fl_chart.dart';
+
 
 var tGetTransactions;
 
@@ -17,7 +17,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   @override
   void initState() {
     super.initState();
-    tGetTransactions = getTransactions();
+    tGetTransactions = getMonthlyTransactions();
   }
 
   @override
@@ -26,145 +26,73 @@ class _TransactionsPageState extends State<TransactionsPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Column(
-            children: <Widget>[
+        children: <Widget>[
+          Container(
+            child: Text("TESTTESTTESTTESTTEST"), 
+            color: Colors.blue,
+          ),
+          Expanded(
+              child: FutureBuilder<List>(
+            future:
+                tGetTransactions, // a previously-obtained Future<String> or null
+            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+              List<Widget> children;
 
-              Container(
-                child: Text("TESTTESTTESTTEST"),
-                color: Colors.red,
-              ),
-
-              Expanded(
-                child: FutureBuilder<List>(
-        future:
-            tGetTransactions, // a previously-obtained Future<String> or null
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-          List<Widget> children;
-
-          if (snapshot.hasData) {
-            children = <Widget>[
-              Container(
-                  child: Expanded(
-                child: ListView(
-                    scrollDirection: Axis.vertical,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: SizeConfig.blockSizeHorizontal * 5,
-                    ),
-                    children: [
-                      for (var item in snapshot.data)
-                        TransactionViewCell(
-                          amountText: item["amount"],
-                          type: item["type"],
-                          //category: item["category"],
-                          description: item["description"],
-                        )
-                    ]),
-              ))
-            ];
-          } else if (snapshot.hasError) {
-            children = <Widget>[
-              NotificationCell(
-                message: "Network Error",
-                messageColor: Colors.red,
-              )
-            ];
-           } 
-          //else if (snapshot.data.length < 1) {
-          //   children = <Widget>[
-          //     NotificationCell(
-          //       message: "Hmmm...Looks like you haven't recorded any transactions yet",
-          //       messageColor: Colors.blue,
-          //     )
-          //   ];
-          // }
-          else {
-            children = <Widget>[
-              NotificationCell(
-                message: "Loading...",
-                messageColor: Colors.orange,
-              )
-            ];
-          }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: children,
-            ),
-          );
-        },
-      )
-              ),
-
-
-      //         FutureBuilder<List>(
-      //   future:
-      //       tGetTransactions, // a previously-obtained Future<String> or null
-      //   builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-      //     List<Widget> children;
-
-      //     if (snapshot.hasData) {
-      //       children = <Widget>[
-      //         Container(
-      //             child: Expanded(
-      //           child: ListView(
-      //               scrollDirection: Axis.vertical,
-      //               padding: EdgeInsets.symmetric(
-      //                 horizontal: SizeConfig.blockSizeHorizontal * 5,
-      //               ),
-      //               children: [
-      //                 for (var item in snapshot.data)
-      //                   TransactionViewCell(
-      //                     amountText: item["amount"],
-      //                     type: item["type"],
-      //                     //category: item["category"],
-      //                     description: item["description"],
-      //                   )
-      //               ]),
-      //         ))
-      //       ];
-      //     } else if (snapshot.hasError) {
-      //       children = <Widget>[
-      //         NotificationCell(
-      //           message: "Network Error",
-      //           messageColor: Colors.red,
-      //         )
-      //       ];
-      //      } 
-      //     //else if (snapshot.data.length < 1) {
-      //     //   children = <Widget>[
-      //     //     NotificationCell(
-      //     //       message: "Hmmm...Looks like you haven't recorded any transactions yet",
-      //     //       messageColor: Colors.blue,
-      //     //     )
-      //     //   ];
-      //     // }
-      //     else {
-      //       children = <Widget>[
-      //         NotificationCell(
-      //           message: "Loading...",
-      //           messageColor: Colors.orange,
-      //         )
-      //       ];
-      //     }
-      //     return Center(
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         crossAxisAlignment: CrossAxisAlignment.center,
-      //         children: children,
-      //       ),
-      //     );
-      //   },
-      // )
-
-
-
-
-
-            ],
-
-          )
-          
-      ),
+              if (snapshot.hasData) {
+                children = <Widget>[
+                  Container(
+                      child: Expanded(
+                    child: ListView(
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.blockSizeHorizontal * 5,
+                        ),
+                        children: [
+                          for (var item in snapshot.data)
+                            TransactionViewCell(
+                              amountText: item["amount"],
+                              type: item["type"],
+                              //category: item["category"],
+                              description: item["description"],
+                            )
+                        ]),
+                  ))
+                ];
+              } else if (snapshot.hasError) {
+                children = <Widget>[
+                  NotificationCell(
+                    message: "Network Error",
+                    messageColor: Colors.red,
+                  )
+                ];
+              }
+              //else if (snapshot.data.length < 1) {
+              //   children = <Widget>[
+              //     NotificationCell(
+              //       message: "Hmmm...Looks like you haven't recorded any transactions yet",
+              //       messageColor: Colors.blue,
+              //     )
+              //   ];
+              // }
+              else {
+                children = <Widget>[
+                  NotificationCell(
+                    message: "Loading...",
+                    messageColor: Colors.orange,
+                  )
+                ];
+              }
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: children,
+                ),
+              );
+            },
+          )),
+        ],
+      )),
     );
   }
 }
@@ -221,47 +149,45 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-
                 Padding(
-                  padding: EdgeInsets.only(left: SizeConfig.blockSizeVertical * 1),
-                  child:  Row(
-                  children: <Widget>[
-                    Text(
-                      "\$ ",
-                      style: GoogleFonts.varelaRound(
-                        textStyle: TextStyle(
-                            letterSpacing: .5,
-                            fontSize: 20,
-                            color: Colors.white),
+                  padding:
+                      EdgeInsets.only(left: SizeConfig.blockSizeVertical * 1),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        "\$ ",
+                        style: GoogleFonts.varelaRound(
+                          textStyle: TextStyle(
+                              letterSpacing: .5,
+                              fontSize: 20,
+                              color: Colors.white),
+                        ),
                       ),
-                    ),
-                    Text(
-                      widget.amountText,
-                      style: GoogleFonts.varelaRound(
-                        textStyle: TextStyle(
-                            letterSpacing: .5,
-                            fontSize: 30,
-                            color: Colors.white),
+                      Text(
+                        widget.amountText,
+                        style: GoogleFonts.varelaRound(
+                          textStyle: TextStyle(
+                              letterSpacing: .5,
+                              fontSize: 30,
+                              color: Colors.white),
+                        ),
                       ),
-                    ),
 
-                    // Text(
-                    //   "\$ ",
-                    //   style: TextStyle(color: Colors.grey[100], fontSize: 20),
-                    // ),
-                    // Text(
-                    //   widget.amountText,
-                    //   style: TextStyle(
-                    //       letterSpacing: .5,
-                    //       color: Colors.grey[100],
-                    //       fontSize: 30,
-                    //       fontWeight: FontWeight.bold),
-                    // ),
-                  ],
+                      // Text(
+                      //   "\$ ",
+                      //   style: TextStyle(color: Colors.grey[100], fontSize: 20),
+                      // ),
+                      // Text(
+                      //   widget.amountText,
+                      //   style: TextStyle(
+                      //       letterSpacing: .5,
+                      //       color: Colors.grey[100],
+                      //       fontSize: 30,
+                      //       fontWeight: FontWeight.bold),
+                      // ),
+                    ],
+                  ),
                 ),
-                ),
-
-               
                 Text(
                   widget.description,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),

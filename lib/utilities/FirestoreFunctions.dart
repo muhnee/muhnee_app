@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
+import 'package:intl/intl.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
@@ -102,33 +102,48 @@ void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  var curDateTime = DateTime.now().toUtc().millisecondsSinceEpoch.toString();
+  
+
+  //var timeStamp = DateFormat('dd MMMM yyyy').format(DateTime.now()).toString() + " at " + DateFormat('hh:mm:ss').format(DateTime.now()).toString() 
+
+  var timeStamp = DateTime.now();
+
+  var budgetYear = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
 
   await databaseReference
       .collection("users")
       .document(uid)
+      .collection("budget")
+      .document(budgetYear)
       .collection("transactions")
-      .document(curDateTime)
+      .document()
       .setData({
     "amount": uAmount,
     "type": uTransactionType,
     "category": uSelectedCategories,
     "taxDeductible": uIsTaxable,
-    "description": description, 
-    "timestamp" : curDateTime
+    "description": description,
+    "timestamp": timeStamp
   });
 
   print("transaction uploaded");
 }
 
-Future<List> getTransactions() async {
+Future<List> getMonthlyTransactions() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
+
+    var budgetYear = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+
 
   var tRef = await databaseReference
       .collection("users")
       .document(uid)
-      .collection("transactions").orderBy("timestamp", descending: true).getDocuments();
+      .collection("budget")
+      .document(budgetYear)
+      .collection("transactions")
+      .orderBy("timestamp", descending: true)
+      .getDocuments();
 
   var tempList = tRef.documents;
 
