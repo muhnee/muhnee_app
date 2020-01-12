@@ -50,7 +50,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         children: [
                           for (var item in snapshot.data)
                             TransactionViewCell(
-                              amountText: item["amount"],
+                              amountText: item["amount"].toString(),
                               type: item["type"],
                               //category: item["category"],
                               description: item["description"],
@@ -124,7 +124,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.type == "Income") {
+    if (widget.type == "income") {
       cellColor1 = Color(0xff90cb46);
       cellColor2 = Color(0xff9ed45b);
     } else {

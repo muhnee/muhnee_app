@@ -240,8 +240,8 @@ class _InteractionPaneState extends State<InteractionPane> {
                   // Income / Expense Button
                   RaisedButton(
                     child: Text(
-                      transactionType[0].toUpperCase().toString() +  transactionType.substring(1).toString()
-                     ,
+                      transactionType[0].toUpperCase().toString() +
+                          transactionType.substring(1).toString(),
                       style: TextStyle(color: Colors.white),
                     ),
                     color: incomeExpenseColor,
@@ -561,15 +561,9 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
                   setState(() {
                     _value = selected ? index : null;
 
-                    //! fix this logic 
+                    selectedCategory = selected ? widget.items[index] : "";
 
-                    if (selectedCategory == "") {
-                      selectedCategory = widget.items[index];
-                    } else if (selectedCategory == widget.items[index]) {
-                      selectedCategory = "";
-                    } else {
-                      selectedCategory = widget.items[index];
-                    }
+                    print(selectedCategory);
                   });
                 },
               ));
