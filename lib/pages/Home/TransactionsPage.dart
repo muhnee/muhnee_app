@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
-
 import 'ExpensePageSingleFile.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 
 
 var tGetTransactions;
+var curPageIndex; 
 
 class TransactionsPage extends StatefulWidget {
   @override
@@ -27,10 +28,33 @@ class _TransactionsPageState extends State<TransactionsPage> {
       body: SafeArea(
           child: Column(
         children: <Widget>[
-          Container(
-            child: Text("TESTTESTTESTTESTTEST"), 
-            color: Colors.blue,
-          ),
+
+
+          // Container(
+          //   child: Text("TESTTESTTESTTESTTEST"), 
+          //   color: Colors.blue,
+          // ),
+
+          BubbleBottomBar(
+        opacity: 0.2,
+        currentIndex: curPageIndex,
+        onTap: changePage(),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        elevation: 0,
+        fabLocation: BubbleBottomBarFabLocation.center, //new
+        hasNotch: true, //new
+        hasInk: true, //new, gives a cute ink effect
+        inkColor: Colors.black12, //optional, uses theme color if not specified
+        items: <BubbleBottomBarItem>[
+           
+            BubbleBottomBarItem(backgroundColor: Colors.deepPurple, icon: Icon(Icons.access_time, color: Colors.black,), activeIcon: Icon(Icons.access_time, color: Colors.deepPurple,), title: Text("This week")),
+            BubbleBottomBarItem(backgroundColor: Colors.indigo, icon: Icon(Icons.blur_on, color: Colors.black,), activeIcon: Icon(Icons.blur_on, color: Colors.indigo,), title: Text("Folders")),
+        ],
+      ),
+
+
+
+
           Expanded(
               child: FutureBuilder<List>(
             future:
@@ -95,7 +119,16 @@ class _TransactionsPageState extends State<TransactionsPage> {
       )),
     );
   }
+
+  changePage(){
+  setState(() {
+    curPageIndex = 1;
+  });
+  
 }
+
+}
+
 
 class TransactionViewCell extends StatefulWidget {
   var amountText;
