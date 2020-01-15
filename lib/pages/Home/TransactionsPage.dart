@@ -101,7 +101,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             TransactionViewCell(
                               amountText: item["amount"].toString(),
                               type: item["type"],
-                              //category: item["category"],
+                              category: item["category"],
                               description: item["description"],
                             )
                         ]),
@@ -156,7 +156,7 @@ class TransactionViewCell extends StatefulWidget {
   TransactionViewCell(
       {@required this.amountText,
       @required this.type,
-      this.category,
+      @required this.category,
       this.taxable,
       @required this.description});
 
@@ -237,10 +237,29 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                     ],
                   ),
                 ),
-                Text(
-                  widget.description,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                ),
+
+                 RaisedButton(
+                    child: Text(
+                      widget.category,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.grey[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      //side: BorderSide(color: Colors.grey[200])
+                    ),
+                    elevation: 0,
+                    onPressed: () {
+
+                      //nothing
+                   
+                    
+                    },
+                  ),
+
+               
+
+                
               ],
             ),
           ),
