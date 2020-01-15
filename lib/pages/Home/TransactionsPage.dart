@@ -6,7 +6,8 @@ import 'ExpensePageSingleFile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 
-var tGetTransactions;
+var weeklyTransactions;
+var monthlyTransactions;
 var curPageIndex;
 
 class TransactionsPage extends StatefulWidget {
@@ -18,15 +19,22 @@ class _TransactionsPageState extends State<TransactionsPage> {
   @override
   void initState() {
     super.initState();
-    tGetTransactions = getMonthlyTransactions();
+    monthlyTransactions = getMonthlyTransactions();
+    weeklyTransactions = getWeeklyTransactions();
   }
 
-  int curPageIndex = 0; 
+  int curPageIndex = 0;
 
   final Map<int, Widget> logoWidgets = const <int, Widget>{
-    0: Padding(padding: EdgeInsets.symmetric(horizontal: 4),child: Text('This Week'),),
-    1: Padding(padding: EdgeInsets.symmetric(horizontal: 4),child: Text('This Month'),),
-    2: Padding(padding: EdgeInsets.symmetric(horizontal: 4),child: Text('This Year'),),
+    0: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 6),
+      child: Text('This Week'),
+    ),
+    1: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 6),
+      child: Text('This Month'),
+    ),
+    // 2: Padding(padding: EdgeInsets.symmetric(horizontal: 6),child: Text('This Year'),),
   };
 
   @override
@@ -59,21 +67,23 @@ class _TransactionsPageState extends State<TransactionsPage> {
           // ),
 
           CupertinoSegmentedControl<int>(
-                children: logoWidgets,
-                onValueChanged: (int val) {
-                  setState(() {
-                    curPageIndex = val;
-                  });
-                },
-                groupValue: curPageIndex,
-              ),
-
-       
+            borderColor: Colors.grey[100],
+            selectedColor: Color(0xff8e91f3),
+            unselectedColor: Colors.grey[100],
+            children: logoWidgets,
+            onValueChanged: (int val) {
+              setState(() {
+                curPageIndex = val;
+              });
+            },
+            groupValue: curPageIndex,
+          ),
 
           Expanded(
               child: FutureBuilder<List>(
-            future:
-                tGetTransactions, // a previously-obtained Future<String> or null
+            future: curPageIndex == 0
+                ? weeklyTransactions
+                : monthlyTransactions, // a previously-obtained Future<String> or null
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
               List<Widget> children;
 
@@ -134,7 +144,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
       )),
     );
   }
-
 }
 
 class TransactionViewCell extends StatefulWidget {

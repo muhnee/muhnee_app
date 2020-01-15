@@ -133,14 +133,14 @@ Future<List> getMonthlyTransactions() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-    var budgetYear = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+    var budgetMonth = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
 
 
   var tRef = await databaseReference
       .collection("users")
       .document(uid)
       .collection("budget")
-      .document(budgetYear)
+      .document(budgetMonth)
       .collection("transactions")
       .orderBy("timestamp", descending: true)
       .getDocuments();
@@ -153,3 +153,34 @@ Future<List> getMonthlyTransactions() async {
 
   return transactionList;
 }
+
+
+Future<List> getWeeklyTransactions() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+    var budgetMonth = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+    var severDaysAgo = DateTime.now().subtract(Duration(days: 7));
+
+
+  var tRef = await databaseReference
+      .collection("users")
+      .document(uid)
+      .collection("budget")
+      .document(budgetMonth)
+      .collection("transactions")
+      .where("timestamp", isGreaterThan: severDaysAgo )
+      .orderBy("timestamp", descending: true)
+      .getDocuments();
+
+  var tempList = tRef.documents;
+
+  var transactionList = tempList.map((DocumentSnapshot docSnapshot) {
+    return docSnapshot.data;
+  }).toList();
+
+  return transactionList;
+}
+
+
+
