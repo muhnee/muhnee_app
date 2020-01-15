@@ -21,6 +21,14 @@ class _TransactionsPageState extends State<TransactionsPage> {
     tGetTransactions = getMonthlyTransactions();
   }
 
+  int curPageIndex = 0; 
+
+  final Map<int, Widget> logoWidgets = const <int, Widget>{
+    0: Padding(padding: EdgeInsets.symmetric(horizontal: 4),child: Text('This Week'),),
+    1: Padding(padding: EdgeInsets.symmetric(horizontal: 4),child: Text('This Month'),),
+    2: Padding(padding: EdgeInsets.symmetric(horizontal: 4),child: Text('This Year'),),
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,15 +58,17 @@ class _TransactionsPageState extends State<TransactionsPage> {
           //   ],
           // ),
 
-          CupertinoNavigationBar(
-              middle: CupertinoSegmentedControl(
-            selectedColor: Colors.orange,
-            borderColor: Colors.orange,
-            onValueChanged: test(),
-            pressedColor: Colors.red,
-            children: children,
-            //groupValue: selectedCollection,
-          )),
+          CupertinoSegmentedControl<int>(
+                children: logoWidgets,
+                onValueChanged: (int val) {
+                  setState(() {
+                    curPageIndex = val;
+                  });
+                },
+                groupValue: curPageIndex,
+              ),
+
+       
 
           Expanded(
               child: FutureBuilder<List>(
@@ -125,22 +135,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
     );
   }
 
-//   changePage(){
-//   setState(() {
-//     curPageIndex = 1;
-//   });
-
-// }
-
-test(){
-  print("somethign");
-}
-
-  final Map<int, Widget> children = const <int, Widget>{
-    0: Text('One'),
-    1: Text('Two'),
-    2: Text('Three'),
-  };
 }
 
 class TransactionViewCell extends StatefulWidget {
