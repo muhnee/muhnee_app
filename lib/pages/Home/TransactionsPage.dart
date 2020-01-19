@@ -106,30 +106,32 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 children = <Widget>[
                   Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.blockSizeVertical * 0.7),
+                          vertical: SizeConfig.blockSizeVertical * 0.8),
                       child: SizedBox(
-                        height: SizeConfig.blockSizeVertical * 6.5,
+                        height: SizeConfig.blockSizeVertical * 15,
+                        width: SizeConfig.blockSizeHorizontal * 70,
                         child: InkWell(
                           child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [Colors.grey, Colors.grey[200]],
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.grey[200],
                               ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text("total exp: " + totalExp.toString()),
-                                Text("total inc: " + totalInc.toString()),
-                                Text("net: " + totalNet.toString())
-                              ],
-                            ),
-                          ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 20, top: 10, bottom: 10),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    summaryRow("Income", totalInc.toString()),
+                                    summaryRow("Expense", totalExp.toString()),
+                                    summaryRow("Net", totalNet.toString()),
+                                  ],
+                                ),
+                              )),
                           onTap: () {
-                            print("Transaction View Cell Pressed");
+                            print("Summary Cell Pressed");
                           },
                         ),
                       )),
@@ -177,6 +179,25 @@ class _TransactionsPageState extends State<TransactionsPage> {
       )),
     );
   }
+}
+
+Widget summaryRow(type, amount) {
+  return Row(
+    children: <Widget>[
+      Text(
+        "Total ",
+        style: TextStyle(fontSize: 15, ),
+      ),
+      Text(
+        type + ": ",
+        style: TextStyle(fontSize: 15, ),
+      ),
+      Text(
+        amount,
+        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+      )
+    ],
+  );
 }
 
 class TransactionViewCell extends StatefulWidget {
