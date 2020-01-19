@@ -108,7 +108,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                       padding: EdgeInsets.symmetric(
                           vertical: SizeConfig.blockSizeVertical * 0.8),
                       child: SizedBox(
-                        height: SizeConfig.blockSizeVertical * 15,
+                        height: SizeConfig.blockSizeVertical * 17,
                         width: SizeConfig.blockSizeHorizontal * 70,
                         child: InkWell(
                           child: Container(
@@ -117,8 +117,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 color: Colors.grey[200],
                               ),
                               child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 20, top: 10, bottom: 10),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10,
+                                ),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -183,19 +185,45 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
 Widget summaryRow(type, amount) {
   return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
-      Text(
-        "Total ",
-        style: TextStyle(fontSize: 15, ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "Total ",
+            style: TextStyle(
+              fontSize: 15,
+            ),
+          ),
+          Text(
+            type + ": ",
+            style: TextStyle(
+              fontSize: 15,
+            ),
+          ),
+        ],
       ),
-      Text(
-        type + ": ",
-        style: TextStyle(fontSize: 15, ),
-      ),
-      Text(
-        amount,
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-      )
+      type == "Income"
+          ? Text(
+              "\$ " + amount,
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.green),
+            )
+          : type == "Expense"
+              ? Text(
+                  "\$ " + amount,
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.red),
+                )
+              : Text(
+                  "\$ " + amount,
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                )
     ],
   );
 }
