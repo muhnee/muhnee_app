@@ -66,17 +66,21 @@ class _TransactionsPageState extends State<TransactionsPage> {
           //   ],
           // ),
 
-          CupertinoSegmentedControl<int>(
-            borderColor: Colors.grey[100],
-            selectedColor: Color(0xff8e91f3),
-            unselectedColor: Colors.grey[100],
-            children: logoWidgets,
-            onValueChanged: (int val) {
-              setState(() {
-                curPageIndex = val;
-              });
-            },
-            groupValue: curPageIndex,
+          Padding(
+            padding: EdgeInsets.only(bottom: 10, top: 10),
+            child: CupertinoSegmentedControl<int>(
+              borderColor: Colors.white,
+              // selectedColor: Color(0xff8e91f3),
+              selectedColor: Colors.grey[400],
+              unselectedColor: Colors.white,
+              children: logoWidgets,
+              onValueChanged: (int val) {
+                setState(() {
+                  curPageIndex = val;
+                });
+              },
+              groupValue: curPageIndex,
+            ),
           ),
 
           Expanded(
@@ -88,7 +92,47 @@ class _TransactionsPageState extends State<TransactionsPage> {
               List<Widget> children;
 
               if (snapshot.hasData) {
+                var totalExp = 0.0;
+                var totalInc = 0.0;
+                var totalNet = 0.0;
+
+                for (var item in snapshot.data)
+                  item["type"] == "expense"
+                      ? totalExp += item["amount"]
+                      : totalInc += item["amount"];
+
+                totalNet = totalInc - totalExp;
+
                 children = <Widget>[
+                  Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: SizeConfig.blockSizeVertical * 0.7),
+                      child: SizedBox(
+                        height: SizeConfig.blockSizeVertical * 6.5,
+                        child: InkWell(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.grey, Colors.grey[200]],
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("total exp: " + totalExp.toString()),
+                                Text("total inc: " + totalInc.toString()),
+                                Text("net: " + totalNet.toString())
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            print("Transaction View Cell Pressed");
+                          },
+                        ),
+                      )),
                   Container(
                       child: Expanded(
                     child: ListView(
@@ -114,21 +158,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                     messageColor: Colors.red,
                   )
                 ];
-              }
-              //else if (snapshot.data.length < 1) {
-              //   children = <Widget>[
-              //     NotificationCell(
-              //       message: "Hmmm...Looks like you haven't recorded any transactions yet",
-              //       messageColor: Colors.blue,
-              //     )
-              //   ];
-              // }
-              else {
+              } else {
                 children = <Widget>[
                   NotificationCell(
-                    message: "Loading...",
-                    messageColor: Colors.orange,
-                  )
+                      message: "Loading...", messageColor: Colors.grey)
                 ];
               }
               return Center(
@@ -168,7 +201,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   Color cellColor1;
   Color cellColor2;
 
-  var cat; //! ISSUE IS THAT CAT IS AN ARRAY AND NOT A SINGLE ITEM
+  var cat;
   var tax;
 
   @override
@@ -177,91 +210,71 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
       cellColor1 = Color(0xff90cb46);
       cellColor2 = Color(0xff9ed45b);
     } else {
-      cellColor1 = Color(0xffd01908);
-      cellColor2 = Color(0xffe43524);
+      cellColor1 = Color(0xffe52d27);
+      cellColor2 = Color(0xffff0844);
     }
 
     return Padding(
         padding:
-            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1),
+            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 0.7),
         child: SizedBox(
-          height: SizeConfig.blockSizeVertical * 7,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [cellColor1, cellColor2],
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding:
-                      EdgeInsets.only(left: SizeConfig.blockSizeVertical * 1),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        "\$ ",
-                        style: GoogleFonts.varelaRound(
-                          textStyle: TextStyle(
-                              letterSpacing: .5,
-                              fontSize: 20,
-                              color: Colors.white),
-                        ),
-                      ),
-                      Text(
-                        widget.amountText,
-                        style: GoogleFonts.varelaRound(
-                          textStyle: TextStyle(
-                              letterSpacing: .5,
-                              fontSize: 30,
-                              color: Colors.white),
-                        ),
-                      ),
-
-                      // Text(
-                      //   "\$ ",
-                      //   style: TextStyle(color: Colors.grey[100], fontSize: 20),
-                      // ),
-                      // Text(
-                      //   widget.amountText,
-                      //   style: TextStyle(
-                      //       letterSpacing: .5,
-                      //       color: Colors.grey[100],
-                      //       fontSize: 30,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
-                    ],
-                  ),
+          height: SizeConfig.blockSizeVertical * 6.5,
+          child: InkWell(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [cellColor1, cellColor2],
                 ),
-
-                 RaisedButton(
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: SizeConfig.blockSizeVertical * 1),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          "\$ ",
+                          style: GoogleFonts.varelaRound(
+                            textStyle: TextStyle(
+                                letterSpacing: .5,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ),
+                        Text(
+                          widget.amountText,
+                          style: GoogleFonts.varelaRound(
+                            textStyle: TextStyle(
+                                letterSpacing: .5,
+                                fontSize: 25,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: SizeConfig.blockSizeHorizontal * 3),
                     child: Text(
                       widget.category,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
                     ),
-                    color: Colors.grey[300],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      //side: BorderSide(color: Colors.grey[200])
-                    ),
-                    elevation: 0,
-                    onPressed: () {
-
-                      //nothing
-                   
-                    
-                    },
                   ),
-
-               
-
-                
-              ],
+                ],
+              ),
             ),
+            onTap: () {
+              print("Transaction View Cell Pressed");
+            },
           ),
         ));
   }

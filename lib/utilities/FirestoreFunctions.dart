@@ -118,7 +118,7 @@ void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
       .collection("transactions")
       .document()
       .setData({
-    "amount": int.parse(uAmount),
+    "amount": double.parse(uAmount),
     "type": uTransactionType,
     "category": uSelectedCategories,
     "taxDeductible": uIsTaxable,

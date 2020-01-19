@@ -436,7 +436,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
           children = <Widget>[
             NotificationCell(
               message: "Loading...",
-              messageColor: Colors.white,
+              messageColor: Colors.grey,
             )
           ];
         }
@@ -499,7 +499,7 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
           children = <Widget>[
             NotificationCell(
               message: "Loading...",
-              messageColor: Colors.white,
+              messageColor: Colors.grey,
             )
           ];
         }
