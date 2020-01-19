@@ -70,8 +70,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
             padding: EdgeInsets.only(bottom: 10, top: 10),
             child: CupertinoSegmentedControl<int>(
               borderColor: Colors.white,
-              // selectedColor: Color(0xff8e91f3),
-              selectedColor: Colors.grey[400],
+               selectedColor: Color(0xff8e91f3),
+              //selectedColor: Colors.grey[200],
               unselectedColor: Colors.white,
               children: logoWidgets,
               onValueChanged: (int val) {
@@ -112,6 +112,15 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         width: SizeConfig.blockSizeHorizontal * 70,
                         child: InkWell(
                           child: Container(
+                    //         decoration: BoxDecoration(
+                    // borderRadius: BorderRadius.circular(10.0),
+                    // color: Colors.white,
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.black.withOpacity(0.25),
+                    //     blurRadius: 10.0,
+                    //   ),
+                    // ]),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.grey[200],
@@ -187,43 +196,45 @@ Widget summaryRow(type, amount) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "Total ",
+      Text(
+            "Total " + type + ": ",
             style: TextStyle(
               fontSize: 15,
+              fontWeight: FontWeight.w600
             ),
           ),
-          Text(
-            type + ": ",
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-        ],
-      ),
       type == "Income"
           ? Text(
-              "\$ " + amount,
-              style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.green),
-            )
+                          "\$ " + amount,
+                          style: GoogleFonts.varelaRound(
+                            textStyle: TextStyle(
+                                letterSpacing: .5,
+                                fontSize: 16,
+                                color: Colors.green,
+                                ),
+                          ),
+                        )
           : type == "Expense"
               ? Text(
-                  "\$ " + amount,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.red),
-                )
+                          "\$ " + amount,
+                          style: GoogleFonts.varelaRound(
+                            textStyle: TextStyle(
+                                letterSpacing: .5,
+                                fontSize: 16,
+                                color: Colors.red,
+                                ),
+                          ),
+                        )
               : Text(
-                  "\$ " + amount,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                )
+                          "\$ " + amount,
+                          style: GoogleFonts.varelaRound(
+                            textStyle: TextStyle(
+                                letterSpacing: .5,
+                                fontSize: 16,
+                                color: Colors.black,
+                                ),
+                          ),
+                        )
     ],
   );
 }
