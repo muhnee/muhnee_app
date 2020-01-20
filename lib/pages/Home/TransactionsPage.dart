@@ -5,6 +5,7 @@ import 'package:muhnee/utilities/SizeConfig.dart';
 import 'ExpensePageSingleFile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:intl/intl.dart';
 
 var weeklyTransactions;
 var monthlyTransactions;
@@ -70,7 +71,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
             padding: EdgeInsets.only(bottom: 10, top: 10),
             child: CupertinoSegmentedControl<int>(
               borderColor: Colors.white,
-               selectedColor: Color(0xff8e91f3),
+              selectedColor: Color(0xff8e91f3),
               //selectedColor: Colors.grey[200],
               unselectedColor: Colors.white,
               children: logoWidgets,
@@ -112,19 +113,21 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         width: SizeConfig.blockSizeHorizontal * 70,
                         child: InkWell(
                           child: Container(
-                    //         decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(10.0),
-                    // color: Colors.white,
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.black.withOpacity(0.25),
-                    //     blurRadius: 10.0,
-                    //   ),
-                    // ]),
+                              //         decoration: BoxDecoration(
+                              // borderRadius: BorderRadius.circular(10.0),
+                              // color: Colors.white,
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //     color: Colors.black.withOpacity(0.25),
+                              //     blurRadius: 10.0,
+                              //   ),
+                              // ]),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.grey[200],
-                              ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  //color: Color(0xff8e91f3),
+                                  color: Colors.grey[200]
+                                  //border: Border.all(color: Colors.grey)
+                                  ),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 20,
@@ -156,11 +159,11 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         children: [
                           for (var item in snapshot.data)
                             TransactionViewCell(
-                              amountText: item["amount"].toString(),
-                              type: item["type"],
-                              category: item["category"],
-                              description: item["description"],
-                            )
+                                amountText: item["amount"].toString(),
+                                type: item["type"],
+                                category: item["category"],
+                                description: item["description"],
+                                timestamp: item["timestamp"])
                         ]),
                   ))
                 ];
@@ -197,44 +200,41 @@ Widget summaryRow(type, amount) {
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
       Text(
-            "Total " + type + ": ",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600
-            ),
-          ),
+        "Total " + type + ": ",
+        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+      ),
       type == "Income"
           ? Text(
-                          "\$ " + amount,
-                          style: GoogleFonts.varelaRound(
-                            textStyle: TextStyle(
-                                letterSpacing: .5,
-                                fontSize: 16,
-                                color: Colors.green,
-                                ),
-                          ),
-                        )
+              "\$ " + amount,
+              style: GoogleFonts.varelaRound(
+                textStyle: TextStyle(
+                  letterSpacing: .5,
+                  fontSize: 16,
+                  color: Colors.green,
+                ),
+              ),
+            )
           : type == "Expense"
               ? Text(
-                          "\$ " + amount,
-                          style: GoogleFonts.varelaRound(
-                            textStyle: TextStyle(
-                                letterSpacing: .5,
-                                fontSize: 16,
-                                color: Colors.red,
-                                ),
-                          ),
-                        )
+                  "\$ " + amount,
+                  style: GoogleFonts.varelaRound(
+                    textStyle: TextStyle(
+                      letterSpacing: .5,
+                      fontSize: 16,
+                      color: Colors.red,
+                    ),
+                  ),
+                )
               : Text(
-                          "\$ " + amount,
-                          style: GoogleFonts.varelaRound(
-                            textStyle: TextStyle(
-                                letterSpacing: .5,
-                                fontSize: 16,
-                                color: Colors.black,
-                                ),
-                          ),
-                        )
+                  "\$ " + amount,
+                  style: GoogleFonts.varelaRound(
+                    textStyle: TextStyle(
+                      letterSpacing: .5,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
     ],
   );
 }
@@ -245,13 +245,15 @@ class TransactionViewCell extends StatefulWidget {
   var category;
   var taxable;
   var description;
+  var timestamp;
 
   TransactionViewCell(
       {@required this.amountText,
       @required this.type,
       @required this.category,
       this.taxable,
-      @required this.description});
+      @required this.description,
+      @required this.timestamp});
 
   @override
   _TransactionViewCellState createState() => _TransactionViewCellState();
@@ -277,65 +279,78 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
     return Padding(
         padding:
             EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 0.7),
-        child: SizedBox(
-          height: SizeConfig.blockSizeVertical * 6.5,
-          child: InkWell(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [cellColor1, cellColor2],
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: SizeConfig.blockSizeVertical * 1),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          "\$ ",
-                          style: GoogleFonts.varelaRound(
-                            textStyle: TextStyle(
-                                letterSpacing: .5,
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                        ),
-                        Text(
-                          widget.amountText,
-                          style: GoogleFonts.varelaRound(
-                            textStyle: TextStyle(
-                                letterSpacing: .5,
-                                fontSize: 25,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: SizeConfig.blockSizeHorizontal * 3),
-                    child: Text(
-                      widget.category,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
-              ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 1, bottom: 3),
+              child: Text(DateFormat.yMMMMEEEEd()
+                .format(widget.timestamp.toDate())
+                .toString()),
             ),
-            onTap: () {
-              print("Transaction View Cell Pressed");
-            },
-          ),
+            
+            SizedBox(
+              height: SizeConfig.blockSizeVertical * 6.5,
+              child: InkWell(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      // gradient: LinearGradient(
+                      //   begin: Alignment.topLeft,
+                      //   end: Alignment.bottomRight,
+                      //   colors: [cellColor1, cellColor2],
+                      // ),
+                      color: Colors.grey[200],
+                      border: Border.all(color: cellColor1)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: SizeConfig.blockSizeVertical * 1),
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              "\$ ",
+                              style: GoogleFonts.varelaRound(
+                                textStyle: TextStyle(
+                                    letterSpacing: .5,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
+                            ),
+                            Text(
+                              widget.amountText,
+                              style: GoogleFonts.varelaRound(
+                                textStyle: TextStyle(
+                                    letterSpacing: .5,
+                                    fontSize: 25,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: SizeConfig.blockSizeHorizontal * 3),
+                        child: Text(
+                          widget.category,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                onTap: () {
+                  print("Transaction View Cell Pressed");
+                },
+              ),
+            )
+          ],
         ));
   }
 }
