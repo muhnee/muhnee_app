@@ -69,11 +69,11 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
           Padding(
             padding: EdgeInsets.only(bottom: 10, top: 10),
-            child: CupertinoSegmentedControl<int>(
-              borderColor: Colors.white,
-              selectedColor: Color(0xff8e91f3),
+            child: CupertinoSlidingSegmentedControl<int>(
+              //borderColor: Colors.white,
+             // selectedColor: Color(0xff8e91f3),
               //selectedColor: Colors.grey[200],
-              unselectedColor: Colors.white,
+             // unselectedColor: Colors.white,
               children: logoWidgets,
               onValueChanged: (int val) {
                 setState(() {

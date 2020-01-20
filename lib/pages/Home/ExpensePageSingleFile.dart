@@ -149,7 +149,8 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
     return RaisedButton(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
-          side: BorderSide(color: Colors.grey[200])),
+          //side: BorderSide(color: Colors.grey[200])
+          ),
       color: Colors.grey[100],
       elevation: 0,
       child: Padding(
