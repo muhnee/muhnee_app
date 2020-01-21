@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'ExpensePageSingleFile.dart';
@@ -28,14 +29,13 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
   final Map<int, Widget> logoWidgets = const <int, Widget>{
     0: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6),
-      child: Text('This Week'),
-    ),
+        padding: EdgeInsets.symmetric(horizontal: 6),
+        child:
+            Text('this week', style: TextStyle(fontWeight: FontWeight.w600))),
     1: Padding(
       padding: EdgeInsets.symmetric(horizontal: 6),
-      child: Text('This Month'),
+      child: Text('this month', style: TextStyle(fontWeight: FontWeight.w600)),
     ),
-    // 2: Padding(padding: EdgeInsets.symmetric(horizontal: 6),child: Text('This Year'),),
   };
 
   @override
@@ -71,9 +71,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
             padding: EdgeInsets.only(bottom: 10, top: 10),
             child: CupertinoSlidingSegmentedControl<int>(
               //borderColor: Colors.white,
-             // selectedColor: Color(0xff8e91f3),
+              // selectedColor: Color(0xff8e91f3),
               //selectedColor: Colors.grey[200],
-             // unselectedColor: Colors.white,
+              // unselectedColor: Colors.white,
               children: logoWidgets,
               onValueChanged: (int val) {
                 setState(() {
@@ -103,6 +103,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                       : totalInc += item["amount"];
 
                 totalNet = totalInc - totalExp;
+
+                var dateArray = [];
 
                 children = <Widget>[
                   Padding(
@@ -139,7 +141,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     summaryRow("Income", totalInc.toString()),
-                                    summaryRow("Expense", totalExp.toString()),
+                                    summaryRow("Expenses", totalExp.toString()),
                                     summaryRow("Net", totalNet.toString()),
                                   ],
                                 ),
@@ -200,7 +202,7 @@ Widget summaryRow(type, amount) {
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
       Text(
-        "Total " + type + ": ",
+         type + ": ",
         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
       ),
       type == "Income"
@@ -214,7 +216,7 @@ Widget summaryRow(type, amount) {
                 ),
               ),
             )
-          : type == "Expense"
+          : type == "Expenses"
               ? Text(
                   "\$ " + amount,
                   style: GoogleFonts.varelaRound(
@@ -285,10 +287,9 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
             Padding(
               padding: EdgeInsets.only(left: 1, bottom: 3),
               child: Text(DateFormat.yMMMMEEEEd()
-                .format(widget.timestamp.toDate())
-                .toString()),
+                  .format(widget.timestamp.toDate())
+                  .toString()),
             ),
-            
             SizedBox(
               height: SizeConfig.blockSizeVertical * 6.5,
               child: InkWell(

@@ -74,11 +74,11 @@ flutter:
   # example:
 
   fonts:
-  # - family: SFPro
-  #   fonts: 
-  #     - asset: lib/assets/fonts/SFPro/SF-Pro-Text-Regular.otf
-  #     - asset: lib/assets/fonts/SFPro/SF-Pro-Text-Semibold.otf
-  #       weight: 700
+  - family: SFPro
+    fonts: 
+      - asset: lib/assets/fonts/SFPro/SF-Pro-Text-Regular.otf
+      - asset: lib/assets/fonts/SFPro/SF-Pro-Display-Regular.otf
+      - asset: lib/assets/fonts/SFPro/SF-Pro-Display-Semibold.otf
   
   - family: Montserrat
     fonts: 
