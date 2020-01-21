@@ -4,6 +4,7 @@ import 'ExpensePageSingleFile.dart';
 import 'LeftPanel.dart';
 import 'ProfilePage.dart';
 import 'TransactionsPage.dart';
+import './StatsPage.dart';
 
 var imageUrlFirebase;
 
@@ -30,8 +31,8 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 ProfilePage(),
                 ExpensePageSingleFile(),
-
                 //IncomePage(),
+                StatsPage(),
                 TransactionsPage(),
               ],
             ),
