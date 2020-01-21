@@ -452,6 +452,9 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
           ];
         } else {
           children = <Widget>[
+
+           
+
             NotificationCell(
               message: "Loading...",
               messageColor: Colors.grey,
@@ -680,13 +683,34 @@ class NotificationCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6.0),
+    // return Padding(
+    //   padding: EdgeInsets.symmetric(horizontal: 6.0),
+    //   child: Text(message,
+    //       style: TextStyle(
+    //         color: messageColor,
+    //         fontWeight: FontWeight.w600,
+    //       )),
+    // );
+
+     return RaisedButton(
+      color: Colors.white,
+      elevation: 0,
       child: Text(message,
           style: TextStyle(
             color: messageColor,
             fontWeight: FontWeight.w600,
           )),
+      onPressed: (){
+
+        //do nothing
+
+      },
     );
+
+
   }
 }
+
+
+
+
