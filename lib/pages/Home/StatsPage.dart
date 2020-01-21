@@ -33,10 +33,10 @@ class _StatsPageState extends State<StatsPage> {
     0: Padding(
         padding: EdgeInsets.symmetric(horizontal: 6),
         child:
-            Text('this week', style: TextStyle(fontWeight: FontWeight.w600))),
+            Text('Income', style: TextStyle(fontWeight: FontWeight.w600))),
     1: Padding(
       padding: EdgeInsets.symmetric(horizontal: 6),
-      child: Text('this month', style: TextStyle(fontWeight: FontWeight.w600)),
+      child: Text('Expenses', style: TextStyle(fontWeight: FontWeight.w600)),
     ),
   };
 

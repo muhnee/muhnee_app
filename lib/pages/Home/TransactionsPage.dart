@@ -45,35 +45,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
       body: SafeArea(
           child: Column(
         children: <Widget>[
-          // Container(
-          //   child: Text("TESTTESTTESTTESTTEST"),
-          //   color: Colors.blue,
-          // ),
-
-          //     BubbleBottomBar(
-          //   opacity: 0.2,
-          //   currentIndex: curPageIndex,
-          //   onTap: changePage(),
-          //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-          //   elevation: 0,
-          //   fabLocation: BubbleBottomBarFabLocation.center, //new
-          //   hasNotch: true, //new
-          //   hasInk: true, //new, gives a cute ink effect
-          //   inkColor: Colors.black12, //optional, uses theme color if not specified
-          //   items: <BubbleBottomBarItem>[
-
-          //       BubbleBottomBarItem(backgroundColor: Colors.deepPurple, icon: Icon(Icons.access_time, color: Colors.black,), activeIcon: Icon(Icons.access_time, color: Colors.deepPurple,), title: Text("This week")),
-          //       BubbleBottomBarItem(backgroundColor: Colors.indigo, icon: Icon(Icons.blur_on, color: Colors.black,), activeIcon: Icon(Icons.blur_on, color: Colors.indigo,), title: Text("Folders")),
-          //   ],
-          // ),
+         
 
           Padding(
             padding: EdgeInsets.only(bottom: 10, top: 10),
             child: CupertinoSlidingSegmentedControl<int>(
-              //borderColor: Colors.white,
-              // selectedColor: Color(0xff8e91f3),
-              //selectedColor: Colors.grey[200],
-              // unselectedColor: Colors.white,
+           
               children: logoWidgets,
               onValueChanged: (int val) {
                 setState(() {
@@ -107,50 +84,52 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 var dateArray = [];
 
                 children = <Widget>[
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.blockSizeVertical * 0.8),
-                      child: SizedBox(
-                        height: SizeConfig.blockSizeVertical * 17,
-                        width: SizeConfig.blockSizeHorizontal * 70,
-                        child: InkWell(
-                          child: Container(
-                              //         decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(10.0),
-                              // color: Colors.white,
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     color: Colors.black.withOpacity(0.25),
-                              //     blurRadius: 10.0,
-                              //   ),
-                              // ]),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  //color: Color(0xff8e91f3),
-                                  color: Colors.grey[200]
-                                  //border: Border.all(color: Colors.grey)
-                                  ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 10,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    summaryRow("Income", totalInc.toString()),
-                                    summaryRow("Expenses", totalExp.toString()),
-                                    summaryRow("Net", totalNet.toString()),
-                                  ],
-                                ),
-                              )),
-                          onTap: () {
-                            print("Summary Cell Pressed");
-                          },
-                        ),
-                      )),
+
+                  //! Previously the stats section 
+                  // Padding(
+                  //     padding: EdgeInsets.symmetric(
+                  //         vertical: SizeConfig.blockSizeVertical * 0.8),
+                  //     child: SizedBox(
+                  //       height: SizeConfig.blockSizeVertical * 17,
+                  //       width: SizeConfig.blockSizeHorizontal * 70,
+                  //       child: InkWell(
+                  //         child: Container(
+                  //             //         decoration: BoxDecoration(
+                  //             // borderRadius: BorderRadius.circular(10.0),
+                  //             // color: Colors.white,
+                  //             // boxShadow: [
+                  //             //   BoxShadow(
+                  //             //     color: Colors.black.withOpacity(0.25),
+                  //             //     blurRadius: 10.0,
+                  //             //   ),
+                  //             // ]),
+                  //             decoration: BoxDecoration(
+                  //                 borderRadius: BorderRadius.circular(10.0),
+                  //                 //color: Color(0xff8e91f3),
+                  //                 color: Colors.grey[200]
+                  //                 //border: Border.all(color: Colors.grey)
+                  //                 ),
+                  //             child: Padding(
+                  //               padding: EdgeInsets.symmetric(
+                  //                 horizontal: 20,
+                  //                 vertical: 10,
+                  //               ),
+                  //               child: Column(
+                  //                 mainAxisAlignment:
+                  //                     MainAxisAlignment.spaceAround,
+                  //                 crossAxisAlignment: CrossAxisAlignment.start,
+                  //                 children: <Widget>[
+                  //                   summaryRow("Income", totalInc.toString()),
+                  //                   summaryRow("Expenses", totalExp.toString()),
+                  //                   summaryRow("Net", totalNet.toString()),
+                  //                 ],
+                  //               ),
+                  //             )),
+                  //         onTap: () {
+                  //           print("Summary Cell Pressed");
+                  //         },
+                  //       ),
+                  //     )),
                   Container(
                       child: Expanded(
                     child: ListView(
