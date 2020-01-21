@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:muhnee/utilities/FirestoreFunctions.dart';
-import 'package:muhnee/utilities/SizeConfig.dart';
 import 'ExpensePageSingleFile.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:intl/intl.dart';
 
 var incomeStats;
 var expenseStats;
@@ -23,8 +15,8 @@ class _StatsPageState extends State<StatsPage> {
   @override
   void initState() {
     super.initState();
-    incomeStats = getIncomeStatsMonth();
-   expenseStats = getExpenseStatsMonth();
+    // incomeStats = getIncomeStatsMonth();
+    // expenseStats = getExpenseStatsMonth();
   }
 
   int curPageIndex = 0;
@@ -60,9 +52,7 @@ class _StatsPageState extends State<StatsPage> {
           ),
           Expanded(
               child: FutureBuilder<List>(
-            future: curPageIndex == 0
-                ? incomeStats
-                : expenseStats, 
+            future: curPageIndex == 0 ? incomeStats : expenseStats,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
               List<Widget> children;
 
@@ -84,7 +74,6 @@ class _StatsPageState extends State<StatsPage> {
                   Text("Income" + totalInc.toString()),
                   Text("Expenses" + totalExp.toString()),
                   Text("Net" + totalNet.toString()),
-
                 ];
               } else if (snapshot.hasError) {
                 children = <Widget>[

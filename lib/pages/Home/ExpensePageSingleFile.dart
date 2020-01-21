@@ -331,7 +331,8 @@ class _InteractionPaneState extends State<InteractionPane> {
                                 context: context,
                                 dialogType: DialogType.SUCCES,
                                 animType: AnimType.BOTTOMSLIDE,
-                                tittle: transactionType + " uploaded",
+                                
+                                tittle: (transactionType[0].toUpperCase()+ transactionType.substring(1).toString()) + " Uploaded",
                                 desc: '\$' + amount,
                                 btnOkOnPress: () {})
                             .show();
@@ -365,6 +366,7 @@ class _InteractionPaneState extends State<InteractionPane> {
 
               // ROW FOR CATEGORY OPTIONS
 
+              //TODO: this could be solved much better - in a single line by changing tInc to tExp
               transactionType == "income"
                   ? incomeCategorySection()
                   : expenseCategorySection(),
@@ -408,6 +410,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
         if (snapshot.hasData) {
           var length = snapshot.data.length;
           var items = [];
+          selectedCategory = snapshot.data[0];
 
           for (var item in snapshot.data) {
             items.add(item);
@@ -471,6 +474,7 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
         if (snapshot.hasData) {
           var length = snapshot.data.length;
           var items = [];
+          selectedCategory = snapshot.data[0];
 
           for (var item in snapshot.data) {
             items.add(item);
