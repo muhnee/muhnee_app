@@ -275,13 +275,14 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      // gradient: LinearGradient(
-                      //   begin: Alignment.topLeft,
-                      //   end: Alignment.bottomRight,
-                      //   colors: [cellColor1, cellColor2],
-                      // ),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [cellColor1, cellColor2],
+                      ),
                       color: Colors.grey[200],
-                      border: Border.all(color: cellColor1)),
+                      //border: Border.all(color: cellColor1)
+                      ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[

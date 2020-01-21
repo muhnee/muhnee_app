@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import '../../utilities/SizeConfig.dart';
+
+var getPhoto;
 
 class LeftPanel extends StatefulWidget {
   PageController pageViewController;
@@ -10,6 +13,12 @@ class LeftPanel extends StatefulWidget {
 }
 
 class _LeftPanelState extends State<LeftPanel> {
+  @override
+  void initState() {
+    super.initState();
+    getPhoto = getPhotoUrl();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -46,7 +55,7 @@ class _LeftPanelState extends State<LeftPanel> {
               flex: 1,
               child: Container(),
             ),
-            
+
             // PanelButton(
             //     itemValue: "-",
             //     fontSize: 27,
@@ -63,7 +72,7 @@ class _LeftPanelState extends State<LeftPanel> {
                 fontSize: 16,
                 cellHeight: 18, //15
                 rotation: 3,
-                pageIndex: 2, 
+                pageIndex: 2,
                 pageViewController: widget.pageViewController),
             Expanded(
               flex: 1,
@@ -100,36 +109,90 @@ class ProfilePic extends StatefulWidget {
 class _ProfilePicState extends State<ProfilePic> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: SizeConfig.blockSizeVertical * 2,
-        ),
-        Stack(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14.0),
-              child: Image.network(
-                "https://lh3.googleusercontent.com/a-/AAuE7mDHyKXfGnaH4IJIvp11DTSxrotvC8W2P96VfsT5s8c",
-                width: SizeConfig.blockSizeHorizontal * 13,
-                height: SizeConfig.blockSizeHorizontal * 13,
-              ),
+    return FutureBuilder<String>(
+      future: getPhoto, // a previously-obtained Future<String> or null
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        List<Widget> children;
+
+        if (snapshot.hasData) {
+          children = <Widget>[
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: SizeConfig.blockSizeVertical * 2,
+                ),
+                Stack(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(14.0),
+                      child: Image.network(
+                        snapshot.data,
+                        width: SizeConfig.blockSizeHorizontal * 13,
+                        height: SizeConfig.blockSizeHorizontal * 13,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                            borderRadius: BorderRadius.circular(14.0),
+                            onTap: () {
+                              widget.pageViewController.animateToPage(
+                                  widget.pageIndex,
+                                  duration: Duration(milliseconds: 800),
+                                  curve: Curves.easeInOutExpo);
+                            }),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                    borderRadius: BorderRadius.circular(14.0),
-                    onTap: () {
-                      widget.pageViewController.animateToPage(widget.pageIndex,
-                          duration: Duration(milliseconds: 800),
-                          curve: Curves.easeInOutExpo);
-                    }),
-              ),
+          ];
+        } else {
+          children = <Widget>[
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: SizeConfig.blockSizeVertical * 2,
+                ),
+                Stack(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(14.0),
+                      child: Image(
+                        image: AssetImage('lib/assets/images/defaultProfilePic.png'),
+                        width: SizeConfig.blockSizeHorizontal * 13,
+                        height: SizeConfig.blockSizeHorizontal * 13,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                            borderRadius: BorderRadius.circular(14.0),
+                            onTap: () {
+                              widget.pageViewController.animateToPage(
+                                  widget.pageIndex,
+                                  duration: Duration(milliseconds: 800),
+                                  curve: Curves.easeInOutExpo);
+                            }),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
-      ],
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
+          ),
+        );
+      },
     );
   }
 }

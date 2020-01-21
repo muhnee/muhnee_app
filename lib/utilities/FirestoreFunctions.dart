@@ -101,13 +101,12 @@ void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  
-
-  //var timeStamp = DateFormat('dd MMMM yyyy').format(DateTime.now()).toString() + " at " + DateFormat('hh:mm:ss').format(DateTime.now()).toString() 
+  //var timeStamp = DateFormat('dd MMMM yyyy').format(DateTime.now()).toString() + " at " + DateFormat('hh:mm:ss').format(DateTime.now()).toString()
 
   var timeStamp = DateTime.now();
 
-  var budgetYear = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+  var budgetYear =
+      DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
 
   await databaseReference
       .collection("users")
@@ -132,8 +131,8 @@ Future<List> getMonthlyTransactions() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-    var budgetMonth = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
-
+  var budgetMonth =
+      DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
 
   var tRef = await databaseReference
       .collection("users")
@@ -152,15 +151,14 @@ Future<List> getMonthlyTransactions() async {
 
   return transactionList;
 }
-
 
 Future<List> getWeeklyTransactions() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-    var budgetMonth = DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
-    var severDaysAgo = DateTime.now().subtract(Duration(days: 7));
-
+  var budgetMonth =
+      DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+  var severDaysAgo = DateTime.now().subtract(Duration(days: 7));
 
   var tRef = await databaseReference
       .collection("users")
@@ -168,7 +166,7 @@ Future<List> getWeeklyTransactions() async {
       .collection("budget")
       .document(budgetMonth)
       .collection("transactions")
-      .where("timestamp", isGreaterThan: severDaysAgo )
+      .where("timestamp", isGreaterThan: severDaysAgo)
       .orderBy("timestamp", descending: true)
       .getDocuments();
 
@@ -181,4 +179,13 @@ Future<List> getWeeklyTransactions() async {
   return transactionList;
 }
 
+Future<String> getPhotoUrl() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
 
+  var snap = await databaseReference.collection("users").document(uid).get();
+
+  var photoUrl = snap.data["photoURL"];
+
+  return photoUrl;
+}

@@ -213,6 +213,7 @@ class InteractionPane extends StatefulWidget {
 }
 
 class _InteractionPaneState extends State<InteractionPane> {
+ 
   Color incomeExpenseColor = Color(0xffa5d15b);
 
   Color taxableColor = Colors.grey[300];
@@ -263,6 +264,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                           transactionType = "income";
                           incomeExpenseColor = Color(0xffa5d15b);
                           selectedCategory = "";
+                          descriptionController.clear();
                         });
                       }
                     },
@@ -332,12 +334,25 @@ class _InteractionPaneState extends State<InteractionPane> {
                                 dialogType: DialogType.SUCCES,
                                 animType: AnimType.BOTTOMSLIDE,
                                 
-                                tittle: (transactionType[0].toUpperCase()+ transactionType.substring(1).toString()) + " Uploaded",
-                                desc: '\$' + amount,
+                                tittle: (transactionType[0].toUpperCase()+ transactionType.substring(1).toString()) + " uploaded",
+                                desc: selectedCategory + ': \$' + amount,
                                 btnOkOnPress: () {})
                             .show();
 
-                        resetValues();
+                            
+                            //TODO : FIRST THING IN THE MONRING
+                        //! resetValues();
+
+                        if (transactionType == "expense"){
+                          setState(() {
+                            descriptionController.clear();
+
+                          });
+
+                        }
+
+
+                        
                       } else if (selectedCategory == "") {
                         AwesomeDialog(
                           context: context,
@@ -380,14 +395,13 @@ class _InteractionPaneState extends State<InteractionPane> {
     setState(() {
       amount = "0";
       transactionType = "income";
-      selectedCategory = "";
       isTaxable = false;
       descriptionController.clear();
+      incomeExpenseColor = Color(0xffa5d15b);
     });
 
     print(amount);
     print(transactionType);
-    print(selectedCategory);
     print(isTaxable);
   }
 }
@@ -410,7 +424,7 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
         if (snapshot.hasData) {
           var length = snapshot.data.length;
           var items = [];
-          selectedCategory = snapshot.data[0];
+          // selectedCategory = snapshot.data[0];
 
           for (var item in snapshot.data) {
             items.add(item);
@@ -474,7 +488,7 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
         if (snapshot.hasData) {
           var length = snapshot.data.length;
           var items = [];
-          selectedCategory = snapshot.data[0];
+          // selectedCategory = snapshot.data[0];
 
           for (var item in snapshot.data) {
             items.add(item);
