@@ -28,7 +28,7 @@ class _LeftPanelState extends State<LeftPanel> {
         boxShadow: [
           BoxShadow(
             color: Colors.grey[500],
-            offset: const Offset(90.0, 0.0),
+            offset: const Offset(90.0, 330.0), //(90.0, 0)
             spreadRadius: 0.0,
             blurRadius: 20.0,
           ),
@@ -149,7 +149,7 @@ class _ProfilePicState extends State<ProfilePic> {
               ],
             ),
           ];
-        } else {
+        } else{
           children = <Widget>[
             Column(
               children: <Widget>[

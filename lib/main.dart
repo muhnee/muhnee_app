@@ -19,7 +19,8 @@ void main() async {
     ),
     home: new SplashScreen(),
   ));
-  SystemChrome.setEnabledSystemUIOverlays([]);
+
+ // SystemChrome.setEnabledSystemUIOverlays([]);
 
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

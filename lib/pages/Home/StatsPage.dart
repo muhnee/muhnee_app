@@ -68,8 +68,6 @@ class _StatsPageState extends State<StatsPage> {
 
                 totalNet = totalInc - totalExp;
 
-                var dateArray = [];
-
                 children = <Widget>[
                   Text("Income" + totalInc.toString()),
                   Text("Expenses" + totalExp.toString()),
