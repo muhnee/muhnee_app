@@ -396,7 +396,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                         child: Row(
                           children: <Widget>[
                             Text(
-                              "\$ ",
+                              "\$",
                               style: TextStyle(
                                   letterSpacing: .5,
                                   fontSize: 18,
