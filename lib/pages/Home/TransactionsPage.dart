@@ -120,8 +120,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                           fontSize: 30.0,
                           fontFamily: "SFPro",
                           fontWeight: FontWeight.bold,
-                          //color: Colors.grey[600],
-                          foreground: Paint()..shader = linearGradientPurple
+                          color: Color(0xff8e91f3),
+                          // foreground: Paint()..shader = linearGradientPurple
                         ),
                       ),
 
@@ -138,7 +138,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             fontSize: 25.0,
                             fontFamily: "SFPro",
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey[600]),
+                             color: Colors.grey[600]
+                            //foreground: Paint()..shader = linearGradientPurple
+                            ),
                           ),
 
                            Text(
@@ -167,7 +169,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             fontSize: 25.0,
                             fontFamily: "SFPro",
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey[600]),
+                             color: Colors.grey[600]
+                            //foreground: Paint()..shader = linearGradientPurple
+                            ),
                           ),
 
                            Text(
@@ -196,7 +200,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             fontSize: 25.0,
                             fontFamily: "SFPro",
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey[600]),
+                             color: Colors.grey[600]
+                            //foreground: Paint()..shader = linearGradientPurple
+                            ),
                           ),
 
                           totalNet < 0 ?
@@ -234,8 +240,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             fontSize: 30.0,
                             fontFamily: "SFPro",
                             fontWeight: FontWeight.bold,
-                            // color: Colors.grey[600]
-                            foreground: Paint()..shader = linearGradientPurple
+                            color: Color(0xff8e91f3),
+                            //foreground: Paint()..shader = linearGradientPurple
                             ),
                           ),
 
@@ -395,7 +401,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                 DateFormat.MMMMEEEEd()
                     .format(widget.timestamp.toDate())
                     .toString(),
-                style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                style: TextStyle(color: Colors.grey[600], fontSize: 12, fontWeight: FontWeight.w600),
               ),
             ),
             SizedBox(
