@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
+import 'package:muhnee/utilities/SizeConfig.dart';
 import 'IntroPageIncome.dart';
 import '../../utilities/FadeRoute.dart';
 
@@ -22,12 +23,16 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         automaticallyImplyLeading: false,
         elevation: 0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: ListView(
         children: <Widget>[
           ShowUpText(),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 4,
+          ),
           ExpCellsComponent(),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 4,
+          ),
           NextButton(),
         ],
       ),
@@ -296,7 +301,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
         //else if its purple, set colour back to grey and remove from array
         else {
           setState(() {
-            cellColor = Color(0xffDEDEDE);
+            cellColor = Color(0xffDEDEDE).withOpacity(0.75);
             textColor = Colors.black;
           });
 

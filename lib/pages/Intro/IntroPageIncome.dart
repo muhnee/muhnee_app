@@ -3,6 +3,7 @@ import '../../utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import '../Home/HomePage.dart';
+import 'package:muhnee/utilities/SizeConfig.dart';
 
 var incomes = [];
 
@@ -22,12 +23,16 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
         automaticallyImplyLeading: false,
         elevation: 0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: ListView(
         children: <Widget>[
           ShowUpText(),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 4,
+          ),
           IncCellsComponent(),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 4,
+          ),
           NextButton(),
         ],
       ),
@@ -287,7 +292,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
         //else if its purple, set colour back to grey and remove from array
         else {
           setState(() {
-            cellColor = Color(0xffDEDEDE);
+            cellColor = Color(0xffDEDEDE).withOpacity(0.75);
             textColor = Colors.black;
           });
 

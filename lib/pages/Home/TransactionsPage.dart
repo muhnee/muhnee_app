@@ -206,7 +206,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                                   ..shader = linearGradientRed),
                                           )
                                         : Text(
-                                            totalNet.toString(),
+                                            "\$" + totalNet.toString(),
                                             style: TextStyle(
                                                 fontSize: 25.0,
                                                 fontFamily: "SFPro",
