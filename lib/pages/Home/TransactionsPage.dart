@@ -99,7 +99,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 children = <Widget>[
                   // Stats section
 
-                  
                   // ListView
                   Container(
                       child: Expanded(
@@ -109,138 +108,136 @@ class _TransactionsPageState extends State<TransactionsPage> {
                           horizontal: SizeConfig.blockSizeHorizontal * 5,
                         ),
                         children: [
-
                           // Not Scrollable b4
 
                           SizedBox(
-                    width: SizeConfig.blockSizeHorizontal * 70,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: SizeConfig.blockSizeVertical * 1.5,
-                        ),
-                        Text(
-                          "This week you've",
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontFamily: "SFPro",
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff8e91f3),
-                            // foreground: Paint()..shader = linearGradientPurple
+                            width: SizeConfig.blockSizeHorizontal * 70,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 1.5,
+                                ),
+                                Text(
+                                  "This week you've",
+                                  style: TextStyle(
+                                    fontSize: 30.0,
+                                    fontFamily: "SFPro",
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff8e91f3),
+                                    // foreground: Paint()..shader = linearGradientPurple
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 1,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "Spent: ",
+                                      style: TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: "SFPro",
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[600]
+                                          //foreground: Paint()..shader = linearGradientPurple
+                                          ),
+                                    ),
+                                    Text(
+                                      "\$" + totalExp.toString(),
+                                      style: TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: "SFPro",
+                                          fontWeight: FontWeight.bold,
+                                          foreground: Paint()
+                                            ..shader = linearGradientRed),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 1,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "Saved: ",
+                                      style: new TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: "SFPro",
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[600]
+                                          //foreground: Paint()..shader = linearGradientPurple
+                                          ),
+                                    ),
+                                    Text(
+                                      "\$" + totalInc.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: "SFPro",
+                                          fontWeight: FontWeight.bold,
+                                          foreground: Paint()
+                                            ..shader = linearGradientGreen),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 1,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "Net: ",
+                                      style: TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: "SFPro",
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[600]
+                                          //foreground: Paint()..shader = linearGradientPurple
+                                          ),
+                                    ),
+                                    totalNet < 0
+                                        ? Text(
+                                            "- \$"+ totalNet.toString().substring(1),
+                                            style: TextStyle(
+                                                fontSize: 25.0,
+                                                fontFamily: "SFPro",
+                                                fontWeight: FontWeight.bold,
+                                                foreground: Paint()
+                                                  ..shader = linearGradientRed),
+                                          )
+                                        : Text(
+                                            totalNet.toString(),
+                                            style: TextStyle(
+                                                fontSize: 25.0,
+                                                fontFamily: "SFPro",
+                                                fontWeight: FontWeight.bold,
+                                                foreground: Paint()
+                                                  ..shader =
+                                                      linearGradientGreen),
+                                          )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 2.5,
+                                ),
+                                Text(
+                                  "Your Transactions",
+                                  style: TextStyle(
+                                    fontSize: 30.0,
+                                    fontFamily: "SFPro",
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff8e91f3),
+                                    //foreground: Paint()..shader = linearGradientPurple
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 0.3,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeVertical * 1,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              "Spent: ",
-                              style: TextStyle(
-                                  fontSize: 25.0,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[600]
-                                  //foreground: Paint()..shader = linearGradientPurple
-                                  ),
-                            ),
-                            Text(
-                              totalExp.toString(),
-                              style: TextStyle(
-                                  fontSize: 25.0,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.bold,
-                                  foreground: Paint()
-                                    ..shader = linearGradientRed),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeVertical * 1,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              "Saved: ",
-                              style: new TextStyle(
-                                  fontSize: 25.0,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[600]
-                                  //foreground: Paint()..shader = linearGradientPurple
-                                  ),
-                            ),
-                            Text(
-                              totalInc.toString(),
-                              style: new TextStyle(
-                                  fontSize: 25.0,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.bold,
-                                  foreground: Paint()
-                                    ..shader = linearGradientGreen),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeVertical * 1,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              "Net: ",
-                              style: TextStyle(
-                                  fontSize: 25.0,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[600]
-                                  //foreground: Paint()..shader = linearGradientPurple
-                                  ),
-                            ),
-                            totalNet < 0
-                                ? Text(
-                                    totalNet.toString(),
-                                    style: TextStyle(
-                                        fontSize: 25.0,
-                                        fontFamily: "SFPro",
-                                        fontWeight: FontWeight.bold,
-                                        foreground: Paint()
-                                          ..shader = linearGradientRed),
-                                  )
-                                : Text(
-                                    totalNet.toString(),
-                                    style: TextStyle(
-                                        fontSize: 25.0,
-                                        fontFamily: "SFPro",
-                                        fontWeight: FontWeight.bold,
-                                        foreground: Paint()
-                                          ..shader = linearGradientGreen),
-                                  )
-                          ],
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeVertical * 2.5,
-                        ),
-                        Text(
-                          "Your Transactions",
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontFamily: "SFPro",
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff8e91f3),
-                            //foreground: Paint()..shader = linearGradientPurple
-                          ),
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeVertical * 0.3,
-                        ),
-                      ],
-                    ),
-                  ),
-
 
                           // Not Scrollable b4 ^
-
 
                           for (var item in snapshot.data)
                             TransactionViewCell(
