@@ -431,7 +431,9 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                               ),
                             ),
                             Text(
-                              DateFormat.MMMMEEEEd()
+                              DateFormat.EEEE()
+                                  .format(widget.timestamp.toDate())
+                                  .toString() + ", " + DateFormat.MMMd()
                                   .format(widget.timestamp.toDate())
                                   .toString(),
                               style: TextStyle(
