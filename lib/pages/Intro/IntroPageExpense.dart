@@ -150,13 +150,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                     child: Padding(
                       padding:
                           EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
-                      child:
-
-                      
-
-  
-                      
-                       TextField(
+                      child: TextField(
                         controller: customExpenseController,
                         textCapitalization: TextCapitalization.words,
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
@@ -252,7 +246,31 @@ class _TickBtnState extends State<TickBtn> {
             // ));
 
             if (widget.customExpenseController.text.isNotEmpty) {
-              addToExpenses(widget.customExpenseController.text);
+              var customExpense = widget.customExpenseController.text;
+
+              addToExpenses(customExpense);
+
+              Scaffold.of(context).showSnackBar(SnackBar(
+                //behavior: SnackBarBehavior.floating,
+                //elevation: 0,
+                //           shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(10.0),
+                // ),
+                // duration: Duration(seconds: 1),
+                backgroundColor: Colors.grey[300],
+                content: Text(
+                  customExpense,
+                  style: TextStyle(color: Colors.black),
+                ),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  textColor: Colors.black,
+                  onPressed: () {
+                    removeFromExpenses(customExpense);
+                  },
+                ),
+              ));
+
               widget.customExpenseController.clear();
 
               print(expenses);
@@ -276,7 +294,6 @@ class SingleExpCell extends StatefulWidget {
 
 class _SingleExpCellState extends State<SingleExpCell> {
   //! should this be in the build or not???
-
 
   var cellColor = Colors.grey[300];
   var textColor = Colors.black;
@@ -356,6 +373,7 @@ class _NextButtonState extends State<NextButton> {
                       onTap: () {
                         expenses.add("Other");
                         uploadExpenses(expenses);
+
                         Navigator.pushReplacement(
                             context, FadeRouteBuilder(page: IntroPageIncome()));
                       },

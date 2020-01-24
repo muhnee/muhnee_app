@@ -7,7 +7,7 @@ import './pages/Intro/IntroPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
-  runApp(new MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       canvasColor: Colors.white,
@@ -20,7 +20,7 @@ void main() async {
     home: new SplashScreen(),
   ));
 
- // SystemChrome.setEnabledSystemUIOverlays([]);
+  // SystemChrome.setEnabledSystemUIOverlays([]);
 
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
