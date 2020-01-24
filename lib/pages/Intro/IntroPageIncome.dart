@@ -168,7 +168,7 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
                       ),
                     ),
                     decoration: BoxDecoration(
-                      color: Color(0xffDEDEDE),
+                      color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
@@ -261,7 +261,7 @@ class SingleExpCell extends StatefulWidget {
 
 class _SingleExpCellState extends State<SingleExpCell> {
   //! should this be in the build or not???
-  var cellColor = Color(0xffDEDEDE).withOpacity(0.75);
+  var cellColor = Colors.grey[300];
   var textColor = Colors.black;
 
   @override
@@ -281,7 +281,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
       onPressed: () {
         //set the state of itself
         //if cell colour is grey set it to purple and update the array
-        if (cellColor == Color(0xffDEDEDE).withOpacity(0.75)) {
+        if (cellColor == Colors.grey[300]) {
           setState(() {
             cellColor = Color(0xff8e91f3).withOpacity(0.75);
             textColor = Colors.white;
@@ -293,7 +293,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
         //else if its purple, set colour back to grey and remove from array
         else {
           setState(() {
-            cellColor = Color(0xffDEDEDE).withOpacity(0.75);
+            cellColor = Colors.grey[300];
             textColor = Colors.black;
           });
 
