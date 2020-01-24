@@ -55,6 +55,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
       colors: <Color>[Color(0xffe52d27), Color(0xffff0844)],
     ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
+     final Shader linearGradientPurple = LinearGradient(
+      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -112,11 +116,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
                       ),
                       Text(
                         "This week you've",
-                        style: new TextStyle(
+                        style:  TextStyle(
                           fontSize: 30.0,
                           fontFamily: "SFPro",
                           fontWeight: FontWeight.bold,
-                          color: Colors.grey[600],
+                          //color: Colors.grey[600],
+                          foreground: Paint()..shader = linearGradientPurple
                         ),
                       ),
 
@@ -187,7 +192,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
                           Text(
                              "Net: ",
-                        style: new TextStyle(
+                        style:  TextStyle(
                             fontSize: 25.0,
                             fontFamily: "SFPro",
                             fontWeight: FontWeight.bold,
@@ -225,11 +230,13 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
                       Text(
                              "Your Transactions",
-                        style: new TextStyle(
+                        style:  TextStyle(
                             fontSize: 30.0,
                             fontFamily: "SFPro",
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey[600]),
+                            // color: Colors.grey[600]
+                            foreground: Paint()..shader = linearGradientPurple
+                            ),
                           ),
 
                           SizedBox(
@@ -388,7 +395,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                 DateFormat.MMMMEEEEd()
                     .format(widget.timestamp.toDate())
                     .toString(),
-                style: TextStyle(color: Colors.grey[600], ),
+                style: TextStyle(color: Colors.grey[600], fontSize: 13),
               ),
             ),
             SizedBox(
