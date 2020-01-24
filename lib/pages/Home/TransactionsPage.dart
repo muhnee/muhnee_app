@@ -25,6 +25,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
     weeklyTransactions = getWeeklyTransactions();
   }
 
+  //! used for week to month switch
+
   int curPageIndex = 0;
 
   final Map<int, Widget> logoWidgets = const <int, Widget>{
@@ -40,26 +42,37 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    
+
+
+    //Shader is for gradient text
+    final Shader linearGradientRed = LinearGradient(
+      colors: <Color>[Color(0xff90cb46), Color(0xff9ed45b)],
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
+    final Shader linearGradientGreen = LinearGradient(
+      colors: <Color>[Color(0xffe52d27), Color(0xffff0844)],
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Column(
         children: <Widget>[
-         
+          // Padding(
+          //   padding: EdgeInsets.only(bottom: 10, top: 10),
+          //   child: CupertinoSlidingSegmentedControl<int>(
 
-          Padding(
-            padding: EdgeInsets.only(bottom: 10, top: 10),
-            child: CupertinoSlidingSegmentedControl<int>(
-           
-              children: logoWidgets,
-              onValueChanged: (int val) {
-                setState(() {
-                  curPageIndex = val;
-                });
-              },
-              groupValue: curPageIndex,
-            ),
-          ),
+          //     children: logoWidgets,
+          //     onValueChanged: (int val) {
+          //       setState(() {
+          //         curPageIndex = val;
+          //       });
+          //     },
+          //     groupValue: curPageIndex,
+          //   ),
+          // ),
 
           Expanded(
               child: FutureBuilder<List>(
@@ -81,55 +94,62 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
                 totalNet = totalInc - totalExp;
 
-                var dateArray = [];
-
                 children = <Widget>[
+                  // Stats section
 
-                  //! Previously the stats section 
-                  // Padding(
-                  //     padding: EdgeInsets.symmetric(
-                  //         vertical: SizeConfig.blockSizeVertical * 0.8),
-                  //     child: SizedBox(
-                  //       height: SizeConfig.blockSizeVertical * 17,
-                  //       width: SizeConfig.blockSizeHorizontal * 70,
-                  //       child: InkWell(
-                  //         child: Container(
-                  //             //         decoration: BoxDecoration(
-                  //             // borderRadius: BorderRadius.circular(10.0),
-                  //             // color: Colors.white,
-                  //             // boxShadow: [
-                  //             //   BoxShadow(
-                  //             //     color: Colors.black.withOpacity(0.25),
-                  //             //     blurRadius: 10.0,
-                  //             //   ),
-                  //             // ]),
-                  //             decoration: BoxDecoration(
-                  //                 borderRadius: BorderRadius.circular(10.0),
-                  //                 //color: Color(0xff8e91f3),
-                  //                 color: Colors.grey[200]
-                  //                 //border: Border.all(color: Colors.grey)
-                  //                 ),
-                  //             child: Padding(
-                  //               padding: EdgeInsets.symmetric(
-                  //                 horizontal: 20,
-                  //                 vertical: 10,
-                  //               ),
-                  //               child: Column(
-                  //                 mainAxisAlignment:
-                  //                     MainAxisAlignment.spaceAround,
-                  //                 crossAxisAlignment: CrossAxisAlignment.start,
-                  //                 children: <Widget>[
-                  //                   summaryRow("Income", totalInc.toString()),
-                  //                   summaryRow("Expenses", totalExp.toString()),
-                  //                   summaryRow("Net", totalNet.toString()),
-                  //                 ],
-                  //               ),
-                  //             )),
-                  //         onTap: () {
-                  //           print("Summary Cell Pressed");
-                  //         },
-                  //       ),
-                  //     )),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "This week you've",
+                        style: new TextStyle(
+                          fontSize: 25.0,
+                          fontFamily: "SFPro",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      Text(
+                        "Spent: " + totalExp.toString(),
+                        style: new TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()..shader = linearGradientRed),
+                      ),
+                      Text(
+                        "Saved: " + totalInc.toString(),
+                        style: new TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()..shader = linearGradientGreen),
+                      ),
+
+                      totalNet < 0
+                          ? Text(
+                              "Net: " + totalNet.toString(),
+                              style: new TextStyle(
+                                  fontSize: 25.0,
+                                  fontFamily: "SFPro",
+                                  fontWeight: FontWeight.bold,
+                                  foreground: Paint()
+                                    ..shader = linearGradientGreen),
+                            )
+                          : Text(
+                              "Net: " + totalNet.toString(),
+                              style: new TextStyle(
+                                  fontSize: 25.0,
+                                  fontFamily: "SFPro",
+                                  fontWeight: FontWeight.bold,
+                                  foreground: Paint()
+                                    ..shader = linearGradientRed),
+                            )
+
+                    ],
+                  ),
+
+                  // ListView
                   Container(
                       child: Expanded(
                     child: ListView(
@@ -176,49 +196,49 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 }
 
-Widget summaryRow(type, amount) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      Text(
-         type + ": ",
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-      ),
-      type == "Income"
-          ? Text(
-              "\$ " + amount,
-              style: GoogleFonts.varelaRound(
-                textStyle: TextStyle(
-                  letterSpacing: .5,
-                  fontSize: 16,
-                  color: Colors.green,
-                ),
-              ),
-            )
-          : type == "Expenses"
-              ? Text(
-                  "\$ " + amount,
-                  style: GoogleFonts.varelaRound(
-                    textStyle: TextStyle(
-                      letterSpacing: .5,
-                      fontSize: 16,
-                      color: Colors.red,
-                    ),
-                  ),
-                )
-              : Text(
-                  "\$ " + amount,
-                  style: GoogleFonts.varelaRound(
-                    textStyle: TextStyle(
-                      letterSpacing: .5,
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                )
-    ],
-  );
-}
+// Widget summaryRow(type, amount) {
+//   return Row(
+//     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//     children: <Widget>[
+//       Text(
+//         type + ": ",
+//         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+//       ),
+//       type == "Income"
+//           ? Text(
+//               "\$ " + amount,
+//               style: GoogleFonts.varelaRound(
+//                 textStyle: TextStyle(
+//                   letterSpacing: .5,
+//                   fontSize: 16,
+//                   color: Colors.green,
+//                 ),
+//               ),
+//             )
+//           : type == "Expenses"
+//               ? Text(
+//                   "\$ " + amount,
+//                   style: GoogleFonts.varelaRound(
+//                     textStyle: TextStyle(
+//                       letterSpacing: .5,
+//                       fontSize: 16,
+//                       color: Colors.red,
+//                     ),
+//                   ),
+//                 )
+//               : Text(
+//                   "\$ " + amount,
+//                   style: GoogleFonts.varelaRound(
+//                     textStyle: TextStyle(
+//                       letterSpacing: .5,
+//                       fontSize: 16,
+//                       color: Colors.black,
+//                     ),
+//                   ),
+//                 )
+//     ],
+//   );
+// }
 
 class TransactionViewCell extends StatefulWidget {
   var amountText;
@@ -241,7 +261,7 @@ class TransactionViewCell extends StatefulWidget {
 }
 
 class _TransactionViewCellState extends State<TransactionViewCell> {
-  Color cellColor1;
+  //Color cellColor1;
   Color cellColor2;
 
   var cat;
@@ -250,10 +270,10 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   @override
   Widget build(BuildContext context) {
     if (widget.type == "income") {
-      cellColor1 = Color(0xff90cb46);
+      //cellColor1 = Color(0xff90cb46);
       cellColor2 = Color(0xff9ed45b);
     } else {
-      cellColor1 = Color(0xffe52d27);
+      //cellColor1 = Color(0xffe52d27);
       cellColor2 = Color(0xffff0844);
     }
 
@@ -265,24 +285,30 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 1, bottom: 3),
-              child: Text(DateFormat.yMMMMEEEEd()
-                  .format(widget.timestamp.toDate())
-                  .toString()),
+              child: Text(
+                DateFormat.MMMMEEEEd()
+                    .format(widget.timestamp.toDate())
+                    .toString(),
+                style: TextStyle(color: Colors.grey[600]),
+              ),
             ),
             SizedBox(
               height: SizeConfig.blockSizeVertical * 6.5,
               child: InkWell(
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [cellColor1, cellColor2],
-                      ),
-                      color: Colors.grey[200],
-                      //border: Border.all(color: cellColor1)
-                      ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Colors.grey[200],
+                        Colors.grey[300]
+                      ], //? [cellColor1, cellColor2],
+                    ),
+                    //color: Colors.grey[200],
+                    //border: Border.all(color: cellColor2)
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -291,23 +317,29 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                             left: SizeConfig.blockSizeVertical * 1),
                         child: Row(
                           children: <Widget>[
+
                             Text(
                               "\$ ",
-                              style: GoogleFonts.varelaRound(
-                                textStyle: TextStyle(
+                              style: 
+                                 TextStyle(
                                     letterSpacing: .5,
                                     fontSize: 20,
-                                    color: Colors.white),
-                              ),
+                                    color: cellColor2,
+                                    fontFamily: "SFPro", 
+                                    fontWeight: FontWeight.w600),
+
+                              
                             ),
                             Text(
                               widget.amountText,
-                              style: GoogleFonts.varelaRound(
-                                textStyle: TextStyle(
+                              style: 
+                                TextStyle(
                                     letterSpacing: .5,
                                     fontSize: 25,
-                                    color: Colors.white),
-                              ),
+                                    color: cellColor2, 
+                                    fontFamily: "SFPro", 
+                                    fontWeight: FontWeight.w600,)
+                            
                             ),
                           ],
                         ),
@@ -318,7 +350,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                         child: Text(
                           widget.category,
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: 15,
                               fontWeight: FontWeight.w600),
                         ),

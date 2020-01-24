@@ -47,7 +47,7 @@ class _LeftPanelState extends State<LeftPanel> {
             PanelButton(
                 itemValue: "Add",
                 fontSize: 16,
-                cellHeight: 18, //15
+                cellHeight: 15, //18
                 rotation: 3,
                 pageIndex: 1,
                 pageViewController: widget.pageViewController),
@@ -70,7 +70,7 @@ class _LeftPanelState extends State<LeftPanel> {
             PanelButton(
                 itemValue: "Transactions",
                 fontSize: 16,
-                cellHeight: 18, //15
+                cellHeight: 25, //18
                 rotation: 3,
                 pageIndex: 2,
                 pageViewController: widget.pageViewController),
@@ -78,17 +78,19 @@ class _LeftPanelState extends State<LeftPanel> {
               flex: 1,
               child: Container(),
             ),
-            PanelButton(
-                itemValue: "Statistics",
-                fontSize: 16,
-                cellHeight: 18, //25
-                rotation: 3,
-                pageIndex: 3,
-                pageViewController: widget.pageViewController),
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
+
+            //! Stats Page Disabled
+            // PanelButton(
+            //     itemValue: "Statistics",
+            //     fontSize: 16,
+            //     cellHeight: 18, //25
+            //     rotation: 3,
+            //     pageIndex: 3,
+            //     pageViewController: widget.pageViewController),
+            // Expanded(
+            //   flex: 1,
+            //   child: Container(),
+            // ),
           ],
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 
 // Pull from Firebase
 
@@ -148,9 +149,9 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget KeyboardCell(cellValue) {
     return RaisedButton(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          //side: BorderSide(color: Colors.grey[200])
-          ),
+        borderRadius: BorderRadius.circular(10.0),
+        //side: BorderSide(color: Colors.grey[200])
+      ),
       color: Colors.grey[100],
       elevation: 0,
       child: Padding(
@@ -189,15 +190,13 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
             children: <Widget>[
               Text(
                 "\$ ",
-                style: GoogleFonts.varelaRound(
-                  textStyle: TextStyle(fontSize: 35),
-                ),
+                style:  TextStyle(fontSize: 45,fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[700])
+                
               ),
               Text(
                 amount,
-                style: GoogleFonts.varelaRound(
-                  textStyle: TextStyle(fontSize: 80),
-                ),
+                style: TextStyle(fontSize: 80, fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[700])
+                
               ),
             ],
           ),
@@ -213,7 +212,6 @@ class InteractionPane extends StatefulWidget {
 }
 
 class _InteractionPaneState extends State<InteractionPane> {
- 
   Color incomeExpenseColor = Color(0xffa5d15b);
 
   Color taxableColor = Colors.grey[300];
@@ -230,11 +228,31 @@ class _InteractionPaneState extends State<InteractionPane> {
             children: <Widget>[
               // ROW FOR BUTTONS
 
+              //         Container(
+              //           child: BubbleBottomBar(
+              //   opacity: .2,
+              //   currentIndex: 0,
+              //   onTap: transactionTypeSelector(),
+              //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              //   elevation: 8,
+              //   fabLocation: BubbleBottomBarFabLocation.end, //new
+              //   hasNotch: true, //new
+              //   hasInk: true, //new, gives a cute ink effect
+              //   inkColor: Colors.black12, //optional, uses theme color if not specified
+              //   items: <BubbleBottomBarItem>[
+              //       BubbleBottomBarItem(backgroundColor: Colors.red, icon: Icon(Icons.dashboard, color: Colors.black,), activeIcon: Icon(Icons.dashboard, color: Colors.red,), title: Text("Home")),
+              //       BubbleBottomBarItem(backgroundColor: Colors.deepPurple, icon: Icon(Icons.access_time, color: Colors.black,), activeIcon: Icon(Icons.access_time, color: Colors.deepPurple,), title: Text("Logs")),
+              //   ],
+              // ),
+              //         ),
+
               // ExpenseDescription(),
 
-              transactionType == "income"
-                  ? ExpenseDescriptionEmptySpace()
-                  : ExpenseDescription(),
+              // transactionType == "income"
+              //     ? ExpenseDescriptionEmptySpace()
+              //     : ExpenseDescription(),
+
+              ExpenseDescription(),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -319,12 +337,18 @@ class _InteractionPaneState extends State<InteractionPane> {
                       if (amount != "0" && selectedCategory != "") {
                         var description;
 
-                        transactionType == "income"
-                            ? description = ""
-                            : descriptionController.text.isNotEmpty
-                                ? description =
-                                    descriptionController.text.toString()
-                                : description = "";
+                        //? All transactions now take description data (optional)
+                        // transactionType == "income"
+                        //     ? description = ""
+                        //     : descriptionController.text.isNotEmpty
+                        //         ? description =
+                        //             descriptionController.text.toString()
+                        //         : description = "";
+
+                        descriptionController.text.isNotEmpty
+                            ? description =
+                                descriptionController.text.toString()
+                            : description = null;
 
                         uploadTransaction(amount, transactionType,
                             selectedCategory, isTaxable, description);
@@ -333,26 +357,23 @@ class _InteractionPaneState extends State<InteractionPane> {
                                 context: context,
                                 dialogType: DialogType.SUCCES,
                                 animType: AnimType.BOTTOMSLIDE,
-                                
-                                tittle: (transactionType[0].toUpperCase()+ transactionType.substring(1).toString()) + " uploaded",
+                                tittle: (transactionType[0].toUpperCase() +
+                                        transactionType
+                                            .substring(1)
+                                            .toString()) +
+                                    " uploaded",
                                 desc: selectedCategory + ': \$' + amount,
                                 btnOkOnPress: () {})
                             .show();
 
-                            
-                            //TODO : FIRST THING IN THE MONRING
+                        //TODO : FIRST THING IN THE MONRING
                         //! resetValues();
 
-                        if (transactionType == "expense"){
+                        if (transactionType == "expense") {
                           setState(() {
                             descriptionController.clear();
-
                           });
-
                         }
-
-
-                        
                       } else if (selectedCategory == "") {
                         AwesomeDialog(
                           context: context,
@@ -404,6 +425,23 @@ class _InteractionPaneState extends State<InteractionPane> {
     print(transactionType);
     print(isTaxable);
   }
+
+  transactionTypeSelector() {
+    if (transactionType == "income") {
+      setState(() {
+        transactionType = "expense";
+        //incomeExpenseColor = Color(0xffE43524);
+        selectedCategory = "";
+      });
+    } else {
+      setState(() {
+        transactionType = "income";
+        //incomeExpenseColor = Color(0xffa5d15b);
+        selectedCategory = "";
+        descriptionController.clear();
+      });
+    }
+  }
 }
 
 class expenseCategorySection extends StatefulWidget {
@@ -452,9 +490,6 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
           ];
         } else {
           children = <Widget>[
-
-           
-
             NotificationCell(
               message: "Loading...",
               messageColor: Colors.grey,
@@ -692,7 +727,7 @@ class NotificationCell extends StatelessWidget {
     //       )),
     // );
 
-     return RaisedButton(
+    return RaisedButton(
       color: Colors.white,
       elevation: 0,
       child: Text(message,
@@ -700,17 +735,9 @@ class NotificationCell extends StatelessWidget {
             color: messageColor,
             fontWeight: FontWeight.w600,
           )),
-      onPressed: (){
-
+      onPressed: () {
         //do nothing
-
       },
     );
-
-
   }
 }
-
-
-
-
