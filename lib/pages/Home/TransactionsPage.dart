@@ -99,7 +99,20 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 children = <Widget>[
                   // Stats section
 
-                  SizedBox(
+                  
+                  // ListView
+                  Container(
+                      child: Expanded(
+                    child: ListView(
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.blockSizeHorizontal * 5,
+                        ),
+                        children: [
+
+                          // Not Scrollable b4
+
+                          SizedBox(
                     width: SizeConfig.blockSizeHorizontal * 70,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,15 +238,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                     ),
                   ),
 
-                  // ListView
-                  Container(
-                      child: Expanded(
-                    child: ListView(
-                        scrollDirection: Axis.vertical,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: SizeConfig.blockSizeHorizontal * 5,
-                        ),
-                        children: [
+
+                          // Not Scrollable b4 ^
+
+
                           for (var item in snapshot.data)
                             TransactionViewCell(
                                 amountText: item["amount"].toString(),
