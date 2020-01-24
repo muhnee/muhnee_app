@@ -27,11 +27,11 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
         children: <Widget>[
           ShowUpText(),
           SizedBox(
-            height: SizeConfig.blockSizeVertical * 4,
+            height: SizeConfig.blockSizeVertical * 6,
           ),
           IncCellsComponent(),
           SizedBox(
-            height: SizeConfig.blockSizeVertical * 4,
+            height: SizeConfig.blockSizeVertical * 6,
           ),
           NextButton(),
         ],
@@ -161,6 +161,7 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
                           EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
                       child: TextField(
                         controller: customIncomeController,
+                        textCapitalization: TextCapitalization.words,
                         style: TextStyle(fontSize: 15.0, color: Colors.black),
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Custom...'),

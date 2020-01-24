@@ -27,11 +27,11 @@ class _IntroPageExpenseState extends State<IntroPageExpense> {
         children: <Widget>[
           ShowUpText(),
           SizedBox(
-            height: SizeConfig.blockSizeVertical * 4,
+            height: SizeConfig.blockSizeVertical * 6,
           ),
           ExpCellsComponent(),
           SizedBox(
-            height: SizeConfig.blockSizeVertical * 4,
+            height: SizeConfig.blockSizeVertical * 6,
           ),
           NextButton(),
         ],
@@ -150,9 +150,16 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                     child: Padding(
                       padding:
                           EdgeInsets.only(left: 20.0, right: 20.0, bottom: 2.0),
-                      child: TextField(
+                      child:
+
+                      
+
+  
+                      
+                       TextField(
                         controller: customExpenseController,
-                        style: TextStyle(fontSize: 15.0, color: Colors.black),
+                        textCapitalization: TextCapitalization.words,
+                        style: TextStyle(fontSize: 15.0, color: Colors.white),
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Custom...'),
                       ),
