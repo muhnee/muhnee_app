@@ -234,7 +234,33 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
             // ));
 
             if (widget.customIncomeController.text.isNotEmpty) {
-              addToIncomes(widget.customIncomeController.text);
+              
+
+              var customIncome = widget.customIncomeController.text;
+              addToIncomes(customIncome);
+
+
+              Scaffold.of(context).showSnackBar(SnackBar(
+                //behavior: SnackBarBehavior.floating,
+                //elevation: 0,
+                //           shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(10.0),
+                // ),
+                // duration: Duration(seconds: 1),
+                backgroundColor: Colors.grey[300],
+                content: Text(
+                  customIncome + " added",
+                  style: TextStyle(color: Colors.black),
+                ),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  textColor: Colors.black,
+                  onPressed: () {
+                    removeFromIncomes(customIncome);
+                  },
+                ),
+              ));
+
               widget.customIncomeController.clear();
 
               print(incomes);

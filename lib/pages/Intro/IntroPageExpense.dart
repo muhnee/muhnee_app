@@ -259,7 +259,7 @@ class _TickBtnState extends State<TickBtn> {
                 // duration: Duration(seconds: 1),
                 backgroundColor: Colors.grey[300],
                 content: Text(
-                  customExpense,
+                  customExpense + " added",
                   style: TextStyle(color: Colors.black),
                 ),
                 action: SnackBarAction(
