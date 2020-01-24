@@ -21,7 +21,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   @override
   void initState() {
     super.initState();
-    monthlyTransactions = getMonthlyTransactions();
+    //monthlyTransactions = getMonthlyTransactions();
     weeklyTransactions = getWeeklyTransactions();
   }
 
@@ -47,11 +47,11 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
 
     //Shader is for gradient text
-    final Shader linearGradientRed = LinearGradient(
+    final Shader linearGradientGreen = LinearGradient(
       colors: <Color>[Color(0xff90cb46), Color(0xff9ed45b)],
     ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
-    final Shader linearGradientGreen = LinearGradient(
+    final Shader linearGradientRed = LinearGradient(
       colors: <Color>[Color(0xffe52d27), Color(0xffff0844)],
     ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
@@ -60,6 +60,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
       body: SafeArea(
           child: Column(
         children: <Widget>[
+
+          //! Segmented controller
           // Padding(
           //   padding: EdgeInsets.only(bottom: 10, top: 10),
           //   child: CupertinoSlidingSegmentedControl<int>(
@@ -75,10 +77,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
           // ),
 
           Expanded(
-              child: FutureBuilder<List>(
-            future: curPageIndex == 0
-                ? weeklyTransactions
-                : monthlyTransactions, // a previously-obtained Future<String> or null
+              child:
+               FutureBuilder<List>(
+            // future: curPageIndex == 0
+            //     ? weeklyTransactions
+            //     : monthlyTransactions, // a previously-obtained Future<String> or null
+            future: weeklyTransactions,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
               List<Widget> children;
 
@@ -97,28 +101,72 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 children = <Widget>[
                   // Stats section
 
-                  Column(
+                  SizedBox(
+                    width: SizeConfig.blockSizeHorizontal * 70,
+                    
+                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 1.5,
+                      ),
                       Text(
                         "This week you've",
                         style: new TextStyle(
-                          fontSize: 25.0,
+                          fontSize: 30.0,
                           fontFamily: "SFPro",
                           fontWeight: FontWeight.bold,
                           color: Colors.grey[600],
                         ),
                       ),
-                      Text(
-                        "Spent: " + totalExp.toString(),
-                        style: new TextStyle(
+
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 1,
+                      ),
+
+                      Row(
+                        children: <Widget>[
+
+                          Text(
+                             "Spent: ",
+                        style:  TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[600]),
+                          ),
+
+                           Text(
+                         totalExp.toString(),
+                        style:  TextStyle(
                             fontSize: 25.0,
                             fontFamily: "SFPro",
                             fontWeight: FontWeight.bold,
                             foreground: Paint()..shader = linearGradientRed),
                       ),
-                      Text(
-                        "Saved: " + totalInc.toString(),
+
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 1,
+                      ),
+
+
+                       Row(
+                        children: <Widget>[
+
+                          Text(
+                             "Saved: ",
+                        style: new TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[600]),
+                          ),
+
+                           Text(
+                        totalInc.toString(),
                         style: new TextStyle(
                             fontSize: 25.0,
                             fontFamily: "SFPro",
@@ -126,28 +174,77 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             foreground: Paint()..shader = linearGradientGreen),
                       ),
 
-                      totalNet < 0
-                          ? Text(
-                              "Net: " + totalNet.toString(),
-                              style: new TextStyle(
-                                  fontSize: 25.0,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.bold,
-                                  foreground: Paint()
-                                    ..shader = linearGradientGreen),
-                            )
-                          : Text(
-                              "Net: " + totalNet.toString(),
-                              style: new TextStyle(
-                                  fontSize: 25.0,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.bold,
-                                  foreground: Paint()
-                                    ..shader = linearGradientRed),
-                            )
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 1,
+                      ),
+
+
+                       Row(
+                        children: <Widget>[
+
+                          Text(
+                             "Net: ",
+                        style: new TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[600]),
+                          ),
+
+                          totalNet < 0 ?
+
+                           Text(
+                       totalNet.toString(),
+                        style:  TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()..shader = linearGradientRed),
+                      ) : 
+
+                      Text(
+                        totalNet.toString(),
+                        style:  TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()..shader = linearGradientGreen),
+                      )
+
+
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 2.5,
+                      ),
+
+
+                      Text(
+                             "Your Transactions",
+                        style: new TextStyle(
+                            fontSize: 30.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[600]),
+                          ),
+
+                          SizedBox(
+                        height: SizeConfig.blockSizeVertical * 0.3,
+                      ),
+
+
+                     
+                   
 
                     ],
                   ),
+                  ),
+
+                  
 
                   // ListView
                   Container(
@@ -189,9 +286,11 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 ),
               );
             },
-          )),
-        ],
-      )),
+          )
+          ),
+      ],
+      )
+      ),
     );
   }
 }
@@ -289,7 +388,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                 DateFormat.MMMMEEEEd()
                     .format(widget.timestamp.toDate())
                     .toString(),
-                style: TextStyle(color: Colors.grey[600]),
+                style: TextStyle(color: Colors.grey[600], ),
               ),
             ),
             SizedBox(
@@ -298,15 +397,15 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.grey[200],
-                        Colors.grey[300]
-                      ], //? [cellColor1, cellColor2],
-                    ),
-                    //color: Colors.grey[200],
+                    // gradient: LinearGradient(
+                    //   begin: Alignment.topLeft,
+                    //   end: Alignment.bottomRight,
+                    //   colors: [
+                    //     Colors.grey[200],
+                    //     Colors.grey[300]
+                    //   ], //? [cellColor1, cellColor2],
+                    // ),
+                    color: Colors.grey[200],
                     //border: Border.all(color: cellColor2)
                   ),
                   child: Row(
@@ -323,7 +422,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                               style: 
                                  TextStyle(
                                     letterSpacing: .5,
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: cellColor2,
                                     fontFamily: "SFPro", 
                                     fontWeight: FontWeight.w600),
@@ -350,9 +449,10 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                         child: Text(
                           widget.category,
                           style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
+                              color: Colors.grey[600],
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600, 
+                              ),
                         ),
                       ),
                     ],

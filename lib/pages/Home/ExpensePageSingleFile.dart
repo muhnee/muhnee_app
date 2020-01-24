@@ -190,12 +190,12 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
             children: <Widget>[
               Text(
                 "\$ ",
-                style:  TextStyle(fontSize: 45,fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[700])
+                style:  TextStyle(fontSize: 45,fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[600])
                 
               ),
               Text(
                 amount,
-                style: TextStyle(fontSize: 80, fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[700])
+                style: TextStyle(fontSize: 80, fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[600])
                 
               ),
             ],
@@ -681,11 +681,12 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
         padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.blockSizeHorizontal * 5),
         child: TextField(
-          controller: descriptionController,
+          controller: descriptionController,        
           decoration: InputDecoration(
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
             labelText: 'Add a description (optional)',
+            
             labelStyle: TextStyle(
               fontSize: 13,
             ),
