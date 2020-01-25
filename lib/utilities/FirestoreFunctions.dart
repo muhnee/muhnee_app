@@ -53,7 +53,7 @@ void uploadGoals(goalAmount) async {
   uid = currentUser.uid;
 
   await databaseReference.collection("users").document(uid).updateData({
-    'weeklyGoal': goalAmount,
+    'weeklySavingsGoal': goalAmount,
   });
 
   print("goalAmount uploaded");

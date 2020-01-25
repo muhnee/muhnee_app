@@ -26,12 +26,14 @@ class ExpensePageSingleFile extends StatefulWidget {
 }
 
 class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
-  @override
-  void initState() {
-    super.initState();
-    tExp = getExpenseCategories();
-    tInc = getIncomeCategories();
-  }
+  
+  
+  //@override
+  // void initState() {
+  //   super.initState();
+  //   tExp = getExpenseCategories();
+  //   tInc = getIncomeCategories();
+  // }
 
   @override
   Widget build(BuildContext context) {
