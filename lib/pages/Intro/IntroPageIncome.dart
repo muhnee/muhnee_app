@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:muhnee/pages/Intro/IntroPageGoals.dart';
 import '../../utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
@@ -27,11 +28,11 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
         children: <Widget>[
           ShowUpText(),
           SizedBox(
-            height: SizeConfig.blockSizeVertical * 6,
+            height: SizeConfig.blockSizeVertical * 10,
           ),
           IncCellsComponent(),
           SizedBox(
-            height: SizeConfig.blockSizeVertical * 6,
+            height: SizeConfig.blockSizeVertical * 13,
           ),
           NextButton(),
         ],
@@ -53,13 +54,13 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
                 children: <Widget>[
                   Text("Now, ",
                       style: TextStyle(
-                        fontSize: 30.0,
+                        fontSize: 28.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
                   Text("what are your",
                       style: TextStyle(
-                        fontSize: 30.0,
+                        fontSize: 28.0,
                         color: Colors.black,
                       )),
                 ],
@@ -79,7 +80,7 @@ class _IntroPageIncomeState extends State<IntroPageIncome> {
         padding: EdgeInsets.only(bottom: 15.0),
         child: Text(lineText,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: 28.0,
               // fontFamily: "Montserrat",
               color: Colors.black,
             )),
@@ -365,10 +366,9 @@ class _NextButtonState extends State<NextButton> {
                       onTap: () {
                         incomes.add("Other");
                         uploadIncomes(incomes);
-                        setOnboardedParam();
 
                         Navigator.pushReplacement(
-                            context, FadeRouteBuilder(page: HomePage()));
+                            context, FadeRouteBuilder(page: IntroPageGoals()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
