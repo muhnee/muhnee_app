@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
 import '../../utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import '../Home/HomePage.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 
-var goalAmount = "Test";
+var amount = "0";
 
 class IntroPageGoals extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class IntroPageGoals extends StatefulWidget {
 
 class _IntroPageGoalsState extends State<IntroPageGoals> {
   int delayAmount = 500;
+  var goalAmount = "0";
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +29,13 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
       body: ListView(
         children: <Widget>[
           ShowUpText(),
-          
-          AmountText(),
-
+          SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
+          ShowUp(
+            child: AmountText(),
+            delay: delayAmount * 6,
+          ),
           CustomKeyboard(),
-        
+          SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
           NextButton(),
         ],
       ),
@@ -90,109 +94,136 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
 
   Widget AmountText() {
     return Container(
-        child: Center(
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: <Widget>[
-              Text("\$ ",
-                  style: TextStyle(
-                      fontSize: 45,
-                      fontFamily: "SFPro",
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[600])),
-              Text(goalAmount.toString(),
-                  style: TextStyle(
-                      fontSize: 80,
-                      fontFamily: "SFPro",
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[600])),
-            ],
-          ),
+      child: Center(
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: <Widget>[
+            Text("\$ ",
+                style: TextStyle(
+                    fontSize: 45,
+                    fontFamily: "SFPro",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[600])),
+            Text(goalAmount.toString(),
+                style: TextStyle(
+                    fontSize: 80,
+                    fontFamily: "SFPro",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[600])),
+          ],
         ),
+      ),
     );
   }
 
   Widget CustomKeyboard() {
     return SizedBox(
-        
         height: SizeConfig.blockSizeVertical * 30,
         child: Container(
           //color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  KeyboardCell("1"),
-                  KeyboardCell("2"),
-                  KeyboardCell("3"),
-                ],
+              ShowUp(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    KeyboardCell("1"),
+                    KeyboardCell("2"),
+                    KeyboardCell("3"),
+                  ],
+                ),
+                delay: delayAmount * 8,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  KeyboardCell("4"),
-                  KeyboardCell("5"),
-                  KeyboardCell("6"),
-                ],
+              ShowUp(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    KeyboardCell("4"),
+                    KeyboardCell("5"),
+                    KeyboardCell("6"),
+                  ],
+                ),
+                delay: delayAmount * 9,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  KeyboardCell("7"),
-                  KeyboardCell("8"),
-                  KeyboardCell("9"),
-                ],
+              ShowUp(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    KeyboardCell("7"),
+                    KeyboardCell("8"),
+                    KeyboardCell("9"),
+                  ],
+                ),
+                delay: delayAmount * 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        ),
-                    color: Colors.grey[100],
-                    elevation: 0,
-                    child: Padding(
+              ShowUp(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.blockSizeVertical * 1.8),
-                      child: Icon(Icons.brightness_1,
-                          size: 8, color: Colors.black),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        goalAmount += ".";
-                      });
-                    },
-                  ),
-                  KeyboardCell("0"),
-                  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        horizontal: SizeConfig.blockSizeVertical * 0.6,
+                      ),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                    color: Colors.grey[100],
-                    elevation: 0,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.blockSizeVertical * 0.9),
-                      child: Icon(Icons.first_page, color: Colors.black),
+                        color: Colors.grey[100],
+                        elevation: 0,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeConfig.blockSizeVertical * 1.8),
+                          child: Icon(Icons.brightness_1,
+                              size: 8, color: Colors.black),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            goalAmount += ".";
+                            amount += ".";
+                          });
+                        },
+                      ),
                     ),
-                    onPressed: () {
-                      print("delete char");
+                    KeyboardCell("0"),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: SizeConfig.blockSizeVertical * 0.6,
+                      ),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        color: Colors.grey[100],
+                        elevation: 0,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeConfig.blockSizeVertical * 0.95),
+                          child: Icon(Icons.first_page, color: Colors.black),
+                        ),
+                        onPressed: () {
+                          print("delete char");
 
-                      if (goalAmount.length == 1) {
-                        setState(() {
-                          goalAmount = "0";
-                        });
-                      } else {
-                        setState(() {
-                          goalAmount = goalAmount.substring(0, (goalAmount.length - 1));
-                        });
-                      }
-                    },
-                  ),
-                ],
+                          if (goalAmount.length == 1) {
+                            setState(() {
+                              goalAmount = "0";
+                              amount = "0";
+                            });
+                          } else {
+                            setState(() {
+                              goalAmount = goalAmount.substring(
+                                  0, (goalAmount.length - 1));
+
+                              amount = goalAmount.substring(
+                                  0, (goalAmount.length - 1));
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                delay: delayAmount * 12,
               ),
             ],
           ),
@@ -200,49 +231,47 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
   }
 
   Widget KeyboardCell(cellValue) {
-    return RaisedButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        //side: BorderSide(color: Colors.grey[200])
-      ),
-      color: Colors.grey[100],
-      elevation: 0,
-      child: Padding(
-        padding:
-            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1),
-        child: Text(
-          cellValue,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.kulimPark(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            textStyle: TextStyle(
-              color: Colors.black,
+    return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.blockSizeVertical * 0.6,
+        ),
+        child: RaisedButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            //side: BorderSide(color: Colors.grey[200])
+          ),
+          color: Colors.grey[100],
+          elevation: 0,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: SizeConfig.blockSizeVertical * 1,
+            ),
+            child: Text(
+              cellValue,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.kulimPark(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                textStyle: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      onPressed: () {
-        goalAmount == "0"
-            ? setState(() {
-                goalAmount = cellValue;
-              })
-            : setState(() {
-                goalAmount += cellValue;
-              });
-      },
-    );
+          onPressed: () {
+            goalAmount == "0"
+                ? setState(() {
+                    goalAmount = cellValue;
+                    amount = cellValue;
+                  })
+                : setState(() {
+                    goalAmount += cellValue;
+                    amount += cellValue;
+                  });
+          },
+        ));
   }
 }
-
-//! FUNCTIONS
-// addToIncomes(incomeType) {
-//   goalAmount.add(incomeType);
-// }
-
-// removeFromIncomes(incomeType) {
-//   goalAmount.remove(incomeType);
-// }
 
 class NextButton extends StatefulWidget {
   @override
@@ -276,9 +305,11 @@ class _NextButtonState extends State<NextButton> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
-                        // incomes.add("Other");
-                        // uploadIncomes(incomes);
-                        // setOnboardedParam();
+                        uploadGoals(int.parse(amount));
+
+                        print(amount);
+
+                        setOnboardedParam();
 
                         Navigator.pushReplacement(
                             context, FadeRouteBuilder(page: HomePage()));

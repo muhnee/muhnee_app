@@ -48,6 +48,19 @@ Future<bool> isOnboarded() async {
   return onBoarded;
 }
 
+void uploadGoals(goalAmount) async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+  await databaseReference.collection("users").document(uid).updateData({
+    'weeklyGoal': goalAmount,
+  });
+
+  print("goalAmount uploaded");
+}
+
+
+
 userProfilePic() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   String imageUrlFirebase = currentUser.photoUrl;
