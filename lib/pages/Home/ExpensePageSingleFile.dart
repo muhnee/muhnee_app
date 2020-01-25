@@ -97,8 +97,8 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                 children: <Widget>[
                   RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                       ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     color: Colors.grey[100],
                     elevation: 0,
                     child: Padding(
@@ -116,8 +116,8 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                   KeyboardCell("0"),
                   RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                       ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     color: Colors.grey[100],
                     elevation: 0,
                     child: Padding(
@@ -188,16 +188,18 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
-              Text(
-                "\$ ",
-                style:  TextStyle(fontSize: 45,fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[600])
-                
-              ),
-              Text(
-                amount,
-                style: TextStyle(fontSize: 80, fontFamily: "SFPro", fontWeight: FontWeight.bold, color: Colors.grey[600])
-                
-              ),
+              Text("\$ ",
+                  style: TextStyle(
+                      fontSize: 45,
+                      fontFamily: "SFPro",
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[600])),
+              Text(amount,
+                  style: TextStyle(
+                      fontSize: 80,
+                      fontFamily: "SFPro",
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[600])),
             ],
           ),
         ),
@@ -674,29 +676,72 @@ class ExpenseDescription extends StatefulWidget {
 class _ExpenseDescriptionState extends State<ExpenseDescription> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: SizeConfig.blockSizeHorizontal * 80,
-      height: SizeConfig.blockSizeVertical * 5,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.blockSizeHorizontal * 5),
-        child: TextField(
-          controller: descriptionController,        
-          decoration: InputDecoration(
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-            labelText: 'Add a description (optional)',
-            
-            labelStyle: TextStyle(
-              fontSize: 13,
+    return Row(
+      children: <Widget>[
+        SizedBox(
+          width: SizeConfig.blockSizeHorizontal * 60,
+          height: SizeConfig.blockSizeVertical * 5,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.blockSizeHorizontal * 5),
+            child: TextField(
+              controller: descriptionController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                labelText: 'Add a description (optional)',
+                labelStyle: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
+              style: TextStyle(fontSize: 13),
+              cursorColor: Colors.grey,
+              //textAlign: TextAlign.center,
             ),
           ),
-          style: TextStyle(fontSize: 13),
-          cursorColor: Colors.grey,
-          //textAlign: TextAlign.center,
         ),
-      ),
+
+        // Recurring btn
+
+        RecurringBtn(),
+      ],
     );
+  }
+}
+
+class RecurringBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 40,
+      height: 40,
+      child: RaisedButton(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius:  BorderRadius.circular(10.0),
+        side: BorderSide(color: Colors.grey[300])
+),
+      elevation: 0,
+      child: Icon(Icons.loop),
+      onPressed: () {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          //behavior: SnackBarBehavior.floating,
+          //elevation: 0,
+          //           shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.circular(10.0),
+          // ),
+          // duration: Duration(seconds: 1),
+          backgroundColor: Colors.grey[300],
+          content: Text(
+            "Recurring every: ",
+            style: TextStyle(color: Colors.black),
+          ),
+        ));
+      },
+    ),
+    );
+    
+    
   }
 }
 
