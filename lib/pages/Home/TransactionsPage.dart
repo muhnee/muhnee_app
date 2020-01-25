@@ -426,28 +426,22 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-
-                                widget.recurring !=0 ? Row(children: <Widget>[
-
-                                  Text("  "),
-                                  Icon(Icons.loop, size: 10), 
-
-                                   Text(
-                                  widget.recurring.toString(),
-                                  style: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-
-
-                                ],) : Text("")
-
-                              
-
-                                
-
+                                widget.recurring != 0
+                                    ? Row(
+                                        children: <Widget>[
+                                          Text("  "),
+                                          Icon(Icons.loop, size: 10),
+                                          Text(
+                                            widget.recurring.toString(),
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Text("")
                               ],
                             ),
                             Text(
