@@ -16,6 +16,9 @@ var transactionType = "income";
 var selectedCategory = "";
 var isTaxable = false;
 
+var recurringDaysChoices = [0, 1, 2, 5, 7, 10, 14, 21, 32];
+var recurringDaySelection = 0; 
+
 final descriptionController = TextEditingController();
 
 class ExpensePageSingleFile extends StatefulWidget {
@@ -733,18 +736,40 @@ class RecurringBtn extends StatelessWidget {
           //     width: SizeConfig.blockSizeVertical * 4,
           //     height: SizeConfig.blockSizeVertical * 4,
           //   ),
-          
+
           onPressed: () {
+
+            switch(recurringDaySelection){
+              case 0 : {recurringDaySelection = 1; }
+              break; 
+              case 1 : {recurringDaySelection = 2; }
+              break; 
+              case 2 : {recurringDaySelection = 5; }
+              break; 
+              case 5 : {recurringDaySelection = 7; }
+              break; 
+              case 7 : {recurringDaySelection = 10; }
+              break; 
+              case 10 : {recurringDaySelection = 14; }
+              break; 
+              case 14 : {recurringDaySelection = 21; }
+              break; 
+              case 21 : {recurringDaySelection = 32; }
+              break; 
+              case 32 : {recurringDaySelection = 0; }
+              break; 
+            }
+
             Scaffold.of(context).showSnackBar(SnackBar(
               //behavior: SnackBarBehavior.floating,
               //elevation: 0,
               //           shape: RoundedRectangleBorder(
               //   borderRadius: BorderRadius.circular(10.0),
               // ),
-              // duration: Duration(seconds: 1),
+              duration: Duration(milliseconds: 200),
               backgroundColor: Colors.grey[300],
               content: Text(
-                "Recurring every: ",
+                "Recurring every: " + recurringDaySelection.toString() + " days",
                 style: TextStyle(color: Colors.black),
               ),
             ));
