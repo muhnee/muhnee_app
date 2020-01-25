@@ -766,7 +766,7 @@ class RecurringBtn extends StatelessWidget {
               //           shape: RoundedRectangleBorder(
               //   borderRadius: BorderRadius.circular(10.0),
               // ),
-              duration: Duration(milliseconds: 200),
+              duration: Duration(milliseconds: 300),
               backgroundColor: Colors.grey[300],
               content: Text(
                 "Recurring every: " + recurringDaySelection.toString() + " days",
