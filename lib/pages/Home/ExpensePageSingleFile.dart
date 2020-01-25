@@ -34,8 +34,8 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Container(
-      color: Colors.white,
+    return Scaffold(
+      // color: Colors.white,
       // decoration: BoxDecoration(
       //     gradient: LinearGradient(
       //           begin: Alignment.topCenter,
@@ -44,7 +44,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
       //         ),
 
       // ),
-      child: SafeArea(
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
@@ -679,11 +679,12 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
     return Row(
       children: <Widget>[
         SizedBox(
-          width: SizeConfig.blockSizeHorizontal * 60,
+          width: SizeConfig.blockSizeHorizontal * 65,
           height: SizeConfig.blockSizeVertical * 5,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: SizeConfig.blockSizeHorizontal * 5),
+            padding: EdgeInsets.only(
+                left: SizeConfig.blockSizeHorizontal * 5,
+                right: SizeConfig.blockSizeHorizontal * 3.5),
             child: TextField(
               controller: descriptionController,
               decoration: InputDecoration(
@@ -702,7 +703,6 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
         ),
 
         // Recurring btn
-
         RecurringBtn(),
       ],
     );
@@ -713,35 +713,43 @@ class RecurringBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 40,
-      height: 40,
+      width: SizeConfig.blockSizeVertical * 5,
+      height: SizeConfig.blockSizeVertical * 5,
       child: RaisedButton(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius:  BorderRadius.circular(10.0),
-        side: BorderSide(color: Colors.grey[300])
-),
-      elevation: 0,
-      child: Icon(Icons.loop),
-      onPressed: () {
-        Scaffold.of(context).showSnackBar(SnackBar(
-          //behavior: SnackBarBehavior.floating,
-          //elevation: 0,
-          //           shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.circular(10.0),
-          // ),
-          // duration: Duration(seconds: 1),
-          backgroundColor: Colors.grey[300],
-          content: Text(
-            "Recurring every: ",
-            style: TextStyle(color: Colors.black),
+          color: Colors.grey[200],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            //side: BorderSide(color: Colors.grey)
           ),
-        ));
-      },
-    ),
+          elevation: 0,
+          child: Image.asset(
+              'lib/assets/images/loop.png',
+              width: SizeConfig.blockSizeVertical * 4,
+              height: SizeConfig.blockSizeVertical * 4,
+            ),
+          
+          // Image(
+          //     image: AssetImage("lib/assets/images/loop.png",),
+          //     width: SizeConfig.blockSizeVertical * 4,
+          //     height: SizeConfig.blockSizeVertical * 4,
+          //   ),
+          
+          onPressed: () {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              //behavior: SnackBarBehavior.floating,
+              //elevation: 0,
+              //           shape: RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.circular(10.0),
+              // ),
+              // duration: Duration(seconds: 1),
+              backgroundColor: Colors.grey[300],
+              content: Text(
+                "Recurring every: ",
+                style: TextStyle(color: Colors.black),
+              ),
+            ));
+          }),
     );
-    
-    
   }
 }
 

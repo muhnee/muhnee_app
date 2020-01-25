@@ -61,6 +61,7 @@ flutter:
   assets:
    - lib/assets/images/google_icon.png
    - lib/assets/images/tick.png
+   - lib/assets/images/loop.png
    - lib/assets/images/defaultProfilePic.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
