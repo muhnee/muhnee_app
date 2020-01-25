@@ -355,7 +355,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                             : description = null;
 
                         uploadTransaction(amount, transactionType,
-                            selectedCategory, isTaxable, description);
+                            selectedCategory, isTaxable, description, recurringDaySelection);
 
                         AwesomeDialog(
                                 context: context,
