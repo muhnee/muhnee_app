@@ -16,7 +16,6 @@ var transactionType = "income";
 var selectedCategory = "";
 var isTaxable = false;
 
-var recurringDaysChoices = [0, 1, 2, 5, 7, 10, 14, 21, 32];
 var recurringDaySelection = 0; 
 
 final descriptionController = TextEditingController();

@@ -110,7 +110,7 @@ Future<List> getIncomeCategories() async {
 }
 
 void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
-    uIsTaxable, description) async {
+    uIsTaxable, description, recurringDays) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
@@ -134,7 +134,8 @@ void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
     "category": uSelectedCategories,
     "taxDeductible": uIsTaxable,
     "description": description,
-    "timestamp": timeStamp
+    "timestamp": timeStamp, 
+    "recurringDays": recurringDays
   });
 
   print("transaction uploaded");
