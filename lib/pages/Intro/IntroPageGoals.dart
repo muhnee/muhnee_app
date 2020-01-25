@@ -158,6 +158,7 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
                 delay: delayAmount * 10,
               ),
               ShowUp(
+                
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -223,7 +224,7 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
                     ),
                   ],
                 ),
-                delay: delayAmount * 12,
+                delay: delayAmount * 11,
               ),
             ],
           ),
@@ -331,7 +332,7 @@ class _NextButtonState extends State<NextButton> {
                   )),
             ),
           )),
-      delay: delayAmount * 10,
+      delay: delayAmount * 12,
     );
   }
 }

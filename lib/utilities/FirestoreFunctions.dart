@@ -203,3 +203,43 @@ Future<String> getPhotoUrl() async {
 
   return photoUrl;
 }
+
+Future<int> getWeeklySavingsGoal() async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+  var snap = await databaseReference.collection("users").document(uid).get();
+
+  var weeklySavingsGoal = snap.data["weeklySavingsGoal"];
+
+  return weeklySavingsGoal;
+}
+
+
+
+// Future<String> getProfileInfo() async {
+//   final FirebaseUser currentUser = await _auth.currentUser();
+//   uid = currentUser.uid;
+
+//   var budgetMonth =
+//       DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+//   var severDaysAgo = DateTime.now().subtract(Duration(days: 7));
+
+//   var tRef = await databaseReference
+//       .collection("users")
+//       .document(uid)
+//       .collection("budget")
+//       .document(budgetMonth)
+//       .collection("transactions")
+//       .where("timestamp", isGreaterThan: severDaysAgo)
+//       .orderBy("timestamp", descending: true)
+//       .getDocuments();
+
+//   var tempList = tRef.documents;
+
+//   var transactionList = tempList.map((DocumentSnapshot docSnapshot) {
+//     return docSnapshot.data;
+//   }).toList();
+
+//   return "test";
+// }

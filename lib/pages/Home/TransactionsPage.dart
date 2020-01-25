@@ -66,7 +66,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
           //   child: CupertinoSlidingSegmentedControl<int>(
 
           //     children: logoWidgets,
-          //     onValueChanged: (int val) {
+          //     onValueChanged: (int val)
           //       setState(() {
           //         curPageIndex = val;
           //       });
@@ -88,6 +88,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 var totalExp = 0.0;
                 var totalInc = 0.0;
                 var totalNet = 0.0;
+
+                // var savingsGoal = getWeeklySavingsGoal();
+
+                // var reachedGoalPercent = total
 
                 for (var item in snapshot.data)
                   item["type"] == "expense"
@@ -132,40 +136,15 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   height: SizeConfig.blockSizeVertical * 1,
                                 ),
                                 Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
-                                      "Spent: ",
-                                      style: TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: "SFPro",
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[600]
-                                          //foreground: Paint()..shader = linearGradientPurple
-                                          ),
-                                    ),
-                                    Text(
-                                      "\$" + totalExp.toString(),
-                                      style: TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: "SFPro",
-                                          fontWeight: FontWeight.bold,
-                                          foreground: Paint()
-                                            ..shader = linearGradientRed),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: SizeConfig.blockSizeVertical * 1,
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      "Saved: ",
+                                      "Earned: ",
                                       style: new TextStyle(
                                           fontSize: 25.0,
                                           fontFamily: "SFPro",
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.grey[600]
+                                          color: Colors.grey[500]
                                           //foreground: Paint()..shader = linearGradientPurple
                                           ),
                                     ),
@@ -184,20 +163,51 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   height: SizeConfig.blockSizeVertical * 1,
                                 ),
                                 Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
-                                      "Net: ",
+                                      "Spent:   ",
                                       style: TextStyle(
                                           fontSize: 25.0,
                                           fontFamily: "SFPro",
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.grey[600]
+                                          color: Colors.grey[500]
+                                          //foreground: Paint()..shader = linearGradientPurple
+                                          ),
+                                    ),
+                                    Text(
+                                      "\$" + totalExp.toString(),
+                                      style: TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: "SFPro",
+                                          fontWeight: FontWeight.bold,
+                                          foreground: Paint()
+                                            ..shader = linearGradientRed),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 1,
+                                ),
+                                Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "Saved:  ",
+                                      style: TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: "SFPro",
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[500]
                                           //foreground: Paint()..shader = linearGradientPurple
                                           ),
                                     ),
                                     totalNet < 0
                                         ? Text(
-                                            "- \$"+ totalNet.toString().substring(1),
+                                            "- \$" +
+                                                totalNet
+                                                    .toString()
+                                                    .substring(1),
                                             style: TextStyle(
                                                 fontSize: 25.0,
                                                 fontFamily: "SFPro",
@@ -241,11 +251,13 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
                           for (var item in snapshot.data)
                             TransactionViewCell(
-                                amountText: item["amount"].toString(),
-                                type: item["type"],
-                                category: item["category"],
-                                description: item["description"],
-                                timestamp: item["timestamp"])
+                              amountText: item["amount"].toString(),
+                              type: item["type"],
+                              category: item["category"],
+                              description: item["description"],
+                              timestamp: item["timestamp"],
+                              recurring: item["recurringDays"],
+                            )
                         ]),
                   ))
                 ];
@@ -328,6 +340,7 @@ class TransactionViewCell extends StatefulWidget {
   var taxable;
   var description;
   var timestamp;
+  var recurring;
 
   TransactionViewCell(
       {@required this.amountText,
@@ -335,7 +348,8 @@ class TransactionViewCell extends StatefulWidget {
       @required this.category,
       this.taxable,
       @required this.description,
-      @required this.timestamp});
+      @required this.timestamp,
+      @required this.recurring});
 
   @override
   _TransactionViewCellState createState() => _TransactionViewCellState();
@@ -397,43 +411,44 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(
-                            left: SizeConfig.blockSizeVertical * 1),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "\$",
-                              style: TextStyle(
-                                  letterSpacing: .5,
-                                  fontSize: 18,
-                                  color: cellColor2,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(widget.amountText,
-                                style: TextStyle(
-                                  letterSpacing: .5,
-                                  fontSize: 25,
-                                  color: cellColor2,
-                                  fontFamily: "SFPro",
-                                  fontWeight: FontWeight.w600,
-                                )),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: SizeConfig.blockSizeHorizontal * 3),
+                            left: SizeConfig.blockSizeHorizontal * 3),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              widget.category,
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  widget.category,
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+
+                                widget.recurring !=0 ? Row(children: <Widget>[
+
+                                  Text("  "),
+                                  Icon(Icons.loop, size: 10), 
+
+                                   Text(
+                                  widget.recurring.toString(),
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+
+
+                                ],) : Text("")
+
+                              
+
+                                
+
+                              ],
                             ),
                             Text(
                               DateFormat.EEEE()
@@ -448,6 +463,32 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600),
                             ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: SizeConfig.blockSizeVertical * 1),
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              "\$",
+                              style: TextStyle(
+                                letterSpacing: .5,
+                                fontSize: 14, //15?
+                                color: cellColor2,
+                                fontFamily: "SFPro",
+                                //fontWeight: FontWeight.w600
+                              ),
+                            ),
+                            Text(widget.amountText,
+                                style: TextStyle(
+                                  letterSpacing: 1,
+                                  fontSize: 19,
+                                  color: cellColor2,
+                                  fontFamily: "SFPro",
+                                  //fontWeight: FontWeight.w600,
+                                )),
                           ],
                         ),
                       ),
