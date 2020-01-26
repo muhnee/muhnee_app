@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'ExpensePageSingleFile.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:intl/intl.dart';
 
 var weeklyTransactions;
 var monthlyTransactions;
 var curPageIndex;
+
+var categoryInfoIncome;
+var categoryInfoExpense; 
 
 class TransactionsPage extends StatefulWidget {
   @override
@@ -23,6 +23,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
     super.initState();
     //monthlyTransactions = getMonthlyTransactions();
     weeklyTransactions = getWeeklyTransactions();
+    categoryInfoIncome = getCurrentSummaryforTransactions("income");
+    categoryInfoExpense = getCurrentSummaryforTransactions("expense");
   }
 
   //! used for week to month switch
@@ -247,8 +249,16 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             ),
                           ),
 
-                          // Not Scrollable b4 ^
+                        
 
+                          //! Categories
+
+                          CategoryInfoSection(),
+
+
+
+
+                          //! Transactions
                           for (var item in snapshot.data)
                             TransactionViewCell(
                               amountText: item["amount"].toString(),
@@ -258,6 +268,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                               timestamp: item["timestamp"],
                               recurring: item["recurringDays"],
                             )
+
+
+
                         ]),
                   ))
                 ];
@@ -496,5 +509,21 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
             )
           ],
         ));
+  }
+}
+
+
+class CategoryInfoSection extends StatefulWidget {
+
+  @override
+  _CategoryInfoSectionState createState() => _CategoryInfoSectionState();
+}
+
+class _CategoryInfoSectionState extends State<CategoryInfoSection> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+       child: child,
+    );
   }
 }

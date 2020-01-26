@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
@@ -243,3 +245,24 @@ Future<int> getWeeklySavingsGoal() async {
 
 //   return "test";
 // }
+
+
+Future<List> getCurrentSummaryforTransactions(transactionCategoryType) async {
+  final FirebaseUser currentUser = await _auth.currentUser();
+  uid = currentUser.uid;
+
+  final HttpsCallable getCurrentSummaryforTransactionsFn = CloudFunctions.instance.getHttpsCallable(
+    functionName: 'YOUR_CALLABLE_FUNCTION_NAME',
+);
+
+dynamic response = await getCurrentSummaryforTransactionsFn.call(<String, dynamic>{
+    'summaryType': 'week',
+    'transactionType': transactionCategoryType
+});
+
+  var categoryInfo = response.map((DocumentSnapshot docSnapshot) {
+    return docSnapshot.data;
+  }).toList();
+
+  return categoryInfo;
+}

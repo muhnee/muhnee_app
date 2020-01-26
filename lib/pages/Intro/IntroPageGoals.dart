@@ -158,7 +158,6 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
                 delay: delayAmount * 10,
               ),
               ShowUp(
-                
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
