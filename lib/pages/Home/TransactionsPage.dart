@@ -539,14 +539,16 @@ class CategoryInfoSection extends StatefulWidget {
 class _CategoryInfoSectionState extends State<CategoryInfoSection> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List>(
+    return FutureBuilder<dynamic>(
       future: widget.categoryFuture,
-      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         List<Widget> children;
 
         if (snapshot.hasData) {
           children = <Widget>[
-            Text("Income / Expense")
+            
+
+            Text(snapshot.toString())
 
             //category info
           ];

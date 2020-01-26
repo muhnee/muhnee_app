@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
@@ -60,8 +59,6 @@ void uploadGoals(goalAmount) async {
 
   print("goalAmount uploaded");
 }
-
-
 
 userProfilePic() async {
   final FirebaseUser currentUser = await _auth.currentUser();
@@ -136,7 +133,7 @@ void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
     "category": uSelectedCategories,
     "taxDeductible": uIsTaxable,
     "description": description,
-    "timestamp": timeStamp, 
+    "timestamp": timeStamp,
     "recurringDays": recurringDays
   });
 
@@ -217,8 +214,6 @@ Future<int> getWeeklySavingsGoal() async {
   return weeklySavingsGoal;
 }
 
-
-
 // Future<String> getProfileInfo() async {
 //   final FirebaseUser currentUser = await _auth.currentUser();
 //   uid = currentUser.uid;
@@ -246,23 +241,20 @@ Future<int> getWeeklySavingsGoal() async {
 //   return "test";
 // }
 
+Future<dynamic> getCurrentSummaryforTransactions(transactionCategoryType) async {
+  final HttpsCallable getCurrentSummaryforTransactionsFn =
+      CloudFunctions.instance.getHttpsCallable(
+    functionName: 'getCurrentSummaryforTransactions',
+  );
 
-Future<List> getCurrentSummaryforTransactions(transactionCategoryType) async {
-  final FirebaseUser currentUser = await _auth.currentUser();
-  uid = currentUser.uid;
-
-  final HttpsCallable getCurrentSummaryforTransactionsFn = CloudFunctions.instance.getHttpsCallable(
-    functionName: 'YOUR_CALLABLE_FUNCTION_NAME',
-);
-
-dynamic response = await getCurrentSummaryforTransactionsFn.call(<String, dynamic>{
+  dynamic response = await getCurrentSummaryforTransactionsFn
+      .call(<String, dynamic>{
     'summaryType': 'week',
     'transactionType': transactionCategoryType
-});
+  });
 
-  var categoryInfo = response.map((DocumentSnapshot docSnapshot) {
-    return docSnapshot.data;
-  }).toList();
+  print(response.data);
 
-  return categoryInfo;
+  return response.data;
+
 }
