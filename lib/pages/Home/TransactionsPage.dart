@@ -10,7 +10,7 @@ var monthlyTransactions;
 var curPageIndex;
 
 var categoryInfoIncome;
-var categoryInfoExpense; 
+var categoryInfoExpense;
 
 class TransactionsPage extends StatefulWidget {
   @override
@@ -232,6 +232,34 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 2.5,
                                 ),
+
+                                Text(
+                                  "Categories",
+                                  style: TextStyle(
+                                    fontSize: 30.0,
+                                    fontFamily: "SFPro",
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff8e91f3),
+                                    //foreground: Paint()..shader = linearGradientPurple
+                                  ),
+                                ),
+
+                                //! Categories
+
+                                CategoryInfoSection(categoryInfoIncome),
+
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 0.3,
+                                ),
+
+                                CategoryInfoSection(categoryInfoExpense),
+
+                                SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 2.5,
+                                ),
+
+                                //!Transaction
+
                                 Text(
                                   "Your Transactions",
                                   style: TextStyle(
@@ -249,15 +277,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
                             ),
                           ),
 
-                        
-
-                          //! Categories
-
-                          CategoryInfoSection(),
-
-
-
-
                           //! Transactions
                           for (var item in snapshot.data)
                             TransactionViewCell(
@@ -268,9 +287,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
                               timestamp: item["timestamp"],
                               recurring: item["recurringDays"],
                             )
-
-
-
                         ]),
                   ))
                 ];
@@ -512,8 +528,9 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   }
 }
 
-
 class CategoryInfoSection extends StatefulWidget {
+  var categoryFuture;
+  CategoryInfoSection(this.categoryFuture);
 
   @override
   _CategoryInfoSectionState createState() => _CategoryInfoSectionState();
@@ -522,8 +539,37 @@ class CategoryInfoSection extends StatefulWidget {
 class _CategoryInfoSectionState extends State<CategoryInfoSection> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: child,
+    return FutureBuilder<List>(
+      future: widget.categoryFuture,
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        List<Widget> children;
+
+        if (snapshot.hasData) {
+          children = <Widget>[
+            Text("Income / Expense")
+
+            //category info
+          ];
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            NotificationCell(
+              message: "Network Error",
+              messageColor: Colors.red,
+            )
+          ];
+        } else {
+          children = <Widget>[
+            NotificationCell(message: "Loading...", messageColor: Colors.grey)
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
+          ),
+        );
+      },
     );
   }
 }

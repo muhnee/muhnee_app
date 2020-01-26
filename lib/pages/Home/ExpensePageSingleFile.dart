@@ -3,7 +3,6 @@ import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 
 // Pull from Firebase
 
