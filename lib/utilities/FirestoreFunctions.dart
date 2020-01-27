@@ -7,42 +7,27 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
 String uid;
 
+// uploads the list of a users categories
 void uploadCategories(type, itemsList) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
   for (var item in itemsList)
-
-  await databaseReference
-      .collection("users")
-      .document(uid)
-      .collection("categories")
-      .document(type).collection("types").document()
-      .setData({
-    'name': item,
-  });
+    await databaseReference
+        .collection("users")
+        .document(uid)
+        .collection("categories")
+        .document(type)
+        .collection("types")
+        .document()
+        .setData({
+      'name': item,
+    });
 
   print("uploadCategories executed");
 }
 
-// void uploadIncomes(incomes) async {
-//   final FirebaseUser currentUser = await _auth.currentUser();
-//   uid = currentUser.uid;
-
-//   for (var item in incomes)
-
-//   await databaseReference
-//       .collection("users")
-//       .document(uid)
-//       .collection("categories")
-//       .document("income").collection("types").document()
-//       .setData({
-//     'name': item,
-//   });
-
-//   print("uploadIncomes executed");
-// }
-
+// returns true if the user has been onboarded
 Future<bool> isOnboarded() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -54,6 +39,7 @@ Future<bool> isOnboarded() async {
   return onBoarded;
 }
 
+// uploads the users weekly savings goal amount
 void uploadGoals(goalAmount) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -65,13 +51,7 @@ void uploadGoals(goalAmount) async {
   print("goalAmount uploaded");
 }
 
-userProfilePic() async {
-  final FirebaseUser currentUser = await _auth.currentUser();
-  String imageUrlFirebase = currentUser.photoUrl;
-
-  return imageUrlFirebase;
-}
-
+// sets the parameter "onboarded" to true once onboarded on mobile
 void setOnboardedParam() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -83,7 +63,7 @@ void setOnboardedParam() async {
   print("onboarded set to true");
 }
 
-
+//get the list of categories for a user
 Future<List> getCategories(categoryType) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -94,21 +74,21 @@ Future<List> getCategories(categoryType) async {
       .collection("users")
       .document(uid)
       .collection("categories")
-      .document(categoryType).collection("types").getDocuments()
+      .document(categoryType)
+      .collection("types")
+      .getDocuments()
       .then((QuerySnapshot snapshot) {
     snapshot.documents.forEach((f) => results.add(f.data["name"]));
   });
 
-
   return results;
 }
 
+// uploads transactions from every user
 void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
     uIsTaxable, description, recurringDays) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
-
-  //var timeStamp = DateFormat('dd MMMM yyyy').format(DateTime.now()).toString() + " at " + DateFormat('hh:mm:ss').format(DateTime.now()).toString()
 
   var timeStamp = DateTime.now();
 
@@ -135,31 +115,33 @@ void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
   print("transaction uploaded");
 }
 
-Future<List> getMonthlyTransactions() async {
-  final FirebaseUser currentUser = await _auth.currentUser();
-  uid = currentUser.uid;
+// get all transactions for this last month
+// Future<List> getMonthlyTransactions() async {
+//   final FirebaseUser currentUser = await _auth.currentUser();
+//   uid = currentUser.uid;
 
-  var budgetMonth =
-      DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+//   var budgetMonth =
+//       DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
 
-  var tRef = await databaseReference
-      .collection("users")
-      .document(uid)
-      .collection("budget")
-      .document(budgetMonth)
-      .collection("transactions")
-      .orderBy("timestamp", descending: true)
-      .getDocuments();
+//   var tRef = await databaseReference
+//       .collection("users")
+//       .document(uid)
+//       .collection("budget")
+//       .document(budgetMonth)
+//       .collection("transactions")
+//       .orderBy("timestamp", descending: true)
+//       .getDocuments();
 
-  var tempList = tRef.documents;
+//   var tempList = tRef.documents;
 
-  var transactionList = tempList.map((DocumentSnapshot docSnapshot) {
-    return docSnapshot.data;
-  }).toList();
+//   var transactionList = tempList.map((DocumentSnapshot docSnapshot) {
+//     return docSnapshot.data;
+//   }).toList();
 
-  return transactionList;
-}
+//   return transactionList;
+// }
 
+// gets an ordered list of weekly transactions from latest to last
 Future<List> getWeeklyTransactions() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -187,6 +169,7 @@ Future<List> getWeeklyTransactions() async {
   return transactionList;
 }
 
+// gets the url of the users profile pic
 Future<String> getPhotoUrl() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -198,6 +181,7 @@ Future<String> getPhotoUrl() async {
   return photoUrl;
 }
 
+// gets the users weekly savings goal
 Future<int> getWeeklySavingsGoal() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
@@ -209,35 +193,9 @@ Future<int> getWeeklySavingsGoal() async {
   return weeklySavingsGoal;
 }
 
-// Future<String> getProfileInfo() async {
-//   final FirebaseUser currentUser = await _auth.currentUser();
-//   uid = currentUser.uid;
-
-//   var budgetMonth =
-//       DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
-//   var severDaysAgo = DateTime.now().subtract(Duration(days: 7));
-
-//   var tRef = await databaseReference
-//       .collection("users")
-//       .document(uid)
-//       .collection("budget")
-//       .document(budgetMonth)
-//       .collection("transactions")
-//       .where("timestamp", isGreaterThan: severDaysAgo)
-//       .orderBy("timestamp", descending: true)
-//       .getDocuments();
-
-//   var tempList = tRef.documents;
-
-//   var transactionList = tempList.map((DocumentSnapshot docSnapshot) {
-//     return docSnapshot.data;
-//   }).toList();
-
-//   return "test";
-// }
-
-
-Future<dynamic> getCurrentSummaryforTransactions(transactionCategoryType) async {
+// gets the categories and amounts of income or expense on that cat for the week
+Future<dynamic> getCurrentSummaryforTransactions(
+    transactionCategoryType) async {
   final HttpsCallable getCurrentSummaryforTransactionsFn =
       CloudFunctions.instance.getHttpsCallable(
     functionName: 'getCurrentSummaryforTransactionMobile',
@@ -249,11 +207,9 @@ Future<dynamic> getCurrentSummaryforTransactions(transactionCategoryType) async 
     'transactionType': transactionCategoryType
   });
 
-    var responseInfo = json.encode(response.data);
+  var responseInfo = json.encode(response.data);
 
-    print(json.decode(responseInfo));
+  print(json.decode(responseInfo));
 
-   return responseInfo; 
-
-
+  return responseInfo;
 }
