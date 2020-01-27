@@ -44,7 +44,9 @@ dev_dependencies:
 
 flutter_icons:
   ios: true
-  image_path: "lib/assets/images/muhnee_icon.png"
+  android: true
+  image_path_ios: "lib/assets/images/muhnee_icon.png"
+  image_path_android: "lib/assets/images/muhnee_icon_android.png"
 
 
 # For information on the generic Dart part of this file, see the
