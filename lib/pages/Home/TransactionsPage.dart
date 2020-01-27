@@ -288,8 +288,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
                               timestamp: item["timestamp"],
                               recurring: item["recurringDays"],
                             )
-
-
                         ]),
                   ))
                 ];
@@ -573,18 +571,16 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                       ),
                     ),
 
-                    SizedBox(width: SizeConfig.blockSizeVertical * 1,),
+                    SizedBox(
+                      width: SizeConfig.blockSizeVertical * 1,
+                    ),
 
                     // Center(
                     //   child: Text(data["amount"].toString()),
                     // )
 
-
                     // for(var item in test)
                     //   Text(item.toString())
-
-
-                    
                   ]),
             )
 

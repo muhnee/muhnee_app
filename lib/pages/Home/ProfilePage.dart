@@ -41,7 +41,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 //     if (snapshot.hasData) {
                 //       children = <Widget>[
 
-
                 //         ClipRRect(
                 //           borderRadius: BorderRadius.circular(10.0),
                 //           child: Image.network(

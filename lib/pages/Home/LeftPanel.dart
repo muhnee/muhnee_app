@@ -151,7 +151,7 @@ class _ProfilePicState extends State<ProfilePic> {
               ],
             ),
           ];
-        } else{
+        } else {
           children = <Widget>[
             Column(
               children: <Widget>[
@@ -163,7 +163,8 @@ class _ProfilePicState extends State<ProfilePic> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(14.0),
                       child: Image(
-                        image: AssetImage('lib/assets/images/defaultProfilePic.png'),
+                        image: AssetImage(
+                            'lib/assets/images/defaultProfilePic.png'),
                         width: SizeConfig.blockSizeHorizontal * 13,
                         height: SizeConfig.blockSizeHorizontal * 13,
                       ),

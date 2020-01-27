@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                 ExpensePageSingleFile(),
                 //IncomePage(),
                 TransactionsPage(),
-                StatsPage(),
+                //StatsPage(),
               ],
             ),
           ),

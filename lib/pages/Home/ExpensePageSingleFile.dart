@@ -15,7 +15,7 @@ var transactionType = "income";
 var selectedCategory = "";
 var isTaxable = false;
 
-var recurringDaySelection = 0; 
+var recurringDaySelection = 0;
 
 final descriptionController = TextEditingController();
 
@@ -25,7 +25,6 @@ class ExpensePageSingleFile extends StatefulWidget {
 }
 
 class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
-  
   @override
   void initState() {
     super.initState();
@@ -354,8 +353,13 @@ class _InteractionPaneState extends State<InteractionPane> {
                                 descriptionController.text.toString()
                             : description = null;
 
-                        uploadTransaction(amount, transactionType,
-                            selectedCategory, isTaxable, description, recurringDaySelection);
+                        uploadTransaction(
+                            amount,
+                            transactionType,
+                            selectedCategory,
+                            isTaxable,
+                            description,
+                            recurringDaySelection);
 
                         AwesomeDialog(
                                 context: context,
@@ -725,11 +729,11 @@ class RecurringBtn extends StatelessWidget {
           ),
           elevation: 0,
           child: Image.asset(
-              'lib/assets/images/loop.png',
-              width: SizeConfig.blockSizeVertical * 4,
-              height: SizeConfig.blockSizeVertical * 4,
-            ),
-          
+            'lib/assets/images/loop.png',
+            width: SizeConfig.blockSizeVertical * 4,
+            height: SizeConfig.blockSizeVertical * 4,
+          ),
+
           // Image(
           //     image: AssetImage("lib/assets/images/loop.png",),
           //     width: SizeConfig.blockSizeVertical * 4,
@@ -737,26 +741,52 @@ class RecurringBtn extends StatelessWidget {
           //   ),
 
           onPressed: () {
-
-            switch(recurringDaySelection){
-              case 0 : {recurringDaySelection = 1; }
-              break; 
-              case 1 : {recurringDaySelection = 2; }
-              break; 
-              case 2 : {recurringDaySelection = 5; }
-              break; 
-              case 5 : {recurringDaySelection = 7; }
-              break; 
-              case 7 : {recurringDaySelection = 10; }
-              break; 
-              case 10 : {recurringDaySelection = 14; }
-              break; 
-              case 14 : {recurringDaySelection = 21; }
-              break; 
-              case 21 : {recurringDaySelection = 32; }
-              break; 
-              case 32 : {recurringDaySelection = 0; }
-              break; 
+            switch (recurringDaySelection) {
+              case 0:
+                {
+                  recurringDaySelection = 1;
+                }
+                break;
+              case 1:
+                {
+                  recurringDaySelection = 2;
+                }
+                break;
+              case 2:
+                {
+                  recurringDaySelection = 5;
+                }
+                break;
+              case 5:
+                {
+                  recurringDaySelection = 7;
+                }
+                break;
+              case 7:
+                {
+                  recurringDaySelection = 10;
+                }
+                break;
+              case 10:
+                {
+                  recurringDaySelection = 14;
+                }
+                break;
+              case 14:
+                {
+                  recurringDaySelection = 21;
+                }
+                break;
+              case 21:
+                {
+                  recurringDaySelection = 32;
+                }
+                break;
+              case 32:
+                {
+                  recurringDaySelection = 0;
+                }
+                break;
             }
 
             Scaffold.of(context).showSnackBar(SnackBar(
@@ -768,7 +798,9 @@ class RecurringBtn extends StatelessWidget {
               duration: Duration(milliseconds: 300),
               backgroundColor: Colors.grey[300],
               content: Text(
-                "Recurring every: " + recurringDaySelection.toString() + " days",
+                "Recurring every: " +
+                    recurringDaySelection.toString() +
+                    " days",
                 style: TextStyle(color: Colors.black),
               ),
             ));

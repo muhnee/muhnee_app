@@ -235,11 +235,8 @@ class _TickBtnIncomeState extends State<TickBtnIncome> {
             // ));
 
             if (widget.customIncomeController.text.isNotEmpty) {
-              
-
               var customIncome = widget.customIncomeController.text;
               addToIncomes(customIncome);
-
 
               Scaffold.of(context).showSnackBar(SnackBar(
                 //behavior: SnackBarBehavior.floating,
