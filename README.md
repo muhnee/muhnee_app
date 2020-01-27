@@ -1,10 +1,12 @@
 # muhnee
 
-The Native Version of Muhnee -- currently built for iOS
+The Native Version of Muhnee 
 
 ## Development Setup
 
-### How to run
+# How to run
+
+## iOS
 
 Initialise an instance of an iOS Simulator or connect physical iOS device, navigate to the cloned repo and run from root:
 
