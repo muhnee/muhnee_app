@@ -29,8 +29,8 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   @override
   void initState() {
     super.initState();
-    tExp = getExpenseCategories();
-    tInc = getIncomeCategories();
+    tExp = getCategories("expense");
+    tInc = getCategories("income");
   }
 
   @override

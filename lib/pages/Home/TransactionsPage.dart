@@ -4,6 +4,7 @@ import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'ExpensePageSingleFile.dart';
 import 'package:intl/intl.dart';
+import 'dart:convert';
 
 var weeklyTransactions;
 var monthlyTransactions;
@@ -545,6 +546,9 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
         List<Widget> children;
 
         if (snapshot.hasData) {
+          var data = json.decode(snapshot.data);
+          var test = data.toList(); 
+
           children = <Widget>[
             Container(
               height: SizeConfig.blockSizeVertical * 10,
@@ -567,7 +571,19 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                             ),
                       ),
                     ),
-                    Text(snapshot.toString())
+
+                    SizedBox(width: SizeConfig.blockSizeVertical * 1,),
+
+                    // Center(
+                    //   child: Text(data["amount"].toString()),
+                    // )
+
+
+                    // for(var item in test)
+                    //   Text(item.toString())
+
+
+                    
                   ]),
             )
 

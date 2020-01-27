@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'dart:convert';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
@@ -10,13 +11,15 @@ void uploadExpenses(expenses) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
+  for (var item in expenses)
+
   await databaseReference
       .collection("users")
       .document(uid)
       .collection("categories")
-      .document("expense")
+      .document("expense").collection("types").document()
       .setData({
-    'expenseCategories': expenses,
+    'name': item,
   });
 
   print("uploadExpenses executed");
@@ -26,13 +29,15 @@ void uploadIncomes(incomes) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
+  for (var item in incomes)
+
   await databaseReference
       .collection("users")
       .document(uid)
       .collection("categories")
-      .document("income")
+      .document("income").collection("types").document()
       .setData({
-    'incomeCategories': incomes,
+    'name': item,
   });
 
   print("uploadIncomes executed");
@@ -78,34 +83,24 @@ void setOnboardedParam() async {
   print("onboarded set to true");
 }
 
-Future<List> getExpenseCategories() async {
+
+Future<List> getCategories(categoryType) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
+
+  var results = [];
 
   var onBoardedRef = await databaseReference
       .collection("users")
       .document(uid)
       .collection("categories")
-      .document("expense")
-      .get();
-  var expenseCategories = onBoardedRef.data["expenseCategories"];
+      .document(categoryType).collection("types").getDocuments()
+      .then((QuerySnapshot snapshot) {
+    snapshot.documents.forEach((f) => results.add(f.data["name"]));
+  });
 
-  return expenseCategories;
-}
 
-Future<List> getIncomeCategories() async {
-  final FirebaseUser currentUser = await _auth.currentUser();
-  uid = currentUser.uid;
-
-  var onBoardedRef = await databaseReference
-      .collection("users")
-      .document(uid)
-      .collection("categories")
-      .document("income")
-      .get();
-  var incomeCategories = onBoardedRef.data["incomeCategories"];
-
-  return incomeCategories;
+  return results;
 }
 
 void uploadTransaction(uAmount, uTransactionType, uSelectedCategories,
@@ -241,6 +236,7 @@ Future<int> getWeeklySavingsGoal() async {
 //   return "test";
 // }
 
+
 Future<dynamic> getCurrentSummaryforTransactions(transactionCategoryType) async {
   final HttpsCallable getCurrentSummaryforTransactionsFn =
       CloudFunctions.instance.getHttpsCallable(
@@ -253,8 +249,11 @@ Future<dynamic> getCurrentSummaryforTransactions(transactionCategoryType) async 
     'transactionType': transactionCategoryType
   });
 
-  print(response.data);
+    var responseInfo = json.encode(response.data);
 
-  return response.data;
+    print(json.decode(responseInfo));
+
+   return responseInfo; 
+
 
 }
