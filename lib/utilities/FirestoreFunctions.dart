@@ -7,41 +7,41 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
 String uid;
 
-void uploadExpenses(expenses) async {
+void uploadCategories(type, itemsList) async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
 
-  for (var item in expenses)
+  for (var item in itemsList)
 
   await databaseReference
       .collection("users")
       .document(uid)
       .collection("categories")
-      .document("expense").collection("types").document()
+      .document(type).collection("types").document()
       .setData({
     'name': item,
   });
 
-  print("uploadExpenses executed");
+  print("uploadCategories executed");
 }
 
-void uploadIncomes(incomes) async {
-  final FirebaseUser currentUser = await _auth.currentUser();
-  uid = currentUser.uid;
+// void uploadIncomes(incomes) async {
+//   final FirebaseUser currentUser = await _auth.currentUser();
+//   uid = currentUser.uid;
 
-  for (var item in incomes)
+//   for (var item in incomes)
 
-  await databaseReference
-      .collection("users")
-      .document(uid)
-      .collection("categories")
-      .document("income").collection("types").document()
-      .setData({
-    'name': item,
-  });
+//   await databaseReference
+//       .collection("users")
+//       .document(uid)
+//       .collection("categories")
+//       .document("income").collection("types").document()
+//       .setData({
+//     'name': item,
+//   });
 
-  print("uploadIncomes executed");
-}
+//   print("uploadIncomes executed");
+// }
 
 Future<bool> isOnboarded() async {
   final FirebaseUser currentUser = await _auth.currentUser();

@@ -365,7 +365,7 @@ class _NextButtonState extends State<NextButton> {
                       borderRadius: BorderRadius.circular(23.0),
                       onTap: () {
                         incomes.add("Other");
-                        uploadIncomes(incomes);
+                        uploadCategories("income", incomes);
 
                         Navigator.pushReplacement(
                             context, FadeRouteBuilder(page: IntroPageGoals()));

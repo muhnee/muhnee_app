@@ -234,30 +234,30 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   height: SizeConfig.blockSizeVertical * 2.5,
                                 ),
 
-                                Text(
-                                  "Categories",
-                                  style: TextStyle(
-                                    fontSize: 30.0,
-                                    fontFamily: "SFPro",
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff8e91f3),
-                                    //foreground: Paint()..shader = linearGradientPurple
-                                  ),
-                                ),
+                                // Text(
+                                //   "Categories",
+                                //   style: TextStyle(
+                                //     fontSize: 30.0,
+                                //     fontFamily: "SFPro",
+                                //     fontWeight: FontWeight.bold,
+                                //     color: Color(0xff8e91f3),
+                                //     //foreground: Paint()..shader = linearGradientPurple
+                                //   ),
+                                // ),
 
                                 //! Categories
 
-                                CategoryInfoSection(categoryInfoIncome),
+                                // CategoryInfoSection(categoryInfoIncome),
 
-                                SizedBox(
-                                  height: SizeConfig.blockSizeVertical * 0.3,
-                                ),
+                                // SizedBox(
+                                //   height: SizeConfig.blockSizeVertical * 0.3,
+                                // ),
 
-                                CategoryInfoSection(categoryInfoExpense),
+                                // CategoryInfoSection(categoryInfoExpense),
 
-                                SizedBox(
-                                  height: SizeConfig.blockSizeVertical * 2.5,
-                                ),
+                                // SizedBox(
+                                //   height: SizeConfig.blockSizeVertical * 2.5,
+                                // ),
 
                                 //!Transaction
 
@@ -288,6 +288,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                               timestamp: item["timestamp"],
                               recurring: item["recurringDays"],
                             )
+
+
                         ]),
                   ))
                 ];
@@ -547,7 +549,6 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
 
         if (snapshot.hasData) {
           var data = json.decode(snapshot.data);
-          var test = data.toList(); 
 
           children = <Widget>[
             Container(
