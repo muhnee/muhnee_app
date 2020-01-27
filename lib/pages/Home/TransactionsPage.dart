@@ -544,12 +544,12 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
         List<Widget> children;
 
         if (snapshot.hasData) {
-
+          print(snapshot.data);
 
           children = <Widget>[
             Container(
               height: SizeConfig.blockSizeVertical * 10,
-              // color: Colors.red,
+               color: Colors.red,
               child: ListView(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -558,7 +558,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                       child: Text(
                         widget.categoryFuture == categoryInfoIncome
                             ? "Income"
-                            : "Expense",
+                            : "Expenses",
                         style: TextStyle(
                             fontSize: 20.0,
                             fontFamily: "SFPro",
@@ -568,18 +568,22 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                             ),
                       ),
                     ),
-
-
                     SizedBox(
-                      width: SizeConfig.blockSizeVertical * 1,
+                      width: SizeConfig.blockSizeHorizontal * 1,
                     ),
+                    for (var item in snapshot.data)
+                      
 
-                    // Center(
-                    //   child: Text(object["name"][0].toString()),
-                    // )
+                      Center(child:
+                      // Text(" " + item["name"].toString() + " " + item["amount"].toString() )
+                      Padding(
+                        padding: EdgeInsets.only(
+                          right: 30,
+                        ),
+                        child: CategoryBtnView(item["name"], item["amount"]),
+                      )
+                      )
 
-
-                   
                   ]),
             )
 
@@ -605,6 +609,29 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
           ),
         );
       },
+    );
+  }
+
+  Widget CategoryBtnView(catName, amount) {
+    return SizedBox(
+      width: SizeConfig.blockSizeHorizontal * 5,
+    
+      child: Container(
+        color: Colors.grey[300],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[Text(catName.toString())],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[Text("\$ " + amount.toString())],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

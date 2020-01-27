@@ -209,7 +209,9 @@ Future<dynamic> getCurrentSummaryforTransactions(
     'transactionType': transactionCategoryType
   });
 
-  return json.decode(jsonEncode(response.data));
+  return response.data;
+
+  //return json.decode(jsonEncode(response.data));
 }
 
 // Future<List> getCurrentSummaryforTransactionsSimple(
