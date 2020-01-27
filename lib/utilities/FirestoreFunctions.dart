@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'dart:convert';
 
+import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
+
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
 String uid;
@@ -207,9 +209,55 @@ Future<dynamic> getCurrentSummaryforTransactions(
     'transactionType': transactionCategoryType
   });
 
-  var responseInfo = json.encode(response.data);
-
-  print(json.decode(responseInfo));
-
-  return responseInfo;
+  return json.decode(jsonEncode(response.data));
 }
+
+// Future<List> getCurrentSummaryforTransactionsSimple(
+//     transactionCategoryType) async {
+//   var results = [];
+//   var finalResults = [];
+
+//   final FirebaseUser currentUser = await _auth.currentUser();
+//   uid = currentUser.uid;
+
+//   var budgetMonth =
+//       DateTime.now().year.toString() + "-" + DateTime.now().month.toString();
+//   var severDaysAgo = DateTime.now().subtract(Duration(days: 7));
+
+//   var tempRef = await databaseReference
+//       .collection("users")
+//       .document(uid)
+//       .collection("budget")
+//       .document(budgetMonth)
+//       .collection("transactions")
+//       .where("timestamp", isGreaterThan: severDaysAgo)
+//       .where("type", isEqualTo: transactionCategoryType)
+//       .getDocuments();
+
+//   var tempList = tempRef.documents;
+
+//   var transactionList = tempList.map((DocumentSnapshot docSnapshot) {
+//     return docSnapshot.data;
+//   }).toList();
+
+//   print(transactionList);
+
+//   for (var item in transactionList)
+//     results.add({item["category"]: item["amount"]});
+
+//   print(results);
+
+//   for (var item in results)
+//     if (!finalResults.contains(item[0])) {
+//       finalResults.add(item[0]);
+//     }
+
+//   for (var item in results)
+//     if (!finalResults.contains(item[0])){
+
+//     }
+
+
+//   var lST = [1, 2, 3];
+//   return lST;
+// }
