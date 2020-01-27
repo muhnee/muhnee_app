@@ -542,49 +542,54 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
       future: widget.categoryFuture,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         List<Widget> children;
+        Color txtColor; 
 
         if (snapshot.hasData) {
-          print(snapshot.data);
+          widget.categoryFuture == categoryInfoIncome ? txtColor = Color(0xff9ed45b) : txtColor = Color(0xffff0844); 
 
           children = <Widget>[
             Container(
-              height: SizeConfig.blockSizeVertical * 10,
-               color: Colors.red,
-              child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Center(
-                      child: Text(
-                        widget.categoryFuture == categoryInfoIncome
-                            ? "Income"
-                            : "Expenses",
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: "SFPro",
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[500]
-                            //foreground: Paint()..shader = linearGradientPurple
-                            ),
+              height: SizeConfig.blockSizeVertical * 9,
+              child: Center(
+                child: ListView(
+                    shrinkWrap: false,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      SizedBox(
+                          width: SizeConfig.blockSizeHorizontal * 22,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                widget.categoryFuture == categoryInfoIncome
+                                    ? "Income "
+                                    : "Expenses",
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: "SFPro",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[500]
+                                    //foreground: Paint()..shader = linearGradientPurple
+                                    ),
+                              ),
+                            ],
+                          )),
+                      SizedBox(
+                        width: SizeConfig.blockSizeHorizontal * 2,
                       ),
-                    ),
-                    SizedBox(
-                      width: SizeConfig.blockSizeHorizontal * 1,
-                    ),
-                    for (var item in snapshot.data)
-                      
-
-                      Center(child:
-                      // Text(" " + item["name"].toString() + " " + item["amount"].toString() )
-                      Padding(
-                        padding: EdgeInsets.only(
-                          right: 30,
-                        ),
-                        child: CategoryBtnView(item["name"], item["amount"]),
-                      )
-                      )
-
-                  ]),
+                      for (var item in snapshot.data)
+                        Center(
+                            child: Padding(
+                          padding: EdgeInsets.only(
+                            right: SizeConfig.blockSizeHorizontal * 1.5,
+                            top: SizeConfig.blockSizeHorizontal * 1,
+                            bottom: SizeConfig.blockSizeHorizontal * 0.5,
+                          ),
+                          child: CategoryBtnView(item["name"], item["amount"], txtColor),
+                        ))
+                    ]),
+              ),
             )
 
             //category info
@@ -612,22 +617,38 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
     );
   }
 
-  Widget CategoryBtnView(catName, amount) {
+  Widget CategoryBtnView(catName, amount, txtColor) {
     return SizedBox(
-      width: SizeConfig.blockSizeHorizontal * 5,
-    
+      width: SizeConfig.blockSizeHorizontal * 30,
       child: Container(
-        color: Colors.grey[300],
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.grey[200],
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[Text(catName.toString())],
+              children: <Widget>[
+                Text(
+                  catName.toString(),
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[Text("\$ " + amount.toString())],
+              children: <Widget>[
+                Text(
+                  "\$ " + amount.toString(),
+                  style: TextStyle(color: txtColor),
+                )
+              ],
             )
           ],
         ),
