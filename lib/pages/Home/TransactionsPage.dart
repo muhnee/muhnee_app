@@ -546,9 +546,30 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
 
         if (snapshot.hasData) {
           children = <Widget>[
-            
-
-            Text(snapshot.toString())
+            Container(
+              height: SizeConfig.blockSizeVertical * 10,
+              // color: Colors.red,
+              child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Center(
+                      child: Text(
+                        widget.categoryFuture == categoryInfoIncome
+                            ? "Income"
+                            : "Expense",
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontFamily: "SFPro",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[500]
+                            //foreground: Paint()..shader = linearGradientPurple
+                            ),
+                      ),
+                    ),
+                    Text(snapshot.toString())
+                  ]),
+            )
 
             //category info
           ];

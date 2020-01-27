@@ -244,7 +244,7 @@ Future<int> getWeeklySavingsGoal() async {
 Future<dynamic> getCurrentSummaryforTransactions(transactionCategoryType) async {
   final HttpsCallable getCurrentSummaryforTransactionsFn =
       CloudFunctions.instance.getHttpsCallable(
-    functionName: 'getCurrentSummaryforTransactions',
+    functionName: 'getCurrentSummaryforTransactionMobile',
   );
 
   dynamic response = await getCurrentSummaryforTransactionsFn
