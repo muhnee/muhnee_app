@@ -374,8 +374,18 @@ class _InteractionPaneState extends State<InteractionPane> {
                                 btnOkOnPress: () {})
                             .show();
 
-                        //TODO : FIRST THING IN THE MONRING
-                        //! resetValues();
+                        //TODO
+                        //resetValues();
+
+                        //RESETING
+                        setState(() {
+                          
+                          //transactionType = "income";
+                          isTaxable = false;
+                          descriptionController.clear();
+                          recurringDaySelection = 0; 
+                          //incomeExpenseColor = Color(0xffa5d15b);
+                        });
 
                         if (transactionType == "expense") {
                           setState(() {
@@ -420,19 +430,19 @@ class _InteractionPaneState extends State<InteractionPane> {
   }
 
   //TODO : setState on amount wont rebuild the view if in this widget
-  resetValues() {
-    setState(() {
-      amount = "0";
-      transactionType = "income";
-      isTaxable = false;
-      descriptionController.clear();
-      incomeExpenseColor = Color(0xffa5d15b);
-    });
+  // resetValues() {
+  //   setState(() {
+  //     amount = "0";
+  //     transactionType = "income";
+  //     isTaxable = false;
+  //     descriptionController.clear();
+  //     incomeExpenseColor = Color(0xffa5d15b);
+  //   });
 
-    print(amount);
-    print(transactionType);
-    print(isTaxable);
-  }
+  //   print(amount);
+  //   print(transactionType);
+  //   print(isTaxable);
+  // }
 
   transactionTypeSelector() {
     if (transactionType == "income") {
@@ -593,7 +603,7 @@ class CategorySelectorBtn extends StatefulWidget {
 class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
   Color unselectedBtnColor = Colors.grey[300];
 
-  int _value = 0;
+  int _value = -1;
 
   @override
   Widget build(BuildContext context) {
