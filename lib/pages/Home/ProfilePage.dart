@@ -75,23 +75,14 @@ class ProfileImgFuture extends StatelessWidget {
                 Stack(
                   children: <Widget>[
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(14.0),
+                      borderRadius: new BorderRadius.circular(14.0),
                       child: Image.network(
                         snapshot.data,
-                        width: SizeConfig.blockSizeHorizontal * 13,
-                        height: SizeConfig.blockSizeHorizontal * 13,
+                        width: SizeConfig.blockSizeHorizontal * 20,
+                        height: SizeConfig.blockSizeHorizontal * 20,
                       ),
-                    ),
-                    Positioned.fill(
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                            borderRadius: BorderRadius.circular(14.0),
-                            onTap: () {
-                             print("test");
-                            }),
-                      ),
-                    ),
+                    )
+                  
                   ],
                 ),
               ],
@@ -107,24 +98,14 @@ class ProfileImgFuture extends StatelessWidget {
                 Stack(
                   children: <Widget>[
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(14.0),
+                      borderRadius: new BorderRadius.circular(14.0),
                       child: Image(
                         image: AssetImage(
                             'lib/assets/images/defaultProfilePic.png'),
-                        width: SizeConfig.blockSizeHorizontal * 13,
-                        height: SizeConfig.blockSizeHorizontal * 13,
+                        width: SizeConfig.blockSizeHorizontal * 20,
+                        height: SizeConfig.blockSizeHorizontal * 20,
                       ),
-                    ),
-                    Positioned.fill(
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                            borderRadius: BorderRadius.circular(14.0),
-                            onTap: () {
-                             print("test");
-                            }),
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ],
