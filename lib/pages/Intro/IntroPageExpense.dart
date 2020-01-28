@@ -239,7 +239,7 @@ class _TickBtnState extends State<TickBtn> {
             //     'added',
             //     textAlign: TextAlign.center,
             //     style: TextStyle(
-            //         color: Color(0xff8e91f3),
+            //         color: Color(0xff4199e1),
             //         fontWeight: FontWeight.bold,
             //         fontSize: 12),
             //   ),
@@ -317,7 +317,7 @@ class _SingleExpCellState extends State<SingleExpCell> {
         //if cell colour is grey set it to purple and update the array
         if (cellColor == Colors.grey[300]) {
           setState(() {
-            cellColor = Color(0xff8e91f3).withOpacity(0.75);
+            cellColor = Color(0xff4199e1).withOpacity(0.75);
             textColor = Colors.white;
           });
 

@@ -238,7 +238,7 @@ class _PanelButtonState extends State<PanelButton> {
           ],
         ),
         child: Material(
-          color: Color(0xff8e91f3).withOpacity(0.9),
+          color: Color(0xff4199e1).withOpacity(0.9),
           borderRadius: BorderRadius.circular(13.0),
           child: InkWell(
             borderRadius: BorderRadius.circular(13.0),

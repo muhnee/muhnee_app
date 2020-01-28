@@ -55,7 +55,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
     final Shader linearGradientPurple = LinearGradient(
-      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
+      colors: <Color>[Color(0xff4199e1), Color(0xff9D78F3)],
     ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
     return Scaffold(
@@ -136,7 +136,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff8e91f3),
+                                      color: Color(0xff4199e1),
                                       // foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
@@ -279,7 +279,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff8e91f3),
+                                      color: Color(0xff4199e1),
                                       //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
@@ -312,7 +312,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff8e91f3),
+                                      color: Color(0xff4199e1),
                                       //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
