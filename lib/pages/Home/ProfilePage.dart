@@ -82,19 +82,16 @@ class ProfileImgFuture extends StatelessWidget {
                         height: SizeConfig.blockSizeHorizontal * 13,
                       ),
                     ),
-                    // Positioned.fill(
-                    //   child: Material(
-                    //     color: Colors.transparent,
-                    //     child: InkWell(
-                    //         borderRadius: BorderRadius.circular(14.0),
-                    //         onTap: () {
-                    //           widget.pageViewController.animateToPage(
-                    //               widget.pageIndex,
-                    //               duration: Duration(milliseconds: 800),
-                    //               curve: Curves.easeInOutExpo);
-                    //         }),
-                    //   ),
-                    // ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                            borderRadius: BorderRadius.circular(14.0),
+                            onTap: () {
+                             print("test");
+                            }),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -118,19 +115,16 @@ class ProfileImgFuture extends StatelessWidget {
                         height: SizeConfig.blockSizeHorizontal * 13,
                       ),
                     ),
-                    // Positioned.fill(
-                    //   child: Material(
-                    //     color: Colors.transparent,
-                    //     child: InkWell(
-                    //         borderRadius: BorderRadius.circular(14.0),
-                    //         onTap: () {
-                    //           widget.pageViewController.animateToPage(
-                    //               widget.pageIndex,
-                    //               duration: Duration(milliseconds: 800),
-                    //               curve: Curves.easeInOutExpo);
-                    //         }),
-                    //   ),
-                    // ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                            borderRadius: BorderRadius.circular(14.0),
+                            onTap: () {
+                             print("test");
+                            }),
+                      ),
+                    ),
                   ],
                 ),
               ],
