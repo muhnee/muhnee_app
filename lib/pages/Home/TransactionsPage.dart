@@ -109,11 +109,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                   // ListView
                   Container(
                       child: Expanded(
-                    child: ListView(
-                        scrollDirection: Axis.vertical,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: SizeConfig.blockSizeHorizontal * 5,
-                        ),
+                    child: ListView(scrollDirection: Axis.vertical,
+                        // padding: EdgeInsets.symmetric(
+                        //   horizontal: SizeConfig.blockSizeHorizontal * 5,
+                        // ),
                         children: [
                           // Not Scrollable b4
 
@@ -125,148 +124,197 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 1.5,
                                 ),
-                                Text(
-                                  "This week you've",
-                                  style: TextStyle(
-                                    fontSize: 30.0,
-                                    fontFamily: "SFPro",
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff8e91f3),
-                                    // foreground: Paint()..shader = linearGradientPurple
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                  ),
+                                  child: Text(
+                                    "This week you've",
+                                    style: TextStyle(
+                                      fontSize: 30.0,
+                                      fontFamily: "SFPro",
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff8e91f3),
+                                      // foreground: Paint()..shader = linearGradientPurple
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 1,
                                 ),
-                                Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      "Earned: ",
-                                      style: new TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: "SFPro",
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[500]
-                                          //foreground: Paint()..shader = linearGradientPurple
-                                          ),
-                                    ),
-                                    Text(
-                                      "\$" + totalInc.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: "SFPro",
-                                          fontWeight: FontWeight.bold,
-                                          foreground: Paint()
-                                            ..shader = linearGradientGreen),
-                                    ),
-                                  ],
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                  ),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "Earned: ",
+                                        style: new TextStyle(
+                                            fontSize: 25.0,
+                                            fontFamily: "SFPro",
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[500]
+                                            //foreground: Paint()..shader = linearGradientPurple
+                                            ),
+                                      ),
+                                      Text(
+                                        "\$" + totalInc.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 25.0,
+                                            fontFamily: "SFPro",
+                                            fontWeight: FontWeight.bold,
+                                            foreground: Paint()
+                                              ..shader = linearGradientGreen),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 1,
                                 ),
-                                Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      "Spent:   ",
-                                      style: TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: "SFPro",
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[500]
-                                          //foreground: Paint()..shader = linearGradientPurple
-                                          ),
-                                    ),
-                                    Text(
-                                      "\$" + totalExp.toString(),
-                                      style: TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: "SFPro",
-                                          fontWeight: FontWeight.bold,
-                                          foreground: Paint()
-                                            ..shader = linearGradientRed),
-                                    ),
-                                  ],
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                  ),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "Spent:   ",
+                                        style: TextStyle(
+                                            fontSize: 25.0,
+                                            fontFamily: "SFPro",
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[500]
+                                            //foreground: Paint()..shader = linearGradientPurple
+                                            ),
+                                      ),
+                                      Text(
+                                        "\$" + totalExp.toString(),
+                                        style: TextStyle(
+                                            fontSize: 25.0,
+                                            fontFamily: "SFPro",
+                                            fontWeight: FontWeight.bold,
+                                            foreground: Paint()
+                                              ..shader = linearGradientRed),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 1,
                                 ),
-                                Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      "Saved:  ",
-                                      style: TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: "SFPro",
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[500]
-                                          //foreground: Paint()..shader = linearGradientPurple
-                                          ),
-                                    ),
-                                    totalNet < 0
-                                        ? Text(
-                                            "- \$" +
-                                                totalNet
-                                                    .toString()
-                                                    .substring(1),
-                                            style: TextStyle(
-                                                fontSize: 25.0,
-                                                fontFamily: "SFPro",
-                                                fontWeight: FontWeight.bold,
-                                                foreground: Paint()
-                                                  ..shader = linearGradientRed),
-                                          )
-                                        : Text(
-                                            "\$" + totalNet.toString(),
-                                            style: TextStyle(
-                                                fontSize: 25.0,
-                                                fontFamily: "SFPro",
-                                                fontWeight: FontWeight.bold,
-                                                foreground: Paint()
-                                                  ..shader =
-                                                      linearGradientGreen),
-                                          )
-                                  ],
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                  ),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "Saved:  ",
+                                        style: TextStyle(
+                                            fontSize: 25.0,
+                                            fontFamily: "SFPro",
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[500]
+                                            //foreground: Paint()..shader = linearGradientPurple
+                                            ),
+                                      ),
+                                      totalNet < 0
+                                          ? Text(
+                                              "- \$" +
+                                                  totalNet
+                                                      .toString()
+                                                      .substring(1),
+                                              style: TextStyle(
+                                                  fontSize: 25.0,
+                                                  fontFamily: "SFPro",
+                                                  fontWeight: FontWeight.bold,
+                                                  foreground: Paint()
+                                                    ..shader =
+                                                        linearGradientRed),
+                                            )
+                                          : Text(
+                                              "\$" + totalNet.toString(),
+                                              style: TextStyle(
+                                                  fontSize: 25.0,
+                                                  fontFamily: "SFPro",
+                                                  fontWeight: FontWeight.bold,
+                                                  foreground: Paint()
+                                                    ..shader =
+                                                        linearGradientGreen),
+                                            )
+
+                                      //ends here
+                                    ],
+                                  ),
                                 ),
+
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 2.5,
                                 ),
 
                                 //  ! Categories
 
-                                Text(
-                                  "Categories",
-                                  style: TextStyle(
-                                    fontSize: 30.0,
-                                    fontFamily: "SFPro",
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff8e91f3),
-                                    //foreground: Paint()..shader = linearGradientPurple
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                  ),
+                                  child: Text(
+                                    "Categories",
+                                    style: TextStyle(
+                                      fontSize: 30.0,
+                                      fontFamily: "SFPro",
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff8e91f3),
+                                      //foreground: Paint()..shader = linearGradientPurple
+                                    ),
                                   ),
                                 ),
 
-                                CategoryInfoSection(categoryInfoIncome),
+                               
+                                      CategoryInfoSection(categoryInfoIncome),
+                                
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 0.3,
                                 ),
 
-                                CategoryInfoSection(categoryInfoExpense),
+                               
+                                      CategoryInfoSection(categoryInfoExpense),
+                                
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 2.5,
                                 ),
 
                                 //!Transaction
 
-                                Text(
-                                  "Your Transactions",
-                                  style: TextStyle(
-                                    fontSize: 30.0,
-                                    fontFamily: "SFPro",
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff8e91f3),
-                                    //foreground: Paint()..shader = linearGradientPurple
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                  ),
+                                  child: Text(
+                                    "Your Transactions",
+                                    style: TextStyle(
+                                      fontSize: 30.0,
+                                      fontFamily: "SFPro",
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff8e91f3),
+                                      //foreground: Paint()..shader = linearGradientPurple
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -277,15 +325,21 @@ class _TransactionsPageState extends State<TransactionsPage> {
                           ),
 
                           //! Transactions
+
                           for (var item in snapshot.data)
-                            TransactionViewCell(
-                              amountText: item["amount"].toString(),
-                              type: item["type"],
-                              category: item["category"],
-                              description: item["description"],
-                              timestamp: item["timestamp"],
-                              recurring: item["recurringDays"],
-                            )
+                            Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      SizeConfig.blockSizeHorizontal * 5,
+                                ),
+                                child: TransactionViewCell(
+                                  amountText: item["amount"].toString(),
+                                  type: item["type"],
+                                  category: item["category"],
+                                  description: item["description"],
+                                  timestamp: item["timestamp"],
+                                  recurring: item["recurringDays"],
+                                )),
                         ]),
                   ))
                 ];
@@ -542,10 +596,12 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
       future: widget.categoryFuture,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         List<Widget> children;
-        Color txtColor; 
+        Color txtColor;
 
         if (snapshot.hasData) {
-          widget.categoryFuture == categoryInfoIncome ? txtColor = Color(0xff9ed45b) : txtColor = Color(0xffff0844); 
+          widget.categoryFuture == categoryInfoIncome
+              ? txtColor = Color(0xff9ed45b)
+              : txtColor = Color(0xffff0844);
 
           children = <Widget>[
             Container(
@@ -561,6 +617,11 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
+                              // SizedBox(width: SizeConfig.blockSizeHorizontal * 5 , child: Icon(Icons.do_not_disturb, color: Colors.white,),),
+                          //     Padding(
+                          //   padding: EdgeInsets.only(
+                          // left: SizeConfig.blockSizeHorizontal * 5, right: SizeConfig.blockSizeHorizontal * 2,),
+                          // child: 
                               Text(
                                 widget.categoryFuture == categoryInfoIncome
                                     ? "Income "
@@ -573,11 +634,11 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                                     //foreground: Paint()..shader = linearGradientPurple
                                     ),
                               ),
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2 ,),
+                          // ),
                             ],
                           )),
-                      SizedBox(
-                        width: SizeConfig.blockSizeHorizontal * 2,
-                      ),
+                      
                       for (var item in snapshot.data)
                         Center(
                             child: Padding(
@@ -586,7 +647,8 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                             top: SizeConfig.blockSizeHorizontal * 1,
                             bottom: SizeConfig.blockSizeHorizontal * 0.5,
                           ),
-                          child: CategoryBtnView(item["name"], item["amount"], txtColor),
+                          child: CategoryBtnView(
+                              item["name"], item["amount"], txtColor),
                         ))
                     ]),
               ),
@@ -596,14 +658,16 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
           ];
         } else if (snapshot.hasError) {
           children = <Widget>[
+            Center(child:
             NotificationCell(
               message: "Network Error",
               messageColor: Colors.red,
-            )
+            ))
           ];
         } else {
           children = <Widget>[
-            NotificationCell(message: "Loading...", messageColor: Colors.grey)
+            Center(child: 
+            NotificationCell(message: "Loading...", messageColor: Colors.grey))
           ];
         }
         return Center(
@@ -623,7 +687,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: Colors.grey[200],
+          color: Colors.grey[100],
         ),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -646,7 +710,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
               children: <Widget>[
                 Text(
                   "\$ " + amount.toString(),
-                  style: TextStyle(color: txtColor),
+                  style: TextStyle(color: txtColor, fontWeight: FontWeight.w600),
                 )
               ],
             )
