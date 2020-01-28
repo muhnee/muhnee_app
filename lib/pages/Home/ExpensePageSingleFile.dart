@@ -306,7 +306,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                     onPressed: () {
                       if (taxableColor == Colors.grey[300]) {
                         setState(() {
-                          taxableColor = Color(0xff4199e1);
+                          taxableColor = Color(0xff8e91f3);
                           isTaxable = true;
                           print(isTaxable);
                         });
@@ -626,7 +626,7 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
                   ),
                 ),
                 backgroundColor: Colors.grey[300],
-                selectedColor: Color(0xff4199e1),
+                selectedColor: Color(0xff8e91f3),
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -664,7 +664,7 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
   //       onPressed: () {
   //         if (unselectedBtnColor == Colors.grey[300]) {
   //           setState(() {
-  //             unselectedBtnColor = Color(0xff4199e1);
+  //             unselectedBtnColor = Color(0xff8e91f3);
   //             selectedCategories.add(widget.catItem);
   //             print(selectedCategories);
   //           });
