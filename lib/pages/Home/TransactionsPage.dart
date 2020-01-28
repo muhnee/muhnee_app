@@ -284,6 +284,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                     ),
                                   ),
                                 ),
+                                  SizedBox(
+                                  height: SizeConfig.blockSizeVertical * 1,
+                                ),
 
                                
                                       CategoryInfoSection(categoryInfoIncome),
@@ -485,7 +488,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                     //     Colors.grey[300]
                     //   ], //? [cellColor1, cellColor2],
                     // ),
-                    color: Colors.grey[200],
+                    color: Colors.grey[100],
                     //border: Border.all(color: cellColor2)
                   ),
                   child: Row(
@@ -611,17 +614,15 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                     shrinkWrap: false,
                     scrollDirection: Axis.horizontal,
                     children: [
+                      SizedBox(width: SizeConfig.blockSizeHorizontal * 5 ,),
                       SizedBox(
                           width: SizeConfig.blockSizeHorizontal * 22,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              // SizedBox(width: SizeConfig.blockSizeHorizontal * 5 , child: Icon(Icons.do_not_disturb, color: Colors.white,),),
-                          //     Padding(
-                          //   padding: EdgeInsets.only(
-                          // left: SizeConfig.blockSizeHorizontal * 5, right: SizeConfig.blockSizeHorizontal * 2,),
-                          // child: 
+
+                            
                               Text(
                                 widget.categoryFuture == categoryInfoIncome
                                     ? "Income "
@@ -631,11 +632,11 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                                     fontFamily: "SFPro",
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[500]
-                                    //foreground: Paint()..shader = linearGradientPurple
+                                  
                                     ),
                               ),
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2 ,),
-                          // ),
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 3 ,),
+                          
                             ],
                           )),
                       
@@ -644,8 +645,8 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                             child: Padding(
                           padding: EdgeInsets.only(
                             right: SizeConfig.blockSizeHorizontal * 1.5,
-                            top: SizeConfig.blockSizeHorizontal * 1,
-                            bottom: SizeConfig.blockSizeHorizontal * 0.5,
+                            top: SizeConfig.blockSizeHorizontal * 0.7,
+                            bottom: SizeConfig.blockSizeHorizontal * 0.7,
                           ),
                           child: CategoryBtnView(
                               item["name"], item["amount"], txtColor),
