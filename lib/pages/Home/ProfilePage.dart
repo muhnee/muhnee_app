@@ -6,6 +6,7 @@ import '../../utilities/SignIn.dart';
 import '../../utilities/SizeConfig.dart';
 
 var getPhoto;
+var getDescriptions;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     getPhoto = getPhotoUrl();
+    getDescriptions = getProfileDescriptions(); 
   }
 
   @override
@@ -30,6 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
               scrollDirection: Axis.vertical,
               children: [
                 ProfileImgFuture(),
+                ProfileDescriptions(), 
                 SignOutBtn(),
               ]),
         ),
@@ -70,12 +73,12 @@ class ProfileImgFuture extends StatelessWidget {
             Column(
               children: <Widget>[
                 SizedBox(
-                  height: SizeConfig.blockSizeVertical * 2,
+                  height: SizeConfig.blockSizeVertical * 5,
                 ),
                 Stack(
                   children: <Widget>[
                     ClipRRect(
-                      borderRadius: new BorderRadius.circular(14.0),
+                      borderRadius: BorderRadius.circular(14.0),
                       child: Image.network(
                         snapshot.data,
                         width: SizeConfig.blockSizeHorizontal * 20,
@@ -121,5 +124,96 @@ class ProfileImgFuture extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+
+class ProfileDescriptions extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<dynamic>(
+      future: getDescriptions, // a previously-obtained Future<String> or null
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        List<Widget> children;
+
+        if (snapshot.hasData) {
+          children = <Widget>[
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: SizeConfig.blockSizeVertical * 5,
+                ),
+
+                TextElement(text: snapshot.data["displayName"] ,),
+                TextElement(text: snapshot.data["email"] ,),
+                TextElement(text: snapshot.data["monthlySavingsGoal"].toString() ,),
+
+                  
+                
+                
+              ],
+            ),
+          ];
+        } else {
+          children = <Widget>[
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: SizeConfig.blockSizeVertical * 2,
+                ),
+                Stack(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: new BorderRadius.circular(14.0),
+                      child: Image(
+                        image: AssetImage(
+                            'lib/assets/images/defaultProfilePic.png'),
+                        width: SizeConfig.blockSizeHorizontal * 20,
+                        height: SizeConfig.blockSizeHorizontal * 20,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
+          ),
+        );
+      },
+    );
+  }
+}
+
+
+class TextElement extends StatelessWidget {
+
+  var text; 
+  TextElement({this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                  ),
+                                  child: Text(
+                                    text,
+                                    style: TextStyle(
+                                      fontSize: 30.0,
+                                      fontFamily: "SFPro",
+                                      fontWeight: FontWeight.bold,
+                                      // color: Color(0xff8e91f), 
+                                      //foreground: Paint()..shader = linearGradientPurple
+                                    ),
+                                  ),
+                                ); 
   }
 }
