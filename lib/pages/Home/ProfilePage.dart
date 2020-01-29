@@ -130,10 +130,6 @@ class ProfileDescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-        final Shader linearGradientPurple = LinearGradient(
-      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
-    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
-
 
     return FutureBuilder<dynamic>(
       future: getDescriptions, // a previously-obtained Future<String> or null
@@ -151,14 +147,39 @@ class ProfileDescriptions extends StatelessWidget {
                 
                 TextElement(
                   text: snapshot.data["displayName"],
-
+                  size: 40,
                 ),
+                 SizedBox(
+                  height: SizeConfig.blockSizeVertical * 3,
+                ),
+
+                TextElementGrey(
+                  text: "Email:",
+                  size: 18,
+                ),
+
                 TextElement(
                   text: snapshot.data["email"],
+                  size: 18,
                 ),
+
+                 SizedBox(
+                  height: SizeConfig.blockSizeVertical * 2,
+                ),
+
+                 TextElementGrey(
+                  text: "Your monthly savings goal:" ,
+                  size: 18,
+                ),
+
+               
+
                 TextElement(
-                  text: snapshot.data["monthlySavingsGoal"].toString(),
+                  text: "\$" + snapshot.data["monthlySavingsGoal"].toString(),
+                  size: 18,
                 ),
+
+
               ],
             ),
           ];
@@ -200,10 +221,17 @@ class ProfileDescriptions extends StatelessWidget {
 
 class TextElement extends StatelessWidget {
   var text;
-  TextElement({@required this.text});
+  double size;
+  TextElement({@required this.text, @required this.size});
 
   @override
   Widget build(BuildContext context) {
+
+        final Shader linearGradientPurple = LinearGradient(
+      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
+
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.blockSizeHorizontal * 5,
@@ -211,10 +239,41 @@ class TextElement extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 15.0,
+          fontSize: size,
           fontFamily: "SFPro",
           fontWeight: FontWeight.bold,
           // color: Color(0xff8e91f),
+          foreground: Paint()..shader = linearGradientPurple
+        ),
+      ),
+    );
+  }
+}
+
+class TextElementGrey extends StatelessWidget {
+  var text;
+  double size;
+  TextElementGrey({@required this.text, @required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+
+        final Shader linearGradientPurple = LinearGradient(
+      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.blockSizeHorizontal * 5,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: size,
+          fontFamily: "SFPro",
+          fontWeight: FontWeight.bold,
+           color: Colors.grey[400],
           //foreground: Paint()..shader = linearGradientPurple
         ),
       ),
