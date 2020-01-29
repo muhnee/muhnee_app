@@ -228,7 +228,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                             fontSize: 25.0,
                                             fontFamily: "SFPro",
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.grey[500]
+                                            color: Colors.grey[400]
                                             //foreground: Paint()..shader = linearGradientPurple
                                             ),
                                       ),
@@ -488,7 +488,14 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                     //     Colors.grey[300]
                     //   ], //? [cellColor1, cellColor2],
                     // ),
-                    color: Colors.grey[100],
+                    // color: Colors.grey[100],
+                    color: Colors.white,
+                     boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.06),
+                        blurRadius: 40.0,
+                      ),
+                    ]
                     //border: Border.all(color: cellColor2)
                   ),
                   child: Row(
