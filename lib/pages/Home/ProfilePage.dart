@@ -142,8 +142,11 @@ class ProfileDescriptions extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.blockSizeVertical * 5,
                 ),
+                TextElementMain(
+                  text: "Name"),
                 TextElement(
                   text: snapshot.data["displayName"],
+
                 ),
                 TextElement(
                   text: snapshot.data["email"],
@@ -207,6 +210,30 @@ class TextElement extends StatelessWidget {
           fontFamily: "SFPro",
           fontWeight: FontWeight.bold,
           // color: Color(0xff8e91f),
+          //foreground: Paint()..shader = linearGradientPurple
+        ),
+      ),
+    );
+  }
+}
+
+class TextElementMain extends StatelessWidget {
+  var text;
+  TextElementMain({@required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.blockSizeHorizontal * 5,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 30.0,
+          fontFamily: "SFPro",
+          fontWeight: FontWeight.bold,
+          color: Color(0xff496068),
           //foreground: Paint()..shader = linearGradientPurple
         ),
       ),

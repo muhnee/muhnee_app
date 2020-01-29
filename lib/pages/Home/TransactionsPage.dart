@@ -137,7 +137,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
                                       // color: Color(0xff8e91f3),
-                                      // foreground: Paint()..shader = linearGradientPurple
+                                       foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
@@ -159,7 +159,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                             fontSize: 25.0,
                                             fontFamily: "SFPro",
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.grey[500]
+                                            color: Colors.grey[400]
                                             //foreground: Paint()..shader = linearGradientPurple
                                             ),
                                       ),
@@ -193,7 +193,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                             fontSize: 25.0,
                                             fontFamily: "SFPro",
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.grey[500]
+                                            color: Colors.grey[400]
                                             //foreground: Paint()..shader = linearGradientPurple
                                             ),
                                       ),
@@ -279,8 +279,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      // color: Color(0xff8e91f), 
-                                      //foreground: Paint()..shader = linearGradientPurple
+                                      //color: Color(0xff8e91f3), 
+                                      foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
@@ -310,13 +310,13 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                         SizeConfig.blockSizeHorizontal * 5,
                                   ),
                                   child: Text(
-                                    "Your Transactions",
+                                    "Your transactions",
                                     style: TextStyle(
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
                                       // color: Color(0xff8e91f3),
-                                      //foreground: Paint()..shader = linearGradientPurple
+                                      foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
@@ -631,7 +631,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                                     fontSize: 20.0,
                                     fontFamily: "SFPro",
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.grey[500]
+                                    color: Colors.grey[400]
                                   
                                     ),
                               ),

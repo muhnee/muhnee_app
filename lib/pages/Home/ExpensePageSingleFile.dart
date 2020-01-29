@@ -601,7 +601,6 @@ class CategorySelectorBtn extends StatefulWidget {
 }
 
 class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
-  Color unselectedBtnColor = Colors.grey[300];
 
   int _value = -1;
 
