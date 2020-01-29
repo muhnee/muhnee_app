@@ -33,6 +33,12 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   }
 
   @override
+
+  // final Shader linearGradientPurple = LinearGradient(
+  //     colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
+  //   ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
+
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
@@ -194,13 +200,17 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                       fontSize: 45,
                       fontFamily: "SFPro",
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[600])),
+                      //foreground:  Paint()..shader = linearGradientPurple,
+                      color: Colors.grey[600]
+                      )),
               Text(amount,
                   style: TextStyle(
                       fontSize: 80,
                       fontFamily: "SFPro",
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[600])),
+                       //foreground:  Paint()..shader = linearGradientPurple,
+                      color: Colors.grey[600]
+                      )),
             ],
           ),
         ),

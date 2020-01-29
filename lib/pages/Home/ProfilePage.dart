@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               children: [
-                ProfileImgFuture(),
+                //ProfileImgFuture(),
                 ProfileDescriptions(),
                 SignOutBtn(),
               ]),

@@ -237,9 +237,20 @@ class _PanelButtonState extends State<PanelButton> {
             )
           ],
         ),
-        child: Material(
-          color: Color(0xff8e91f3).withOpacity(0.9),
-          borderRadius: BorderRadius.circular(13.0),
+        child: Container(
+          decoration: BoxDecoration(
+            // gradient: LinearGradient(
+            //   begin: Alignment.topRight,
+            //   end: Alignment.bottomLeft,
+            //   colors: [Color(0xff8e91f3), Color(0xff977aee)],
+            // ),
+            color: Color(0xff8e91f3).withOpacity(0.9),
+            borderRadius: BorderRadius.circular(13.0),
+          ),
+
+          // color: Color(0xff8e91f3).withOpacity(0.9),
+
+          // borderRadius: BorderRadius.circular(13.0),
           child: InkWell(
             borderRadius: BorderRadius.circular(13.0),
             child: Center(

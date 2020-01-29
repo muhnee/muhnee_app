@@ -288,15 +288,18 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   height: SizeConfig.blockSizeVertical * 1,
                                 ),
 
-                               
-                                      CategoryInfoSection(categoryInfoIncome),
+                                 CategoryInfoSection(categoryInfoIncome),
                                 
-                                SizedBox(
-                                  height: SizeConfig.blockSizeVertical * 0.3,
-                                ),
 
                                
-                                      CategoryInfoSection(categoryInfoExpense),
+                                    
+                                
+                                
+                               
+                                    
+                                 CategoryInfoSection(categoryInfoExpense),
+                                
+
                                 
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 2.5,
@@ -459,7 +462,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
 
     return Padding(
         padding:
-            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 0.7),
+            EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 0.85),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -493,7 +496,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                      boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.06),
-                        blurRadius: 40.0,
+                        blurRadius: 15.0,
                       ),
                     ]
                     //border: Border.all(color: cellColor2)
@@ -545,7 +548,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                       .format(widget.timestamp.toDate())
                                       .toString(),
                               style: TextStyle(
-                                  color: Colors.grey[500],
+                                  color: Colors.grey[400],
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -615,7 +618,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
 
           children = <Widget>[
             Container(
-              height: SizeConfig.blockSizeVertical * 9,
+              height: SizeConfig.blockSizeVertical * 11,
               child: Center(
                 child: ListView(
                     shrinkWrap: false,
@@ -624,6 +627,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                       SizedBox(width: SizeConfig.blockSizeHorizontal * 5 ,),
                       SizedBox(
                           width: SizeConfig.blockSizeHorizontal * 22,
+                         
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -642,18 +646,18 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                                   
                                     ),
                               ),
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 3 ,),
                           
                             ],
                           )),
+                          SizedBox(width: SizeConfig.blockSizeHorizontal * 3 ,),
                       
                       for (var item in snapshot.data)
                         Center(
                             child: Padding(
                           padding: EdgeInsets.only(
-                            right: SizeConfig.blockSizeHorizontal * 1.5,
-                            top: SizeConfig.blockSizeHorizontal * 0.7,
-                            bottom: SizeConfig.blockSizeHorizontal * 0.7,
+                            right: SizeConfig.blockSizeHorizontal * 2.5,
+                            // top: SizeConfig.blockSizeHorizontal * 0.7,
+                            // bottom: SizeConfig.blockSizeHorizontal * 0.7,
                           ),
                           child: CategoryBtnView(
                               item["name"], item["amount"], txtColor),
@@ -692,10 +696,18 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
   Widget CategoryBtnView(catName, amount, txtColor) {
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * 30,
+      height: SizeConfig.blockSizeVertical * 8.5,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: Colors.grey[100],
+          // color: Colors.grey[100],
+          color: Colors.white,
+           boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.06),
+                        blurRadius: 15.0,
+                      ),
+                    ]
         ),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -707,8 +719,8 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                 Text(
                   catName.toString(),
                   style: TextStyle(
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[500],
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
