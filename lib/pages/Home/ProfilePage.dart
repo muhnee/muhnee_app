@@ -33,26 +33,12 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 //ProfileImgFuture(),
                 ProfileDescriptions(),
+                SizedBox(
+                  height: SizeConfig.blockSizeVertical * 3,
+                ),
                 SignOutBtn(),
               ]),
         ),
-      ),
-    );
-  }
-}
-
-class SignOutBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 30),
-      child: RaisedButton(
-        child: Text("SignOut"),
-        onPressed: () {
-          signOutGoogle();
-          Navigator.pushReplacement(
-              context, FadeRouteBuilder(page: SplashScreen()));
-        },
       ),
     );
   }
@@ -129,8 +115,6 @@ class ProfileImgFuture extends StatelessWidget {
 class ProfileDescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
     return FutureBuilder<dynamic>(
       future: getDescriptions, // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -144,42 +128,32 @@ class ProfileDescriptions extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.blockSizeVertical * 5,
                 ),
-                
                 TextElement(
                   text: snapshot.data["displayName"],
                   size: 40,
                 ),
-                 SizedBox(
+                SizedBox(
                   height: SizeConfig.blockSizeVertical * 3,
                 ),
-
                 TextElementGrey(
                   text: "Email:",
                   size: 18,
                 ),
-
                 TextElement(
                   text: snapshot.data["email"],
                   size: 18,
                 ),
-
-                 SizedBox(
+                SizedBox(
                   height: SizeConfig.blockSizeVertical * 2,
                 ),
-
-                 TextElementGrey(
-                  text: "Your monthly savings goal:" ,
+                TextElementGrey(
+                  text: "Your monthly savings goal:",
                   size: 18,
                 ),
-
-               
-
                 TextElement(
                   text: "\$" + snapshot.data["monthlySavingsGoal"].toString(),
                   size: 18,
                 ),
-
-
               ],
             ),
           ];
@@ -226,11 +200,9 @@ class TextElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-        final Shader linearGradientPurple = LinearGradient(
+    final Shader linearGradientPurple = LinearGradient(
       colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
     ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
-
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -239,12 +211,11 @@ class TextElement extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: size,
-          fontFamily: "SFPro",
-          fontWeight: FontWeight.bold,
-          // color: Color(0xff8e91f),
-          foreground: Paint()..shader = linearGradientPurple
-        ),
+            fontSize: size,
+            fontFamily: "SFPro",
+            fontWeight: FontWeight.bold,
+            // color: Color(0xff8e91f),
+            foreground: Paint()..shader = linearGradientPurple),
       ),
     );
   }
@@ -257,11 +228,9 @@ class TextElementGrey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-        final Shader linearGradientPurple = LinearGradient(
+    final Shader linearGradientPurple = LinearGradient(
       colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
     ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
-
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -273,10 +242,56 @@ class TextElementGrey extends StatelessWidget {
           fontSize: size,
           fontFamily: "SFPro",
           fontWeight: FontWeight.bold,
-           color: Colors.grey[400],
+          color: Colors.grey[400],
           //foreground: Paint()..shader = linearGradientPurple
         ),
       ),
     );
+  }
+}
+
+class SignOutBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(bottom: 142.0),
+        child: Center(
+          child: SizedBox(
+            width: 150,
+            child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.15),
+                        blurRadius: 40.0,
+                      ),
+                    ]),
+                child: Material(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10.0),
+                    onTap: () {
+                      signOutGoogle();
+                      Navigator.pushReplacement(
+                          context, FadeRouteBuilder(page: SplashScreen()));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "SignOut",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
+          ),
+        ));
   }
 }
