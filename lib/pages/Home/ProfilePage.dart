@@ -129,6 +129,12 @@ class ProfileImgFuture extends StatelessWidget {
 class ProfileDescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+        final Shader linearGradientPurple = LinearGradient(
+      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
+
     return FutureBuilder<dynamic>(
       future: getDescriptions, // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -142,8 +148,7 @@ class ProfileDescriptions extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.blockSizeVertical * 5,
                 ),
-                TextElementMain(
-                  text: "Name"),
+                
                 TextElement(
                   text: snapshot.data["displayName"],
 
@@ -210,30 +215,6 @@ class TextElement extends StatelessWidget {
           fontFamily: "SFPro",
           fontWeight: FontWeight.bold,
           // color: Color(0xff8e91f),
-          //foreground: Paint()..shader = linearGradientPurple
-        ),
-      ),
-    );
-  }
-}
-
-class TextElementMain extends StatelessWidget {
-  var text;
-  TextElementMain({@required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.blockSizeHorizontal * 5,
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 30.0,
-          fontFamily: "SFPro",
-          fontWeight: FontWeight.bold,
-          color: Color(0xff496068),
           //foreground: Paint()..shader = linearGradientPurple
         ),
       ),
