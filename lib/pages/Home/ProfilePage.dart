@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     getPhoto = getPhotoUrl();
-    getDescriptions = getProfileDescriptions(); 
+    getDescriptions = getProfileDescriptions();
   }
 
   @override
@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
               scrollDirection: Axis.vertical,
               children: [
                 ProfileImgFuture(),
-                ProfileDescriptions(), 
+                ProfileDescriptions(),
                 SignOutBtn(),
               ]),
         ),
@@ -85,7 +85,6 @@ class ProfileImgFuture extends StatelessWidget {
                         height: SizeConfig.blockSizeHorizontal * 20,
                       ),
                     )
-                  
                   ],
                 ),
               ],
@@ -127,9 +126,7 @@ class ProfileImgFuture extends StatelessWidget {
   }
 }
 
-
 class ProfileDescriptions extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<dynamic>(
@@ -140,18 +137,20 @@ class ProfileDescriptions extends StatelessWidget {
         if (snapshot.hasData) {
           children = <Widget>[
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(
                   height: SizeConfig.blockSizeVertical * 5,
                 ),
-
-                TextElement(text: snapshot.data["displayName"] ,),
-                TextElement(text: snapshot.data["email"] ,),
-                TextElement(text: snapshot.data["monthlySavingsGoal"].toString() ,),
-
-                  
-                
-                
+                TextElement(
+                  text: snapshot.data["displayName"],
+                ),
+                TextElement(
+                  text: snapshot.data["email"],
+                ),
+                TextElement(
+                  text: snapshot.data["monthlySavingsGoal"].toString(),
+                ),
               ],
             ),
           ];
@@ -191,29 +190,26 @@ class ProfileDescriptions extends StatelessWidget {
   }
 }
 
-
 class TextElement extends StatelessWidget {
-
-  var text; 
-  TextElement({this.text});
+  var text;
+  TextElement({@required this.text});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        SizeConfig.blockSizeHorizontal * 5,
-                                  ),
-                                  child: Text(
-                                    text,
-                                    style: TextStyle(
-                                      fontSize: 30.0,
-                                      fontFamily: "SFPro",
-                                      fontWeight: FontWeight.bold,
-                                      // color: Color(0xff8e91f), 
-                                      //foreground: Paint()..shader = linearGradientPurple
-                                    ),
-                                  ),
-                                ); 
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.blockSizeHorizontal * 5,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 15.0,
+          fontFamily: "SFPro",
+          fontWeight: FontWeight.bold,
+          // color: Color(0xff8e91f),
+          //foreground: Paint()..shader = linearGradientPurple
+        ),
+      ),
+    );
   }
 }
