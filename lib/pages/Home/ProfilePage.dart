@@ -260,7 +260,7 @@ class SignOutBtn extends StatelessWidget {
             width: 150,
             child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(23.0),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
@@ -269,9 +269,9 @@ class SignOutBtn extends StatelessWidget {
                       ),
                     ]),
                 child: Material(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(23.0),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(23.0),
                     onTap: () {
                       signOutGoogle();
                       Navigator.pushReplacement(
@@ -283,8 +283,8 @@ class SignOutBtn extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "SignOut",
-                            style: TextStyle(color: Colors.black, fontSize: 18),
+                            "Signout",
+                            style: TextStyle(color: Colors.black, fontSize: 17, )
                           ),
                         ],
                       ),
