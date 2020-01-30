@@ -444,7 +444,7 @@ class TransactionViewCell extends StatefulWidget {
 }
 
 class _TransactionViewCellState extends State<TransactionViewCell> {
-  //Color cellColor1;
+  Color cellColor1;
   Color cellColor2;
 
   var cat;
@@ -453,10 +453,10 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   @override
   Widget build(BuildContext context) {
     if (widget.type == "income") {
-      //cellColor1 = Color(0xff90cb46);
+      cellColor1 = Color(0xff90cb46);
       cellColor2 = Color(0xff9ed45b);
     } else {
-      //cellColor1 = Color(0xffe52d27);
+      cellColor1 = Color(0xffe52d27);
       cellColor2 = Color(0xffff0844);
     }
 
@@ -483,22 +483,22 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    // gradient: LinearGradient(
-                    //   begin: Alignment.topLeft,
-                    //   end: Alignment.bottomRight,
-                    //   colors: [
-                    //     Colors.grey[200],
-                    //     Colors.grey[300]
-                    //   ], //? [cellColor1, cellColor2],
-                    // ),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        cellColor1, 
+                        cellColor2
+                      ], //? [cellColor1, cellColor2],
+                    ),
                     // color: Colors.grey[100],
-                    color: Colors.white,
-                     boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.06),
-                        blurRadius: 15.0,
-                      ),
-                    ]
+                    //color: cellColor2,
+                    //  boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.black.withOpacity(0.06),
+                    //     blurRadius: 15.0
+                    //   ),
+                    // ]
                     //border: Border.all(color: cellColor2)
                   ),
                   child: Row(
@@ -516,20 +516,22 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                 Text(
                                   widget.category,
                                   style: TextStyle(
-                                    color: Colors.grey[600],
+                                    // color: Colors.grey[600],
+                                    color: Colors.white,
                                     fontSize: 13,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 widget.recurring != 0
                                     ? Row(
                                         children: <Widget>[
                                           Text("  "),
-                                          Icon(Icons.loop, size: 10),
+                                          Icon(Icons.loop, size: 10, color: Colors.white,),
                                           Text(
                                             widget.recurring.toString(),
                                             style: TextStyle(
-                                              color: Colors.grey[600],
+                                              //color: Colors.grey[600],
+                                              color: Colors.white,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -548,7 +550,8 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                       .format(widget.timestamp.toDate())
                                       .toString(),
                               style: TextStyle(
-                                  color: Colors.grey[400],
+                                  // color: Colors.grey[400],
+                                  color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -565,16 +568,18 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                               style: TextStyle(
                                 letterSpacing: .5,
                                 fontSize: 14, //15?
-                                color: cellColor2,
+                                // color: cellColor2,
+                                color: Colors.white,
                                 fontFamily: "SFPro",
-                                //fontWeight: FontWeight.w600
+                                // fontWeight: FontWeight.w600
                               ),
                             ),
                             Text(widget.amountText,
                                 style: TextStyle(
                                   letterSpacing: 1,
                                   fontSize: 19,
-                                  color: cellColor2,
+                                  // color: cellColor2,
+                                  color: Colors.white,
                                   fontFamily: "SFPro",
                                   //fontWeight: FontWeight.w600,
                                 )),
@@ -618,7 +623,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
 
           children = <Widget>[
             Container(
-              height: SizeConfig.blockSizeVertical * 11,
+              height: SizeConfig.blockSizeVertical * 10,
               child: Center(
                 child: ListView(
                     shrinkWrap: false,
@@ -700,14 +705,16 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          // color: Colors.grey[100],
-          color: Colors.white,
-           boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.06),
-                        blurRadius: 15.0,
-                      ),
-                    ]
+            color: Colors.grey[100],
+          //color: Colors.white,
+          //border: Border.all(color: Colors.grey)
+          //color: Color(0xffd6d6d6),
+          //  boxShadow: [
+          //             BoxShadow(
+          //               color: Colors.black.withOpacity(0.06),
+          //               blurRadius: 15.0,
+          //             ),
+          //           ]
         ),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
