@@ -239,12 +239,12 @@ class _PanelButtonState extends State<PanelButton> {
         ),
         child: Container(
           decoration: BoxDecoration(
-            // gradient: LinearGradient(
-            //   begin: Alignment.topRight,
-            //   end: Alignment.bottomLeft,
-            //   colors: [Color(0xff8e91f3), Color(0xff977aee)],
-            // ),
-            color: Color(0xff8e91f3).withOpacity(0.9),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Color(0xff977aee).withOpacity(0.8), Color(0xff91CEFF).withOpacity(0.7), ],
+            ),
+            // color: Color(0xff8e91f3).withOpacity(0.9),
             borderRadius: BorderRadius.circular(13.0),
           ),
 
