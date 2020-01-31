@@ -199,14 +199,14 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                       fontFamily: "SFPro",
                       fontWeight: FontWeight.bold,
                       //foreground:  Paint()..shader = linearGradientPurple,
-                      color: Colors.grey[600])),
+                      color: Color(0xff1d1c1f))),
               Text(amount,
                   style: TextStyle(
                       fontSize: 80,
                       fontFamily: "SFPro",
                       fontWeight: FontWeight.bold,
                       //foreground:  Paint()..shader = linearGradientPurple,
-                      color: Colors.grey[600])),
+                      color: Color(0xff1d1c1f))),
             ],
           ),
         ),
@@ -228,14 +228,14 @@ class _InteractionPaneState extends State<InteractionPane> {
   @override
   Widget build(BuildContext context) {
     return 
-    // SizedBox(
-    //     width: SizeConfig.blockSizeHorizontal * 80,
-    //     height: SizeConfig.blockSizeVertical * 17,
-    //     child: Container(
-    //       //color: Colors.red,
-    //       child: 
+    SizedBox(
+        width: SizeConfig.blockSizeHorizontal * 80,
+        height: SizeConfig.blockSizeVertical * 17,
+        child: Container(
+          //color: Colors.red,
+          child: 
           Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               // ROW FOR BUTTONS
 
@@ -436,8 +436,8 @@ class _InteractionPaneState extends State<InteractionPane> {
 
              
             ],
-        //   ),
-        // )
+          ),
+        )
         );
   }
 

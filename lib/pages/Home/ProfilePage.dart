@@ -183,9 +183,9 @@ class TextElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Shader linearGradientPurple = LinearGradient(
-      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
-    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+    // final Shader linearGradientPurple = LinearGradient(
+    //   colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
+    // ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -197,8 +197,9 @@ class TextElement extends StatelessWidget {
             fontSize: size,
             fontFamily: "SFPro",
             fontWeight: FontWeight.bold,
-            // color: Color(0xff8e91f),
-            foreground: Paint()..shader = linearGradientPurple),
+             color: Color(0xff1d1c1f),
+            // foreground: Paint()..shader = linearGradientPurple
+            ),
       ),
     );
   }
@@ -243,7 +244,7 @@ class SignOutBtn extends StatelessWidget {
             width: 150,
             child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
@@ -252,9 +253,9 @@ class SignOutBtn extends StatelessWidget {
                       ),
                     ]),
                 child: Material(
-                  borderRadius: BorderRadius.circular(23.0),
+                  borderRadius: BorderRadius.circular(15.0),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     onTap: () {
                       signOutGoogle();
                       Navigator.pushReplacement(

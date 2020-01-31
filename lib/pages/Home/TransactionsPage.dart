@@ -136,8 +136,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      // color: Color(0xff8e91f3),
-                                       foreground: Paint()..shader = linearGradientPurple
+                                       color: Color(0xff1d1c1f),
+                                       //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
@@ -279,8 +279,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      //color: Color(0xff8e91f3), 
-                                      foreground: Paint()..shader = linearGradientPurple
+                                      color: Color(0xff1d1c1f), 
+                                      //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
@@ -289,14 +289,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 ),
 
                                  CategoryInfoSection(categoryInfoIncome),
-                                
-
-                               
-                                    
-                                
-                                
-                               
-                                    
+                            
                                  CategoryInfoSection(categoryInfoExpense),
                                 
 
@@ -318,8 +311,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      // color: Color(0xff8e91f3),
-                                      foreground: Paint()..shader = linearGradientPurple
+                                       color: Color(0xff1d1c1f),
+                                      //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
@@ -444,7 +437,7 @@ class TransactionViewCell extends StatefulWidget {
 }
 
 class _TransactionViewCellState extends State<TransactionViewCell> {
-  Color cellColor1;
+  //Color cellColor1;
   Color cellColor2;
 
   var cat;
@@ -453,10 +446,10 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   @override
   Widget build(BuildContext context) {
     if (widget.type == "income") {
-      cellColor1 = Color(0xff90cb46);
+      //cellColor1 = Color(0xff90cb46);
       cellColor2 = Color(0xff9ed45b);
     } else {
-      cellColor1 = Color(0xffe52d27);
+     // cellColor1 = Color(0xffe52d27);
       cellColor2 = Color(0xffff0844);
     }
 
@@ -478,20 +471,22 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
             // ),
 
             SizedBox(
-              height: SizeConfig.blockSizeVertical * 6.5,
+              // height: SizeConfig.blockSizeVertical * 6.5,
+              height: 58,
+              
               child: InkWell(
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        cellColor1, 
-                        cellColor2
-                      ], //? [cellColor1, cellColor2],
-                    ),
-                    // color: Colors.grey[100],
+                    // gradient: LinearGradient(
+                    //   begin: Alignment.topLeft,
+                    //   end: Alignment.bottomRight,
+                    //   colors: [
+                    //     Colors.grey[100], 
+                    //     cellColor2.withOpacity(0.3)
+                    //   ], //? [cellColor1, cellColor2],
+                    // ),
+                      color: Colors.grey[100],
                     //color: cellColor2,
                     //  boxShadow: [
                     //   BoxShadow(
@@ -516,22 +511,24 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                 Text(
                                   widget.category,
                                   style: TextStyle(
-                                    // color: Colors.grey[600],
-                                    color: Colors.white,
+                                    //  color: Colors.grey[600],
+                                    color: Color(0xff1d1c1f), 
+                                     
+                                    //color: Colors.white,
                                     fontSize: 13,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 widget.recurring != 0
                                     ? Row(
                                         children: <Widget>[
                                           Text("  "),
-                                          Icon(Icons.loop, size: 10, color: Colors.white,),
+                                          Icon(Icons.loop, size: 10, color: Color(0xff1d1c1f),),
                                           Text(
                                             widget.recurring.toString(),
                                             style: TextStyle(
-                                              //color: Colors.grey[600],
-                                              color: Colors.white,
+                                              color: Colors.grey[600],
+                                              //color: Colors.white,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -550,8 +547,8 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                       .format(widget.timestamp.toDate())
                                       .toString(),
                               style: TextStyle(
-                                  // color: Colors.grey[400],
-                                  color: Colors.white,
+                                   color: Colors.grey[400],
+                                  //color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -571,7 +568,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                 // color: cellColor2,
                                 color: Colors.white,
                                 fontFamily: "SFPro",
-                                // fontWeight: FontWeight.w600
+                                 fontWeight: FontWeight.w600
                               ),
                             ),
                             Text(widget.amountText,
@@ -581,7 +578,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                   // color: cellColor2,
                                   color: Colors.white,
                                   fontFamily: "SFPro",
-                                  //fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w600,
                                 )),
                           ],
                         ),
@@ -624,6 +621,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
           children = <Widget>[
             Container(
               height: SizeConfig.blockSizeVertical * 10,
+              
               child: Center(
                 child: ListView(
                     shrinkWrap: false,
@@ -631,7 +629,9 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                     children: [
                       SizedBox(width: SizeConfig.blockSizeHorizontal * 5 ,),
                       SizedBox(
-                          width: SizeConfig.blockSizeHorizontal * 22,
+                          //width: SizeConfig.blockSizeHorizontal * 28,
+
+                          width: 115,
                          
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -644,7 +644,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                                     ? "Income "
                                     : "Expenses",
                                 style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 25.0,
                                     fontFamily: "SFPro",
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[400]
@@ -701,10 +701,11 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
   Widget CategoryBtnView(catName, amount, txtColor) {
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * 30,
-      height: SizeConfig.blockSizeVertical * 8.5,
+      // height: SizeConfig.blockSizeVertical * 8.5,
+      height: 75, 
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(8.0),
             color: Colors.grey[100],
           //color: Colors.white,
           //border: Border.all(color: Colors.grey)
@@ -726,7 +727,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                 Text(
                   catName.toString(),
                   style: TextStyle(
-                    color: Colors.grey[500],
+                    color: Color(0xff1d1c1f),
                     fontWeight: FontWeight.w600,
                   ),
                 ),

@@ -28,7 +28,7 @@ class _LeftPanelState extends State<LeftPanel> {
         boxShadow: [
           BoxShadow(
             color: Colors.grey[500],
-            offset: const Offset(90.0, 330.0), //(90.0, 0)
+            offset: const Offset(90.0, 50), //(90.0, 0)
             spreadRadius: 0.0,
             blurRadius: 20.0,
           ),
@@ -242,9 +242,9 @@ class _PanelButtonState extends State<PanelButton> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Color(0xff977aee).withOpacity(0.8), Color(0xff91CEFF).withOpacity(0.7), ],
+              colors: [Color(0xff8e91f3).withOpacity(0.9), Color(0xff9D78F3).withOpacity(0.8) ],
             ),
-            // color: Color(0xff8e91f3).withOpacity(0.9),
+             //color: Color(0xfff2f2f2),
             borderRadius: BorderRadius.circular(13.0),
           ),
 
@@ -261,6 +261,8 @@ class _PanelButtonState extends State<PanelButton> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: widget.fontSize,
+                    // fontFamily: "SFPro",
+                    // letterSpacing: 1,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
