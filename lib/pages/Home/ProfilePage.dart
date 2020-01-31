@@ -4,6 +4,7 @@ import '../../utilities/FadeRoute.dart';
 import '../../main.dart';
 import '../../utilities/SignIn.dart';
 import '../../utilities/SizeConfig.dart';
+import 'ExpensePageSingleFile.dart';
 
 var getPhoto;
 var getDescriptions;
@@ -78,26 +79,8 @@ class ProfileImgFuture extends StatelessWidget {
           ];
         } else {
           children = <Widget>[
-            Column(
-              children: <Widget>[
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical * 2,
-                ),
-                Stack(
-                  children: <Widget>[
-                    ClipRRect(
-                      borderRadius: new BorderRadius.circular(14.0),
-                      child: Image(
-                        image: AssetImage(
-                            'lib/assets/images/defaultProfilePic.png'),
-                        width: SizeConfig.blockSizeHorizontal * 20,
-                        height: SizeConfig.blockSizeHorizontal * 20,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+         NotificationCell(
+                      message: "Loading...", messageColor: Colors.grey)
           ];
         }
         return Center(

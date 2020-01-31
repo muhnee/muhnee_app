@@ -38,7 +38,6 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   //     colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
   //   ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
-
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
@@ -189,8 +188,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   }
 
   Widget AmountText() {
-    return Container(
-      child: Expanded(
+    return  Expanded(
         child: Center(
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -201,20 +199,18 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
                       fontFamily: "SFPro",
                       fontWeight: FontWeight.bold,
                       //foreground:  Paint()..shader = linearGradientPurple,
-                      color: Colors.grey[600]
-                      )),
+                      color: Colors.grey[600])),
               Text(amount,
                   style: TextStyle(
                       fontSize: 80,
                       fontFamily: "SFPro",
                       fontWeight: FontWeight.bold,
-                       //foreground:  Paint()..shader = linearGradientPurple,
-                      color: Colors.grey[600]
-                      )),
+                      //foreground:  Paint()..shader = linearGradientPurple,
+                      color: Colors.grey[600])),
             ],
           ),
         ),
-      ),
+      
     );
   }
 }
@@ -231,13 +227,15 @@ class _InteractionPaneState extends State<InteractionPane> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 17,
-        child: Container(
-          //color: Colors.red,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return 
+    // SizedBox(
+    //     width: SizeConfig.blockSizeHorizontal * 80,
+    //     height: SizeConfig.blockSizeVertical * 17,
+    //     child: Container(
+    //       //color: Colors.red,
+    //       child: 
+          Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               // ROW FOR BUTTONS
 
@@ -272,6 +270,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                 children: <Widget>[
                   // Income / Expense Button
                   RaisedButton(
+                    
                     child: Text(
                       transactionType[0].toUpperCase().toString() +
                           transactionType.substring(1).toString(),
@@ -299,6 +298,7 @@ class _InteractionPaneState extends State<InteractionPane> {
                         });
                       }
                     },
+                    
                   ),
 
                   //Taxable Button
@@ -389,11 +389,10 @@ class _InteractionPaneState extends State<InteractionPane> {
 
                         //RESETING
                         setState(() {
-                          
                           //transactionType = "income";
                           isTaxable = false;
                           descriptionController.clear();
-                          recurringDaySelection = 0; 
+                          recurringDaySelection = 0;
                           //incomeExpenseColor = Color(0xffa5d15b);
                         });
 
@@ -434,9 +433,12 @@ class _InteractionPaneState extends State<InteractionPane> {
               transactionType == "income"
                   ? incomeCategorySection()
                   : expenseCategorySection(),
+
+             
             ],
-          ),
-        ));
+        //   ),
+        // )
+        );
   }
 
   //TODO : setState on amount wont rebuild the view if in this widget
@@ -473,8 +475,6 @@ class _InteractionPaneState extends State<InteractionPane> {
 }
 
 class expenseCategorySection extends StatefulWidget {
-  expenseCategorySection({Key key}) : super(key: key);
-
   @override
   _expenseCategorySectionState createState() => _expenseCategorySectionState();
 }
@@ -537,8 +537,6 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
 }
 
 class incomeCategorySection extends StatefulWidget {
-  incomeCategorySection({Key key}) : super(key: key);
-
   @override
   _incomeCategorySectionState createState() => _incomeCategorySectionState();
 }
@@ -611,7 +609,6 @@ class CategorySelectorBtn extends StatefulWidget {
 }
 
 class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
-
   int _value = -1;
 
   @override
@@ -749,9 +746,11 @@ class RecurringBtn extends StatelessWidget {
           elevation: 0,
           child: Image.asset(
             'lib/assets/images/loop.png',
-            width: SizeConfig.blockSizeVertical * 4,
-            height: SizeConfig.blockSizeVertical * 4,
+            // width: SizeConfig.blockSizeVertical * 50,
+            // height: SizeConfig.blockSizeVertical * 50,
           ),
+
+          // child: Icon(Icons.loop),
 
           // Image(
           //     image: AssetImage("lib/assets/images/loop.png",),
