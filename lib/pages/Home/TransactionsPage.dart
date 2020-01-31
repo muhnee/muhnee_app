@@ -558,15 +558,16 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                       Padding(
                         padding: EdgeInsets.only(
                             right: SizeConfig.blockSizeVertical * 1),
-                        child: Row(
+                        child: 
+                        Row(
                           children: <Widget>[
                             Text(
-                              "\$",
+                              "\$ ",
                               style: TextStyle(
                                 letterSpacing: .5,
-                                fontSize: 14, //15?
+                                fontSize: 17, //15?
                                 // color: cellColor2,
-                                color: Colors.white,
+                                color: cellColor2,
                                 fontFamily: "SFPro",
                                  fontWeight: FontWeight.w600
                               ),
@@ -574,14 +575,16 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                             Text(widget.amountText,
                                 style: TextStyle(
                                   letterSpacing: 1,
-                                  fontSize: 19,
+                                  fontSize: 17,
                                   // color: cellColor2,
-                                  color: Colors.white,
+                                  color: cellColor2,
                                   fontFamily: "SFPro",
                                   fontWeight: FontWeight.w600,
                                 )),
                           ],
                         ),
+
+
                       ),
                     ],
                   ),
@@ -661,8 +664,8 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                             child: Padding(
                           padding: EdgeInsets.only(
                             right: SizeConfig.blockSizeHorizontal * 2.5,
-                            // top: SizeConfig.blockSizeHorizontal * 0.7,
-                            // bottom: SizeConfig.blockSizeHorizontal * 0.7,
+                            //  top: SizeConfig.blockSizeHorizontal * 0.7,
+                            //  bottom: SizeConfig.blockSizeHorizontal * 0.7,
                           ),
                           child: CategoryBtnView(
                               item["name"], item["amount"], txtColor),

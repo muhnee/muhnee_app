@@ -47,7 +47,7 @@ class _LeftPanelState extends State<LeftPanel> {
             PanelButton(
                 itemValue: "Add",
                 fontSize: 16,
-                cellHeight: 15, //18
+                cellHeight: 135, //18
                 rotation: 3,
                 pageIndex: 1,
                 pageViewController: widget.pageViewController),
@@ -70,7 +70,7 @@ class _LeftPanelState extends State<LeftPanel> {
             PanelButton(
                 itemValue: "Transactions",
                 fontSize: 16,
-                cellHeight: 25, //18
+                cellHeight: 240.0, //220
                 rotation: 3,
                 pageIndex: 2,
                 pageViewController: widget.pageViewController),
@@ -203,7 +203,7 @@ class _ProfilePicState extends State<ProfilePic> {
 class PanelButton extends StatefulWidget {
   String itemValue;
   double fontSize;
-  var cellHeight;
+  double cellHeight;
   var rotation;
   var pageIndex;
   PageController pageViewController;
@@ -226,7 +226,8 @@ class _PanelButtonState extends State<PanelButton> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * 13,
-      height: SizeConfig.blockSizeVertical * widget.cellHeight,
+      // height: SizeConfig.blockSizeVertical * widget.cellHeight,
+      height: widget.cellHeight,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13.0),
