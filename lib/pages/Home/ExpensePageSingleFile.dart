@@ -376,7 +376,9 @@ class _InteractionPaneState extends State<InteractionPane> {
                                             .substring(1)
                                             .toString()) +
                                     " uploaded",
-                                desc: selectedCategory + ': \$' + amount,
+                                desc: description != null
+                                    ? description
+                                    : 'Transaction' + ': \$' + amount,
                                 btnOkOnPress: () {})
                             .show();
 
