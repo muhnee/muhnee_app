@@ -3,6 +3,7 @@ import 'package:muhnee/utilities/FirestoreFunctions.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:muhnee/models/Category.dart';
 
 // Pull from Firebase
 
@@ -188,29 +189,28 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   }
 
   Widget AmountText() {
-    return  Expanded(
-        child: Center(
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: <Widget>[
-              Text("\$ ",
-                  style: TextStyle(
-                      fontSize: 45,
-                      fontFamily: "SFPro",
-                      fontWeight: FontWeight.bold,
-                      //foreground:  Paint()..shader = linearGradientPurple,
-                      color: Color(0xff1d1c1f))),
-              Text(amount,
-                  style: TextStyle(
-                      fontSize: 80,
-                      fontFamily: "SFPro",
-                      fontWeight: FontWeight.bold,
-                      //foreground:  Paint()..shader = linearGradientPurple,
-                      color: Color(0xff1d1c1f))),
-            ],
-          ),
+    return Expanded(
+      child: Center(
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: <Widget>[
+            Text("\$ ",
+                style: TextStyle(
+                    fontSize: 45,
+                    fontFamily: "SFPro",
+                    fontWeight: FontWeight.bold,
+                    //foreground:  Paint()..shader = linearGradientPurple,
+                    color: Color(0xff1d1c1f))),
+            Text(amount,
+                style: TextStyle(
+                    fontSize: 80,
+                    fontFamily: "SFPro",
+                    fontWeight: FontWeight.bold,
+                    //foreground:  Paint()..shader = linearGradientPurple,
+                    color: Color(0xff1d1c1f))),
+          ],
         ),
-      
+      ),
     );
   }
 }
@@ -227,14 +227,12 @@ class _InteractionPaneState extends State<InteractionPane> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    SizedBox(
+    return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
         height: SizeConfig.blockSizeVertical * 17,
         child: Container(
           //color: Colors.red,
-          child: 
-          Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               // ROW FOR BUTTONS
@@ -270,7 +268,6 @@ class _InteractionPaneState extends State<InteractionPane> {
                 children: <Widget>[
                   // Income / Expense Button
                   RaisedButton(
-                    
                     child: Text(
                       transactionType[0].toUpperCase().toString() +
                           transactionType.substring(1).toString(),
@@ -298,7 +295,6 @@ class _InteractionPaneState extends State<InteractionPane> {
                         });
                       }
                     },
-                    
                   ),
 
                   //Taxable Button
@@ -380,7 +376,9 @@ class _InteractionPaneState extends State<InteractionPane> {
                                             .substring(1)
                                             .toString()) +
                                     " uploaded",
-                                desc: selectedCategory + ': \$' + amount,
+                                desc: description != null
+                                    ? description
+                                    : 'Transaction' + ': \$' + amount,
                                 btnOkOnPress: () {})
                             .show();
 
@@ -433,12 +431,9 @@ class _InteractionPaneState extends State<InteractionPane> {
               transactionType == "income"
                   ? incomeCategorySection()
                   : expenseCategorySection(),
-
-             
             ],
           ),
-        )
-        );
+        ));
   }
 
   //TODO : setState on amount wont rebuild the view if in this widget
@@ -626,7 +621,7 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
                 label: Padding(
                   padding: EdgeInsets.symmetric(vertical: 7, horizontal: 3),
                   child: Text(
-                    widget.items[index],
+                    widget.items[index].name,
                     style: TextStyle(
                         fontWeight: FontWeight.w600, color: Colors.white),
                   ),
@@ -642,7 +637,7 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
                   setState(() {
                     _value = selected ? index : null;
 
-                    selectedCategory = selected ? widget.items[index] : "";
+                    selectedCategory = selected ? widget.items[index].id : "";
 
                     print(selectedCategory);
                   });

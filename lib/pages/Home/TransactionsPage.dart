@@ -136,8 +136,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                       color: Color(0xff1d1c1f),
-                                       //foreground: Paint()..shader = linearGradientPurple
+                                      color: Color(0xff1d1c1f),
+                                      //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
@@ -279,21 +279,19 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff1d1c1f), 
+                                      color: Color(0xff1d1c1f),
                                       //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
                                 ),
-                                  SizedBox(
+                                SizedBox(
                                   height: SizeConfig.blockSizeVertical * 1,
                                 ),
 
-                                 CategoryInfoSection(categoryInfoIncome),
-                            
-                                 CategoryInfoSection(categoryInfoExpense),
-                                
+                                CategoryInfoSection(categoryInfoIncome),
 
-                                
+                                CategoryInfoSection(categoryInfoExpense),
+
                                 SizedBox(
                                   height: SizeConfig.blockSizeVertical * 2.5,
                                 ),
@@ -311,7 +309,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       fontSize: 30.0,
                                       fontFamily: "SFPro",
                                       fontWeight: FontWeight.bold,
-                                       color: Color(0xff1d1c1f),
+                                      color: Color(0xff1d1c1f),
                                       //foreground: Paint()..shader = linearGradientPurple
                                     ),
                                   ),
@@ -449,7 +447,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
       //cellColor1 = Color(0xff90cb46);
       cellColor2 = Color(0xff9ed45b);
     } else {
-     // cellColor1 = Color(0xffe52d27);
+      // cellColor1 = Color(0xffe52d27);
       cellColor2 = Color(0xffff0844);
     }
 
@@ -473,7 +471,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
             SizedBox(
               // height: SizeConfig.blockSizeVertical * 6.5,
               height: 58,
-              
+
               child: InkWell(
                 child: Container(
                   decoration: BoxDecoration(
@@ -482,11 +480,11 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                     //   begin: Alignment.topLeft,
                     //   end: Alignment.bottomRight,
                     //   colors: [
-                    //     Colors.grey[100], 
+                    //     Colors.grey[100],
                     //     cellColor2.withOpacity(0.3)
                     //   ], //? [cellColor1, cellColor2],
                     // ),
-                      color: Colors.grey[100],
+                    color: Colors.grey[100],
                     //color: cellColor2,
                     //  boxShadow: [
                     //   BoxShadow(
@@ -509,11 +507,13 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  widget.category,
+                                  widget.description != null
+                                      ? widget.description
+                                      : "(no description)",
                                   style: TextStyle(
                                     //  color: Colors.grey[600],
-                                    color: Color(0xff1d1c1f), 
-                                     
+                                    color: Color(0xff1d1c1f),
+
                                     //color: Colors.white,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
@@ -523,7 +523,11 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                     ? Row(
                                         children: <Widget>[
                                           Text("  "),
-                                          Icon(Icons.loop, size: 10, color: Color(0xff1d1c1f),),
+                                          Icon(
+                                            Icons.loop,
+                                            size: 10,
+                                            color: Color(0xff1d1c1f),
+                                          ),
                                           Text(
                                             widget.recurring.toString(),
                                             style: TextStyle(
@@ -547,7 +551,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                       .format(widget.timestamp.toDate())
                                       .toString(),
                               style: TextStyle(
-                                   color: Colors.grey[400],
+                                  color: Colors.grey[400],
                                   //color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600),
@@ -558,19 +562,17 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                       Padding(
                         padding: EdgeInsets.only(
                             right: SizeConfig.blockSizeVertical * 1),
-                        child: 
-                        Row(
+                        child: Row(
                           children: <Widget>[
                             Text(
                               "\$ ",
                               style: TextStyle(
-                                letterSpacing: .5,
-                                fontSize: 17, //15?
-                                // color: cellColor2,
-                                color: cellColor2,
-                                fontFamily: "SFPro",
-                                 fontWeight: FontWeight.w600
-                              ),
+                                  letterSpacing: .5,
+                                  fontSize: 17, //15?
+                                  // color: cellColor2,
+                                  color: cellColor2,
+                                  fontFamily: "SFPro",
+                                  fontWeight: FontWeight.w600),
                             ),
                             Text(widget.amountText,
                                 style: TextStyle(
@@ -583,8 +585,6 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                 )),
                           ],
                         ),
-
-
                       ),
                     ],
                   ),
@@ -624,24 +624,22 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
           children = <Widget>[
             Container(
               height: SizeConfig.blockSizeVertical * 10,
-              
               child: Center(
                 child: ListView(
                     shrinkWrap: false,
                     scrollDirection: Axis.horizontal,
                     children: [
-                      SizedBox(width: SizeConfig.blockSizeHorizontal * 5 ,),
+                      SizedBox(
+                        width: SizeConfig.blockSizeHorizontal * 5,
+                      ),
                       SizedBox(
                           //width: SizeConfig.blockSizeHorizontal * 28,
 
                           width: 115,
-                         
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-
-                            
                               Text(
                                 widget.categoryFuture == categoryInfoIncome
                                     ? "Income "
@@ -650,15 +648,13 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                                     fontSize: 25.0,
                                     fontFamily: "SFPro",
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.grey[400]
-                                  
-                                    ),
+                                    color: Colors.grey[400]),
                               ),
-                          
                             ],
                           )),
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 3 ,),
-                      
+                      SizedBox(
+                        width: SizeConfig.blockSizeHorizontal * 3,
+                      ),
                       for (var item in snapshot.data)
                         Center(
                             child: Padding(
@@ -678,16 +674,17 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
           ];
         } else if (snapshot.hasError) {
           children = <Widget>[
-            Center(child:
-            NotificationCell(
+            Center(
+                child: NotificationCell(
               message: "Network Error",
               messageColor: Colors.red,
             ))
           ];
         } else {
           children = <Widget>[
-            Center(child: 
-            NotificationCell(message: "Loading...", messageColor: Colors.grey))
+            Center(
+                child: NotificationCell(
+                    message: "Loading...", messageColor: Colors.grey))
           ];
         }
         return Center(
@@ -705,11 +702,11 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
     return SizedBox(
       width: SizeConfig.blockSizeHorizontal * 30,
       // height: SizeConfig.blockSizeVertical * 8.5,
-      height: 75, 
+      height: 75,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
-            color: Colors.grey[100],
+          color: Colors.grey[100],
           //color: Colors.white,
           //border: Border.all(color: Colors.grey)
           //color: Color(0xffd6d6d6),
@@ -741,7 +738,8 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
               children: <Widget>[
                 Text(
                   "\$ " + amount.toString(),
-                  style: TextStyle(color: txtColor, fontWeight: FontWeight.w600),
+                  style:
+                      TextStyle(color: txtColor, fontWeight: FontWeight.w600),
                 )
               ],
             )
