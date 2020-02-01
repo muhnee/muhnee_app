@@ -23,7 +23,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   void initState() {
     super.initState();
     //monthlyTransactions = getMonthlyTransactions();
-    weeklyTransactions = getWeeklyTransactions();
+    weeklyTransactions = getWeeklyTransactionsCloud();
     categoryInfoIncome = getCurrentSummaryforTransactions("income");
     categoryInfoExpense = getCurrentSummaryforTransactions("expense");
   }
@@ -79,12 +79,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
           // ),
 
           Expanded(
-              child: FutureBuilder<List>(
+              child: FutureBuilder<dynamic>(
             // future: curPageIndex == 0
             //     ? weeklyTransactions
             //     : monthlyTransactions, // a previously-obtained Future<String> or null
             future: weeklyTransactions,
-            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               List<Widget> children;
 
               if (snapshot.hasData) {
@@ -331,11 +331,11 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 ),
                                 child: TransactionViewCell(
                                   amountText: item["amount"].toString(),
-                                  type: item["type"],
-                                  category: item["category"],
-                                  description: item["description"],
-                                  timestamp: item["timestamp"],
-                                  recurring: item["recurringDays"],
+                                   type: item["type"],
+                                   category: item["category"],
+                                  // description: item["description"],
+                                   timestamp: item["timestamp"],
+                                   recurring: item["recurringDays"],
                                 )),
                         ]),
                   ))
@@ -350,7 +350,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
               } else {
                 children = <Widget>[
                   NotificationCell(
-                      message: "Loading...", messageColor: Colors.grey)
+                      message: "Loading...", messageColor: Colors.grey[200])
                 ];
               }
               return Center(
@@ -368,49 +368,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 }
 
-// Widget summaryRow(type, amount) {
-//   return Row(
-//     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//     children: <Widget>[
-//       Text(
-//         type + ": ",
-//         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-//       ),
-//       type == "Income"
-//           ? Text(
-//               "\$ " + amount,
-//               style: GoogleFonts.varelaRound(
-//                 textStyle: TextStyle(
-//                   letterSpacing: .5,
-//                   fontSize: 16,
-//                   color: Colors.green,
-//                 ),
-//               ),
-//             )
-//           : type == "Expenses"
-//               ? Text(
-//                   "\$ " + amount,
-//                   style: GoogleFonts.varelaRound(
-//                     textStyle: TextStyle(
-//                       letterSpacing: .5,
-//                       fontSize: 16,
-//                       color: Colors.red,
-//                     ),
-//                   ),
-//                 )
-//               : Text(
-//                   "\$ " + amount,
-//                   style: GoogleFonts.varelaRound(
-//                     textStyle: TextStyle(
-//                       letterSpacing: .5,
-//                       fontSize: 16,
-//                       color: Colors.black,
-//                     ),
-//                   ),
-//                 )
-//     ],
-//   );
-// }
 
 class TransactionViewCell extends StatefulWidget {
   var amountText;
@@ -422,13 +379,13 @@ class TransactionViewCell extends StatefulWidget {
   var recurring;
 
   TransactionViewCell(
-      {@required this.amountText,
-      @required this.type,
-      @required this.category,
-      this.taxable,
-      @required this.description,
+      { @required this.amountText,
+       @required this.type,
+       this.category,
+       this.taxable,
+       this.description,
       @required this.timestamp,
-      @required this.recurring});
+       this.recurring});
 
   @override
   _TransactionViewCellState createState() => _TransactionViewCellState();
@@ -441,8 +398,13 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   var cat;
   var tax;
 
+  DateTime timestampDate ;
+
   @override
   Widget build(BuildContext context) {
+
+    timestampDate = DateTime.parse(widget.timestamp);
+
     if (widget.type == "income") {
       //cellColor1 = Color(0xff90cb46);
       cellColor2 = Color(0xff9ed45b);
@@ -507,9 +469,7 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  widget.description != null
-                                      ? widget.description
-                                      : "(no description)",
+                                  widget.category.toString(), //! change to category
                                   style: TextStyle(
                                     //  color: Colors.grey[600],
                                     color: Color(0xff1d1c1f),
@@ -542,13 +502,18 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                     : Text("")
                               ],
                             ),
+
+                            
+
+
+
                             Text(
                               DateFormat.EEEE()
-                                      .format(widget.timestamp.toDate())
+                                      .format(timestampDate)
                                       .toString() +
                                   ", " +
                                   DateFormat.MMMd()
-                                      .format(widget.timestamp.toDate())
+                                      .format(timestampDate)
                                       .toString(),
                               style: TextStyle(
                                   color: Colors.grey[400],
@@ -556,6 +521,9 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600),
                             ),
+
+
+
                           ],
                         ),
                       ),

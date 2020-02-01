@@ -173,6 +173,23 @@ Future<List> getWeeklyTransactions() async {
   return transactionList;
 }
 
+// gets an ordered list of weekly transactions from latest to last
+Future<dynamic> getWeeklyTransactionsCloud() async {
+     
+  final HttpsCallable getTransactionsFn =
+      CloudFunctions.instance.getHttpsCallable(
+    functionName: 'getAllTransactions',
+  );
+
+  dynamic response = await getTransactionsFn
+      .call(<String, dynamic>{
+    'summaryType': 'week'
+  });
+
+  return response.data;
+
+}
+
 // gets the url of the users profile pic
 Future<String> getPhotoUrl() async {
   final FirebaseUser currentUser = await _auth.currentUser();
