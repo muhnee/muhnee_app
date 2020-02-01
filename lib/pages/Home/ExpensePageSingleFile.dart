@@ -263,6 +263,8 @@ class _InteractionPaneState extends State<InteractionPane> {
 
               ExpenseDescription(),
 
+              SizedBox(height: 7,),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -492,16 +494,17 @@ class _expenseCategorySectionState extends State<expenseCategorySection> {
           }
 
           children = <Widget>[
-            Container(
-              height: SizeConfig.blockSizeVertical * 5,
-              child: Center(
+            SizedBox(
+              // height: SizeConfig.blockSizeVertical * 7,
+              height: 45,
+              // child: Center(
                 child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
                       CategorySelectorBtn(items: items, length: length)
                     ]),
-              ),
+              // ),
             )
           ];
         } else if (snapshot.hasError) {
@@ -555,15 +558,16 @@ class _incomeCategorySectionState extends State<incomeCategorySection> {
 
           children = <Widget>[
             Container(
-              height: SizeConfig.blockSizeVertical * 5,
-              child: Center(
+              // height: SizeConfig.blockSizeVertical * 5,
+              height: 45,
+              // child: Center(
                 child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
                       CategorySelectorBtn(items: items, length: length)
                     ]),
-              ),
+              // ),
             )
           ];
         } else if (snapshot.hasError) {
