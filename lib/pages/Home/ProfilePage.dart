@@ -140,30 +140,19 @@ class ProfileDescriptions extends StatelessWidget {
               ],
             ),
           ];
-        } else {
-          children = <Widget>[
-            Column(
-              children: <Widget>[
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical * 2,
-                ),
-                Stack(
-                  children: <Widget>[
-                    ClipRRect(
-                      borderRadius: new BorderRadius.circular(14.0),
-                      child: Image(
-                        image: AssetImage(
-                            'lib/assets/images/defaultProfilePic.png'),
-                        width: SizeConfig.blockSizeHorizontal * 20,
-                        height: SizeConfig.blockSizeHorizontal * 20,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ];
-        }
+        }  else if (snapshot.hasError) {
+                children = <Widget>[
+                  NotificationCell(
+                    message: "Network Error",
+                    messageColor: Colors.red,
+                  )
+                ];
+              } else {
+                children = <Widget>[
+                  NotificationCell(
+                      message: "Loading...", messageColor: Colors.grey[600])
+                ];
+              }
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -183,9 +172,6 @@ class TextElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final Shader linearGradientPurple = LinearGradient(
-    //   colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
-    // ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -212,10 +198,6 @@ class TextElementGrey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Shader linearGradientPurple = LinearGradient(
-      colors: <Color>[Color(0xff8e91f3), Color(0xff9D78F3)],
-    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
-
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.blockSizeHorizontal * 5,

@@ -6,56 +6,13 @@ import 'package:muhnee/utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
 import 'package:muhnee/utilities/SizeConfig.dart';
 
-
 class IntroPageFinal extends StatefulWidget {
   @override
   _IntroPageFinalState createState() => _IntroPageFinalState();
 }
 
-class _IntroPageFinalState extends State<IntroPageFinal> with SingleTickerProviderStateMixin {
+class _IntroPageFinalState extends State<IntroPageFinal> {
   int delayAmount = 500;
-  AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController (
-      vsync: this,
-      lowerBound: 0.5,
-      duration: Duration(seconds: 3),
-    )..repeat();
-  }
-
-  Widget _buildBody() {
-    return AnimatedBuilder(
-      animation: CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
-      builder: (context, child) {
-        return Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            _buildContainer(150 * _controller.value),
-            _buildContainer(200 * _controller.value),
-            _buildContainer(250 * _controller.value),
-            _buildContainer(300 * _controller.value),
-            _buildContainer(350 * _controller.value),
-            // Align(child: Icon(Icons.phone_android, size: 44,)),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildContainer(double radius) {
-    return Container(
-      width: radius,
-      height: radius,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.blue.withOpacity(1 - _controller.value),
-      ),
-    );
-  }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -152,30 +109,25 @@ class _IntroPageFinalState extends State<IntroPageFinal> with SingleTickerProvid
                 child: Material(
                   borderRadius: BorderRadius.circular(21.0),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(21.0),
-                    child: Padding(
-                        padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                        child: Center(
-                          child: Text(
-                            "Let's Begin",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
+                      borderRadius: BorderRadius.circular(21.0),
+                      child: Padding(
+                          padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                          child: Center(
+                            child: Text(
+                              "Let's Begin",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
                             ),
-                          ),
-                        )),
-                    onTap: () {
-                      
-                      Future.delayed(const Duration(seconds: 1), () {
-                        _buildBody();
+                          )),
+                      onTap: () {
                         Navigator.pushReplacement(
                             context,
                             FadeRouteBuilder(
                               page: HomePage(),
                             ));
-                      });
-                    },
-                  ),
+                      }),
                 ),
               ),
             ),
