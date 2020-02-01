@@ -4,6 +4,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'dart:convert';
 
 import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
+import 'package:muhnee/models/Category.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final databaseReference = Firestore.instance;
@@ -80,7 +81,8 @@ Future<List> getCategories(categoryType) async {
       .collection("types")
       .getDocuments()
       .then((QuerySnapshot snapshot) {
-    snapshot.documents.forEach((f) => results.add(f.data["name"]));
+    snapshot.documents.forEach((f) => results
+        .add(new Category(f.data["name"], f.documentID, f.data['icon'])));
   });
 
   return results;
@@ -213,4 +215,3 @@ Future<dynamic> getCurrentSummaryforTransactions(
 
   //return json.decode(jsonEncode(response.data));
 }
-
