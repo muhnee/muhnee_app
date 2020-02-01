@@ -395,9 +395,6 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
   //Color cellColor1;
   Color cellColor2;
 
-  var cat;
-  var tax;
-
   DateTime timestampDate ;
 
   @override
