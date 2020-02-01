@@ -151,11 +151,11 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
             child: Padding(
               padding: EdgeInsets.only(bottom: 25, top: 25),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    width: 250,
+                    width: 200,
                     height: 40,
                     child: Padding(
                       padding:
@@ -173,6 +173,7 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
+                  SizedBox(width: 20),
                   TickBtnIncome(customIncomeController: customIncomeController),
                 ],
               ),

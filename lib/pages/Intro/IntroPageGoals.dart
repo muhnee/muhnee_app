@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
+import 'package:muhnee/pages/Intro/IntroPageFinal.dart';
 import '../../utilities/FadeRoute.dart';
 import 'package:muhnee/utilities/ShowUp.dart';
 import 'package:muhnee/utilities/FirestoreFunctions.dart';
@@ -35,7 +36,7 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
             delay: delayAmount * 6,
           ),
           CustomKeyboard(),
-          SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
+          SizedBox(height: 30),
           NextButton(),
         ],
       ),
@@ -292,7 +293,7 @@ class _NextButtonState extends State<NextButton> {
               width: 150,
               child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(23.0),
+                      borderRadius: BorderRadius.circular(21.0),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -301,9 +302,9 @@ class _NextButtonState extends State<NextButton> {
                         ),
                       ]),
                   child: Material(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(21.0),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(23.0),
+                      borderRadius: BorderRadius.circular(21.0),
                       onTap: () {
                         uploadGoals(int.parse(amount));
 
@@ -312,7 +313,7 @@ class _NextButtonState extends State<NextButton> {
                         setOnboardedParam();
 
                         Navigator.pushReplacement(
-                            context, FadeRouteBuilder(page: HomePage()));
+                            context, FadeRouteBuilder(page: IntroPageFinal()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),

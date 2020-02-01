@@ -117,9 +117,11 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 52.0),
-      child: Column(
+    return 
+    // Padding(
+    //   padding: EdgeInsets.symmetric(horizontal: 40.0),
+    //   child: 
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           ShowUp(
@@ -141,7 +143,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
             child: Padding(
               padding: EdgeInsets.only(bottom: 25),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
@@ -163,6 +165,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
                       borderRadius: BorderRadius.circular(13.0),
                     ),
                   ),
+                  SizedBox(width: 20),
                   TickBtn(customExpenseController: customExpenseController),
                 ],
               ),
@@ -170,7 +173,7 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
             delay: delayAmount * 10,
           )
         ],
-      ),
+      // ),
     );
   }
 
@@ -178,15 +181,17 @@ class _ExpCellsComponentState extends State<ExpCellsComponent> {
     return Padding(
       padding: EdgeInsets.only(bottom: 25),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SingleExpCell(
             expenseType: type1,
           ),
+          SizedBox(width:20),
           SingleExpCell(
             expenseType: type2,
           ),
+          SizedBox(width:20),
           SingleExpCell(
             expenseType: type3,
           ),
@@ -358,7 +363,7 @@ class _NextButtonState extends State<NextButton> {
               width: 150,
               child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(23.0),
+                      borderRadius: BorderRadius.circular(21.0),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -367,9 +372,9 @@ class _NextButtonState extends State<NextButton> {
                         ),
                       ]),
                   child: Material(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(21.0),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(23.0),
+                      borderRadius: BorderRadius.circular(21.0),
                       onTap: () {
                         expenses.add("Other");
                         uploadCategories("expense", expenses);
