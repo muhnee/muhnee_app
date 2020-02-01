@@ -625,8 +625,8 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
                             child: Padding(
                           padding: EdgeInsets.only(
                             right: SizeConfig.blockSizeHorizontal * 2.5,
-                            //  top: SizeConfig.blockSizeHorizontal * 0.7,
-                            //  bottom: SizeConfig.blockSizeHorizontal * 0.7,
+                              top: SizeConfig.blockSizeHorizontal * 0.7,
+                              bottom: SizeConfig.blockSizeHorizontal * 0.7,
                           ),
                           child: CategoryBtnView(
                               item["name"], item["amount"], txtColor),
