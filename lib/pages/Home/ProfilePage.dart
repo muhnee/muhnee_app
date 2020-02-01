@@ -241,14 +241,14 @@ class SignOutBtn extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 142.0),
         child: Center(
           child: SizedBox(
-            width: 150,
+            width: SizeConfig.blockSizeHorizontal * 65,
             child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
+                        color: Colors.black.withOpacity(0.10),
                         blurRadius: 40.0,
                       ),
                     ]),
@@ -262,13 +262,13 @@ class SignOutBtn extends StatelessWidget {
                           context, FadeRouteBuilder(page: SplashScreen()));
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                      padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
                             "Signout",
-                            style: TextStyle(color: Colors.black, fontSize: 17, )
+                            style: TextStyle(color: Color(0xff1d1c1f), fontSize: 15, fontWeight: FontWeight.w600)
                           ),
                         ],
                       ),
