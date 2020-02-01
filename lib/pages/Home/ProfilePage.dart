@@ -80,7 +80,7 @@ class ProfileImgFuture extends StatelessWidget {
         } else {
           children = <Widget>[
          NotificationCell(
-                      message: "Loading...", messageColor: Colors.grey[200])
+                      message: "Loading...", messageColor: Colors.grey[600])
           ];
         }
         return Center(

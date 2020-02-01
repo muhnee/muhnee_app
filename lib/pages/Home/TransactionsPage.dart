@@ -332,7 +332,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                 child: TransactionViewCell(
                                   amountText: item["amount"].toString(),
                                    type: item["type"],
-                                   category: item["category"],
+                                   category: item["categoryName"],
                                   // description: item["description"],
                                    timestamp: item["timestamp"],
                                    recurring: item["recurringDays"],
@@ -350,7 +350,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
               } else {
                 children = <Widget>[
                   NotificationCell(
-                      message: "Loading...", messageColor: Colors.grey[200])
+                      message: "Loading...", messageColor: Colors.grey[600])
                 ];
               }
               return Center(
@@ -649,7 +649,7 @@ class _CategoryInfoSectionState extends State<CategoryInfoSection> {
           children = <Widget>[
             Center(
                 child: NotificationCell(
-                    message: "Loading...", messageColor: Colors.grey))
+                    message: "Loading...", messageColor: Colors.grey[600]))
           ];
         }
         return Center(
