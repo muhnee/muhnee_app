@@ -229,7 +229,7 @@ class _InteractionPaneState extends State<InteractionPane> {
   Widget build(BuildContext context) {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 17,
+        //height: SizeConfig.blockSizeVertical * 17,
         child: Container(
           //color: Colors.red,
           child: Column(
@@ -684,7 +684,6 @@ class _CategorySelectorBtnState extends State<CategorySelectorBtn> {
 }
 
 class ExpenseDescription extends StatefulWidget {
-  ExpenseDescription({Key key}) : super(key: key);
 
   @override
   _ExpenseDescriptionState createState() => _ExpenseDescriptionState();
@@ -697,7 +696,8 @@ class _ExpenseDescriptionState extends State<ExpenseDescription> {
       children: <Widget>[
         SizedBox(
           width: SizeConfig.blockSizeHorizontal * 65,
-          height: SizeConfig.blockSizeVertical * 5,
+          // height: SizeConfig.blockSizeVertical * 5,
+          height: 41,
           child: Padding(
             padding: EdgeInsets.only(
                 left: SizeConfig.blockSizeHorizontal * 5,
@@ -730,8 +730,12 @@ class RecurringBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: SizeConfig.blockSizeVertical * 5,
-      height: SizeConfig.blockSizeVertical * 5,
+      // width: SizeConfig.blockSizeVertical * 5,
+      // height: SizeConfig.blockSizeVertical * 5,
+
+      height: 41,
+      width: 41,
+
       child: RaisedButton(
           color: Colors.grey[200],
           shape: RoundedRectangleBorder(
