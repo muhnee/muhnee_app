@@ -76,15 +76,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 end: Alignment(-1.0, -1.0),
                 stops: [0.1, 0.9],
                 colors: [
-                  Color(0xff91CEFF),
-                  Color(0xff8e91f3),
-                  
+                  Color(0xff9D78F3),
+                  Color(0xff8e91f3),              
                   
                 ],
               ),
             ),
             child: Center(
-              child: Text("muhnee",
+              child: Text("Muhnee",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
