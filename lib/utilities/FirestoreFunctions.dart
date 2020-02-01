@@ -202,7 +202,7 @@ Future<dynamic> getCurrentSummaryforTransactions(
     transactionCategoryType) async {
   final HttpsCallable getCurrentSummaryforTransactionsFn =
       CloudFunctions.instance.getHttpsCallable(
-    functionName: 'getCurrentSummaryforTransactionMobile',
+    functionName: 'getCurrentSummaryforTransactions',
   );
 
   dynamic response = await getCurrentSummaryforTransactionsFn
