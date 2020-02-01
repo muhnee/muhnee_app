@@ -507,7 +507,9 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  widget.description,
+                                  widget.description != null
+                                      ? widget.description
+                                      : "(no description)",
                                   style: TextStyle(
                                     //  color: Colors.grey[600],
                                     color: Color(0xff1d1c1f),
