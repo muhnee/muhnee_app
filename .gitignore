@@ -37,3 +37,6 @@ lib/generated_plugin_registrant.dart
 
 # Google Service JSON
 android/app/google-services.json
+
+# Android Signing Keys
+key.properties
