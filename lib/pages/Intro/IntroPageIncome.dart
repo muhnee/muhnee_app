@@ -155,7 +155,7 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    width: 150,
+                    width: 180,
                     height: 40,
                     child: Padding(
                       padding:
