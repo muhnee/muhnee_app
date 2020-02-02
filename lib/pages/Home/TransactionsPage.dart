@@ -94,6 +94,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
                 // var savingsGoal = getWeeklySavingsGoal();
 
+                
                 // var reachedGoalPercent = total
 
                 for (var item in snapshot.data)
@@ -102,6 +103,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                       : totalInc += item["amount"];
 
                 totalNet = totalInc - totalExp;
+
+                //  for (var item in snapshot.data)
+                  // print(item["timestamp"]);
 
                 children = <Widget>[
                   // Stats section
@@ -500,10 +504,6 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                               ],
                             ),
 
-                            
-
-
-
                             Text(
                               DateFormat.EEEE()
                                       .format(timestampDate)
@@ -518,8 +518,6 @@ class _TransactionViewCellState extends State<TransactionViewCell> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600),
                             ),
-
-
 
                           ],
                         ),

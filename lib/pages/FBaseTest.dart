@@ -20,13 +20,13 @@ class FBaseTest extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                  imageUrl,
-                ),
-                radius: 60,
-                backgroundColor: Colors.transparent,
-              ),
+              // CircleAvatar(
+              //   backgroundImage: NetworkImage(
+              //     "imageUrl",
+              //   ),
+              //   radius: 60,
+              //   backgroundColor: Colors.transparent,
+              // ),
               SizedBox(height: 40),
               Text(
                 'NAME',
@@ -36,7 +36,7 @@ class FBaseTest extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                name,
+                "name",
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.deepPurple,
@@ -51,7 +51,7 @@ class FBaseTest extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                email,
+                "email",
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.deepPurple,
