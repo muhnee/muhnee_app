@@ -119,7 +119,7 @@ class _IntroPageGoalsState extends State<IntroPageGoals> {
 
   Widget CustomKeyboard() {
     return SizedBox(
-        height: SizeConfig.blockSizeVertical * 30,
+        height: SizeConfig.blockSizeVertical * 45,
         child: Container(
           //color: Colors.white,
           child: Column(
