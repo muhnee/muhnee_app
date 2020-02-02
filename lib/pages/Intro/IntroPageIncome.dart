@@ -119,7 +119,7 @@ class _IncCellsComponentState extends State<IncCellsComponent> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 52.0,
+        horizontal: 20.0,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
