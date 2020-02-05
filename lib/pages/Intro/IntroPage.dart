@@ -7,6 +7,9 @@ import '../../utilities/SignIn.dart';
 import '../../utilities/ShowUp.dart';
 import 'IntroPageExpense.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:io' show Platform;
+import 'package:device_info/device_info.dart';
+import 'package:apple_sign_in/apple_sign_in_button.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -15,6 +18,29 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
   int delayAmount = 500;
+
+  bool supportsAppleSignIn = false;
+
+  @override
+  Widget initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _getDeviceInfo();
+    });
+  }
+
+  _getDeviceInfo() async {
+    if (Platform.isIOS) {
+      var iosInfo = await DeviceInfoPlugin().iosInfo;
+      var version = iosInfo.systemVersion;
+
+      // We enable Apple Sign In if on iOS 13
+      // TODO: update this to greater or equal to 13
+      if (version.contains('13') == true) {
+        supportsAppleSignIn = true;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +53,19 @@ class _IntroPageState extends State<IntroPage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _showUpText(),
-          _signInButton(),
+
+          Column(
+         
+            children: <Widget>[
+               _signInButton(),
+          _signInWithAppleButton()
+
+            ],
+          ),
+         
         ],
       ),
     );
@@ -71,13 +106,13 @@ class _IntroPageState extends State<IntroPage> {
   Widget _signInButton() {
     return ShowUp(
       child: Padding(
-          padding: EdgeInsets.only(bottom: 142.0),
+          padding: EdgeInsets.only(bottom: 16.0),
           child: Center(
             child: SizedBox(
               width: 300,
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(6.0),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
@@ -86,11 +121,11 @@ class _IntroPageState extends State<IntroPage> {
                       ),
                     ]),
                 child: Material(
-                  borderRadius: BorderRadius.circular(23.0),
+                  borderRadius: BorderRadius.circular(6.0),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(6.0),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                      padding: EdgeInsets.only(top: 14.0, bottom: 14.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -99,13 +134,13 @@ class _IntroPageState extends State<IntroPage> {
                             child: Image(
                                 image: AssetImage(
                                     "lib/assets/images/google_icon.png"),
-                                height: 30.0),
+                                height: 20.0),
                           ),
                           Text(
                             "Sign in with Google",
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 20,
+                              fontSize: 19,
                             ),
                           ),
                         ],
@@ -175,6 +210,31 @@ class _IntroPageState extends State<IntroPage> {
             ),
           )),
       delay: delayAmount * 7,
+    );
+  }
+
+  Widget _signInWithAppleButton() {
+    return ShowUp(
+      child: Padding(
+          padding: EdgeInsets.only(bottom: 20.0),
+          child: Center(
+            child: SizedBox(
+                width: 300,
+                child: AppleSignInButton(
+                  style: ButtonStyle.black,
+                  type: ButtonType.continueButton,
+                  onPressed: () {
+                    signInWithApple()
+                        .then((user) async => await isOnboarded()
+                            ? Navigator.pushReplacement(
+                                context, FadeRouteBuilder(page: HomePage()))
+                            : Navigator.pushReplacement(context,
+                                FadeRouteBuilder(page: IntroPageExpense())))
+                        .catchError((e) => print(e));
+                  },
+                )),
+          )),
+      delay: delayAmount * 8,
     );
   }
 }
