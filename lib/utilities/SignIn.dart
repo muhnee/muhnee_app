@@ -5,6 +5,8 @@ import 'package:apple_sign_in/apple_sign_in.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
+final OAuthProvider appleOAuthProvider = OAuthProvider(providerId: 'apple.com');
+
 // String name;
 // String email;
 // String imageUrl;
@@ -61,20 +63,20 @@ void signOutGoogle() {
 }
 
 Future<bool> signInWithApple() async {
-  print("Attempting to sign in");
+  print("Attempting to sign in with Apple");
   try {
     final AuthorizationResult result = await AppleSignIn.performRequests([
       AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
     ]);
-
+    print(result.status.toString());
     switch (result.status) {
       case AuthorizationStatus.authorized:
         try {
           print("successfull sign in");
           final AppleIdCredential appleIdCredential = result.credential;
-          OAuthProvider oAuthProvider =
-              new OAuthProvider(providerId: "apple.com");
-          final AuthCredential credential = oAuthProvider.getCredential(
+
+          // Create a new Firebase OAuth Provider with Apple.com
+          final AuthCredential credential = appleOAuthProvider.getCredential(
             idToken: String.fromCharCodes(appleIdCredential.identityToken),
             accessToken:
                 String.fromCharCodes(appleIdCredential.authorizationCode),
@@ -110,7 +112,10 @@ Future<bool> signInWithApple() async {
     }
   } catch (error) {
     print("error with apple sign in");
+
+    return false;
   }
+  return false;
 }
 
 // Future<bool> isSignedIn() async {
