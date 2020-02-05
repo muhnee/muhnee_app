@@ -130,7 +130,7 @@ class _IntroPageState extends State<IntroPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.only(right: 17.0),
+                            padding: EdgeInsets.only(right: 10.0),
                             child: Image(
                                 image: AssetImage(
                                     "lib/assets/images/google_icon.png"),
@@ -222,7 +222,7 @@ class _IntroPageState extends State<IntroPage> {
                 width: 300,
                 child: AppleSignInButton(
                   style: ButtonStyle.black,
-                  type: ButtonType.continueButton,
+                  type: ButtonType.signIn,
                   onPressed: () {
                     signInWithApple()
                         .then((user) async => await isOnboarded()
