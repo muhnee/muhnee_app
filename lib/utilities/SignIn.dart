@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:apple_sign_in/apple_sign_in.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -22,7 +23,7 @@ Future<bool> signInWithGoogle() async {
   final AuthResult authResult = await _auth.signInWithCredential(credential);
   final FirebaseUser user = authResult.user;
 
-   // Checking if email and name is null
+  // Checking if email and name is null
   // assert(user.email != null);
   // assert(user.displayName != null);
   // assert(user.photoUrl != null);
@@ -31,7 +32,7 @@ Future<bool> signInWithGoogle() async {
   // email = user.email;
   // imageUrl = user.photoUrl;
 
-   // Only taking the first part of the name, i.e., First Name
+  // Only taking the first part of the name, i.e., First Name
   // if (name.contains(" ")) {
   //   name = name.substring(0, name.indexOf(" "));
   // }
@@ -43,7 +44,7 @@ Future<bool> signInWithGoogle() async {
   assert(user.uid == currentUser.uid);
 
   // return 'signInWithGoogle succeeded: $user';
-  return true; 
+  return true;
   // } catch (e) {
   //   print(e);
   //   return (e);
@@ -57,6 +58,59 @@ void signOutGoogle() {
   googleSignIn.signOut();
 
   print("User Sign Out");
+}
+
+Future<bool> signInWithApple() async {
+  print("Attempting to sign in");
+  try {
+    final AuthorizationResult result = await AppleSignIn.performRequests([
+      AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
+    ]);
+
+    switch (result.status) {
+      case AuthorizationStatus.authorized:
+        try {
+          print("successfull sign in");
+          final AppleIdCredential appleIdCredential = result.credential;
+          OAuthProvider oAuthProvider =
+              new OAuthProvider(providerId: "apple.com");
+          final AuthCredential credential = oAuthProvider.getCredential(
+            idToken: String.fromCharCodes(appleIdCredential.identityToken),
+            accessToken:
+                String.fromCharCodes(appleIdCredential.authorizationCode),
+          );
+
+          final AuthResult _res = await _auth.signInWithCredential(credential);
+
+          _auth.currentUser().then((val) async {
+            UserUpdateInfo updateUser = UserUpdateInfo();
+            updateUser.displayName =
+                "${appleIdCredential.fullName.givenName} ${appleIdCredential.fullName.familyName}";
+            // updateUser.photoUrl = ;
+            await val.updateProfile(updateUser);
+          });
+          final FirebaseUser user = _res.user;
+          assert(!user.isAnonymous);
+          assert(await user.getIdToken() != null);
+
+          final FirebaseUser currentUser = await _auth.currentUser();
+          assert(user.uid == currentUser.uid);
+          return true;
+        } catch (e) {
+          print("error");
+          return false;
+        }
+        break;
+      case AuthorizationStatus.error:
+        return false;
+
+      case AuthorizationStatus.cancelled:
+        print('User cancelled');
+        return false;
+    }
+  } catch (error) {
+    print("error with apple sign in");
+  }
 }
 
 // Future<bool> isSignedIn() async {
