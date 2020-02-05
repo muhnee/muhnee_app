@@ -53,11 +53,19 @@ class _IntroPageState extends State<IntroPage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _showUpText(),
-          _signInButton(),
+
+          Column(
+         
+            children: <Widget>[
+               _signInButton(),
           _signInWithAppleButton()
+
+            ],
+          ),
+         
         ],
       ),
     );
@@ -98,13 +106,13 @@ class _IntroPageState extends State<IntroPage> {
   Widget _signInButton() {
     return ShowUp(
       child: Padding(
-          padding: EdgeInsets.only(bottom: 142.0),
+          padding: EdgeInsets.only(bottom: 16.0),
           child: Center(
             child: SizedBox(
               width: 300,
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(6.0),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
@@ -113,11 +121,11 @@ class _IntroPageState extends State<IntroPage> {
                       ),
                     ]),
                 child: Material(
-                  borderRadius: BorderRadius.circular(23.0),
+                  borderRadius: BorderRadius.circular(6.0),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(23.0),
+                    borderRadius: BorderRadius.circular(6.0),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                      padding: EdgeInsets.only(top: 14.0, bottom: 14.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -126,13 +134,13 @@ class _IntroPageState extends State<IntroPage> {
                             child: Image(
                                 image: AssetImage(
                                     "lib/assets/images/google_icon.png"),
-                                height: 30.0),
+                                height: 20.0),
                           ),
                           Text(
                             "Sign in with Google",
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 20,
+                              fontSize: 19,
                             ),
                           ),
                         ],
@@ -208,7 +216,7 @@ class _IntroPageState extends State<IntroPage> {
   Widget _signInWithAppleButton() {
     return ShowUp(
       child: Padding(
-          padding: EdgeInsets.only(bottom: 142.0),
+          padding: EdgeInsets.only(bottom: 20.0),
           child: Center(
             child: SizedBox(
                 width: 300,
@@ -226,7 +234,7 @@ class _IntroPageState extends State<IntroPage> {
                   },
                 )),
           )),
-      delay: delayAmount * 7,
+      delay: delayAmount * 8,
     );
   }
 }
