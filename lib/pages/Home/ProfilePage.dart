@@ -27,18 +27,36 @@ class _ProfilePageState extends State<ProfilePage> {
     SizeConfig().init(context);
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              children: [
-                //ProfileImgFuture(),
-                ProfileDescriptions(),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical * 3,
-                ),
-                SignOutBtn(),
-              ]),
+        // child: Container(
+        //   child: ListView(
+        //       shrinkWrap: true,
+        //       scrollDirection: Axis.vertical,
+        //       children: [
+        //         //ProfileImgFuture(),
+        //         ProfileDescriptions(),
+        //         SizedBox(
+        //           height: SizeConfig.blockSizeVertical * 3,
+        //         ),
+        //         SignOutBtn(),
+        //       ]),
+        // ),
+
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(children: <Widget>[
+              SizedBox(
+                height: SizeConfig.blockSizeVertical * 3,
+              ),
+              ProfileDescriptions(),
+            ]),
+            Column(children: <Widget>[
+              SignOutBtn(),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical * 3,
+              ),
+            ]),
+          ],
         ),
       ),
     );
@@ -79,8 +97,8 @@ class ProfileImgFuture extends StatelessWidget {
           ];
         } else {
           children = <Widget>[
-         NotificationCell(
-                      message: "Loading...", messageColor: Colors.grey[600])
+            NotificationCell(
+                message: "Loading...", messageColor: Colors.grey[600])
           ];
         }
         return Center(
@@ -98,12 +116,24 @@ class ProfileImgFuture extends StatelessWidget {
 class ProfileDescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var name;
+    var email;
+    var savingsGoal;
+
     return FutureBuilder<dynamic>(
       future: getDescriptions, // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         List<Widget> children;
 
         if (snapshot.hasData) {
+          snapshot.data["displayName"] != null
+              ? name = snapshot.data["displayName"]
+              : name = "Apple User";
+          snapshot.data["email"] != null
+              ? email = snapshot.data["email"]
+              : email = "Email";
+          savingsGoal = "\$" + snapshot.data["monthlySavingsGoal"].toString();
+
           children = <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +142,7 @@ class ProfileDescriptions extends StatelessWidget {
                   height: SizeConfig.blockSizeVertical * 5,
                 ),
                 TextElement(
-                  text: snapshot.data["displayName"],
+                  text: name,
                   size: 40,
                 ),
                 SizedBox(
@@ -123,7 +153,7 @@ class ProfileDescriptions extends StatelessWidget {
                   size: 18,
                 ),
                 TextElement(
-                  text: snapshot.data["email"],
+                  text: email,
                   size: 18,
                 ),
                 SizedBox(
@@ -134,25 +164,25 @@ class ProfileDescriptions extends StatelessWidget {
                   size: 18,
                 ),
                 TextElement(
-                  text: "\$" + snapshot.data["monthlySavingsGoal"].toString(),
+                  text: savingsGoal,
                   size: 18,
                 ),
               ],
             ),
           ];
-        }  else if (snapshot.hasError) {
-                children = <Widget>[
-                  NotificationCell(
-                    message: "Network Error",
-                    messageColor: Colors.red,
-                  )
-                ];
-              } else {
-                children = <Widget>[
-                  NotificationCell(
-                      message: "Loading...", messageColor: Colors.grey[600])
-                ];
-              }
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            NotificationCell(
+              message: "Network Error",
+              messageColor: Colors.red,
+            )
+          ];
+        } else {
+          children = <Widget>[
+            NotificationCell(
+                message: "Loading...", messageColor: Colors.grey[600])
+          ];
+        }
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +202,6 @@ class TextElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.blockSizeHorizontal * 5,
@@ -180,12 +209,12 @@ class TextElement extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            fontSize: size,
-            fontFamily: "SFPro",
-            fontWeight: FontWeight.bold,
-             color: Color(0xff1d1c1f),
-            // foreground: Paint()..shader = linearGradientPurple
-            ),
+          fontSize: size,
+          fontFamily: "SFPro",
+          fontWeight: FontWeight.bold,
+          color: Color(0xff1d1c1f),
+          // foreground: Paint()..shader = linearGradientPurple
+        ),
       ),
     );
   }
@@ -248,10 +277,11 @@ class SignOutBtn extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            "Signout",
-                            style: TextStyle(color: Color(0xff1d1c1f), fontSize: 15, fontWeight: FontWeight.w600)
-                          ),
+                          Text("Signout",
+                              style: TextStyle(
+                                  color: Color(0xff1d1c1f),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ),
