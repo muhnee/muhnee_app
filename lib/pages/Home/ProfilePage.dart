@@ -46,14 +46,14 @@ class _ProfilePageState extends State<ProfilePage> {
           children: <Widget>[
             Column(children: <Widget>[
               SizedBox(
-                height: SizeConfig.blockSizeVertical * 3,
+                height: SizeConfig.blockSizeVertical * 1.5,
               ),
               ProfileDescriptions(),
             ]),
             Column(children: <Widget>[
               SignOutBtn(),
               SizedBox(
-                height: SizeConfig.blockSizeVertical * 3,
+                height: SizeConfig.blockSizeVertical * 1,
               ),
             ]),
           ],
