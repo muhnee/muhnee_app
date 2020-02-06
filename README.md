@@ -67,3 +67,19 @@ flutter run
    keyAlias=key
    storeFile=<location of the key store file, such as /Users/<user name>/key.jks>
    ```
+
+3. You will also need to update the SHA1/SHA256 Certificate Fingerprint in Firebase Console with the signing certificate.
+
+   To get the certificate run:
+
+   macOS/Linux:
+
+   ```sh
+   keytool -list -v -alias key -keystore ~/key.jks
+   ```
+
+   Windows:
+
+   ```sh
+   keytool -list -v -alias key -keystore c:/Users/USER_NAME/key.jks
+   ```
