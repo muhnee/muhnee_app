@@ -119,7 +119,9 @@ class _IntroPageState extends State<IntroPage> {
                         color: Colors.black.withOpacity(0.25),
                         blurRadius: 40.0,
                       ),
-                    ]),
+                    ]
+                    // border: Border.all(color: Colors.black)
+                    ),
                 child: Material(
                   borderRadius: BorderRadius.circular(6.0),
                   child: InkWell(
