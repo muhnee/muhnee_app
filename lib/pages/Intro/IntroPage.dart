@@ -45,6 +45,13 @@ class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+
+    var signInButtons = <Widget>[_signInButton()];
+
+    if (supportsAppleSignIn) {
+      signInButtons.add(_signInWithAppleButton());
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -56,16 +63,9 @@ class _IntroPageState extends State<IntroPage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _showUpText(),
-
           Column(
-         
-            children: <Widget>[
-               _signInButton(),
-          _signInWithAppleButton()
-
-            ],
+            children: signInButtons,
           ),
-         
         ],
       ),
     );
