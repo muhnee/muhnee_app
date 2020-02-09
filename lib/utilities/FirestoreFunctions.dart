@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'dart:convert';
-
-import 'package:muhnee/pages/Home/ExpensePageSingleFile.dart';
 import 'package:muhnee/models/Category.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -34,10 +31,10 @@ void uploadCategories(type, itemsList) async {
 Future<bool> isOnboarded() async {
   final FirebaseUser currentUser = await _auth.currentUser();
   uid = currentUser.uid;
-
+  var onBoarded = false;
   var onBoardedRef =
       await databaseReference.collection("users").document(uid).get();
-  var onBoarded = onBoardedRef.data["onboarded"];
+  onBoarded = onBoardedRef.data["onboarded"];
 
   return onBoarded;
 }
@@ -175,19 +172,15 @@ Future<List> getWeeklyTransactions() async {
 
 // gets an ordered list of weekly transactions from latest to last
 Future<dynamic> getWeeklyTransactionsCloud() async {
-     
   final HttpsCallable getTransactionsFn =
       CloudFunctions.instance.getHttpsCallable(
     functionName: 'getAllTransactions',
   );
 
-  dynamic response = await getTransactionsFn
-      .call(<String, dynamic>{
-    'summaryType': 'week'
-  });
+  dynamic response =
+      await getTransactionsFn.call(<String, dynamic>{'summaryType': 'week'});
 
   return response.data;
-
 }
 
 // gets the url of the users profile pic
