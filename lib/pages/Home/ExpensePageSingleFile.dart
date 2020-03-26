@@ -69,7 +69,7 @@ class _ExpensePageSingleFileState extends State<ExpensePageSingleFile> {
   Widget CustomKeyboard() {
     return SizedBox(
         width: SizeConfig.blockSizeHorizontal * 80,
-        height: SizeConfig.blockSizeVertical * 33, //! USED TO BE 30 iPHONE
+        height: SizeConfig.blockSizeVertical * 30, //! USED TO BE 30 iPHONE
         child: Container(
           //color: Colors.white,
           child: Column(
