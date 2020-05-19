@@ -69,39 +69,46 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new Container(
-            //color: Color(0xff8e91f3),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment(1.0, 1.0),
-                end: Alignment(-1.0, -1.0),
-                stops: [0.1, 0.9],
-                colors: [
-                  Color(0xff9D78F3),
-                  Color(0xff8e91f3),              
-                  
-                ],
-              ),
-            ),
-            child: Center(
-              child: Text("Muhnee",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                  )),
-            )
-            //   new Stack(
-            //     children: <Widget>[
-            //       Container(
-            //   alignment: Alignment.bottomLeft,
-            //   padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
-            //   child: new Image.asset(
-            //     'lib/assets/images/logoFull.png',
-            //     height: 150,
-            //   ),
-            // ),
-            //     ],
-            //   ),
-            ));
+      //color: Color(0xff8e91f3),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment(1.0, 1.0),
+          end: Alignment(-1.0, -1.0),
+          stops: [0.1, 0.9],
+          colors: [
+            Color(0xff9D78F3),
+            Color(0xff8e91f3),
+          ],
+        ),
+      ),
+      child: Center(
+        child: Text("Muhnee",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+            )),
+      ),
+      //     Stack(
+      //   children: <Widget>[
+      //     Container(
+      //       alignment: Alignment.center,
+      //       // padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
+      //       child: Image.asset(
+      //         'lib/assets/images/muhnee_icon.png',
+      //         height: 140,
+      //       ),
+      //     ),
+      //     Center(
+      //       child: Text("Muhnee",
+      //           textAlign: TextAlign.center,
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 30,
+      //           )),
+      //     ),
+      //   ],
+      // ),
+    ));
   }
 }
